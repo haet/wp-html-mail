@@ -1,0 +1,520 @@
+@import "contenttype-text";
+@import "contenttype-twocol";
+
+
+$black:         #000;
+$dark-gray:     #23282d;
+$medium-gray:    #888;
+$light-gray:    #eee;
+$white:         #FFF;
+
+.clearfix {
+  zoom: 1;
+    &:before, &:after { content: ""; display: table; }
+    &:after { clear: both; }
+}
+
+/*************************************
+*   GENERAL LAYOUT
+* ***********************************/
+.post-type-wphtmlmail_mail{
+    #wpbody-content{
+        padding-top: 55px;
+        min-width: 660px;
+        width: 70%;
+        max-width: 1000px;
+    }
+
+    #poststuff{
+        min-width: 660px;
+        width: 100%;
+    }
+
+    #post-body{
+        opacity: 0.0;
+        transition: all 0.6s ease-out;
+
+        &.columns-1{
+            opacity: 1.0;
+        }
+    }
+
+    fieldset.columns-prefs{
+        display: none;
+    }
+
+    // header bar/metabox
+    #header{
+        position: fixed;
+        top: 32px;
+        left:160px;
+        right: 0;
+        // box-shadow: 0 3px 3px rgba(0,0,0,.2);
+
+        z-index: 50;
+        
+        .handlediv, h2{
+            display: none;
+        }
+
+        .inside{
+            margin-top: 12px;
+        }
+        
+        .email-name{
+            width: 40%;
+            float: left;
+            margin: 6px 0;
+            text-transform: uppercase;
+        }
+
+        .header-buttons{
+            width: 60%;
+            float: right;
+            text-align: right;
+        }
+    }
+
+    // hide custom metaboxes via css but keep in PHP just in case somone uses an newer WooCommerce extensions (3.7.7+) with a core version of 3.7.3 or below
+    #mb_back_to_overview_metabox,
+    #mb_restore_defaults_metabox,
+    #submitdiv,
+    h1.wp-heading-inline,
+    .page-title-action,
+    #wpfooter{
+        display: none;
+    }
+
+
+    .mailbuilder-settings-sidebar{
+        position: fixed;
+        top: 87px;
+        bottom:0;
+        right: 0;
+        width: 148px;
+        z-index: 60;
+        padding:15px;
+        background: $white;
+        overflow-y: scroll;
+        box-shadow: -2px 3px 3px rgba(0,0,0,.2);
+        transition: all 0.6s ease-out;
+
+        &.sidebar-wide{
+            width: 400px;
+        }
+
+        .mailbuilder-sidebar-element{
+            max-height: 0;
+            overflow-y: hidden;
+            transition: all 0.6s ease-out;
+
+            &.active{
+                max-height: 2000px; 
+            }
+        }
+    }
+
+    #subject,#mailbuilder{
+        width: 100%;
+    }
+
+    &.folded{
+        #header{
+            left: 36px;
+        }
+    }
+}
+
+
+
+/*************************************
+*   PADDING SETTINGS
+* ***********************************/
+.post-type-wphtmlmail_mail .padding-settings{
+    position: relative;
+    width: 150px;
+    height: 60px;
+    margin:20px;
+    border: 3px $light-gray solid;
+    &:after{
+        position: absolute;
+        content: '';
+        width: 100%;
+        height: 100%;
+        border: 1px $light-gray dashed;
+    }
+
+    select{
+        position: absolute;
+        -webkit-appearance:none;
+        -moz-appearance:none;
+        appearance:none;
+        padding: 0;
+        border:none;
+        background: transparent;
+        font-size: 11px;
+        text-align: center;
+        width: auto;
+        height: auto;
+        border-radius: 0;
+        outline: none;
+        box-shadow: none;
+        z-index: 2;
+        transform:translate(-50%,-50%);
+
+        &.padding-top{
+            left: 50%;
+            top: 0;
+        }
+
+        &.padding-right{
+            left: 100%;
+            top: 50%;
+        }
+
+        &.padding-bottom{
+            left: 50%;
+            top: 100%;
+        }
+
+        &.padding-left{
+            left: 0px;
+            top: 50%;
+        }
+    }
+}
+
+
+
+/*************************************
+*   ADD BUTTONS
+* ***********************************/
+#mailbuilder .mb-add-wrap{
+    text-align: center;
+
+    .mb-add-types{
+        li{
+            display: block;
+            width: 130px;
+            margin:0;
+
+            a{
+                display: block;
+                height: 70px;
+                padding:10px;
+                padding-top: 25px;
+                color: $dark-gray;
+                text-decoration: none;
+                background: $light-gray;
+                margin-bottom:15px;
+                transition:all 0.4s;
+                text-align: center;
+                font-size: 11px;
+                line-height: 1.1;
+                text-transform: uppercase;
+                text-overflow:ellipsis;
+                overflow: hidden;
+                
+                .dashicons{
+                    font-size: 40px;
+                    height: 45px;
+                    width: 100%;
+                }
+
+                &:hover{
+                    color:$black;
+                    background-color: $medium-gray;
+                }
+
+                &.disabled{
+                    color: $medium-gray;
+                    cursor: not-allowed;
+                    &:hover{
+                        color:$medium-gray;
+                        background-color: transparent;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+
+/*************************************
+*   WYSIWYG EDITOR
+* ***********************************/
+#mb-wysiwyg-edit{
+    .mce-edit-area iframe{
+        min-height:350px;
+    }
+
+    .mb-popup-buttons{
+        margin: 20px;
+        text-align: center;
+        .dashicons{
+            vertical-align: -5px;
+        }
+    }
+}
+
+
+#mb-css-edit{
+    textarea{
+        width: 100%;
+        height: 100px;
+    }
+
+    .CodeMirror{
+        border: 1px solid #ddd;
+        height: 150px;
+        margin-bottom: 20px;
+    }
+}
+
+
+/*************************************
+*   SUBJECT
+* ***********************************/
+.post-type-wphtmlmail_mail #subject input{
+    width:100%;
+}
+
+
+
+/*************************************
+*   CONTENT ELEMENTS
+* ***********************************/
+#mailbuilder-templates {
+    display: none;
+}
+
+#mailbuilder{
+    .hndle,
+    .handlediv{
+        display: none;
+    }
+
+    .inside{
+        margin:0;
+        padding: 0;
+    }
+
+
+    .mb-contentelement{
+        position: relative;
+        transition: all 0.4s;
+
+        .mb-title-bar{
+            position: absolute;
+            top:0;
+            left:0;
+            width: 100%;
+            opacity: 0.0;
+            background: $dark-gray;
+            color: $light-gray;
+            cursor: move;
+            z-index: 2;
+            height: 32px;
+            transform: translateY(-100%);
+            transition: all 0.4s;
+
+            span{
+                display: inline-block;
+                padding:5px 0 5px 10px;
+            }
+            
+            .mb-edit-element,
+            .mb-remove-element{
+                position: absolute;
+                top:0;
+                right: 5px;
+                text-decoration: none;
+                color: $light-gray;
+                text-decoration: none;
+                &:hover{
+                    color:#fff;
+                }
+            }
+
+            .mb-edit-element{
+                right: 30px;
+            }
+        }
+
+        .mb-contentelement-content{
+            cursor: pointer;
+
+            &:after{
+                position: absolute;
+                display: block;
+                opacity:0;
+                height: 100%;
+                width: 100%;
+                top:0;
+                left:0;
+                text-align: center;
+                background: rgba($black,0.3);
+                color: $light-gray;
+                content: "\f464";
+                font-family: dashicons;
+                font-size: 60px;
+                line-height: 1.7;
+                transition: all 0.4s;
+            }
+
+            &:hover{
+                &:after{
+                    opacity: 1.0;
+                }
+            }
+        }
+
+        .mb-edit-wysiwyg{
+            textarea{
+                display: none;
+            }
+
+            .mb-content-preview{
+                min-height: 100px;
+            }
+        }
+
+        &:hover{
+            box-shadow: 0 1px 3px 1px rgba(0,0,0,0.3);
+            .mb-title-bar{
+                opacity: 1;
+            }
+        }
+    }
+}
+
+
+
+/*************************************
+*   MAILBUILDER
+* ***********************************/
+#mailbuilder{
+    // .hndle{
+    //     background: $dark-gray;
+    //     color: $light-gray;
+    // }
+    // 
+    .inside{
+        min-width: 630px;
+    }
+    
+    .container{
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .mailbuilder-custom-css-button{
+        position: absolute;
+        display: inline-block;
+        bottom: 0;
+        right: 0;
+        background: rgba( 255, 255, 255, 0.7 );
+        color: black;
+        font-size: 12px;
+        text-transform: uppercase;
+        padding: 5px 10px 2px 10px;
+        text-decoration: none;
+        transition: all 0.4s ease-out;
+
+        .dashicons{
+            font-size: 17px;
+        }
+
+        &:hover{
+            background: rgba( 255, 255, 255, 1.0 );
+        }
+    }
+
+}
+
+
+
+
+/*************************************
+*   RESET WORDPRESS STYLES IN PREVIEW
+* ***********************************/
+#poststuff #mailbuilder-content {
+    h2{
+        font-size: 18px;
+        padding: 0;
+    }
+}
+
+
+
+
+body.mb-overlay:after{
+    position: fixed;
+    display: block;
+    content:'';
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    background: rgba($black,0.7);
+}
+
+
+/*************************************
+*   ATTACHMENTS
+* ***********************************/
+.upload_attachment_button{
+    .dashicons{
+        vertical-align: -5px;
+    }
+}
+
+.mb-attachment-preview{
+    margin: 15px 0;
+
+    img{
+        width: 24px;
+        height: auto;
+        float: left;
+    }
+
+    .mb-attachment-details{
+        position: relative;
+        margin-left: 35px;
+        padding-top: 6px;
+        line-height: 1.1;
+        padding-right: 25px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .filename{
+
+    }
+
+    .filesize{
+        font-size: 11px;
+    }
+
+    .remove-attachment{
+        position: absolute;
+        right: 0;
+        top:5px;
+        font-size: 14px;
+        text-decoration: none;
+    }
+}
+
+
+
+
+/*************************************
+*   WP SEO
+*   We don't need SEO settings for our emails!
+* ***********************************/
+#wpseo_edit_box{
+    display: none;
+}

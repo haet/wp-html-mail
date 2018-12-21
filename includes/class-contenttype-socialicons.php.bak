@@ -1,0 +1,123 @@
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
+
+final class Haet_MB_ContentType_SocialIcons extends Haet_MB_ContentType
+{
+
+	private static $instance;
+
+	/**
+	 * @var string
+	 */
+	protected $_name  = 'socialicons';
+
+	/**
+	 * @var string
+	 */
+	protected $_nicename = '';
+
+	/**
+	 * @var int
+	 */
+	protected $_priority = 1;
+
+	/**
+	 * @var bool
+	 * contenttype can be used once per email
+	 */
+	protected $_once = false;
+
+	/**
+	 * @var string
+	 */
+	protected $_icon = 'dashicons-share';
+
+	
+	public static function instance(){
+		if (!isset(self::$instance) && !(self::$instance instanceof Haet_MB_ContentType_SocialIcons)) {
+			self::$instance = new Haet_MB_ContentType_SocialIcons();
+		}
+
+		return self::$instance;
+	}
+
+
+
+
+	public function __construct(){
+		$this->_nicename = __('Social Media Icons','wp-html-mail');
+		parent::__construct();
+	}
+
+
+
+
+	public function enqueue_scripts_and_styles($page){
+    	if( false !== strpos($page, 'post.php')){
+	        wp_enqueue_script( 'haet_mb_contenttype_'.$this->_name.'_js',  HAET_MAIL_URL.'/js/contenttype-text.js', array( 'jquery' ) );
+	    }
+	}
+
+
+	private function get_icon_sets(){
+		return array(
+			'flaticon-circle-color' => array(
+				'name'		=>	'flaticon-circle-color',
+				'credits'	=>	'<a href="http://www.flaticon.com/authors/pixel-buddha" target="_blank">Icons designed by Pixel Buddha from Flaticon</a>'
+			),
+			'kulesza-circle-color' => array(
+				'name'		=>	'kulesza-circle-color',
+				'credits'	=>	'<a href="https://dribbble.com/shots/1823648-Free-circle-icons-for-designers" target="_blank">Icons designed by Michal Kulesza</a>'
+			),
+			'kulesza-circle-black' => array(
+				'name'		=>	'kulesza-circle-black',
+				'credits'	=>	'<a href="https://dribbble.com/shots/1823648-Free-circle-icons-for-designers" target="_blank">Icons designed by Michal Kulesza</a>'
+			),
+			'kulesza-black' => array(
+				'name'		=>	'kulesza-black',
+				'credits'	=>	'<a href="https://dribbble.com/shots/1823648-Free-circle-icons-for-designers" target="_blank">Icons designed by Michal Kulesza</a>'
+			),
+			'flaticon-square-color' => array(
+				'name'		=>	'flaticon-square-color',
+				'credits'	=>	'<a href="http://www.flaticon.com/authors/freepik" target="_blank">Icons designed by Freepik from Flaticon</a>'
+			)
+		);
+	}
+
+
+
+	public function admin_render_contentelement_template( $current_email ){
+		$this->admin_print_element_start(); ?>
+		<div class="mb-contentelement-content">
+			<div class="mb-edit-wysiwyg">
+				<textarea name="content"></textarea>
+				<div class="mb-content-preview">
+				</div>
+			</div>
+		</div>
+		<?php
+		$this->admin_print_element_end();
+	}
+
+
+
+
+	public function print_content( $element_content, $settings ){
+		$html = '';
+		if( isset($element_content->content) && isset($element_content->content->content) )
+			$html = $element_content->content->content;
+
+		$html = Haet_Mail()->wrap_in_padding_container( $html, $element_content->id );
+		$html = apply_filters( 'haet_mail_print_content_'.$this->_name, $html, $element_content, $settings );
+
+		echo $html;
+	}
+}
+
+
+
+function Haet_MB_ContentType_SocialIcons()
+{
+	return Haet_MB_ContentType_SocialIcons::instance();
+}
+
+Haet_MB_ContentType_SocialIcons();

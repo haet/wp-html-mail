@@ -1,0 +1,366 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP HTML Mail\n"
+"POT-Creation-Date: 2016-05-23 18:47+0330\n"
+"PO-Revision-Date: 2016-05-23 18:50+0330\n"
+"Last-Translator: wp-market.ir <wp-market@gmail.com>\n"
+"Language-Team: www.fasy.ir <fardadsystem@gmail.com>\n"
+"Language: fa_IR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.1\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: includes/class-contenttype-text.php:47
+msgid "Text"
+msgstr "متن"
+
+#: includes/class-contenttype-twocol.php:47
+msgid "Two Columns"
+msgstr "دو ستون"
+
+#: includes/class-contenttype-twocol.php:62
+msgid ".."
+msgstr ".."
+
+#: includes/class-haet-mail.php:124
+msgid "Email"
+msgstr "ایمیل"
+
+#: includes/class-haet-mail.php:124
+msgid "Email template"
+msgstr "قالب ایمیل"
+
+#: includes/class-haet-mail.php:149
+msgid "Settings Updated."
+msgstr "تنظیمات بروز رسانی شد. "
+
+#: includes/class-haet-mail.php:189 views/admin/settings.php:18
+msgid "General"
+msgstr "عمومی"
+
+#: includes/class-haet-mail.php:190 views/admin/settings.php:47
+msgid "Header"
+msgstr "سربرگ"
+
+#: includes/class-haet-mail.php:191 views/admin/settings.php:162
+msgid "Content"
+msgstr "محتوا"
+
+#: includes/class-haet-mail.php:198 views/admin/settings.php:305
+#: views/admin/settings.php:316
+msgid "Footer"
+msgstr "پانوشت"
+
+#: includes/class-haet-mail.php:199
+msgid "Plugins"
+msgstr "افزونه ها"
+
+#: includes/class-haet-mail.php:200
+msgid "Advanced"
+msgstr "پیشرفته"
+
+#: includes/class-haet-sender-plugin-ninja-forms.php:41
+msgid "Yes"
+msgstr "بله"
+
+#: includes/class-haet-sender-plugin-ninja-forms.php:42
+msgid "No"
+msgstr "خیر"
+
+#: includes/class-haet-sender-plugin-wp-e-commerce.php:9
+msgid "Transaction Report"
+msgstr "گزارش انتقالات"
+
+#: includes/class-haet-sender-plugin-wp-e-commerce.php:10
+msgid "Purchase Receipt"
+msgstr "رسید خرید"
+
+#: includes/class-haet-sender-plugin-wp-e-commerce.php:11
+msgid "Order Pending: Payment Required"
+msgstr "سفارش انتظار: پرداخت مورد نیاز"
+
+#: includes/class-haet-sender-plugin-wp-e-commerce.php:13
+msgid "The administrator has unlocked your file"
+msgstr "مدیر فایل شما را قفل گشایی نموده است"
+
+#: includes/class-mailbuilder.php:43
+msgid "custom emails"
+msgstr "ایمیل های سفارشی"
+
+#: includes/class-mailbuilder.php:44
+msgid "custom email"
+msgstr "ایمیل سفارشی"
+
+#: includes/class-mailbuilder.php:45 includes/class-mailbuilder.php:46
+msgid "Add New Custom Email"
+msgstr "افزودن ایمیل سفارشی جدید"
+
+#: includes/class-mailbuilder.php:47
+msgid "Edit Custom Email"
+msgstr "ویرایش ایمیل سفارشی"
+
+#: includes/class-mailbuilder.php:48
+msgid "New Custom Email"
+msgstr "ایمیل سفارشی جدید"
+
+#: includes/class-mailbuilder.php:49
+msgid "View Custom Email"
+msgstr "مشاهده ایمیل سفارشی"
+
+#: includes/class-mailbuilder.php:50
+msgid "Search Custom Emails"
+msgstr "جستجوی ایمیل سفارشی"
+
+#: includes/class-mailbuilder.php:51
+msgid "No Custom Emails found"
+msgstr "هیچ ایمیل سفارشی پیدا نشد"
+
+#: includes/class-mailbuilder.php:52
+msgid "No Custom Emails found in Trash"
+msgstr "هیچ ایمیل های سفارشی در زباله دان پیدا نشد"
+
+#: includes/class-mailbuilder.php:53
+msgid "Parent Custom Email:"
+msgstr "ایمیل سفارشی والد:"
+
+#: includes/class-mailbuilder.php:54
+msgid "Custom Emails"
+msgstr "ایمیل های سفارشی"
+
+#: includes/class-mailbuilder.php:88
+msgid "Message"
+msgstr "پیغام"
+
+#: includes/class-mailbuilder.php:90
+msgid "Email Subject"
+msgstr "موضوع ایمیل"
+
+#: includes/class-mailbuilder.php:92
+msgid "Email Content Builder"
+msgstr "سازنده محتوای ایمیل"
+
+#: includes/class-mailbuilder.php:142
+msgid "Apply"
+msgstr "اعمال"
+
+#: includes/class-mailbuilder.php:146
+msgid "Cancel"
+msgstr "انصراف"
+
+#: includes/class-mailbuilder.php:183
+msgid "Add Content Element"
+msgstr "افزودن عنصر محتوا"
+
+#: views/admin/settings.php:23 views/admin/settings.php:52
+#: views/admin/settings.php:167 views/admin/settings.php:310
+msgid "Background color"
+msgstr "رنگ پس زمینه"
+
+#: views/admin/settings.php:29
+msgid "Email sender name"
+msgstr "نام فرستنده ایمیل"
+
+#: views/admin/settings.php:35
+msgid "Email sender address"
+msgstr "آدرس ایمیل فرستنده"
+
+#: views/admin/settings.php:59
+msgid "Header image"
+msgstr "تصویر سربرگ"
+
+#: views/admin/settings.php:64
+msgid "Select image"
+msgstr "انتخاب تصویر"
+
+#: views/admin/settings.php:68
+msgid "Add your logo or image header (optional). max 600px wide"
+msgstr ""
+"لوگو یا تصویر سربرگ خود را اضافه نمایید (اختیاری). حداکثر عرض 600 پیکسل"
+
+#: views/admin/settings.php:73
+msgid "Padding"
+msgstr "حاشیه"
+
+#: views/admin/settings.php:76
+msgid "top"
+msgstr "بالا"
+
+#: views/admin/settings.php:83
+msgid "right"
+msgstr "راست"
+
+#: views/admin/settings.php:90
+msgid "bottom"
+msgstr "پایین"
+
+#: views/admin/settings.php:97
+msgid "left"
+msgstr "چپ"
+
+#: views/admin/settings.php:107
+msgid "Header text"
+msgstr "متن سربرگ"
+
+#: views/admin/settings.php:115
+msgid "Font"
+msgstr "فونت"
+
+#: views/admin/settings.php:134 views/admin/settings.php:199
+#: views/admin/settings.php:235 views/admin/settings.php:271
+#: views/admin/settings.php:289
+msgid "Bold"
+msgstr "پر رنگ"
+
+#: views/admin/settings.php:140 views/admin/settings.php:205
+#: views/admin/settings.php:241 views/admin/settings.php:277
+msgid "Italic"
+msgstr "کج"
+
+#: views/admin/settings.php:145
+msgid "Alignment"
+msgstr "تراز"
+
+#: views/admin/settings.php:149 views/admin/settings.php:190
+#: views/admin/settings.php:226 views/admin/settings.php:262
+msgid "Left"
+msgstr "چپ"
+
+#: views/admin/settings.php:150 views/admin/settings.php:191
+#: views/admin/settings.php:227 views/admin/settings.php:263
+msgid "Center"
+msgstr "وسط"
+
+#: views/admin/settings.php:151 views/admin/settings.php:192
+#: views/admin/settings.php:228 views/admin/settings.php:264
+msgid "Right"
+msgstr "راست"
+
+#: views/admin/settings.php:174
+msgid "Headline Font"
+msgstr "فونت سربرگ"
+
+#: views/admin/settings.php:210
+msgid "Subsubheadline Font"
+msgstr "فونت زیر سربرگ"
+
+#: views/admin/settings.php:246
+msgid "Content Font"
+msgstr "فونت محتوا"
+
+#: views/admin/settings.php:282
+msgid "Link styling"
+msgstr "استایل لینک"
+
+#: views/admin/settings.php:295
+msgid "Underline"
+msgstr "زیر خط"
+
+#: views/admin/settings.php:327
+msgid "Show \"powered by\" link in email footer"
+msgstr "نمایش لینک \"قدرت گرفته از\" در پانوشت ایمیل"
+
+#: views/admin/settings.php:337
+msgid "Use template for mails sent by your installed plugins"
+msgstr "استفاده از قالب برای ایمیل های فرستاده شده توسط افزونه های نصب شده"
+
+#: views/admin/settings.php:374
+msgid "Advanced features"
+msgstr "ویژگی های پیشرفته"
+
+#: views/admin/settings.php:388
+msgid "Create custom template"
+msgstr "ایجاد قالب سفارشی"
+
+#: views/admin/settings.php:391
+msgid "create template file in my theme folder"
+msgstr "ایجاد قالب فایل در پوشه تم من"
+
+#: views/admin/settings.php:393
+msgid ""
+"You already have a custom template. If you create a new one the existing "
+"template will be backed up."
+msgstr ""
+"شما در حال حاضر قالب سفارشی است. اگر شما ایجاد یک الگوی موجود را پشتیبان "
+"خواهد شد."
+
+#: views/admin/settings.php:396
+msgid ""
+"WARNING: Your theme directory is not writable by the server. Please change "
+"the permission to allow us to create the mail template."
+msgstr ""
+"اخطار: فهرست موضوع توسط سرور قابل نوشتن نیست. اجازه به ما ایجاد قالب ایمیل "
+"اجازه می دهد را تغییر دهید."
+
+#: views/admin/settings.php:399
+msgid ""
+"Customize your mail template as far as you can. Then click this button to "
+"export the template to your theme directory for further modifications."
+"<br>The template will be created in <strong>wp-content/YOUR-THEME/wp-html-"
+"mail/template.html</strong>"
+msgstr ""
+"تا آنجا که می توانید قالب ایمیل خود را سفارشی کنید. سپس این الگو را به فهرست "
+"موضوع خود را برای بیشتر تغییرات صادر کلیک کنید.<br>الگو در <strong>wp-"
+"content/YOUR-THEME/wp-html-mail/template.html</strong> ایجاد خواهد شد"
+
+#: views/admin/settings.php:401
+msgid "Template created"
+msgstr "قالب ایجاد شد"
+
+#: views/admin/settings.php:403
+msgid "Your template has been created."
+msgstr "قالب ایجاد شده است."
+
+#: views/admin/settings.php:421
+msgid "Save and Preview"
+msgstr "ذخیره و پیش نمایش"
+
+#: views/admin/settings.php:422
+msgid "Discard changes and reload template"
+msgstr "انصراف از تغییرات و بازسازی قالب"
+
+#: views/admin/settings.php:429
+msgid "Send a test mail"
+msgstr "ارسال یک ایمیل آزمایشی"
+
+#: views/admin/settings.php:432
+msgid "send test mail"
+msgstr "ارسال ایمیل آزمایشی"
+
+#: views/admin/settings.php:433
+msgid "Email sent"
+msgstr "ایمیل فرستاده شد"
+
+#: views/admin/settings.php:435
+msgid "Your message has been sent."
+msgstr "پیام شما فرستاده شد."
+
+#: views/admin/single-plugin.php:14
+msgid "Use template"
+msgstr "استفاده از قالب"
+
+#: views/admin/single-plugin.php:18
+msgid "Overwrite sender"
+msgstr "بازنویسی فرستنده"
+
+#: views/admin/single-plugin.php:21
+msgid "Install WP HTML Mail for"
+msgstr "نصب WP HTML Mail برای"
+
+#: views/admin/single-plugin.php:27
+msgid "is currently not installed."
+msgstr "در حال حاضر نصب نشده است."
+
+#: views/admin/single-plugin.php:29
+msgid "install"
+msgstr "نصب"
+
+#~ msgid "Email sender adress"
+#~ msgstr "آدرس فرستنده ایمیل"

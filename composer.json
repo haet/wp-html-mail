@@ -1,0 +1,21 @@
+{
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/haet/CssToInlineStyles"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/haet/simple_html_dom"
+        }
+    ],
+    "require": {
+        "voku/simple_html_dom": "dev-haet",
+        "tijsverkoyen/css-to-inline-styles": "^2.0",
+        "voku/css-to-inline-styles": "dev-haet",
+        "sabberworm/php-css-parser": "*"
+    },
+    "require-dev": {
+        "lucatume/wp-browser": "^2.2"
+    }
+}

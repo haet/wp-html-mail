@@ -1,0 +1,738 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP HTML Mail - WooCommerce\n"
+"POT-Creation-Date: 2016-05-16 14:40-0300\n"
+"PO-Revision-Date: 2016-05-17 13:49-0300\n"
+"Last-Translator: Gutemberg Vasconcellos <gutembergvasconcellos@hotmail.com>\n"
+"Language-Team: Gutemberg Vasconcellos <gutembergvasconcellos@hotmail.com>\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.4\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-WPHeader: wp-html-mail-woocommerce.php\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: includes/class-contenttype-productstable.php:57
+msgid "Products Table"
+msgstr "Tabela de produtos"
+
+#: includes/class-contenttype-productstable.php:99
+msgid "Image"
+msgstr "Imagem"
+
+#: includes/class-contenttype-productstable.php:99
+msgid "exact"
+msgstr "exatamente"
+
+#: includes/class-contenttype-productstable.php:99
+msgid "max"
+msgstr "máx"
+
+#: includes/class-contenttype-productstable.php:109
+#: views/woocommerce/template/email-order-items.php:58
+msgid "Product Image"
+msgstr "Imagem do Produto"
+
+#: includes/class-contenttype-productstable.php:113
+msgid "Product Name"
+msgstr "Nome do Produto"
+
+#: includes/class-contenttype-productstable.php:117
+msgid "SKU"
+msgstr "SKU"
+
+#: includes/class-contenttype-productstable.php:121
+msgid "Item Meta"
+msgstr "Meta do Item"
+
+#: includes/class-contenttype-productstable.php:125
+msgid "Purchase Note"
+msgstr "Nota de Compra"
+
+#: includes/class-contenttype-productstable.php:129
+#: includes/email-default-content.php:38
+#: views/woocommerce/admin/settings-woocommerce.php:179
+#: views/woocommerce/template/email-order-details.php:34
+msgid "Quantity"
+msgstr "Quantidade"
+
+#: includes/class-contenttype-productstable.php:133
+#: includes/email-default-content.php:40
+#: views/woocommerce/admin/settings-woocommerce.php:186
+#: views/woocommerce/template/email-order-details.php:35
+msgid "Price"
+msgstr "Preço"
+
+#: includes/class-contenttype-productstable.php:137
+msgid "Product Link"
+msgstr "Link do produto"
+
+#: includes/class-contenttype-productstable.php:154
+msgid "Do you really want to delete this column?"
+msgstr "Você quer realmente excluir esta coluna?"
+
+#: includes/class-contenttype-productstable.php:175
+msgid "Edit cell content"
+msgstr "Editar o conteúdo da célula"
+
+#: includes/class-contenttype-productstable.php:193
+#: includes/class-contenttype-productstable.php:207
+#: includes/class-contenttype-productstable.php:247
+#: includes/class-contenttype-productstable.php:255
+#: includes/class-contenttype-productstable.php:263
+#: includes/class-contenttype-relatedproducts.php:103
+msgid "edit cell content"
+msgstr "editar o conteúdo da célula"
+
+#: includes/class-contenttype-productstable.php:194
+#: includes/class-contenttype-productstable.php:208
+#: includes/class-contenttype-relatedproducts.php:109
+#: includes/class-contenttype-relatedproducts.php:116
+msgid "add column"
+msgstr "adicionar coluna"
+
+#: includes/class-contenttype-productstable.php:195
+#: includes/class-contenttype-productstable.php:209
+#: includes/class-contenttype-relatedproducts.php:110
+#: includes/class-contenttype-relatedproducts.php:117
+msgid "remove column"
+msgstr "remover coluna"
+
+#: includes/class-contenttype-productstable.php:303
+msgid "Cell borders"
+msgstr "Bordas de célula"
+
+#: includes/class-contenttype-productstable.php:357
+msgid "Cell width"
+msgstr "Largura de célula"
+
+#: includes/class-contenttype-productstable.php:360
+msgid "auto"
+msgstr "auto"
+
+#: includes/class-contenttype-productstable.php:367
+msgid "Cell padding"
+msgstr "Espaçamento de célula"
+
+#: includes/class-contenttype-productstable.php:410
+msgid "Apply"
+msgstr "Aplicar"
+
+#: includes/class-contenttype-productstable.php:414
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: includes/class-contenttype-relatedproducts.php:58
+msgid "Related Products"
+msgstr "Produtos Relacionados"
+
+#: includes/class-contenttype-relatedproducts.php:84
+msgid "Data source for related products"
+msgstr "Fonte de dados para produtos relacionados"
+
+#: includes/class-contenttype-relatedproducts.php:86
+msgid "Linked to order items"
+msgstr "Relacionados aos itens do pedido"
+
+#: includes/class-contenttype-relatedproducts.php:87
+msgid "Latest products"
+msgstr "Últimos Produtos"
+
+#: includes/class-contenttype-relatedproducts.php:88
+msgid "Random products"
+msgstr "Produtos aleatórios"
+
+#: includes/class-contenttype-relatedproducts.php:91
+msgid "Add up to four related products to your customer notifications."
+msgstr ""
+"Adicione até quatro produtos relacionados às suas notificações ao cliente."
+
+#: includes/class-haet-sender-plugin-woocommerce.php:233
+msgid "Email Options"
+msgstr "Opções de E-mail"
+
+#: includes/class-haet-sender-plugin-woocommerce.php:235
+msgid ""
+"WooCommerce styling options have been replaced by WP HTML Mail. Go to "
+"\"Settings\" -> \"Email template\" to configure your emails."
+msgstr ""
+"As opções de estilo do WooCommerce e foram substituídas pelo plugin WP HTML "
+"Mail. Acesse \"Configurações\" -> \"Modelo de E-mail\" para configurar seus "
+"e-mails."
+
+#: includes/class-wphtmlmail-woocommerce.php:141
+msgid "Placeholder"
+msgstr "Marcador"
+
+#: includes/class-wphtmlmail-woocommerce.php:142
+msgid ""
+"Are you sure you want to restore default content? All your changes will be "
+"deleted."
+msgstr ""
+"Você tem certeza de que você restaurar o conteúdo padrão? Todas suas "
+"alterações serão excluídas."
+
+#: includes/class-wphtmlmail-woocommerce.php:177
+msgid "Order Number"
+msgstr "Número do Pedido"
+
+#: includes/class-wphtmlmail-woocommerce.php:181
+msgid "Order Date"
+msgstr "Data do Pedido"
+
+#: includes/class-wphtmlmail-woocommerce.php:185
+msgid "Edit Order URL"
+msgstr "Editar a URL do Pedido"
+
+#: includes/class-wphtmlmail-woocommerce.php:189
+msgid "Payment URL"
+msgstr "URL de pagamento"
+
+#: includes/class-wphtmlmail-woocommerce.php:193
+msgid "Order Meta"
+msgstr "Meta do Pedido"
+
+#: includes/class-wphtmlmail-woocommerce.php:197
+msgid "Customer note"
+msgstr "Nota ao cliente"
+
+#: includes/class-wphtmlmail-woocommerce.php:201
+msgid "Payment Instructions"
+msgstr "Instruções de Pagamento"
+
+#: includes/class-wphtmlmail-woocommerce.php:218
+msgid "Order"
+msgstr "Pedido"
+
+#: includes/class-wphtmlmail-woocommerce.php:222
+msgid "Customer"
+msgstr "Cliente"
+
+#: includes/class-wphtmlmail-woocommerce.php:225
+msgid "Billing full name"
+msgstr "Nome completo para cobrança"
+
+#: includes/class-wphtmlmail-woocommerce.php:229
+#: includes/email-default-content.php:86 includes/email-default-content.php:144
+#: includes/email-default-content.php:204
+#: includes/email-default-content.php:262
+#: includes/email-default-content.php:319
+#: includes/email-default-content.php:381
+#: includes/email-default-content.php:437
+#: includes/email-default-content.php:495
+#: views/woocommerce/template/email-customer-details.php:25
+msgid "Customer details"
+msgstr "Detalhes do Cliente"
+
+#: includes/class-wphtmlmail-woocommerce.php:233
+#: includes/email-default-content.php:94 includes/email-default-content.php:152
+#: includes/email-default-content.php:212
+#: includes/email-default-content.php:270
+#: includes/email-default-content.php:327
+#: includes/email-default-content.php:389
+#: includes/email-default-content.php:445
+#: includes/email-default-content.php:503
+#: views/woocommerce/template/email-addresses.php:14
+msgid "Billing address"
+msgstr "Endereço de cobrança"
+
+#: includes/class-wphtmlmail-woocommerce.php:237
+msgid "Billing fields"
+msgstr "Campos de cobrança"
+
+#: includes/class-wphtmlmail-woocommerce.php:241
+#: includes/email-default-content.php:95 includes/email-default-content.php:153
+#: includes/email-default-content.php:213
+#: includes/email-default-content.php:271
+#: includes/email-default-content.php:328
+#: includes/email-default-content.php:390
+#: includes/email-default-content.php:446
+#: includes/email-default-content.php:504
+#: views/woocommerce/template/email-addresses.php:20
+msgid "Shipping address"
+msgstr "Endereço de entrega"
+
+#: includes/class-wphtmlmail-woocommerce.php:245
+msgid "Shipping fields"
+msgstr "Campos de entrega"
+
+#: includes/class-wphtmlmail-woocommerce.php:251
+msgid "General"
+msgstr "Geral"
+
+#: includes/class-wphtmlmail-woocommerce.php:254
+msgid "Website name"
+msgstr "Nome do Website"
+
+#: includes/class-wphtmlmail-woocommerce.php:260
+msgid "Profile"
+msgstr "Perfil"
+
+#: includes/class-wphtmlmail-woocommerce.php:263
+msgid "Username"
+msgstr "Usuário"
+
+#: includes/class-wphtmlmail-woocommerce.php:267
+msgid "New Password"
+msgstr "Nova senha"
+
+#: includes/class-wphtmlmail-woocommerce.php:271
+msgid "My account URL"
+msgstr "URL da minha conta"
+
+#: includes/class-wphtmlmail-woocommerce.php:275
+msgid "Reset password URL"
+msgstr "URL para Redefinição de Senha"
+
+#: includes/class-wphtmlmail-woocommerce.php:336
+msgid "Restore default email content"
+msgstr "Restaurar o conteúdo de e-mail padrão"
+
+#: includes/class-wphtmlmail-woocommerce.php:337
+msgid "Back to Email settings"
+msgstr "Voltar para as configurações de E-mail"
+
+#: includes/class-wphtmlmail-woocommerce.php:348
+msgid "Restore default template"
+msgstr "Restaurar modelo padrão"
+
+#: includes/class-wphtmlmail-woocommerce.php:361
+msgid "Back to overview"
+msgstr "Voltar para a visão geral"
+
+#: includes/class-wphtmlmail-woocommerce.php:549
+msgid "Note"
+msgstr "Nota"
+
+#: includes/class-wphtmlmail-woocommerce.php:556
+msgid "Email"
+msgstr "E-mail"
+
+#: includes/class-wphtmlmail-woocommerce.php:563
+msgid "Tel"
+msgstr "Tel"
+
+#: includes/email-default-content.php:34
+#: views/woocommerce/template/email-order-details.php:33
+msgid "Product"
+msgstr "Produto"
+
+#: includes/email-default-content.php:60
+msgid "[{site_title}] New customer order ({order_number}) - {order_date}"
+msgstr "[{site_title}] Novo pedido de cliente ({order_number}) - {order_date}"
+
+#: includes/email-default-content.php:73
+msgid "New customer order"
+msgstr "Novo pedido de cliente"
+
+#: includes/email-default-content.php:73
+#: views/woocommerce/template/admin-new-order.php:23
+#, php-format
+msgid "You have received an order from %s. The order is as follows:"
+msgstr "Você recebeu um pedido de %s. O pedido é o seguinte:"
+
+#: includes/email-default-content.php:104
+msgid "[{site_title}] Cancelled order ({order_number})"
+msgstr "[{site_title}] Pedido cancelado ({order_number})"
+
+#: includes/email-default-content.php:120
+msgid "Cancelled order"
+msgstr "Pedido cancelado"
+
+#: includes/email-default-content.php:122
+#: views/woocommerce/template/admin-cancelled-order.php:23
+#, php-format
+msgid "The order #%d from %s has been cancelled. The order was as follows:"
+msgstr "O pedido #%d de %s foi cancelado. O pedido foi o seguinte:"
+
+#: includes/email-default-content.php:129
+#: includes/email-default-content.php:189
+#: includes/email-default-content.php:247
+#: includes/email-default-content.php:304
+#: includes/email-default-content.php:366
+#: includes/email-default-content.php:422
+#: includes/email-default-content.php:480
+#: views/woocommerce/template/email-order-details.php:25
+#: views/woocommerce/template/email-order-details.php:27
+#, php-format
+msgid "Order #%s"
+msgstr "Pedido #%s"
+
+#: includes/email-default-content.php:164
+msgid "[{site_title}] Failed order ({order_number})"
+msgstr "[{site_title}] Falha no pedido ({order_number})"
+
+#: includes/email-default-content.php:180
+msgid "Failed order"
+msgstr "Falha no pedido"
+
+#: includes/email-default-content.php:182
+#: views/woocommerce/template/admin-failed-order.php:23
+#, php-format
+msgid "Payment for order #%d from %s has failed. The order was as follows:"
+msgstr ""
+"Houve um erro no pagamento do pedido #%d de %s. O pedido era o seguinte:"
+
+#: includes/email-default-content.php:225
+msgid "Your {site_title} order receipt from {order_date}"
+msgstr "Seu pedido em {site_title} de {order_date}"
+
+#: includes/email-default-content.php:238
+msgid "Thank you for your order"
+msgstr "Agradecemos seu pedido"
+
+#: includes/email-default-content.php:240
+#: views/woocommerce/template/customer-processing-order.php:23
+msgid ""
+"Your order has been received and is now being processed. Your order details "
+"are shown below for your reference:"
+msgstr ""
+"Seu pedido foi recebido e está sendo processado. Os detalhes do pedido estão "
+"exibidos abaixo para sua conferência:"
+
+#: includes/email-default-content.php:283
+msgid "Your {site_title} order from {order_date} is complete"
+msgstr "Seu pedido  em {site_title} de {order_date} está concluído"
+
+#: includes/email-default-content.php:296
+msgid "Your order is complete"
+msgstr "Seu pedido foi concluído"
+
+#: includes/email-default-content.php:298
+#: views/woocommerce/template/customer-completed-order.php:23
+#, php-format
+msgid ""
+"Hi there. Your recent order on %s has been completed. Your order details are "
+"shown below for your reference:"
+msgstr ""
+"Olá. Seu pedido recente em %s foi concluído. Os detalhes do pedido serão "
+"exibidos abaixo para a sua conferência:"
+
+#: includes/email-default-content.php:340
+msgid "Invoice for order {order_number} from {order_date}"
+msgstr "Fatura para o pedido {order_number} de {order_date}"
+
+#: includes/email-default-content.php:356
+msgid "Invoice for order {order_number}"
+msgstr "Fatura para o pedido {order_number}"
+
+#: includes/email-default-content.php:359
+#: views/woocommerce/template/customer-invoice.php:24
+#, php-format
+msgid ""
+"An order has been created for you on %s. To pay for this order please use "
+"the following link: %s"
+msgstr ""
+"Um pedido foi criado para você em %s. Para pagar esse pedido, por gentileza, "
+"utilize o seguinte link: %s"
+
+#: includes/email-default-content.php:359
+#: views/woocommerce/template/customer-invoice.php:24
+msgid "pay"
+msgstr "pagar"
+
+#: includes/email-default-content.php:402
+msgid "Your {site_title} order from {order_date} has been refunded"
+msgstr ""
+"Seu pedido em {site_title} de {order_date} foi parcialmente reembolsado"
+
+#: includes/email-default-content.php:415
+msgid "Your order has been fully refunded"
+msgstr "Seu pedido foi reembolsado com sucesso"
+
+#: includes/email-default-content.php:417
+#: views/woocommerce/template/customer-refunded-order.php:28
+#, php-format
+msgid "Hi there. Your order on %s has been refunded."
+msgstr "Olá. Seu pedido em %s foi reembolsado."
+
+#: includes/email-default-content.php:458
+msgid "Note added to your {site_title} order from {order_date}"
+msgstr "Nota adicionada ao seu pedido em {site_title} de {order_date}"
+
+#: includes/email-default-content.php:471
+msgid "A note has been added to your order"
+msgstr "Uma nota foi adicionada ao seu pedido"
+
+#: includes/email-default-content.php:473
+#: views/woocommerce/template/customer-note.php:23
+msgid "Hello, a note has just been added to your order:"
+msgstr "Olá, uma nota foi adicionada ao seu pedido:"
+
+#: includes/email-default-content.php:475
+#: views/woocommerce/template/customer-note.php:27
+msgid "For your reference, your order details are shown below."
+msgstr "Para sua referência, os detalhes do pedido são exibidos abaixo."
+
+#: includes/email-default-content.php:513
+msgid "Password Reset for {site_title}"
+msgstr "Redefinição de senha em {site_title}"
+
+#: includes/email-default-content.php:525
+msgid "Password Reset Instructions"
+msgstr "Instruções de Redefinição de Senha"
+
+#: includes/email-default-content.php:527
+#: views/woocommerce/template/customer-reset-password.php:22
+msgid "Someone requested that the password be reset for the following account:"
+msgstr ""
+"Nosso sistema registrou que você solicitou a alteração de senha para a "
+"seguinte conta:"
+
+#: includes/email-default-content.php:528
+#: views/woocommerce/template/customer-reset-password.php:23
+#, php-format
+msgid "Username: %s"
+msgstr "Usuário: %s"
+
+#: includes/email-default-content.php:529
+#: views/woocommerce/template/customer-reset-password.php:24
+msgid "If this was a mistake, just ignore this email and nothing will happen."
+msgstr "Se isto foi um engano, apenas ignore este e-mail e nada acontecerá."
+
+#: includes/email-default-content.php:530
+#: views/woocommerce/template/customer-reset-password.php:25
+msgid "To reset your password, visit the following address:"
+msgstr "Para redefinir sua senha, visite o seguinte endereço:"
+
+#: includes/email-default-content.php:532
+#: views/woocommerce/template/customer-reset-password.php:28
+msgid "Click here to reset your password"
+msgstr "Clique aqui para redefinir sua senha"
+
+#: includes/email-default-content.php:545
+msgid "Your account on {site_title}"
+msgstr "Sua conta em {site_title}"
+
+#: includes/email-default-content.php:557
+msgid "Welcome to {site_title}"
+msgstr "Bem-vindo ao site do {site_title}"
+
+#: includes/email-default-content.php:559
+#: views/woocommerce/template/customer-new-account.php:22
+#, php-format
+msgid ""
+"Thanks for creating an account on %s. Your username is <strong>%s</strong>."
+msgstr ""
+"Obrigado por criar uma conta em %s. Seu nome de usuário é <strong>%s</"
+"strong>."
+
+#: includes/email-default-content.php:560
+#: views/woocommerce/template/customer-new-account.php:26
+#, php-format
+msgid "Your password has been automatically generated: <strong>%s</strong>"
+msgstr "Sua senha foi gerada automaticamente: <strong>%s</strong>"
+
+#: includes/email-default-content.php:561
+#: views/woocommerce/template/customer-new-account.php:30
+#, php-format
+msgid ""
+"You can access your account area to view your orders and change your "
+"password here: %s."
+msgstr ""
+"Você pode acessar o painel de sua conta para ver seus pedidos e alterar sua "
+"senha aqui: %s."
+
+#: views/woocommerce/admin/settings-woocommerce.php:6
+msgid "How do you want to edit your WooCommerce emails?"
+msgstr "Como você quer editar seus e-mails do WooCommerce?"
+
+#: views/woocommerce/admin/settings-woocommerce.php:10
+msgid "Set one global template and use WooCommerce default content."
+msgstr "Defina um modelo global e use o conteúdo padrão do WooCommerce."
+
+#: views/woocommerce/admin/settings-woocommerce.php:15
+msgid "Customize each email individually."
+msgstr "Personalize cada e-mail individualmente."
+
+#: views/woocommerce/admin/settings-woocommerce.php:25
+msgid "WooCommerce global template"
+msgstr "Modelo Global do WooCommerce"
+
+#: views/woocommerce/admin/settings-woocommerce.php:30
+msgid "Show product thumbnails"
+msgstr "Exibir miniaturas de produto"
+
+#: views/woocommerce/admin/settings-woocommerce.php:34
+msgid "for customers"
+msgstr "para os clientes"
+
+#: views/woocommerce/admin/settings-woocommerce.php:38
+msgid "for admins"
+msgstr "para os administradores"
+
+#: views/woocommerce/admin/settings-woocommerce.php:42
+msgid "Thumbnail size"
+msgstr "Tamanho da Miniatura"
+
+#: views/woocommerce/admin/settings-woocommerce.php:49
+msgid "Table Headline Font"
+msgstr "Fonte de Cabeçalho de Tabela"
+
+#: views/woocommerce/admin/settings-woocommerce.php:68
+#: views/woocommerce/admin/settings-woocommerce.php:99
+#: views/woocommerce/admin/settings-woocommerce.php:129
+#: views/woocommerce/admin/settings-woocommerce.php:165
+msgid "Bold"
+msgstr "Negrito"
+
+#: views/woocommerce/admin/settings-woocommerce.php:74
+#: views/woocommerce/admin/settings-woocommerce.php:105
+#: views/woocommerce/admin/settings-woocommerce.php:135
+#: views/woocommerce/admin/settings-woocommerce.php:171
+msgid "Italic"
+msgstr "Itálico"
+
+#: views/woocommerce/admin/settings-woocommerce.php:80
+msgid "Table Content Font"
+msgstr "Fonte de Conteúdo de Tabela"
+
+#: views/woocommerce/admin/settings-woocommerce.php:110
+msgid "Variation Font"
+msgstr "Fonte da Variação"
+
+#: views/woocommerce/admin/settings-woocommerce.php:140
+msgid "Total Font"
+msgstr "Fonte do Total"
+
+#: views/woocommerce/admin/settings-woocommerce.php:156
+#: views/woocommerce/admin/settings-woocommerce.php:181
+#: views/woocommerce/admin/settings-woocommerce.php:188
+#: views/woocommerce/admin/settings-woocommerce.php:195
+msgid "Left"
+msgstr "Esquerda"
+
+#: views/woocommerce/admin/settings-woocommerce.php:157
+#: views/woocommerce/admin/settings-woocommerce.php:182
+#: views/woocommerce/admin/settings-woocommerce.php:189
+#: views/woocommerce/admin/settings-woocommerce.php:196
+msgid "Center"
+msgstr "Centro"
+
+#: views/woocommerce/admin/settings-woocommerce.php:158
+#: views/woocommerce/admin/settings-woocommerce.php:183
+#: views/woocommerce/admin/settings-woocommerce.php:190
+#: views/woocommerce/admin/settings-woocommerce.php:197
+msgid "Right"
+msgstr "Direita"
+
+#: views/woocommerce/admin/settings-woocommerce.php:176
+msgid "Alignment"
+msgstr "Alinhamento"
+
+#: views/woocommerce/admin/settings-woocommerce.php:193
+msgid "Address"
+msgstr "Endereço"
+
+#: views/woocommerce/admin/settings-woocommerce.php:203
+msgid "Header border"
+msgstr "Borda do Cabeçalho"
+
+#: views/woocommerce/admin/settings-woocommerce.php:234
+msgid "Products border"
+msgstr "Borda de Produto"
+
+#: views/woocommerce/admin/settings-woocommerce.php:271
+msgid "Total border"
+msgstr "Borda do Total"
+
+#: views/woocommerce/admin/settings-woocommerce.php:315
+msgid "Build your email"
+msgstr "Construa seu e-mail"
+
+#: views/woocommerce/admin/settings-woocommerce.php:318
+msgid "Please create at least one order. We need this as demo data."
+msgstr ""
+"Por favor, crie pelo menos um pedido. Isto é necessário para exibir como "
+"dados de demonstração."
+
+#: views/woocommerce/admin/settings-woocommerce.php:341
+msgid "Preview woocommerce mail"
+msgstr "Visualizar e-mail do WooCommerce"
+
+#: views/woocommerce/admin/settings-woocommerce.php:345
+msgid "Order #"
+msgstr "Pedido #"
+
+#: views/woocommerce/admin/settings-woocommerce.php:356
+msgid "Send test mails"
+msgstr "Enviar e-mails de teste"
+
+#: views/woocommerce/admin/settings-woocommerce.php:358
+msgid ""
+"Go to the order edit screen to resend some order mails and see the results "
+"in your mail client."
+msgstr ""
+"Acesse a tela de edição de pedido para reenviar e-mails de pedido e ver os "
+"resultados em seu cliente de e-mail."
+
+#: views/woocommerce/template/customer-refunded-order.php:25
+#, php-format
+msgid "Hi there. Your order on %s has been partially refunded."
+msgstr "Olá. Seu pedido em %s foi parcialmente reembolsado."
+
+#: views/woocommerce/template/email-order-items.php:89
+#, php-format
+msgid "Download %d"
+msgstr "Download %d"
+
+#: views/woocommerce/template/email-order-items.php:91
+msgid "Download"
+msgstr "Download"
+
+#: wp-html-mail-woocommerce.php:24
+#, php-format
+msgid ""
+"<strong>Notice:</strong> To use the WP HTML Mail - WooCommerce integration "
+"please install the free WP HTML Mail plugin first. <a href=\"%s\">Install "
+"Plugin</a>"
+msgstr ""
+"<strong>Aviso:</strong> Para usar a integração WP HTML Mail - WooCommerce "
+"instale o plugin gratuito WP HTML Mail primeiro. <a href=\"%s\">Instalar "
+"Plugin</a>"
+
+#: wp-html-mail-woocommerce.php:36
+#, php-format
+msgid ""
+"<strong>Notice:</strong> To use the WP HTML Mail - WooCommerce integration "
+"please install WooCommerce first. <a href=\"%s\">Install Plugin</a>"
+msgstr ""
+"<strong>Aviso:</strong> Para usar a integração WP HTML Mail instale o "
+"WooCommerce primeiro. <a href=\"%s\">Instalar Plugin</a>"
+
+#: wp-html-mail-woocommerce.php:49
+#, php-format
+msgid ""
+"<strong>Notice:</strong> Please update WP HTML Mail to version %s before "
+"using the WooCommerce extension."
+msgstr ""
+"<strong>AVISO:</strong> Por favor, atualize o WP HTML Mail para a versão %s "
+"antes de usar a extensão WooCommerce."
+
+#. Plugin Name of the plugin/theme
+msgid "WP HTML Mail - WooCommerce"
+msgstr "WP HTML Mail - WooCommerce"
+
+#. Plugin URI of the plugin/theme
+msgid "http://wp-html-mail.com/"
+msgstr "http://wp-html-mail.com/"
+
+#. Description of the plugin/theme
+msgid "Beautiful responsive mails for your WooCommerce store"
+msgstr "Belos e-mails responsivos para sua loja WooCommerce"
+
+#. Author of the plugin/theme
+msgid "Hannes Etzelstorfer"
+msgstr "Hannes Etzelstorfer"
+
+#. Author URI of the plugin/theme
+msgid "http://etzelstorfer.com"
+msgstr "http://etzelstorfer.com"

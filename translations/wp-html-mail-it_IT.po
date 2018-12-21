@@ -1,0 +1,381 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP HTML Mail 2.2.2\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-html-mail\n"
+"POT-Creation-Date: 2016-09-06 11:05+0200\n"
+"PO-Revision-Date: 2016-09-06 12:36+0200\n"
+"Last-Translator: Gabriele Lauricella <gab.lau@gmail.com>\n"
+"Language-Team: Gabriele Lauricella <gab.lau@gmail.com>\n"
+"Language: it_IT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.4\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-WPHeader: wp-html-mail.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: includes/class-contenttype-text.php:47
+msgid "Text"
+msgstr "Testo"
+
+#: includes/class-contenttype-twocol.php:47
+msgid "Two Columns"
+msgstr "Due colonne"
+
+#: includes/class-contenttype-twocol.php:62
+msgid ".."
+msgstr ".."
+
+#: includes/class-haet-mail.php:124
+msgid "Email"
+msgstr "E-mail"
+
+#: includes/class-haet-mail.php:124
+msgid "Email template"
+msgstr "Modello e-mail"
+
+#: includes/class-haet-mail.php:149
+msgid "Settings Updated."
+msgstr "Impostazioni Aggiornate."
+
+#: includes/class-haet-mail.php:189 views/admin/settings.php:18
+msgid "General"
+msgstr "Generale"
+
+#: includes/class-haet-mail.php:190 views/admin/settings.php:47
+msgid "Header"
+msgstr "Intestazione"
+
+#: includes/class-haet-mail.php:191 views/admin/settings.php:155
+msgid "Content"
+msgstr "Contenuto"
+
+#: includes/class-haet-mail.php:198 views/admin/settings.php:300
+#: views/admin/settings.php:311
+msgid "Footer"
+msgstr "Piè di pagina"
+
+#: includes/class-haet-mail.php:199
+msgid "Plugins"
+msgstr "Plugins"
+
+#: includes/class-haet-mail.php:200
+msgid "Advanced"
+msgstr "Avanzato"
+
+#: includes/class-haet-sender-plugin-ninja-forms.php:41
+msgid "Yes"
+msgstr "Sì"
+
+#: includes/class-haet-sender-plugin-ninja-forms.php:42
+msgid "No"
+msgstr "No"
+
+#: includes/class-haet-sender-plugin-wp-e-commerce.php:9
+msgid "Transaction Report"
+msgstr "Risultati transazione"
+
+#: includes/class-haet-sender-plugin-wp-e-commerce.php:10
+msgid "Purchase Receipt"
+msgstr "Ricevuta d'acquisto"
+
+#: includes/class-haet-sender-plugin-wp-e-commerce.php:11
+msgid "Order Pending: Payment Required"
+msgstr "Ordine pendente: Pagamento richiesto"
+
+#: includes/class-haet-sender-plugin-wp-e-commerce.php:13
+msgid "The administrator has unlocked your file"
+msgstr "L'amministratore ha sbloccato il vostro file"
+
+#: includes/class-mailbuilder.php:43
+msgid "custom emails"
+msgstr "email personalizzate"
+
+#: includes/class-mailbuilder.php:44
+msgid "custom email"
+msgstr "email personalizzata"
+
+#: includes/class-mailbuilder.php:45 includes/class-mailbuilder.php:46
+msgid "Add New Custom Email"
+msgstr "Aggiungi nuova Email personalizzata"
+
+#: includes/class-mailbuilder.php:47
+msgid "Edit Custom Email"
+msgstr "Modifica Email Personalizzata"
+
+#: includes/class-mailbuilder.php:48
+msgid "New Custom Email"
+msgstr "Nuova Email Personalizzata"
+
+#: includes/class-mailbuilder.php:49
+msgid "View Custom Email"
+msgstr "Mostra Email Personalizzata"
+
+#: includes/class-mailbuilder.php:50
+msgid "Search Custom Emails"
+msgstr "Cerca Email Personalizzate"
+
+#: includes/class-mailbuilder.php:51
+msgid "No Custom Emails found"
+msgstr "Nessun Email Personalizzata trovata"
+
+#: includes/class-mailbuilder.php:52
+msgid "No Custom Emails found in Trash"
+msgstr "Nessun Email Personalizzata trovata nel Cestino"
+
+#: includes/class-mailbuilder.php:53
+msgid "Parent Custom Email:"
+msgstr "Padre Email  Personalizzata:"
+
+#: includes/class-mailbuilder.php:54
+msgid "Custom Emails"
+msgstr "Email Personalizzate"
+
+#: includes/class-mailbuilder.php:88
+msgid "Message"
+msgstr "Messaggio"
+
+#: includes/class-mailbuilder.php:90
+msgid "Email Subject"
+msgstr "Oggetto Email"
+
+#: includes/class-mailbuilder.php:92
+msgid "Email Content Builder"
+msgstr "Contenuto Email"
+
+#: includes/class-mailbuilder.php:142
+msgid "Apply"
+msgstr "Applica"
+
+#: includes/class-mailbuilder.php:146
+msgid "Cancel"
+msgstr "Annulla"
+
+#: includes/class-mailbuilder.php:183
+msgid "Add Content Element"
+msgstr "Aggiungi Elemento Contenuto"
+
+#: views/admin/settings.php:23 views/admin/settings.php:52
+#: views/admin/settings.php:160 views/admin/settings.php:305
+msgid "Background color"
+msgstr "Colore di sfondo"
+
+#: views/admin/settings.php:29
+msgid "Email sender name"
+msgstr "Nome del mittente"
+
+#: views/admin/settings.php:35
+msgid "Email sender address"
+msgstr "E-mail del mittente"
+
+#: views/admin/settings.php:59
+msgid "Header image"
+msgstr "Immagine della testata"
+
+#: views/admin/settings.php:64
+msgid "Select image"
+msgstr "Seleziona immagine"
+
+#: views/admin/settings.php:68
+msgid "Add your logo or image header (optional). max 600px wide"
+msgstr ""
+"Aggiungi il tuo logo o immagine nell'intestazione (opzionale). Dim. max 600px"
+
+#: views/admin/settings.php:73
+msgid "Padding"
+msgstr "Riempimento"
+
+#: views/admin/settings.php:76
+msgid "top"
+msgstr "alto"
+
+#: views/admin/settings.php:83
+msgid "right"
+msgstr "destra"
+
+#: views/admin/settings.php:90
+msgid "bottom"
+msgstr "In basso"
+
+#: views/admin/settings.php:97
+msgid "left"
+msgstr "sinistra"
+
+#: views/admin/settings.php:107
+msgid "Header text"
+msgstr "Testo Testata"
+
+#: views/admin/settings.php:115
+msgid "Font"
+msgstr "Carattere"
+
+#: views/admin/settings.php:167
+msgid "Headline Font"
+msgstr "Carattere del titolo"
+
+#: views/admin/settings.php:202
+msgid "Subsubheadline Font"
+msgstr "Carattere del titoletto"
+
+#: views/admin/settings.php:237
+msgid "Content Font"
+msgstr "Carattere Contenuto"
+
+#: views/admin/settings.php:272
+msgid "Link styling"
+msgstr "Styling di collegamento"
+
+#: views/admin/settings.php:322
+msgid "Show \"powered by\" link in email footer"
+msgstr "Mostra \"powered by\" link nel piè di pagina dell'email"
+
+#: views/admin/settings.php:332
+msgid "Use template for mails sent by your installed plugins"
+msgstr "Utilizzare il modello per le mail inviate dai plugin installati"
+
+#: views/admin/settings.php:369
+msgid "Advanced features"
+msgstr "Caratteristiche avanzate"
+
+#: views/admin/settings.php:383
+msgid "Create custom template"
+msgstr "Crea modello personalizzato"
+
+#: views/admin/settings.php:386
+msgid "create template file in my theme folder"
+msgstr "crea il file di modello nella mia cartella del tema"
+
+#: views/admin/settings.php:388
+msgid ""
+"You already have a custom template. If you create a new one the existing "
+"template will be backed up."
+msgstr ""
+"Hai già un modello personalizzato. Se si crea uno nuovo, il modello "
+"esistente verrà salvato in un backup."
+
+#: views/admin/settings.php:391
+msgid ""
+"WARNING: Your theme directory is not writable by the server. Please change "
+"the permission to allow us to create the mail template."
+msgstr ""
+"Attenzione: La directory del tema non è scrivibile dal server. Si prega di "
+"modificare l'autorizzazione per permetterci di creare il modello dell'email"
+
+#: views/admin/settings.php:394
+msgid ""
+"Customize your mail template as far as you can. Then click this button to "
+"export the template to your theme directory for further modifications."
+"<br>The template will be created in <strong>wp-content/YOUR-THEME/wp-html-"
+"mail/template.html</strong>"
+msgstr ""
+"Personalizzare il modello dell'email per quanto è possibile. Quindi fare "
+"clic su questo pulsante per esportare il modello nella directory del tema "
+"per ulteriori modifiche.<br>Il modello verrà creato in <strong>wp-content/"
+"TUO-TEMA/wp-html-mail/template.html</strong>"
+
+#: views/admin/settings.php:396
+msgid "Template created"
+msgstr "Modello creato"
+
+#: views/admin/settings.php:398
+msgid "Your template has been created."
+msgstr "Il modello è stato creato."
+
+#: views/admin/settings.php:416
+msgid "Save and Preview"
+msgstr "Salva e Anteprima"
+
+#: views/admin/settings.php:417
+msgid "Discard changes and reload template"
+msgstr "Annullare le modifiche e ricaricare il modello"
+
+#: views/admin/settings.php:424
+msgid "Send a test mail"
+msgstr "Invia una mail di prova"
+
+#: views/admin/settings.php:427
+msgid "send test mail"
+msgstr "invia una email di prova"
+
+#: views/admin/settings.php:428
+msgid "Email sent"
+msgstr "Email inviata"
+
+#: views/admin/settings.php:430
+msgid "Your message has been sent."
+msgstr "Il tuo messaggio è stato inviato."
+
+#: views/admin/single-plugin.php:14
+msgid "Use template"
+msgstr "Usa modello"
+
+#: views/admin/single-plugin.php:18
+msgid "Overwrite sender"
+msgstr "Sovrascrivere il mittente"
+
+#: views/admin/single-plugin.php:21
+msgid "Install WP HTML Mail for"
+msgstr "Installare WP HTML Mail per"
+
+#: views/admin/single-plugin.php:27
+msgid "is currently not installed."
+msgstr "non è attualmente installato."
+
+#: views/admin/single-plugin.php:29
+msgid "install"
+msgstr "Installa"
+
+#. Plugin Name of the plugin/theme
+msgid "WP HTML Mail"
+msgstr "WP HTML Mail"
+
+#. Plugin URI of the plugin/theme
+msgid "http://wp-html-mail.com/"
+msgstr "http://wp-html-mail.com/"
+
+#. Description of the plugin/theme
+msgid "Use custom HTML mail templates for your WordPress mails"
+msgstr ""
+"Utilizza modelli di email HTML personalizzati per messaggi di WordPress"
+
+#. Author of the plugin/theme
+msgid "Hannes Etzelstorfer"
+msgstr "Hannes Etzelstorfer"
+
+#. Author URI of the plugin/theme
+msgid "http://etzelstorfer.com/en/"
+msgstr "http://etzelstorfer.com/en/"
+
+#~ msgid "Bold"
+#~ msgstr "Grassetto"
+
+#~ msgid "Italic"
+#~ msgstr "Corsivo"
+
+#~ msgid "Alignment"
+#~ msgstr "Allineamento"
+
+#~ msgid "Left"
+#~ msgstr "Sinistra"
+
+#~ msgid "Center"
+#~ msgstr "Centrato"
+
+#~ msgid "Right"
+#~ msgstr "Destra"
+
+#~ msgid "Underline"
+#~ msgstr "Sottolineato"
+
+#~ msgid "haet webdevelopment"
+#~ msgstr "haet webdevelopment"
+
+#~ msgid "http://etzelstorfer.com"
+#~ msgstr "http://etzelstorfer.com"
