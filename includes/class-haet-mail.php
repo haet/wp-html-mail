@@ -335,6 +335,8 @@ final class Haet_Mail {
 		// $debug .= '<pre>=====GET:'.print_r($_GET,true).'</pre>';
 		// $debug .= 'SENDER-PLUGIN: <pre>'.print_r($sender_plugin,true).'</pre><br>';
 		// $debug .= 'ACTIVE-PLUGINS: <pre>'.print_r(Haet_Sender_Plugin::get_active_plugins(),true).'</pre><br>';
+		// error_log( $debug );
+
 		// if( strpos( $email['message'], '</body>' ) !== false )
 		// 	$email['message'] = str_replace( '</body>', $debug, $email['message'] );
 		// else
@@ -403,6 +405,11 @@ final class Haet_Mail {
 
 		$email = $this->add_attachments( $email );
 
+		if( $this->is_debug_mode() ){
+			$debug_filename = trailingslashit( get_temp_dir() ) . 'debug-' . uniqid() . '.txt';
+			file_put_contents( $debug_filename, print_r( $email, true ) );
+			$email['attachments'][] = $debug_filename;
+		}
 
 		if(	isset( $options['testmode'] ) 
 			&& isset( $options['testmode_recipient'] ) 
@@ -439,8 +446,7 @@ final class Haet_Mail {
 				}
 			}	
 		}
-		
-
+	
 		return $email;
 	}
 
@@ -556,7 +562,6 @@ final class Haet_Mail {
 		$custom_css_desktop = apply_filters( 'haet_mail_css_desktop', $custom_css_desktop );
 		$custom_css_mobile = apply_filters( 'haet_mail_css_mobile', $custom_css_mobile );
 		$custom_css_mobile = ' @media screen and (max-width: 400px) { ' . PHP_EOL . $custom_css_mobile . ' } ';
-		error_log( $custom_css_desktop );
 		$message = str_replace( '/**** ADD CSS HERE ****/', $custom_css_desktop . '/**** ADD CSS HERE ****/', $message );
 		$message = str_replace( '/**** ADD MOBILE CSS HERE ****/', $custom_css_mobile . '/**** ADD MOBILE CSS HERE ****/', $message );
 
@@ -679,6 +684,7 @@ final class Haet_Mail {
 	}
 
 
+
 	/**
 	 * Show action links on the plugin screen
 	 */
@@ -700,6 +706,23 @@ final class Haet_Mail {
 				<?php
 			}
 		}
+	}
+
+	/**
+	 * added in 2.9
+	 * debug mode can only be used when testmode is active to avoid sending debug infos to clients
+	 */
+	public function is_debug_mode(){
+		$options = $this->get_options();
+		return ( 
+				is_array( $options ) 
+				&& isset( $options['testmode'] ) 
+				&& $options['testmode'] 
+				&& isset( $options['testmode_recipient'] ) 
+				&& is_email( trim( $options['testmode_recipient'] ) )
+				&& isset( $options['debugmode'] ) 
+				&& $options['debugmode']
+		);
 	}
 }
 

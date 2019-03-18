@@ -1,47 +1,61 @@
-.clearfix{zoom:1}.clearfix:before,.clearfix:after{content:"";display:table}.clearfix:after{clear:both}
+.clearfix {
+    zoom: 1
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: "";
+    display: table
+}
+
+.clearfix:after {
+    clear: both
+}
 
 #haet_mail_form {
-    .wp-picker-container{
+    .wp-picker-container {
         line-height: 21px;
-        display: inline-block;
-        a{
+        display: inline-block !important;
+        width: auto;
+
+        a {
             margin-right: 0;
         }
     }
 
-    .wp-color-result{
+    .wp-color-result {
         margin-bottom: 0;
     }
 
     .postbox .hndle,
-    .haet-mail-send-test .hndle{
-        padding-left:10px;
+    .haet-mail-send-test .hndle {
+        padding-left: 10px;
         cursor: text;
     }
 
     .form-table th,
     .form-table td {
-        padding-top:8px;
-        padding-bottom:8px;
+        padding-top: 8px;
+        padding-bottom: 8px;
     }
 
-    .border-choice-label{
+    .border-choice-label {
         display: inline-block;
         font-size: 8px;
         line-height: 10px;
         margin-right: 20px;
     }
 
-    .border-choice{
-        width:16px;
-        height:16px;
-        border:none;
+    .border-choice {
+        width: 16px;
+        height: 16px;
+        border: none;
         border-collapse: collapse;
         display: inline-table;
         vertical-align: 1px;
     }
 
-    .border-choice td{
+    .border-choice td {
         width: 8px;
         height: 7px;
         font-size: 0px;
@@ -51,67 +65,70 @@
     }
 
     /* outer vertical */
-    .border-choice.border-choice-outer-v td:first-child{
-        border-left: solid 2px #000!important;
+    .border-choice.border-choice-outer-v td:first-child {
+        border-left: solid 2px #000 !important;
     }
-    .border-choice.border-choice-outer-v td:last-child{
+
+    .border-choice.border-choice-outer-v td:last-child {
         border-right: solid 2px #000;
     }
 
     /* inner vertical */
-    .border-choice.border-choice-inner-v td:last-child{
+    .border-choice.border-choice-inner-v td:last-child {
         border-left: solid 2px #000;
     }
 
 
     /* outer horizontal */
-    .border-choice.border-choice-outer-h tr:first-child td{
-        border-top: solid 2px #000!important;
+    .border-choice.border-choice-outer-h tr:first-child td {
+        border-top: solid 2px #000 !important;
     }
-    .border-choice.border-choice-outer-h tr:last-child td{
+
+    .border-choice.border-choice-outer-h tr:last-child td {
         border-bottom: solid 2px #000;
     }
 
     /* inner horizontal */
-    .border-choice.border-choice-inner-h tr:last-child td{
+    .border-choice.border-choice-inner-h tr:last-child td {
         border-top: solid 2px #000;
     }
 
     /* top */
-    .border-choice.border-choice-top tr:first-child td{
+    .border-choice.border-choice-top tr:first-child td {
         border-top: solid 2px #000;
     }
 
     /* bottom */
-    .border-choice.border-choice-bottom tr:last-child td{
+    .border-choice.border-choice-bottom tr:last-child td {
         border-bottom: solid 2px #000;
     }
 
 
-    input[type="number"]{
-        width:50px;
+    input[type="number"] {
+        width: 50px;
     }
 
-    #haet_mail_testmode_recipient{
+    .collapse-testmode {
         display: none;
     }
 
-    #haet_mail_testmode:checked+label+#haet_mail_testmode_recipient{
+    #haet_mail_testmode:checked+label+.collapse-testmode {
         display: block;
     }
 }
 
-.haet-font-toolbar{
-    select{
+.haet-font-toolbar {
+    select {
         height: 25px;
     }
 }
 
 
 #haet_mail_form input[type=checkbox].haet-toggle,
-#haet_mail_form input[type=radio].haet-toggle{
+#haet_mail_form input[type=radio].haet-toggle {
     display: none;
-    &+label{
+
+    &+label {
         display: inline-block;
         text-align: center;
         height: 22px;
@@ -122,22 +139,23 @@
         border-radius: 3px;
         -webkit-box-shadow: 0 1px 0 #ccc;
         box-shadow: 0 1px 0 #ccc;
-        
-        .dashicons{
+
+        .dashicons {
             font-size: 17px;
             line-height: 1.3;
         }
 
-        &.border-choice-label{
+        &.border-choice-label {
             margin-right: 0;
         }
     }
 
-    &:checked + label{
+    &:checked+label {
         background-color: #dddddd;
         -webkit-box-shadow: 0 2px 0 #ccc inset;
         box-shadow: 0 2px 0 #ccc inset;
-        .dashicons{
+
+        .dashicons {
             line-height: 1.45;
         }
     }
@@ -145,16 +163,16 @@
 
 
 
-.haet-mail-send-test{
+.haet-mail-send-test {
     max-width: 800px;
 }
 
-.haet-mail-dialog{
+.haet-mail-dialog {
     display: none;
 }
 
-.customize-email-content-selection{
-    a{
+.customize-email-content-selection {
+    a {
         text-decoration: none;
     }
 }
@@ -162,35 +180,35 @@
 /****************************************
 *   PLUGINS
 ****************************************/
-.haet-mail-plugin{ 
+.haet-mail-plugin {
     width: 350px;
-    margin:20px;
+    margin: 20px;
     float: left;
     display: block;
-    height:128px;
-    padding:15px;
-    border:1px solid #eee;
+    height: 128px;
+    padding: 15px;
+    border: 1px solid #eee;
     background: #f1f1f1;
 }
 
-.haet-mail-plugin.not-installed img{ 
-    opacity:0.5;
+.haet-mail-plugin.not-installed img {
+    opacity: 0.5;
     transition: opacity 0.4s;
 }
 
-.haet-mail-plugin.not-installed:hover img{ 
-    opacity:1.0;
+.haet-mail-plugin.not-installed:hover img {
+    opacity: 1.0;
 }
 
 
-.haet-mail-plugin .haet-mail-plugin-left{
-    width:128px;
+.haet-mail-plugin .haet-mail-plugin-left {
+    width: 128px;
     float: left;
 }
 
-.haet-mail-plugin .haet-mail-plugin-right{
+.haet-mail-plugin .haet-mail-plugin-right {
     margin-left: 10px;
-    width:205px;
+    width: 205px;
     float: left;
 }
 
@@ -198,44 +216,46 @@
 /****************************************
 *   SURVEY
 ****************************************/
-.haet-survey-nag{
+.haet-survey-nag {
     display: block;
-    .haet-star-rating{
+
+    .haet-star-rating {
         margin-left: 20px;
         vertical-align: -6px;
     }
 }
 
-.haet-star-rating{
+.haet-star-rating {
     display: inline-block;
-    a{
+
+    a {
         display: inline-block;
-        padding:2px;
+        padding: 2px;
         float: left;
     }
 }
 
-.haet-mail-survey{
-    .form-table th{
+.haet-mail-survey {
+    .form-table th {
         width: 460px;
     }
 
-    textarea{
+    textarea {
         width: 400px;
-        height:120px;
+        height: 120px;
     }
 
-    .testimonial-inline-label{
-        display: inline-block;
-        width: 250px;
-    }
-    
-    .testimonial-inline-field{
+    .testimonial-inline-label {
         display: inline-block;
         width: 250px;
     }
 
-    .button-primary .dashicons{
+    .testimonial-inline-field {
+        display: inline-block;
+        width: 250px;
+    }
+
+    .button-primary .dashicons {
         vertical-align: -5px;
     }
 }

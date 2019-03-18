@@ -505,7 +505,6 @@ final class Haet_Mail_Builder
      * @return email body html
      */
     public function modify_styled_mail( $message ){
-        error_log('###### modify_styled_mail');
         preg_match_all("/<\!--mailbuilder\[(.*)\]-->/smU", $message, $matches);
         if( count($matches) > 1 && count($matches[1]) ){
             $email_name = $matches[1][0];
