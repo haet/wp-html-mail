@@ -2,7 +2,7 @@
 Contributors: haet
 Tags: email template, html mail, email design, mail, email templates, ninja-forms, wp-e-commerce, caldera-forms, wp-e-commerce, easy-digital-downloads, woocommerce, contact-form-7, mandrill, postman, gravityforms
 Requires at least: 4.9
-Tested up to: 5.0.1
+Tested up to: 5.1.1
 Stable tag: 2.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -51,6 +51,8 @@ Currently supported are
 * HappyForms
 * WP Support Plus Responsive Ticket System
 * Birthday Emails
+* Ultimate WP Mail
+* Divi Theme contact forms
 * [WPForms and WPForms Lite](http://etzelstorfer.com/en/downloads/wp-html-mail-wpforms/)
 * [WooCommerce](http://etzelstorfer.com/en/downloads/wp-html-mail-woocommerce/)
 * [Easy Digital Downloads](http://etzelstorfer.com/en/downloads/wp-html-mail-easy-digital-downloads/)
