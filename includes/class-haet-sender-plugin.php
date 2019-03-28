@@ -10,6 +10,7 @@ require HAET_MAIL_PATH . 'includes/class-haet-sender-plugin-birthday-emails.php'
 require HAET_MAIL_PATH . 'includes/class-haet-sender-plugin-gravityforms.php';
 require HAET_MAIL_PATH . 'includes/class-haet-sender-plugin-happyforms.php';
 require HAET_MAIL_PATH . 'includes/class-haet-sender-plugin-ultimate-wp-mail.php';
+require HAET_MAIL_PATH . 'includes/class-haet-sender-plugin-divi-theme.php';
 
 class Haet_Different_Plugin_Exception extends Exception {}
 
@@ -85,6 +86,13 @@ class Haet_Sender_Plugin {
                 'class'     =>  'Haet_Sender_Plugin_UltimateWPMail',
                 'display_name' => 'Ultimate WP Mail'
             ),
+            'divi-theme'   =>  array(
+                'name'      =>  'divi-theme',
+                'file'      =>  'Divi',
+                'class'     =>  'Haet_Sender_Plugin_DiviTheme',
+                'display_name' => 'Divi',
+                'image_url' =>  HAET_MAIL_URL . '/images/divi-theme.png'
+            ),
         );
 
         return apply_filters( 'haet_mail_available_plugins', $plugins );
@@ -155,6 +163,10 @@ class Haet_Sender_Plugin {
                         return true;
                     }
                 }
+            }
+            $active_theme = wp_get_theme();
+            if ( $plugin['display_name'] == $active_theme->name || $plugin['display_name']== $active_theme->parent_theme ) {
+                return true;
             }
         }
         return false;
