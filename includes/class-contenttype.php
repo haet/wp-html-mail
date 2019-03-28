@@ -31,7 +31,7 @@ abstract class Haet_MB_ContentType
 
 
 	public function __construct(){
-		add_filter( 'haet_mail_content_types', array( $this, 'register_contenttype'), $this->_priority, 2 );
+		add_filter( 'haet_mail_content_types', array( $this, 'register_contenttype'), $this->_priority, 3 );
 		add_action( 'admin_enqueue_scripts', array($this, 'enqueue_scripts_and_styles'));
 		add_action( 'haet_mail_content_template', array($this, 'admin_render_contentelement_template'), $this->_priority );
 		add_action( 'haet_mail_content_settings', array($this, 'admin_print_contentelement_settings'), $this->_priority );
@@ -41,7 +41,7 @@ abstract class Haet_MB_ContentType
 
 
 
-	public function register_contenttype( $content_types, $current_email ){
+	public function register_contenttype( $content_types, $email_name, $email_post ){
 		$content_types[$this->_name] = array(
 				'name'		=>	$this->_name,
 				'nicename'	=>	$this->_nicename,

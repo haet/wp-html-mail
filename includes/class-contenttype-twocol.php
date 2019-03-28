@@ -18,8 +18,8 @@ final class Haet_MB_ContentType_TwoCol extends Haet_MB_ContentType
 	/**
 	 * @var int
 	 */
-	protected $_priority = 10;
-
+    protected $_priority = 10;
+    
 	/**
 	 * @var bool
 	 * contenttype can be used once per email
@@ -29,7 +29,7 @@ final class Haet_MB_ContentType_TwoCol extends Haet_MB_ContentType
 	/**
 	 * @var string
 	 */
-	protected $_icon = 'dashicons-text';
+	protected $_icon = HAET_MAIL_URL.'images/contenttype-icons/twocol.svg';
 
 	
 	public static function instance(){

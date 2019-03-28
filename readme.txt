@@ -105,6 +105,8 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 = 2.9 = 
 * added debug mode
+* optionally remove header and footer in mailbuilder
+* fixed a bug causing content to be overridden in mailbuilder
 
 
 = 2.8.4.2 =
