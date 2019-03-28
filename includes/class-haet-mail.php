@@ -329,18 +329,19 @@ final class Haet_Mail {
 			$use_template = true;
 		else
 			$use_template = $sender_plugin->use_template();
-
-		// $debug = 'DEBUG<br>';
-		// $debug .= '<pre>=====POST:'.print_r($_POST,true).'</pre>';
-		// $debug .= '<pre>=====GET:'.print_r($_GET,true).'</pre>';
-		// $debug .= 'SENDER-PLUGIN: <pre>'.print_r($sender_plugin,true).'</pre><br>';
-		// $debug .= 'ACTIVE-PLUGINS: <pre>'.print_r(Haet_Sender_Plugin::get_active_plugins(),true).'</pre><br>';
-		// error_log( $debug );
-
-		// if( strpos( $email['message'], '</body>' ) !== false )
-		// 	$email['message'] = str_replace( '</body>', $debug, $email['message'] );
-		// else
-		// 	$email['message'] .= $debug; 
+		
+		
+		//Debug
+		//$debug = 'DEBUG<br>';
+		//$debug .= '<pre>=====POST:'.print_r($_POST,true).'</pre>';
+		//$debug .= '<pre>=====GET:'.print_r($_GET,true).'</pre>';
+		//$debug .= 'SENDER-PLUGIN: <pre>'.print_r($sender_plugin,true).'</pre><br>';
+		//$debug .= 'ACTIVE-PLUGINS: <pre>'.print_r(Haet_Sender_Plugin::get_active_plugins(),true).'</pre><br>';
+		
+		//if( strpos( $email['message'], '</body>' ) !== false )
+		//$email['message'] = str_replace( '</body>', $debug, $email['message'] );
+		//else
+		//$email['message'] .= $debug; 
 
 		$use_template = apply_filters( 'haet_mail_use_template', $use_template, array('to' => $email['to'], 'subject' => $email['subject'], 'message' => $email['message'], 'headers' => $email['headers'], 'attachments' => $email['attachments'], 'sender_plugin' => ($sender_plugin?$sender_plugin->get_plugin_name():null)) );
 
@@ -570,6 +571,10 @@ final class Haet_Mail {
 
 		// remove any scripts injected by hooks and shortcodes
 		$message = preg_replace( '/(<script.*<\/script>)/Us', '', $message );
+
+		// OMG, isn't there a better way to get rid of these encoding issues!?
+		$message = htmlentities( $message, ENT_NOQUOTES, "UTF-8", false );
+		$message = str_replace(array('&lt;','&gt;'),array('<','>'), $message);
 
 		return $message;
 	}
