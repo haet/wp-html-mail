@@ -107,6 +107,7 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 = 2.9.0.1 =
 * improved polylang compatibility 
+* added options to enable/disable header and footer per sender plugin
 
 
 = 2.9 = 
