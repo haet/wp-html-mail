@@ -41,7 +41,7 @@ abstract class Haet_MB_ContentType
 
 
 
-	public function register_contenttype( $content_types, $email_name, $email_post ){
+	public function register_contenttype( $content_types, $email_name, $email_post = null ){
 		$content_types[$this->_name] = array(
 				'name'		=>	$this->_name,
 				'nicename'	=>	$this->_nicename,

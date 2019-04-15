@@ -3,7 +3,7 @@
 Plugin Name: WP HTML Mail
 Plugin URI: http://wp-html-mail.com/
 Description: Create your own professional email design for all your outgoing WordPress emails
-Version: 2.9
+Version: 2.9.0.1
 Text Domain: wp-html-mail
 Domain Path: /translations
 Author: Hannes Etzelstorfer

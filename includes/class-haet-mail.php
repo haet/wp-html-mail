@@ -330,18 +330,6 @@ final class Haet_Mail {
 		else
 			$use_template = $sender_plugin->use_template();
 		
-		
-		//Debug
-		//$debug = 'DEBUG<br>';
-		//$debug .= '<pre>=====POST:'.print_r($_POST,true).'</pre>';
-		//$debug .= '<pre>=====GET:'.print_r($_GET,true).'</pre>';
-		//$debug .= 'SENDER-PLUGIN: <pre>'.print_r($sender_plugin,true).'</pre><br>';
-		//$debug .= 'ACTIVE-PLUGINS: <pre>'.print_r(Haet_Sender_Plugin::get_active_plugins(),true).'</pre><br>';
-		
-		//if( strpos( $email['message'], '</body>' ) !== false )
-		//$email['message'] = str_replace( '</body>', $debug, $email['message'] );
-		//else
-		//$email['message'] .= $debug; 
 
 		$use_template = apply_filters( 'haet_mail_use_template', $use_template, array('to' => $email['to'], 'subject' => $email['subject'], 'message' => $email['message'], 'headers' => $email['headers'], 'attachments' => $email['attachments'], 'sender_plugin' => ($sender_plugin?$sender_plugin->get_plugin_name():null)) );
 
@@ -398,8 +386,15 @@ final class Haet_Mail {
 
 		if ( $use_template ){
 			add_filter('wp_mail_content_type',array($this, 'set_mail_content_type'),20);
-			add_filter('wp_mail_charset',array($this, 'set_mail_charset'),20);
-		}
+            add_filter('wp_mail_charset',array($this, 'set_mail_charset'),20);
+        }
+        
+
+        if( $use_template && $sender_plugin && $sender_plugin->is_header_hidden() )
+            $email['message'] = preg_replace('/(.*)<!--header-table-->.*<!--\/header-table-->(.*)/smU', '$1 $2', $email['message']);
+        if( $use_template && $sender_plugin && $sender_plugin->is_footer_hidden() )
+            $email['message'] = preg_replace('/(.*)<!--footer-table-->.*<!--\/footer-table-->(.*)/smU', '$1 $2', $email['message']);
+
 
 		// Field values in Ninja Forms and of course also in other plugins are encoded and otherwise not suitable for subjects
 		$email['subject'] = html_entity_decode( $email['subject'] );
@@ -408,7 +403,14 @@ final class Haet_Mail {
 
 		if( $this->is_debug_mode() ){
 			$debug_filename = trailingslashit( get_temp_dir() ) . 'debug-' . uniqid() . '.txt';
-			file_put_contents( $debug_filename, print_r( $email, true ) );
+            
+            $debug = print_r( $email, true );
+            $debug .= '=====POST:'.print_r($_POST,true)."\n\n";
+            $debug .= '=====GET:'.print_r($_GET,true)."\n\n";
+            $debug .= 'SENDER-PLUGIN: '.print_r($sender_plugin,true)."\n\n";
+            $debug .= 'ACTIVE-PLUGINS: <pre>'.print_r(Haet_Sender_Plugin::get_active_plugins(),true)."\n\n";
+            
+            file_put_contents( $debug_filename, $debug );
 			$email['attachments'][] = $debug_filename;
 		}
 

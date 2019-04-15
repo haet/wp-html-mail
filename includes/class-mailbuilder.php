@@ -40,6 +40,19 @@ final class Haet_Mail_Builder
         add_filter( 'mce_external_plugins', array( $this, 'tinymce_external_plugins' ) );
 
         add_filter( 'haet_mail_modify_styled_mail', array( $this, 'modify_styled_mail' ) );
+
+        // make post type translateabble if polylang is active
+        add_filter( 'pll_get_post_types', function( $post_types, $is_settings ) {
+            if ( $is_settings ) {
+                // hides from the list of custom post types in Polylang settings
+                unset( $post_types['wphtmlmail_mail'] );
+            } else {
+                // enables language and translation management
+                $post_types['wphtmlmail_mail'] = 'wphtmlmail_mail';
+            }
+            $post_types['wphtmlmail_mail'] = 'wphtmlmail_mail';
+            return $post_types;
+        }, 10, 2 );
     }
 
     public function register_post_type(){        
@@ -410,11 +423,17 @@ final class Haet_Mail_Builder
         if( !isset($options['email_post_ids']) )
             $options['email_post_ids'] = array();
 
-        if( !isset( $options['email_post_ids'][$email_name] ) )
+        if( !isset( $options['email_post_ids'][$email_name] ) ||  !$options['email_post_ids'][$email_name] )
             $options['email_post_ids'][$email_name] = $this->create_email( $email_name );
 
-        if( !$options['email_post_ids'][$email_name] || !get_post( $options['email_post_ids'][$email_name] ) )
-            $options['email_post_ids'][$email_name] = $this->create_email( $email_name ); 
+        if( !get_post( $options['email_post_ids'][$email_name] ) ){
+            // just in case polylang is installed it may have returned no post because the email doesn't exist in current language
+            // so we check once again wheter it exists in other languages. 
+            // missing translations are created a few lines below
+            if( !function_exists('pll_get_post') || !pll_get_post( $options['email_post_ids'][$email_name] ) ) 
+                $options['email_post_ids'][$email_name] = $this->create_email( $email_name ); 
+        }
+            
 
         update_option('haet_mail_options', $options );
 
@@ -440,6 +459,23 @@ final class Haet_Mail_Builder
                 );
          
                 do_action( 'wpml_set_element_language_details', $set_language_args );
+            }
+
+            return $translated_email_post_id;
+        }elseif( $email_post_id && function_exists('pll_get_post') ){ // if POLYLANG is in use we have a look for translations
+            $translated_email_post_id = pll_get_post( $email_post_id );
+            if( !$translated_email_post_id ){
+                $translated_email_post_id = $this->create_email( $email_name );
+                // set language of the attachment
+                PLL()->model->post->set_language($translated_email_post_id, pll_current_language());
+                
+                $translations = PLL()->model->post->get_translations($email_post_id);
+		        if (!$translations && $lang = PLL()->model->post->get_language($email_post_id)) {
+			        $translations[$lang->slug] = $email_post_id;
+                }
+                $translations[pll_current_language()] = $tr_id;
+                PLL()->model->post->save_translations($tr_id, $translations);
+
             }
 
             return $translated_email_post_id;

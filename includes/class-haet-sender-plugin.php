@@ -146,6 +146,32 @@ class Haet_Sender_Plugin {
             return true;
     }
 
+    
+    /**
+    *   is_header_hidden()
+    *   return true if the header of the mail template should hidden
+    **/
+    public function is_header_hidden(){
+        $plugin_options = $this->get_plugin_options();
+        if(array_key_exists($this->current_plugin['name'], $plugin_options))
+            return $plugin_options[ $this->current_plugin['name'] ]['hide_header'];
+        else
+            return true;
+    }
+
+    /**
+    *   is_footer_hidden()
+    *   return true if the footer of the mail template should hidden
+    **/
+    public function is_footer_hidden(){
+        $plugin_options = $this->get_plugin_options();
+        if(array_key_exists($this->current_plugin['name'], $plugin_options))
+            return $plugin_options[ $this->current_plugin['name'] ]['hide_footer'];
+        else
+            return true;
+    }
+
+
     public function get_plugin_name(){
         return $this->current_plugin['name'];
     }
@@ -234,7 +260,7 @@ class Haet_Sender_Plugin {
     *   define plugin specific default options
     **/
     public static function get_plugin_default_options(){
-        return array('template'=>true,'sender'=>true);
+        return array('template'=>true,'sender'=>true,'hide_header'=>false,'hide_footer'=>false);
     }
 
 
