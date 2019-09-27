@@ -1,17 +1,17 @@
 <?php
 /*
 Plugin Name: WP HTML Mail
-Plugin URI: http://wp-html-mail.com/
+Plugin URI: https://codemiq.com/en/plugins/wp-html-mail-email-templates/
 Description: Create your own professional email design for all your outgoing WordPress emails
-Version: 2.9.0.1
+Version: 2.9.0.2
 Text Domain: wp-html-mail
 Domain Path: /translations
-Author: Hannes Etzelstorfer
-Author URI: http://etzelstorfer.com/en/
+Author: Hannes Etzelstorfer // codemiq
+Author URI: https://codemiq.com
 License: GPLv2 or later
 */
 
-/*  Copyright 2019 Hannes Etzelstorfer (email : hannes@etzelstorfer.com) */
+/*  Copyright 2019 codemiq (email : support@codemiq.com) */
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly

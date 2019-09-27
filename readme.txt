@@ -1,9 +1,9 @@
 === WP HTML Mail - Email Designer ===
 Contributors: haet
-Tags: email template, html mail, email design, mail, email templates, ninja-forms, wp-e-commerce, caldera-forms, wp-e-commerce, easy-digital-downloads, woocommerce, contact-form-7, mandrill, postman, gravityforms
+Tags: email template, html mail, email design, mail, email templates, ninja-forms, caldera-forms, wp-e-commerce, easy-digital-downloads, woocommerce, contact-form-7, mandrill, postman, gravityforms
 Requires at least: 4.9
-Tested up to: 5.1.1
-Stable tag: 2.9.0.1
+Tested up to: 5.2.2
+Stable tag: 2.9.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,9 +30,9 @@ Redirect all emails to your own email address for testing or for your staging sy
 * **Live Preview:**
 See all your changes immediately in the live preview.
 * **WooCommerce AddOn (PRO):**
-Customize design, text, products table, simply everything with our Drag & Drop MailBuilder [WooCommerce email templates](https://etzelstorfer.com/en/downloads/wp-html-mail-woocommerce/)
+Customize design, text, products table, simply everything with our Drag & Drop MailBuilder [WooCommerce email templates](https://codemiq.com/en/downloads/wp-html-mail-woocommerce/)
 * **Easy Digital Downloads AddOn (PRO):**
-Read more about the [Easy Digital Downloads Email template](https://etzelstorfer.com/en/downloads/wp-html-mail-easy-digital-downloads/)
+Read more about the [Easy Digital Downloads Email template](https://codemiq.com/en/downloads/wp-html-mail-easy-digital-downloads/)
 
 
 = Tutorial: Create your WordPress email template in 2 minutes =
@@ -53,23 +53,36 @@ Currently supported are
 * Birthday Emails
 * Ultimate WP Mail
 * Divi Theme contact forms
-* [WPForms and WPForms Lite](http://etzelstorfer.com/en/downloads/wp-html-mail-wpforms/)
-* [WooCommerce](http://etzelstorfer.com/en/downloads/wp-html-mail-woocommerce/)
-* [Easy Digital Downloads](http://etzelstorfer.com/en/downloads/wp-html-mail-easy-digital-downloads/)
+* [BuddyPress](https://wordpress.org/plugins/wp-html-mail-buddypress/)
+* [WPForms and WPForms Lite](https://codemiq.com/en/downloads/wp-html-mail-wpforms/)
+* [WooCommerce](https://codemiq.com/en/downloads/wp-html-mail-woocommerce/)
+* [Easy Digital Downloads](https://codemiq.com/en/downloads/wp-html-mail-easy-digital-downloads/)
 * [Give – Donation and Fundraising](https://wordpress.org/plugins/wp-html-mail-give/)
 * WP E-Commerce
 
+= WooCommerce Email Template Extension =
 
-[more about WP HTML Mail](http://wp-html-mail.com)
+Use our WooCommerce extension to customize all your store emails. For all standard emails you can also edit the email content as well as the products table. 
+We recently added support for [WooCommerce Advanced Shipment Tracking](https://wordpress.org/plugins/woo-advanced-shipment-tracking/) and Amazon Payment gateway.
+Most emails from third party WooCommerce plugins can be styled and for some of them we created special integrations:
+
+* Barcodes from **YITH WooCommerce Bar Codes and QR Codes** can be placed anywhere in your Emails
+* You can change emails from **WooCommerce Order Status Manager**
+* Insert custom checkout fields to your emails with [Checkout Field Editor](https://wordpress.org/plugins/woo-checkout-field-editor-pro/)
+* **WooCommerce German Market** is fully integrated
+* In version 2.9 we integrated [AutomateWoo](https://automatewoo.com/?ref=42) so you can use your email template for your **abandoned cart mails** and other **automated emails**
+
+
+[more about WP HTML Mail](https://codemiq.com/en/plugins/wp-html-mail-email-templates/)
 
 
 https://youtu.be/RV8vUNCWOZw
 
 
 = Works with most email delivery plugins =
-* [Post SMTP Mailer/Email Log](https://wordpress.org/plugins/post-smtp/)
-* [WP Mail SMTP](https://wordpress.org/plugins/wp-mail-smtp/)
-* [wpMandrill](https://wordpress.org/plugins/wpmandrill/)
+* Post SMTP Mailer/Email Log
+* WP Mail SMTP
+* wpMandrill
 * ...
 
 
@@ -104,6 +117,9 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 
 == Changelog ==
+
+= 2.9.0.2 =
+* fixed a notice with not initialized settings
 
 = 2.9.0.1 =
 * improved polylang compatibility 
@@ -225,7 +241,7 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 * Works with wpMandrill now
 
 = 2.1.1 =
-* Plugin can be used by Non-Admins now [see here](http://etzelstorfer.com/en/enable-email-customization-for-woocommerce-shop-managers/)
+* Plugin can be used by Non-Admins now [see here](https://codemiq.com/en/enable-email-customization-for-woocommerce-shop-managers/)
 
 = 2.1 =
 * Updated inline css library

@@ -153,10 +153,13 @@ class Haet_Sender_Plugin {
     **/
     public function is_header_hidden(){
         $plugin_options = $this->get_plugin_options();
-        if(array_key_exists($this->current_plugin['name'], $plugin_options))
-            return $plugin_options[ $this->current_plugin['name'] ]['hide_header'];
-        else
-            return true;
+        if(array_key_exists($this->current_plugin['name'], $plugin_options)){
+            if( array_key_exists( 'hide_header', $plugin_options[ $this->current_plugin['name'] ] ) )
+                return $plugin_options[ $this->current_plugin['name'] ]['hide_header'];
+            else
+                return false;
+        }else
+            return false;
     }
 
     /**
@@ -165,10 +168,13 @@ class Haet_Sender_Plugin {
     **/
     public function is_footer_hidden(){
         $plugin_options = $this->get_plugin_options();
-        if(array_key_exists($this->current_plugin['name'], $plugin_options))
-            return $plugin_options[ $this->current_plugin['name'] ]['hide_footer'];
-        else
-            return true;
+        if(array_key_exists($this->current_plugin['name'], $plugin_options)){
+            if( array_key_exists( 'hide_footer', $plugin_options[ $this->current_plugin['name'] ] ) )
+                return $plugin_options[ $this->current_plugin['name'] ]['hide_footer'];
+            else
+                return false;
+        }else
+            return false;
     }
 
 
