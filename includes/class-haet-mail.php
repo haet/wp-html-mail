@@ -473,11 +473,20 @@ final class Haet_Mail {
 		return $sender; 
 	}
 
+
 	public function load_template_file( $template_name ) {
 		$template_path = locate_template( 'wp-html-mail/template.html');
-		if ( ! $template_path ) {
-			$template_path = HAET_MAIL_PATH . 'views/template/template.html';
+		$upload_dir = wp_upload_dir();
+		$custom_template_path = trailingslashit( $upload_dir['basedir'] ) . 'wp-html-mail/template.html';
+		$haet_path = HAET_MAIL_PATH . 'views/template/template.html';
+
+		if ( !file_exists($template_path) ) {
+			$template_path = $custom_template_path;
+			if (!file_exists($custom_template_path)) {
+				$template_path = HAET_MAIL_PATH . 'views/template/template.html';
+			}
 		}
+
 		if ( is_file( $template_path ) ) {
 			ob_start();
 			require( $template_path );
@@ -487,6 +496,7 @@ final class Haet_Mail {
 		}
 		return $template_content;
 	}
+
 
 
 

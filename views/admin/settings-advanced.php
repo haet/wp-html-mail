@@ -44,6 +44,9 @@
                         <p class="description">
                             <?php _e('<strong>Only use this feature if you know what you are doing!</strong><br>From this point you have to continue your work in HTML and CSS code.','wp-html-mail'); ?>
                         </p>
+                        <p class="description">
+                            <?php _e("If you don't use a child theme and need an update save place to store your email template you can also copy the template file from the plugin to <strong>wp-content/uploads/wp-html-mail/template.html</strong>.",'wp-html-mail'); ?>
+                        </p>
                         <div id="haet_mail_template_created" class="haet-mail-dialog" title="<?php _e('Template created','wp-html-mail'); ?>">
                             <p>
                                 <?php _e('Your template has been created.','wp-html-mail'); ?>
