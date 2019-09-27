@@ -2,8 +2,8 @@
 Contributors: haet
 Tags: email template, html mail, email design, mail, email templates, ninja-forms, caldera-forms, wp-e-commerce, easy-digital-downloads, woocommerce, contact-form-7, mandrill, postman, gravityforms
 Requires at least: 4.9
-Tested up to: 5.2.2
-Stable tag: 2.9.0.2
+Tested up to: 5.2.3
+Stable tag: 2.9.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -117,6 +117,9 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 
 == Changelog ==
+
+= 2.9.0.3 = 
+* custom templates can be moved to uploads folder now
 
 = 2.9.0.2 =
 * fixed a notice with not initialized settings
