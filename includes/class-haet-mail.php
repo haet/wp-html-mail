@@ -318,7 +318,6 @@ final class Haet_Mail {
 	}
 
 
-
 	function style_mail($email){
 		$options = $this->get_options();
 		$theme_options = $this->get_theme_options('default');
@@ -337,14 +336,35 @@ final class Haet_Mail {
 			//replace links like <http://... with <a href="http://..."
 			$email['message'] = preg_replace('/\<http(.*)\>/', '<a href="http$1">http$1</a>', $email['message']); 
 
+			$header = $email['headers'];
+
+			error_log('########');
+			//error_log(print_r($email, true));
+
+			if (strpos($header, 'Content-Type: text/plain') !== false ) {
+				
+				$email['message'] = htmlentities($email['message']);
+				error_log('Sanitation successfull');
+			} else {
+				error_log('Ist NOT Plain Text');
+			}
+	
+			
 			if( $sender_plugin ){
+
+				error_log('#########################################-1');
+				error_log(print_r($header, true));
+
 				$template = str_replace('###plugin-class###','plugin-'.$sender_plugin->get_plugin_name(), $template);
 				$email['message'] = $sender_plugin->modify_content($email['message']);
 				$template = $sender_plugin->modify_template($template);
 			}else{
 				$email['message'] = wpautop($email['message']);
+				error_log('#########################################-2');
+				error_log(print_r($header, true));
 			}
-
+			error_log('#########################################-3');
+			error_log(print_r($email['message'], true));
 			// drop <style> blocks in content
 			$email['message'] = preg_replace('/\<style(.*)\<\/style\>/simU', '', $email['message']);
 			
