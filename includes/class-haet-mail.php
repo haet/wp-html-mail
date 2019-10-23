@@ -38,7 +38,9 @@ final class Haet_Mail {
 		echo $email;		
 		wp_mail( $email, 'WP HTML mail - TEST', '<h1>Lorem ipsum dolor sit amet</h1>
 			<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed <a href="#">diam nonumy</a> eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.<br>Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-			<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>');
+			<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>',
+			'Content-Type: text/html'
+		);
 		wp_die();
 	}
 
@@ -337,6 +339,11 @@ final class Haet_Mail {
 			//replace links like <http://... with <a href="http://..."
 			$email['message'] = preg_replace('/\<http(.*)\>/', '<a href="http$1">http$1</a>', $email['message']); 
 
+			// plain text or no content type
+			if ( stripos($email['headers'], 'Content-Type:') === false || stripos($email['headers'], 'Content-Type: text/plain') !== false ) {
+				$email['message'] = htmlentities($email['message']);
+			}
+
 			if( $sender_plugin ){
 				$template = str_replace('###plugin-class###','plugin-'.$sender_plugin->get_plugin_name(), $template);
 				$email['message'] = $sender_plugin->modify_content($email['message']);
@@ -585,8 +592,8 @@ final class Haet_Mail {
 		$message = preg_replace( '/(<script.*<\/script>)/Us', '', $message );
 
 		// OMG, isn't there a better way to get rid of these encoding issues!?
-		$message = htmlentities( $message, ENT_NOQUOTES, "UTF-8", false );
-		$message = str_replace(array('&lt;','&gt;'),array('<','>'), $message);
+		//$message = htmlentities( $message, ENT_NOQUOTES, "UTF-8", false );
+		//$message = str_replace(array('&lt;','&gt;'),array('<','>'), $message);
 
 		return $message;
 	}
