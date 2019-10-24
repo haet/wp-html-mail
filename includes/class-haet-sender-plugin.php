@@ -269,6 +269,16 @@ class Haet_Sender_Plugin {
         return $content;
     }
 
+    
+    /**
+    *   modify_content_plain()
+    *   mofify the email content before applying the template
+    **/
+    public function modify_content_plain($content){
+        return $this->modify_content($content);
+    }
+
+
     /**
     *   get_plugin_default_options()
     *   define plugin specific default options

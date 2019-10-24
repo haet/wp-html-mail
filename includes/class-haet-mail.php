@@ -340,16 +340,22 @@ final class Haet_Mail {
 			$email['message'] = preg_replace('/\<http(.*)\>/', '<a href="http$1">http$1</a>', $email['message']); 
 
 			// plain text or no content type
-			if ( stripos($email['headers'], 'Content-Type:') === false || stripos($email['headers'], 'Content-Type: text/plain') !== false ) {
+			$is_plaintext = ( stripos($email['headers'], 'Content-Type:') === false || stripos($email['headers'], 'Content-Type: text/plain') !== false );
+			if( $is_plaintext ) {
 				$email['message'] = htmlentities($email['message']);
 			}
 
 			if( $sender_plugin ){
 				$template = str_replace('###plugin-class###','plugin-'.$sender_plugin->get_plugin_name(), $template);
-				$email['message'] = $sender_plugin->modify_content($email['message']);
+				if( $is_plaintext )
+					$email['message'] = $sender_plugin->modify_content_plain($email['message']);
+				else
+					$email['message'] = $sender_plugin->modify_content($email['message']);
+
 				$template = $sender_plugin->modify_template($template);
 			}else{
-				$email['message'] = wpautop($email['message']);
+				if( $is_plaintext )
+					$email['message'] = wpautop($email['message']);
 			}
 
 			// drop <style> blocks in content

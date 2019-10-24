@@ -23,7 +23,16 @@ class Haet_Sender_Plugin_contact_form_7 extends Haet_Sender_Plugin {
     *   mofify the email content before applying the template
     **/
     public function modify_content($content){
-        $content = wpautop($content);
         return $content;
     }
+
+
+    /**
+    *   modify_content_plain()
+    *   mofify the email content before applying the template
+    **/
+    public function modify_content_plain($content){
+        $content = wpautop($content);
+        return $content;
+    }    
 }

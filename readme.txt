@@ -2,8 +2,8 @@
 Contributors: haet
 Tags: email template, html mail, email design, mail, email templates, ninja-forms, caldera-forms, wp-e-commerce, easy-digital-downloads, woocommerce, contact-form-7, mandrill, postman, gravityforms
 Requires at least: 4.9
-Tested up to: 5.2.3
-Stable tag: 2.9.0.3
+Tested up to: 5.2.4
+Stable tag: 2.9.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,7 @@ Currently supported are
 * [WooCommerce](https://codemiq.com/en/downloads/wp-html-mail-woocommerce/)
 * [Easy Digital Downloads](https://codemiq.com/en/downloads/wp-html-mail-easy-digital-downloads/)
 * [Give – Donation and Fundraising](https://wordpress.org/plugins/wp-html-mail-give/)
+* TeraWallet
 * WP E-Commerce
 
 = WooCommerce Email Template Extension =
@@ -114,9 +115,15 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 2. Use text or image header
 3. set global font settings
 4. append you contact details to the mail footer
+5. turn template on and off for supported plugins
 
 
 == Changelog ==
+
+= 2.9.1 =
+* TeraWallet Support
+* Improved filtering of plaintext emails
+
 
 = 2.9.0.3 = 
 * custom templates can be moved to uploads folder now
