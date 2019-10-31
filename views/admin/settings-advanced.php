@@ -17,6 +17,17 @@
                 </tr>
                 */?>
                 <tr valign="top">
+                    <th scope="row"><label><?php _e('Content type','wp-html-mail') ?></label></th>
+                    <td>
+                        <input type="hidden" name="haet_mail[invalid_contenttype_to_html]" value="0">
+                        <input type="checkbox" id="haet_mail_invalid_contenttype_to_html" name="haet_mail[invalid_contenttype_to_html]" value="1" <?php echo ( isset( $options['invalid_contenttype_to_html'] ) && $options['invalid_contenttype_to_html']==1 ?'checked':''); ?>>
+                        <label for="haet_mail_invalid_contenttype_to_html"><?php _e('Allow HTML code in plain text content type','wp-html-mail'); ?></label>
+                        <p class="description">
+                            <?php _e('From security perspective you should not enable this option but some plugin developers send HTML code in their emails without setting the correct content type header, so you might see HTML tags in your emails.','wp-html-mail'); ?>
+                       </p>
+                    </td>
+                </tr>
+                <tr valign="top">
                     <th scope="row"><label><?php _e('Delete plugin settings','wp-html-mail') ?></label></th>
                     <td>
                         <a href="<?php echo add_query_arg( 'advanced-action', 'delete-design' ); ?>" class="button-secondary" data-haet-confirm="<?php esc_attr_e('Are you sure? This can not be undone!', 'wp-html-mail') ?>"><?php _e('Delete design settings', 'wp-html-mail'); ?></a>

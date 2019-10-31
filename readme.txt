@@ -3,7 +3,7 @@ Contributors: haet
 Tags: email template, html mail, email design, mail, email templates, ninja-forms, caldera-forms, wp-e-commerce, easy-digital-downloads, woocommerce, contact-form-7, mandrill, postman, gravityforms
 Requires at least: 4.9
 Tested up to: 5.2.4
-Stable tag: 2.9.1
+Stable tag: 2.9.1.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -60,6 +60,21 @@ Currently supported are
 * [Give – Donation and Fundraising](https://wordpress.org/plugins/wp-html-mail-give/)
 * TeraWallet
 * WP E-Commerce
+
+Allthough we didn't optimize WP HTML Mail for these plugins our users use it with many more plugins
+
+* ACF Advanced Forms
+* Elementor Forms
+* Events Made Easy
+* Formidable Forms
+* Learndash Notifications
+* Matador Jobs
+* Memberpress
+* Modern Events Calendar
+* Uncanny Owl Groups
+* ...
+
+
 
 = WooCommerce Email Template Extension =
 
@@ -119,6 +134,11 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 
 == Changelog ==
+
+= 2.9.1.4 =
+* Fixed bug with headers passed as array instead of string
+* added new option to allow plaintext emails containing HTML code for backwards compatibility
+
 
 = 2.9.1 =
 * TeraWallet Support

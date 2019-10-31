@@ -337,25 +337,33 @@ final class Haet_Mail {
 
 		if($use_template){
 			//replace links like <http://... with <a href="http://..."
-			$email['message'] = preg_replace('/\<http(.*)\>/', '<a href="http$1">http$1</a>', $email['message']); 
+			// removed in 2.9.1 because we should not convert plaintext to html 
+			// $email['message'] = preg_replace('/\<http(.*)\>/', '<a href="http$1">http$1</a>', $email['message']); 
 
 			// plain text or no content type
-			$is_plaintext = ( stripos($email['headers'], 'Content-Type:') === false || stripos($email['headers'], 'Content-Type: text/plain') !== false );
-			if( $is_plaintext ) {
-				$email['message'] = htmlentities($email['message']);
-			}
+			$headers_string = $email['headers'];
+			if( is_array( $headers_string ) )
+				$headers_string =  implode( "\n", $headers_string );
+
+			$is_plaintext = ( stripos($headers_string, 'Content-Type:') === false || stripos($headers_string, 'Content-Type: text/plain') !== false );
+
 
 			if( $sender_plugin ){
 				$template = str_replace('###plugin-class###','plugin-'.$sender_plugin->get_plugin_name(), $template);
+				
 				if( $is_plaintext )
 					$email['message'] = $sender_plugin->modify_content_plain($email['message']);
 				else
 					$email['message'] = $sender_plugin->modify_content($email['message']);
 
+				
 				$template = $sender_plugin->modify_template($template);
 			}else{
-				if( $is_plaintext )
+				if( $is_plaintext && !( isset( $options['invalid_contenttype_to_html'] ) && $options['invalid_contenttype_to_html'] ) ) {
+					$email['message'] = htmlentities($email['message']);
+				
 					$email['message'] = wpautop($email['message']);
+				}
 			}
 
 			// drop <style> blocks in content
@@ -597,9 +605,13 @@ final class Haet_Mail {
 		// remove any scripts injected by hooks and shortcodes
 		$message = preg_replace( '/(<script.*<\/script>)/Us', '', $message );
 
+		$options = $this->get_options();
 		// OMG, isn't there a better way to get rid of these encoding issues!?
-		//$message = htmlentities( $message, ENT_NOQUOTES, "UTF-8", false );
-		//$message = str_replace(array('&lt;','&gt;'),array('<','>'), $message);
+		if( isset( $options['invalid_contenttype_to_html'] ) && $options['invalid_contenttype_to_html'] ){
+			$message = htmlentities( $message, ENT_NOQUOTES, "UTF-8", false );
+			$message = str_replace(array('&lt;','&gt;'),array('<','>'), $message);
+		}
+		
 
 		return $message;
 	}

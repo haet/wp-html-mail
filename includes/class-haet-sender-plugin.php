@@ -94,7 +94,7 @@ class Haet_Sender_Plugin {
                 'display_name' => 'Divi',
                 'image_url' =>  HAET_MAIL_URL . '/images/divi-theme.png'
             ),
-            'divi-theme'   =>  array(
+            'woo-wallet'   =>  array(
                 'name'      =>  'woo-wallet',
                 'file'      =>  'woo-wallet/woo-wallet.php',
                 'class'     =>  'Haet_Sender_Plugin_Tera_Wallet',
