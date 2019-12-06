@@ -119,6 +119,7 @@ $white: #FFF;
 
             &.active {
                 max-height: 2000px;
+                padding-bottom: 220px; // avoid color pickers being cut by "overflow-y: hidden"
             }
         }
     }

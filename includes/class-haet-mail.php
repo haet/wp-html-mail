@@ -166,6 +166,7 @@ final class Haet_Mail {
 		$this->process_admin_page_actions();
 		$options = $this->get_options();
 		$theme_options = $this->get_theme_options('default');
+		$plugin_options = Haet_Sender_Plugin::get_plugin_options();
 
 		if(isset($_POST['haet_mail']) )
 			$options = $this->save_options($options);
