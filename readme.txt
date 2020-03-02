@@ -135,6 +135,12 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 == Changelog ==
 
+= 2.9... =
+* Fix: WooCommerce tab has overwritten some settings set on the plugins tab
+* Fixed issue with password reset mail when plan text is interpreted as HTML: https://wordpress.org/support/topic/password-recover-link/
+
+
+
 = 2.9.1.4 =
 * Fixed bug with headers passed as array instead of string
 * added new option to allow plaintext emails containing HTML code for backwards compatibility

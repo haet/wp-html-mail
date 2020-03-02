@@ -337,10 +337,6 @@ final class Haet_Mail {
 		$use_template = apply_filters( 'haet_mail_use_template', $use_template, array('to' => $email['to'], 'subject' => $email['subject'], 'message' => $email['message'], 'headers' => $email['headers'], 'attachments' => $email['attachments'], 'sender_plugin' => ($sender_plugin?$sender_plugin->get_plugin_name():null)) );
 
 		if($use_template){
-			//replace links like <http://... with <a href="http://..."
-			// removed in 2.9.1 because we should not convert plaintext to html 
-			// $email['message'] = preg_replace('/\<http(.*)\>/', '<a href="http$1">http$1</a>', $email['message']); 
-
 			// plain text or no content type
 			$headers_string = $email['headers'];
 			if( is_array( $headers_string ) )
@@ -364,6 +360,20 @@ final class Haet_Mail {
 					$email['message'] = htmlentities($email['message']);
 				
 					$email['message'] = wpautop($email['message']);
+				}elseif( $is_plaintext && isset( $options['invalid_contenttype_to_html'] ) && $options['invalid_contenttype_to_html'] ) {
+					// user has explicitly decided to interpret text as html
+					// but if the text doesn't contain any html tags but \n it get's merged into a single line
+					// see: https://wordpress.org/support/topic/password-recover-link/
+					if( !preg_match('/<[^h][^>]*>/m', $email['message'], $output_array) 
+						&& strpos( $email['message'], "\n" ) !== false ){
+						// found no HTML tags but line breaks
+						$email['message'] = wpautop($email['message']);
+						//replace links like <http://... with <a href="http://..."
+						// removed in 2.9.1 because we should not convert plaintext to html 
+						// added again in 2.9.2 because of the password reset link
+						$email['message'] = preg_replace('/\<http(.*)\>/', '<a href="http$1">http$1</a>', $email['message']); 
+					}
+
 				}
 			}
 

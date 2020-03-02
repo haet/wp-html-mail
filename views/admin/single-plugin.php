@@ -33,7 +33,7 @@ $is_bridge_installed = class_exists($plugin['class']);
 
             <input type="hidden" name="haet_mail_plugins[<?php echo $plugin_name; ?>][sender]" value="0">
             <input type="checkbox" id="haet_mail_plugins_<?php echo $plugin_name; ?>_sender" name="haet_mail_plugins[<?php echo $plugin_name; ?>][sender]" value="1" <?php echo (isset($plugin_options[$plugin_name]['sender']) && $plugin_options[$plugin_name]['sender']==1 || !isset($plugin_options[$plugin_name])?'checked':''); ?>>
-            <label for="haet_mail_plugins_<?php echo $plugin_name; ?>_template"><?php _e('Overwrite sender','wp-html-mail'); ?></label>
+            <label for="haet_mail_plugins_<?php echo $plugin_name; ?>_sender"><?php _e('Overwrite sender','wp-html-mail'); ?></label>
         <?php elseif( !$is_bridge_installed ): ?>
             <p style="text-align:right;">
                 <?php _e('Install WP HTML Mail for','wp-html-mail'); ?><br>

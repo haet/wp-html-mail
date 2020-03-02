@@ -227,37 +227,37 @@ class Haet_Sender_Plugin {
     }
 
     public static function get_plugin_options() {
-        $options = array();
+        $default_options = array();
         foreach (Haet_Sender_Plugin::get_available_plugins() as $plugin_name => $plugin) {
             if( class_exists($plugin['class']) )
-                $options[$plugin_name] = $plugin['class']::get_plugin_default_options();
+                $default_options[$plugin_name] = $plugin['class']::get_plugin_default_options();
         }
-        $haet_mail_options = get_option('haet_mail_plugin_options');
-        if (!empty($haet_mail_options)) {
-            foreach ($haet_mail_options as $key => $option){
-                if( is_array($option) ){
-                    foreach ($option as $sub_key => $sub_option)
-                        $options[$key][$sub_key] = $sub_option;    
-                }else
-                    $options[$key] = $option;
+        $options = get_option('haet_mail_plugin_options');
+
+        if (!empty($options)) {
+            foreach ($options as $plugin_name => $plugin_options){
+                if( array_key_exists( $plugin_name, $default_options ) )
+                    $options[$plugin_name] = wp_parse_args( $plugin_options, $default_options[$plugin_name] );
+
             }
         }               
         update_option('haet_mail_plugin_options', $options);
         return $options;
     }
 
-    public static function save_plugin_options($saved_options) {
+    public static function save_plugin_options($old_options) {
         $new_options = $_POST['haet_mail_plugins'];
-        $options = $saved_options;
-        foreach ($new_options as $key => $value) {
-            if( isset( $saved_options[$key] ) )
-                $options[$key] = array_merge($saved_options[$key],$new_options[$key]);
-            else
-                $options[$key] = $new_options[$key];
+
+        foreach ($new_options as $plugin_name => $new_plugin_options) {
+            $new_options[$plugin_name] = wp_parse_args( $new_plugin_options, $old_options[$plugin_name] );
         }
 
-        update_option('haet_mail_plugin_options', $options);
-        return $options;
+        foreach ( $old_options as $plugin_name => $old_plugin_options) {
+            if( !array_key_exists( $plugin_name, $new_options ) )
+                $new_options[$plugin_name] = $old_plugin_options;
+        }
+        update_option('haet_mail_plugin_options', $new_options);
+        return $new_options;
     }
     
 
@@ -284,7 +284,7 @@ class Haet_Sender_Plugin {
     *   define plugin specific default options
     **/
     public static function get_plugin_default_options(){
-        return array('template'=>true,'sender'=>true,'hide_header'=>false,'hide_footer'=>false);
+        return array('template'=>1,'sender'=>1,'hide_header'=>0,'hide_footer'=>0);
     }
 
 

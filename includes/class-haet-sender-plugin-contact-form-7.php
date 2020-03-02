@@ -14,7 +14,7 @@ class Haet_Sender_Plugin_contact_form_7 extends Haet_Sender_Plugin {
     *   define plugin specific default options
     **/
     public static function get_plugin_default_options(){
-        return array('template'=>true,'sender'=>false);
+        return array('template'=>1,'sender'=>0);
     }
 
 
