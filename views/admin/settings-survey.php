@@ -1,12 +1,9 @@
 <div class="postbox haet-mail-survey">
-    <h3 class="hndle"><span><?php _e('Help me improve WP HTML Mail','wp-html-mail'); ?></span></h3>
+    <h3 class="hndle"><span><?php _e('Help us improve WP HTML Mail','wp-html-mail'); ?></span></h3>
     <div style="" class="inside">
         <table class="form-table">
             <tbody>
-                <input type="hidden" name="haet_mail[survey_completed]" value="1">
-
-                <input type="hidden" name="haet_survey_site_key" value="<?php echo md5( get_bloginfo('name').get_bloginfo('url') ); ?>"> 
-                <?php /* we need this to detect multiple submissions be we anonymize your data with a hash */ ?>
+                <input type="hidden" name="haet_mail[survey2020_completed]" value="1">
 
                 <?php
                 $plugin_data = get_plugin_data( HAET_MAIL_PATH.'/wp-html-mail.php' );
@@ -21,6 +18,8 @@
 
                 if( $survey_step == 1 ):
                     ?>
+                    <input type="hidden" name="haet_survey_site_key" value="<?php echo md5( get_bloginfo('name').get_bloginfo('url') ); ?>"> 
+                    <?php /* we need this to detect multiple submissions be we anonymize your data with a hash */ ?>
                     <tr valign="top">
                         <th scope="row">
                             <label for="haet_survey_rating"><?php _e('How do you like WP HTML Mail so far?','wp-html-mail'); ?></label>
@@ -132,7 +131,8 @@
                         //    echo '</pre>';
                         // }
                     ?>
-                
+                    <input type="hidden" name="haet_survey_site_key" value="<?php echo md5( get_bloginfo('name').get_bloginfo('url') ); ?>"> 
+                    <?php /* we need this to detect multiple submissions be we anonymize your data with a hash */ ?>
                     <input type="hidden" class="" id="haet_survey_rating" name="haet_survey_rating" value="<?php echo $rating; ?>">
                     <input type="hidden" class="" id="haet_survey_email_result" name="haet_survey_email_result" value="<?php echo $email_result; ?>">
                     <input type="hidden" class="" id="haet_survey_usability" name="haet_survey_usability" value="<?php echo $usability; ?>">
@@ -205,8 +205,8 @@
                             </label>
                             <br>
                             <label>
-                                <input type="checkbox" name="haet_survey_features_new[]" value="CSS">
-                                <?php _e('An editor to add custom CSS code','wp-html-mail'); ?>
+                                <input type="checkbox" name="haet_survey_features_new[]" value="Webfonts">
+                                <?php _e('Custom Webfonts','wp-html-mail'); ?>
                             </label>
                             <br>
                             <label>
@@ -288,16 +288,16 @@
                     <tr valign="top">
                         <td>
                             <h3><?php _e('Thank you for your feedback!','wp-html-mail'); ?></h3>
-                            <p><?php _e('This will help me to constantly improve the plugin.','wp-html-mail'); ?></p>
+                            <p><?php _e('This will help us to constantly improve the plugin.','wp-html-mail'); ?></p>
                             <br>
-                            <h4><?php _e('If you want to buy some of my plugins you can use the following discount code to get 10% off.','wp-html-mail'); ?></h4>
-                            <pre>SURVEY32778CP8S</pre>
-                            <a href="http://etzelstorfer.com" target="_blank">
-                                <?php _e('Go to my website','wp-html-mail'); ?>
+                            <h4><?php _e('If you want to buy some of our plugins you can use the following discount code to get 20% off.','wp-html-mail'); ?></h4>
+                            <pre>SURVEY2345345</pre>
+                            <a href="https://codemiq.com/en/wordpress-plugins/" target="_blank">
+                                <?php _e('Go to our website','wp-html-mail'); ?>
                             </a>
                             <br><br><br>
                             <?php if( $rating > 3 ): ?>
-                                <a class="button-primary" href="https://wordpress.org/support/plugin/wp-html-mail/reviews/" target="_blank">
+                                <a class="button-primary" href="https://wordpress.org/support/plugin/wp-html-mail/reviews/?filter=5" target="_blank">
                                     <span class="dashicons dashicons-wordpress-alt"></span>
                                     <?php _e('Leave a review on WordPress.org','wp-html-mail'); ?>
                                 </a>

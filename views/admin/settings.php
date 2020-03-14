@@ -1,10 +1,11 @@
 <?php if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 } ?>
-<?php /* disabled survey after 3.7.3 for a while if( !isset( $options['survey_completed'] ) && !isset( $options['survey_dismissed'] ) && $tab != 'survey' ): ?>
+<?php /* disabled survey after 2.7.3 for a while and enabled in 2.9.2 again */
+if( !isset( $options['survey2020_completed'] ) && !isset( $options['survey2020_dismissed'] ) && $tab != 'survey' ): ?>
 	<div class="update-nag haet-survey-nag">
 	    <p>
-	    	<?php _e('Please help me to improve this plugin.','wp-html-mail'); ?>
+	    	<?php _e('Please help us to improve this plugin.','wp-html-mail'); ?>
 	    	<?php _e('How do you like WP HTML Mail so far?','wp-html-mail'); ?>
 	    	<span class="haet-star-rating">
 	    	    <input type="hidden" class="" id="haet_survey_email_result" name="haet_survey_email_result" value="0">
@@ -16,7 +17,7 @@
 	    	</span>
 	    </p>
 	</div>
-<?php endif;*/ ?>
+<?php endif; ?>
 
 
 <h2 class="nav-tab-wrapper">
@@ -86,6 +87,11 @@
 				</p>
 			</div>
 		</div>
+	</div>
+	<div id="haet_mail_enable_translation_dialog" class="haet-mail-dialog" title="<?php _e('Please wait','wp-html-mail'); ?>">
+		<p style="text-align:center;">
+			<?php _e('Translation settings for this field are updated.','wp-html-mail'); ?><br/><img src="<?php echo get_admin_url(null,'/images/spinner.gif'); ?>">
+		</p>
 	</div>
 <?php endif; ?>
 

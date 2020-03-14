@@ -15,10 +15,23 @@
                     </th>
                     <td>
                         <div class="uploader">
-                            <input id="haet_mailheaderimg" name="haet_mail_theme[headerimg]" type="text" value="<?php echo $theme_options['headerimg']; ?>"/>
+                            <?php 
+                            $headerimg = $this->multilanguage->get_translateable_theme_option( $theme_options, 'headerimg' );
+                            $headerimg_field_key = $this->multilanguage->get_translateable_theme_options_key( $theme_options, 'headerimg' );
+                            ?>
+                            <input id="haet_mailheaderimg" name="haet_mail_theme[<?php echo $headerimg_field_key; ?>]" type="text" value="<?php echo $headerimg; ?>"/>
                             <input id="haet_mailfilepicker" class="button upload_image_button" name="haet_mailfilepicker" type="text" value="<?php _e('Select image','wp-html-mail'); ?>" />
                             <input id="haet_mailheaderimg_width" name="haet_mail_theme[headerimg_width]" type="hidden" value="<?php echo $theme_options['headerimg_width']; ?>"/>
                             <input id="haet_mailheaderimg_height" name="haet_mail_theme[headerimg_height]" type="hidden" value="<?php echo $theme_options['headerimg_height']; ?>"/>
+
+                            <?php if( $this->multilanguage->is_multilanguage_site() ): ?>
+                            <input type="hidden" name="haet_mail_theme[headerimg_enable_translation]" value="0">
+                            <input type="checkbox" id="haet_mail_theme_headerimg_enable_translation" name="haet_mail_theme[headerimg_enable_translation]" value="1" <?php echo (isset($theme_options['headerimg_enable_translation']) && $theme_options['headerimg_enable_translation']==1 ?'checked':''); ?>>
+                            <label for="haet_mail_theme_headerimg_enable_translation">
+                                <?php _e('Enable translation for this field','wp-html-mail'); ?> 
+                                <span class="dashicons dashicons-editor-help haet-mail-info-icon" data-tooltip="<?php esc_attr_e( 'If enabled you can use individual settings depending on the current language selected at the top of the page in your admin bar.','wp-html-mail' ); ?>"></span>
+                            </label>
+                        <?php endif; ?>
                         </div>
                         <p class="description"><?php _e('Add your logo or image header (optional). max 600px wide','wp-html-mail'); ?></p>
                     </td>
@@ -59,10 +72,22 @@
                 </tr>
                 <tr>
                     <th scope="row">
-                        <label for="haet_mailheadertext"><?php _e('Header text','wp-html-mail'); ?></label>
+                        <label for="haet_mailheadertext"><?php _e('Header text','wp-html-mail'); ?> <?php $this->multilanguage->maybe_print_language_label( $theme_options, 'footer' ); ?></label>
                     </th>
                     <td>
-                        <input type="text" value="<?php echo $theme_options['headertext']; ?>" id="haet_mailheadertext" name="haet_mail_theme[headertext]">     
+                        <?php 
+                        $headertext = $this->multilanguage->get_translateable_theme_option( $theme_options, 'headertext' );
+                        $headertext_field_key = $this->multilanguage->get_translateable_theme_options_key( $theme_options, 'headertext' );
+                        ?>
+                        <input type="text" value="<?php echo $headertext; ?>" id="haet_mailheadertext" name="haet_mail_theme[<?php echo $headertext_field_key; ?>]">     
+                        <?php if( $this->multilanguage->is_multilanguage_site() ): ?>
+                            <input type="hidden" name="haet_mail_theme[headertext_enable_translation]" value="0">
+                            <input type="checkbox" id="haet_mail_theme_headertext_enable_translation" name="haet_mail_theme[headertext_enable_translation]" value="1" <?php echo (isset($theme_options['headertext_enable_translation']) && $theme_options['headertext_enable_translation']==1 ?'checked':''); ?>>
+                            <label for="haet_mail_theme_headertext_enable_translation">
+                                <?php _e('Enable translation for this field','wp-html-mail'); ?> 
+                                <span class="dashicons dashicons-editor-help haet-mail-info-icon" data-tooltip="<?php esc_attr_e( 'If enabled you can use individual settings depending on the current language selected at the top of the page in your admin bar.','wp-html-mail' ); ?>"></span>
+                            </label>
+                        <?php endif; ?>
                     </td>
                 </tr>
                 <tr>

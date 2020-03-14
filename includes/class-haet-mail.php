@@ -1,8 +1,11 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
+require HAET_MAIL_PATH . 'includes/class-haet-multilanguage.php';
+
 final class Haet_Mail {
 	
 	private static $instance;
+	private $multilanguage;
 	
 	public static function instance(){
 		if (!isset(self::$instance) && !(self::$instance instanceof Haet_Mail)) {
@@ -14,6 +17,7 @@ final class Haet_Mail {
 
 
 	function __construct(){
+		$this->multilanguage = new Haet_Multilanguage();
 		add_action( 'plugins_loaded', 'Haet_Sender_Plugin::hook_plugins', 30 );
 
 		add_action( 'admin_notices', array( $this, 'maybe_show_testmode_warning' ) );
@@ -121,7 +125,7 @@ final class Haet_Mail {
 	function admin_page_scripts_and_styles($page){
 		if(strpos($page, 'wp-html-mail')){
 			wp_enqueue_style( 'wp-color-picker' );
-			wp_enqueue_script('haet_mail_admin_script',  HAET_MAIL_URL.'/js/admin_script.js', array( 'wp-color-picker','jquery-ui-dialog','jquery'));
+			wp_enqueue_script('haet_mail_admin_script',  HAET_MAIL_URL.'/js/admin_script.js', array( 'wp-color-picker','jquery-ui-dialog','wp-pointer','jquery'));
 			wp_enqueue_style('haet_mail_admin_style',  HAET_MAIL_URL.'/css/style.css');
 			wp_enqueue_style (  'wp-jquery-ui-dialog');
 			wp_enqueue_media();
@@ -167,7 +171,7 @@ final class Haet_Mail {
 		$options = $this->get_options();
 		$theme_options = $this->get_theme_options('default');
 		$plugin_options = Haet_Sender_Plugin::get_plugin_options();
-
+		
 		if(isset($_POST['haet_mail']) )
 			$options = $this->save_options($options);
 		if(isset($_POST['haet_mail_theme']) )
@@ -270,7 +274,6 @@ final class Haet_Mail {
 		if(isset($_POST['reload_haet_mailtemplate'])){
 			$options = $this->get_default_theme_options();
 		}
-
 		update_option('haet_mail_theme_options', $options);
 		
 		return $options;
@@ -558,9 +561,13 @@ final class Haet_Mail {
 
 	public function get_template($options){
 		$template=$this->load_template_file('default');
-		if(isset($options['headerimg']) && strlen($options['headerimg'])>5 )
+		$headertext_field_key = $this->multilanguage->get_translateable_theme_options_key( $options, 'headertext' );
+		$options['headertext'] = $options[$headertext_field_key];
+
+		$headerimg_field_key = $this->multilanguage->get_translateable_theme_options_key( $options, 'headerimg' );
+		if(isset($options[$headerimg_field_key]) && strlen($options[$headerimg_field_key])>5 )
 			$options['headertext'] = '<img class="header-image'.
-										(isset($options['headerimg_width']) && $options['headerimg_width']>580?' full-width-header-image':'').'" src="'.$options['headerimg'].'" style="'.
+										(isset($options['headerimg_width']) && $options['headerimg_width']>580?' full-width-header-image':'').'" src="'.$options[$headerimg_field_key].'" style="'.
 										(isset($options['headerimg_width'])?'width:"'.$options['headerimg_width'].'px; " ':'').
 										(isset($options['headerimg_height'])?'height:"'.$options['headerimg_height'].'px; " ':'').
 										'" alt="'.$options['headertext'].'">';
@@ -578,13 +585,15 @@ final class Haet_Mail {
 		if( !$options['footerbackground'] )
 			$options['footerbackground'] = 'transparent';
 
+		$footer_field_key = $this->multilanguage->get_translateable_theme_options_key( $options, 'footer' );
+
 		if(isset($options['footerlink']) && $options['footerlink']==1){
 			$footerlinkcolor = $this->get_footer_link_color( ($options['footerbackground']!=''?$options['footerbackground']:$options['background']) ); 
-			$options['footer'].= '<p style="text-align:center;"><br><br><a href="https://wordpress.org/plugins/wp-html-mail/" class="footerlink" style="color:'.$footerlinkcolor.'; font-size:11px;">create your own WordPress email template with WP HTML Mail</a></p>';
+			$options[$footer_field_key].= '<p style="text-align:center;"><br><br><a href="https://wordpress.org/plugins/wp-html-mail/" class="footerlink" style="color:'.$footerlinkcolor.'; font-size:11px;">create your own WordPress email template with WP HTML Mail</a></p>';
 		}
 
-		$options['footer'] = stripslashes( $options['footer'] );
-		$options['footer'] = apply_filters( 'haet_mail_footer', $options['footer'] );
+		$options[$footer_field_key] = stripslashes( $options[$footer_field_key] );
+		$options['footer'] = apply_filters( 'haet_mail_footer', $options[$footer_field_key] );
 
 		foreach ($options as $option => $value) {
 			if(strpos($option, 'bold'))

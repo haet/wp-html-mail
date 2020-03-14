@@ -2,8 +2,8 @@
 Contributors: haet
 Tags: email template, html mail, email design, mail, email templates, ninja-forms, caldera-forms, wp-e-commerce, easy-digital-downloads, woocommerce, contact-form-7, mandrill, postman, gravityforms
 Requires at least: 4.9
-Tested up to: 5.2.4
-Stable tag: 2.9.1.4
+Tested up to: 5.4
+Stable tag: 2.9.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -20,7 +20,7 @@ Our e-mail template has been tested in all major desktop, web and mobile mailcli
 * **Text or image header:** 
 Either style your email header with colors and text, use your logo or design a banner.
 * **Customize colors and fonts:**
-Differnt plugins send different emails but you can define global color and font settings for headlines, text, links and more to give all your emails a common professional look.
+Different plugins send different emails but you can define global color and font settings for headlines, text, links and more to give all your emails a common professional look.
 * **Add your companies legal information to the footer:** 
 The email footer can contain links to your legal pages, your contact data or whatever you want. 
 * **Inline CSS:** 
@@ -96,6 +96,7 @@ https://youtu.be/RV8vUNCWOZw
 
 
 = Works with most email delivery plugins =
+* [WP Offload SES](https://aff.deliciousbrains.com/idevaffiliate.php?id=21298_4_3_3)
 * Post SMTP Mailer/Email Log
 * WP Mail SMTP
 * wpMandrill
@@ -135,9 +136,13 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 == Changelog ==
 
-= 2.9... =
+= 2.9.3 =
+* Header and Footer translatable with WPML
+
+
+= 2.9.2 =
 * Fix: WooCommerce tab has overwritten some settings set on the plugins tab
-* Fixed issue with password reset mail when plan text is interpreted as HTML: https://wordpress.org/support/topic/password-recover-link/
+* Fixed issue with password reset mail when plain text is interpreted as HTML: https://wordpress.org/support/topic/password-recover-link/
 
 
 
@@ -374,7 +379,7 @@ add_filter( 'haet_mail_css_mobile', function( $css ){
 
 = How to disable the template for some emails? =
 
-Find anything all emails hav in common. It may be the sender, a word in the subject or something in the email body.
+Find anything all emails have in common. It may be the sender, a word in the subject or something in the email body.
 Then add this function to your (child-)themes functions.php and customize it. Return TRUE if the template should be used and FALSE if not.
 
 `

@@ -227,20 +227,23 @@ class Haet_Sender_Plugin {
     }
 
     public static function get_plugin_options() {
-        $default_options = array();
+        $default_options = [];
         foreach (Haet_Sender_Plugin::get_available_plugins() as $plugin_name => $plugin) {
             if( class_exists($plugin['class']) )
                 $default_options[$plugin_name] = $plugin['class']::get_plugin_default_options();
         }
         $options = get_option('haet_mail_plugin_options');
-
+        
         if (!empty($options)) {
             foreach ($options as $plugin_name => $plugin_options){
                 if( array_key_exists( $plugin_name, $default_options ) )
                     $options[$plugin_name] = wp_parse_args( $plugin_options, $default_options[$plugin_name] );
 
             }
-        }               
+        } else {
+            $options = $default_options;
+        }             
+
         update_option('haet_mail_plugin_options', $options);
         return $options;
     }
