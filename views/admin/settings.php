@@ -20,6 +20,15 @@ if( !isset( $options['survey2020_completed'] ) && !isset( $options['survey2020_d
 <?php endif; ?>
 
 
+<div class="haet-mail-template-button-wrap">
+	<span class="haet-mail-new-notice"><?php _e('New'); ?>!!! <span class="dashicons dashicons-arrow-right-alt"></span></span>
+	<a href="<?php echo $this->get_tab_url('template-library'); ?>" class="button-secondary haet-mail-browse-templates">
+		<span class="dashicons dashicons-admin-appearance"></span>
+		<?php _e('Load a template', 'wp-html-mail'); ?>
+	</a>
+</div>
+
+
 <h2 class="nav-tab-wrapper">
 <?php
 	foreach( $tabs as $el => $name ){
@@ -71,12 +80,31 @@ if( !isset( $options['survey2020_completed'] ) && !isset( $options['survey2020_d
 </form>
 
 <?php if( $tab != 'survey' ): ?>
+	<div class="nav-tab-wrapper">
+		<a class="nav-tab nav-tab-active haet-mail-preview-size-button" data-previewwidth="800">
+			<span class="dashicons dashicons-desktop"></span> &amp; <span class="dashicons dashicons-tablet" ></span>
+		</a>
+		<a class="nav-tab haet-mail-preview-size-button" data-previewwidth="360">
+			<span class="dashicons dashicons-smartphone"></span>
+		</a>
+
+		<div class="haet-mail-send-preview">
+			<?php _e('Send a test mail','wp-html-mail'); ?>
+			<input id="haet_mail_test_address" required type="email" placeholder="you@example.org"> 
+			<button id="haet_mail_test_submit"><span class="dashicons dashicons-arrow-right-alt2"></span></button>
+			<div id="haet_mail_test_sent" class="haet-mail-dialog" title="<?php _e('Email sent','wp-html-mail'); ?>">
+				<p>
+					<?php _e('Your message has been sent.','wp-html-mail'); ?>
+				</p>
+			</div>
+		</div>
+	</div>
 	<iframe id="mailtemplatepreview" style="width:800px; height:480px; border:1px solid #ccc;" ></iframe>
 	<br>
 <?php endif; ?>
 
 <?php if( ( !isset($is_plugin_tab) || false===$is_plugin_tab ) && $tab != 'survey' ): ?>
-	<div class="postbox haet-mail-send-test">
+	<?php /*<div class="postbox haet-mail-send-test">
 		<h3 class="hndle"><span><?php _e('Send a test mail','wp-html-mail'); ?></span></h3>
 		<div style="" class="inside">
 			<input id="haet_mail_test_address" required type="email" placeholder="you@example.org"> 
@@ -87,7 +115,7 @@ if( !isset( $options['survey2020_completed'] ) && !isset( $options['survey2020_d
 				</p>
 			</div>
 		</div>
-	</div>
+	</div>*/ ?>
 	<div id="haet_mail_enable_translation_dialog" class="haet-mail-dialog" title="<?php _e('Please wait','wp-html-mail'); ?>">
 		<p style="text-align:center;">
 			<?php _e('Translation settings for this field are updated.','wp-html-mail'); ?><br/><img src="<?php echo get_admin_url(null,'/images/spinner.gif'); ?>">

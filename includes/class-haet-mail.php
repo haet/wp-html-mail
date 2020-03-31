@@ -1,6 +1,7 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-require HAET_MAIL_PATH . 'includes/class-haet-multilanguage.php';
+require HAET_MAIL_PATH . 'includes/class-multilanguage.php';
+require HAET_MAIL_PATH . 'includes/class-template-library.php';
 
 final class Haet_Mail {
 	
@@ -58,6 +59,7 @@ final class Haet_Mail {
 			'headerfontsize'		=>	40,
 			'headerbold'			=>	0,
 			'headeritalic'			=>	1,
+			'headertexttranform'	=>	'none',
 			'headerbackground'		=>	'#28717f',
 			'headercolor'			=>	'#ffffff',
 			'headerpaddingtop'		=>	50,
@@ -72,12 +74,14 @@ final class Haet_Mail {
 			'headlinefontsize'		=>	25,
 			'headlinebold'			=>	0,
 			'headlineitalic'		=>	1,
+			'headlinetexttranform'	=>	'none',
 			'headlinecolor'			=>	'#2d8496',
 			'subheadlinefont'		=>	'Georgia,Times New Roman,serif',
 			'subheadlinealign'		=> 	'left',
 			'subheadlinefontsize'	=>	20,
 			'subheadlinebold'		=>	0,
 			'subheadlineitalic'		=>	1,
+			'subheadlinetexttranform'	=>	'none',
 			'subheadlinecolor'		=>	'#28717f',
 			'textfont'				=>	'Helvetica, Arial, sans-serif',
 			'textalign'				=> 	'left',
@@ -88,6 +92,7 @@ final class Haet_Mail {
 			'linkcolor'				=>	'#777777',
 			'linkbold'				=>	0,
 			'linkitalic'			=>	0,
+			'linktexttranform'		=>	'none',
 			'linkunderline'			=>	1,
 			'footer'				=> 	'<p>&nbsp;</p>
 <p style="text-align: center;"><span style="color: #d6d6d6;"><span style="font-family: Helvetica, Arial, sans-serif;"><span style="font-size: 12px;">Sample Footer text: © 2017 Acme, Inc.<br /></span><span style="font-size: 12px;"><strong>Acme, Inc.<br /></strong></span><span style="font-size: 12px;">123 Main St., </span></span><span style="font-size: 12px; font-family: Helvetica, Arial, sans-serif;">Springfield, MA 12345</span></span><br /><span style="font-size: 12px; font-family: Helvetica, Arial, sans-serif; color: #d6d6d6;"><a href="http://www.acme-inc.com"><span style="color: #d6d6d6;">www.acme-inc.com</span></a></span></p>',
@@ -166,28 +171,46 @@ final class Haet_Mail {
 
 
 
-	function print_admin_page(){    
+	function print_admin_page(){
+		if(array_key_exists('tab', $_GET))
+			$tab = $_GET['tab'];
+		else
+			$tab = 'general';
+
+		// template library
+		if( $tab == 'template-library' ){
+			$template_library = new Haet_Template_Library();
+		
+			if( isset($_POST['haet_mail_import_template_url']) && filter_var($_POST['haet_mail_import_template_url'], FILTER_VALIDATE_URL) !== FALSE ){
+				$theme_options = $this->get_theme_options('default');
+				$theme_options = $template_library->import_template( $_POST['haet_mail_import_template_url'], $theme_options, $this->multilanguage );
+				if( $theme_options )
+					wp_redirect( $this->get_tab_url('header') );
+			}
+
+			include HAET_MAIL_PATH.'views/admin/template-library.php';
+			return; // not further execution if we are on template library
+		}
+
 		$this->process_admin_page_actions();
 		$options = $this->get_options();
 		$theme_options = $this->get_theme_options('default');
 		$plugin_options = Haet_Sender_Plugin::get_plugin_options();
-		
-		if(isset($_POST['haet_mail']) )
-			$options = $this->save_options($options);
-		if(isset($_POST['haet_mail_theme']) )
-			$theme_options = $this->save_theme_options($theme_options);
-		if(isset($_POST['haet_mail_plugins']))
-			$plugin_options = Haet_Sender_Plugin::save_plugin_options($plugin_options);
+		if( isset($_POST['enable_import_theme_options']) && $_POST['enable_import_theme_options'] && isset($_POST['import_theme_options']) ){
+			$theme_options = $this->import_theme_options( $_POST['import_theme_options'], $theme_options );
+		}else{
+			if(isset($_POST['haet_mail']) )
+				$options = $this->save_options($options);
+			if(isset($_POST['haet_mail_theme']) )
+				$theme_options = $this->save_theme_options($theme_options);
+			if(isset($_POST['haet_mail_plugins']))
+				$plugin_options = Haet_Sender_Plugin::save_plugin_options($plugin_options);
+		}
 		if(isset($_POST['haet_mail']) || isset($_POST['haet_mail_theme']) || isset($_POST['haet_mail_plugins'])){
 			echo '<div class="updated"><p><strong>';
 					_e('Settings Updated.', 'wp-html-mail');
 			echo '</strong></p></div>';	
 		} 
-
-		if(array_key_exists('tab', $_GET))
-			$tab = $_GET['tab'];
-		else
-			$tab = 'general';
 		
 		$active_plugins = Haet_Sender_Plugin::get_active_plugins();
 		$available_plugins = Haet_Sender_Plugin::get_available_plugins();
@@ -270,14 +293,34 @@ final class Haet_Mail {
 
 	function save_theme_options($saved_options){    
 		$new_options = $_POST['haet_mail_theme'];
+
 		$options = array_merge($saved_options,$new_options);
 		if(isset($_POST['reload_haet_mailtemplate'])){
 			$options = $this->get_default_theme_options();
 		}
+		
+
 		update_option('haet_mail_theme_options', $options);
 		
 		return $options;
 	}
+
+
+
+	private function import_theme_options( $new_options, $saved_options ){
+		$new_options = json_decode( stripslashes( $new_options ), true );
+		error_log( print_r( $new_options,true ) );
+		if( $new_options ){
+			$options = array_merge($saved_options,$new_options);
+
+			update_option('haet_mail_theme_options', $options);
+		}else{
+			$options = $saved_options;
+		}
+		
+		return $options;
+	}
+
 
 
 	/**
@@ -488,6 +531,8 @@ final class Haet_Mail {
 		return $email;
 	}
 
+
+
 	function set_mail_content_type(){
 		return "text/html";
 	}
@@ -565,12 +610,20 @@ final class Haet_Mail {
 		$options['headertext'] = $options[$headertext_field_key];
 
 		$headerimg_field_key = $this->multilanguage->get_translateable_theme_options_key( $options, 'headerimg' );
-		if(isset($options[$headerimg_field_key]) && strlen($options[$headerimg_field_key])>5 )
-			$options['headertext'] = '<img class="header-image'.
-										(isset($options['headerimg_width']) && $options['headerimg_width']>580?' full-width-header-image':'').'" src="'.$options[$headerimg_field_key].'" style="'.
-										(isset($options['headerimg_width'])?'width:"'.$options['headerimg_width'].'px; " ':'').
-										(isset($options['headerimg_height'])?'height:"'.$options['headerimg_height'].'px; " ':'').
-										'" alt="'.$options['headertext'].'">';
+		if(isset($options[$headerimg_field_key]) && strlen($options[$headerimg_field_key])>5 ){
+			$width = isset($options['headerimg_width']) && intval( $options['headerimg_width'] ) ? $options['headerimg_width'] : 0;
+			$height = isset($options['headerimg_height']) && intval( $options['headerimg_height'] ) ? $options['headerimg_height'] : 0;
+			$options['headertext'] = '<img class="header-image' . ($width>580?' full-width-header-image':'').'" 
+										src="'.$options[$headerimg_field_key].'" 
+										style="'.
+											( $width ?'width:' . $width . 'px; ' : '' ) .
+											( $height ?'height:' . $height . 'px; ' : '' ) .
+										'" '.
+										( $width ? ' width="' . $width . '" ' : '' ) .
+										( $height ? ' height="' . $height . '" ' : '' ) .
+										'
+										alt="'.$options['headertext'].'">';
+		}
 		if( apply_filters( 'haet_mail_link_header', true ) )
 			$options['headertext'] = '<a href="' . get_home_url() . '">' . $options['headertext'] . '</a>';
 
@@ -652,9 +705,13 @@ final class Haet_Mail {
 		return array(
 			'Arial, Helvetica, sans-serif' 		=>	'Arial',
 			'Helvetica, Arial, sans-serif' 		=>	'Helvetica',
-			'Times New Roman,Georgia,serif'	=> 	'Times New Roman',
-			'Georgia,Times New Roman,serif'	=> 	'Georgia',
-			'Courier, monospace'				=>	'Courier'
+			'Times New Roman,Georgia,serif'		=> 	'Times New Roman',
+			'Georgia,Times New Roman,serif'		=> 	'Georgia',
+			'Courier, monospace'				=>	'Courier',
+			'Tahoma, Geneva, sans-serif'		=>  'Tahoma',
+			'Lucida Sans, sans-serif'			=>  'Lucida',
+			'Trebuchet, sans-serif'				=>  'Trebuchet',
+			'Verdana, sans-serif'				=>  'Verdana',
 		);
 	}
 
@@ -712,6 +769,13 @@ final class Haet_Mail {
 						<input type="hidden" name="<?php echo $field['name']; ?>" value="0">
 						<input type="checkbox" id="<?php echo $this->field_name_to_id( $field['name'] ); ?>" class="haet-toggle" name="<?php echo $field['name']; ?>" value="1" <?php echo ($field['value']==1?'checked':''); ?>>
 						<label for="<?php echo $this->field_name_to_id( $field['name'] ); ?>"><span class="dashicons dashicons-editor-italic"></span></label>
+						<?php
+						break;
+					case 'texttransform':
+						?>
+						<input type="hidden" name="<?php echo $field['name']; ?>" value="none">
+						<input type="checkbox" id="<?php echo $this->field_name_to_id( $field['name'] ); ?>" class="haet-toggle" name="<?php echo $field['name']; ?>" value="uppercase" <?php echo ($field['value']=="uppercase"?'checked':''); ?>>
+						<label for="<?php echo $this->field_name_to_id( $field['name'] ); ?>"><span class="dashicons dashicons-arrow-up" title="<?php esc_attr_e( 'Uppercase', 'wp-html-mail' ); ?>"></span></label>
 						<?php
 						break;
 					case 'align':

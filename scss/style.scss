@@ -14,7 +14,7 @@
 
 #haet_mail_form {
     .wp-picker-container {
-        line-height: 21px;
+        line-height: 25px;
         display: inline-block !important;
         width: auto;
 
@@ -108,11 +108,13 @@
         width: 50px;
     }
 
-    .collapse-testmode {
+    .collapse-testmode,
+    .collapse-headerimg_advanced {
         display: none;
     }
 
-    #haet_mail_testmode:checked+label+.collapse-testmode {
+    #haet_mail_testmode:checked+label+.collapse-testmode,
+    #haet_mail_headerimg_advanced:checked+label+.collapse-headerimg_advanced {
         display: block;
     }
 }
@@ -135,8 +137,8 @@
     &+label {
         display: inline-block;
         text-align: center;
-        height: 22px;
-        width: 22px;
+        height: 28px;
+        width: 28px;
         background-color: #f7f7f7;
         border: 1px solid #ccc;
         -webkit-border-radius: 3px;
@@ -145,8 +147,8 @@
         box-shadow: 0 1px 0 #ccc;
 
         .dashicons {
-            font-size: 17px;
-            line-height: 1.3;
+            font-size: 19px;
+            line-height: 1.5;
         }
 
         &.border-choice-label {
@@ -165,7 +167,36 @@
     }
 }
 
+/****************************************
+*   HEADER
+****************************************/
+#haet_mailheaderimg {
+    width: 380px;
+    max-width: 90%;
+}
 
+label[for="haet_mail_headerimg_advanced"] {
+    vertical-align: 5px;
+}
+
+.collapse-headerimg_advanced {
+    margin-top: 5px;
+
+    input#haet_mailheaderimg_width,
+    input#haet_mailheaderimg_height {
+        width: 60px;
+        margin: 0 5px;
+        text-align: right;
+    }
+
+    label {
+        margin-left: 20px;
+
+        &:first-child {
+            margin-left: 0;
+        }
+    }
+}
 
 .haet-mail-send-test {
     max-width: 800px;
@@ -180,6 +211,41 @@
         text-decoration: none;
     }
 }
+
+/****************************************
+*   SEND PREVIEW
+****************************************/
+.haet-mail-send-preview {
+    border: 1px solid #ccc;
+    margin-bottom: 3px;
+    display: inline-block;
+    margin-left: 100px;
+    padding-left: 10px;
+
+    input {
+        background: transparent;
+        border-radius: 0;
+        border: none;
+        border-bottom: 1px dashed #0071a1;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    button {
+        background: transparent;
+        border: none;
+        color: #0071a1;
+        text-shadow: 0 0 3px rgba(0, 0, 0, 0.0);
+        transition: all 0.4s ease-out;
+
+
+        &:hover {
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+            color: #000;
+        }
+    }
+}
+
 
 /****************************************
 *   PLUGINS
@@ -215,6 +281,100 @@
     width: 205px;
     float: left;
 }
+
+
+/****************************************
+*   TEMPLATE LIBRARY
+****************************************/
+.haet-mail-template-button-wrap {
+    text-align: right;
+    padding-right: 20px;
+    max-width: 800px;
+    padding-top: 20px;
+
+    .haet-mail-new-notice {
+        text-transform: uppercase;
+    }
+
+    .haet-mail-browse-templates {
+        text-transform: uppercase;
+
+        .dashicons {
+            vertical-align: -4px;
+        }
+    }
+}
+
+.haet-mail-template-list {
+    margin-top: 30px;
+
+    .haet-mail-template {
+        position: relative;
+        display: block;
+        width: 300px;
+        height: 250px;
+        margin-right: 40px;
+        margin-bottom: 40px;
+        float: left;
+        background-size: cover;
+        background-position: top center;
+        outline: 10px solid #FFF;
+        box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.4) inset;
+
+
+        .template-name {
+            position: absolute;
+            display: inline-block;
+            left: -1px;
+            bottom: -1px;
+            padding: 5px 10px;
+            background: #fff;
+            font-size: 13px;
+            text-transform: uppercase;
+            box-shadow: 2px -2px 3px rgba(0, 0, 0, 0.4);
+        }
+    }
+}
+
+#haet_mail_template_preview_dialog {
+    .screenshot {
+        width: 55%;
+        margin-right: 5%;
+        min-width: 300px;
+        float: left;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+    }
+
+    .template-description {
+        width: 40%;
+        float: left;
+        min-width: 200px;
+    }
+}
+
+
+/****************************************
+*   ADVANCED
+****************************************/
+.haet-mail-toggle-export,
+.haet-mail-toggle-import {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.5s ease-out;
+
+    textarea {
+        width: 100%;
+        height: 200px;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 13px;
+    }
+
+    &.toggle-active {
+        max-height: 500px;
+    }
+}
+
+
 
 
 /****************************************

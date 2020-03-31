@@ -21,9 +21,14 @@
                             ?>
                             <input id="haet_mailheaderimg" name="haet_mail_theme[<?php echo $headerimg_field_key; ?>]" type="text" value="<?php echo $headerimg; ?>"/>
                             <input id="haet_mailfilepicker" class="button upload_image_button" name="haet_mailfilepicker" type="text" value="<?php _e('Select image','wp-html-mail'); ?>" />
-                            <input id="haet_mailheaderimg_width" name="haet_mail_theme[headerimg_width]" type="hidden" value="<?php echo $theme_options['headerimg_width']; ?>"/>
-                            <input id="haet_mailheaderimg_height" name="haet_mail_theme[headerimg_height]" type="hidden" value="<?php echo $theme_options['headerimg_height']; ?>"/>
-
+                            <span class="dashicons dashicons-editor-help haet-mail-info-icon" data-tooltip="<?php esc_attr_e( 'Add your logo or image header (optional). max 600px wide','wp-html-mail' ); ?>"></span>
+                            <input type="checkbox" id="haet_mail_headerimg_advanced" class="haet-toggle" value="1">
+                            <label for="haet_mail_headerimg_advanced"><span class="dashicons dashicons-admin-generic"></span></label>
+                            <div class="collapse-headerimg_advanced">
+                                <label for="haet_mailheaderimg_width"><?php _e('width','wp-html-mail'); ?></label><input id="haet_mailheaderimg_width" name="haet_mail_theme[headerimg_width]" type="number" value="<?php echo $theme_options['headerimg_width']; ?>"/>px
+                                <label for="haet_mailheaderimg_height"><?php _e('height','wp-html-mail'); ?></label><input id="haet_mailheaderimg_height" name="haet_mail_theme[headerimg_height]" type="number" value="<?php echo $theme_options['headerimg_height']; ?>"/>px
+                                <span class="dashicons dashicons-editor-help haet-mail-info-icon" data-tooltip="<?php esc_attr_e( 'If you would like to provide the header image in retina quality, upload an image with a higher resultion, such as for example 1200px x 400px and enter only half the size values in the input fields on the left (600 x 200).','wp-html-mail' ); ?>"></span>
+                            </div>
                             <?php if( $this->multilanguage->is_multilanguage_site() ): ?>
                             <input type="hidden" name="haet_mail_theme[headerimg_enable_translation]" value="0">
                             <input type="checkbox" id="haet_mail_theme_headerimg_enable_translation" name="haet_mail_theme[headerimg_enable_translation]" value="1" <?php echo (isset($theme_options['headerimg_enable_translation']) && $theme_options['headerimg_enable_translation']==1 ?'checked':''); ?>>
@@ -33,7 +38,9 @@
                             </label>
                         <?php endif; ?>
                         </div>
-                        <p class="description"><?php _e('Add your logo or image header (optional). max 600px wide','wp-html-mail'); ?></p>
+                        <?php if( isset( $theme_options['headerimg_notice'] ) && $theme_options['headerimg_notice'] && stripos( $headerimg, 'templates.wp-html-mail.com' ) ): ?>
+                            <p class="description"><?php echo $theme_options['headerimg_notice']; ?></p>
+                        <?php endif; ?>
                     </td>
                 </tr>
                 <tr>

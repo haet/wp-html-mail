@@ -36,6 +36,10 @@
                                     'name'  =>  'haet_mail_theme[headlineitalic]',
                                     'value' =>  $theme_options['headlineitalic']
                                     ),
+                                'texttransform'  =>  array(
+                                    'name'  =>  'haet_mail_theme[headlinetexttransform]',
+                                    'value' =>  $theme_options['headlinetexttransform']
+                                    ),
                                 'align' =>  array(
                                     'name'  =>  'haet_mail_theme[headlinealign]',
                                     'value' =>  $theme_options['headlinealign']
@@ -70,6 +74,10 @@
                                 'italic'    =>  array(
                                     'name'  =>  'haet_mail_theme[subheadlineitalic]',
                                     'value' =>  $theme_options['subheadlineitalic']
+                                    ),
+                                'texttransform'  =>  array(
+                                    'name'  =>  'haet_mail_theme[subheadlinetexttransform]',
+                                    'value' =>  $theme_options['subheadlinetexttransform']
                                     ),
                                 'align' =>  array(
                                     'name'  =>  'haet_mail_theme[subheadlinealign]',
@@ -132,6 +140,10 @@
                                 'italic'    =>  array(
                                     'name'  =>  'haet_mail_theme[linkitalic]',
                                     'value' =>  $theme_options['linkitalic']
+                                    ),
+                                'texttransform'  =>  array(
+                                    'name'  =>  'haet_mail_theme[linktexttransform]',
+                                    'value' =>  $theme_options['linktexttransform']
                                     ),
                                 ) );
                         ?>

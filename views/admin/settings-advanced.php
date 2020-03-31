@@ -3,19 +3,30 @@
     <div style="" class="inside">
         <table class="form-table">
             <tbody>
-                <?php /*
+                
                 <tr valign="top">
                     <th scope="row"><label><?php _e('Import / Export template','wp-html-mail') ?></label></th>
                     <td>
-                        <div class="export-toggle">
-                            <textarea><?php echo stripslashes(str_replace('\\&quot;','',json_encode($theme_options))); ?></textarea>
+                        <a href="#" class="button-secondary haet-mail-toggle-export-button"><?php _e('Export template', 'wp-html-mail'); ?></a>
+                        <a href="#" class="button-secondary haet-mail-toggle-import-button"><?php _e('Import template', 'wp-html-mail'); ?></a>
+                        <div class="haet-mail-toggle-export">
+                            <textarea readonly><?php echo str_replace('\\&quot;','',json_encode($theme_options)); ?></textarea>
                             <p class="description">
-                                <?php _e('Copy the settings above and paste into another site or paste other sites settings here.','wp-html-mail'); ?>
+                                <?php _e('Copy the settings above and paste into another site.','wp-html-mail'); ?>
                             </p>
+                        </div>
+
+                        <div class="haet-mail-toggle-import">
+                            <input id="haet_mail_enable_import_theme_options" type="hidden" name="enable_import_theme_options" value="0">
+                            <textarea id="haet_mail_import_theme_options" name="import_theme_options"></textarea>
+                            <p class="description">
+                                <?php _e('Paste settings from another site to the field above.','wp-html-mail'); ?>
+                            </p>
+                            <a href="#" class="button-secondary haet-mail-import-start"><?php _e('Start Import', 'wp-html-mail'); ?></a>
                         </div>
                     </td>
                 </tr>
-                */?>
+                
                 <tr valign="top">
                     <th scope="row"><label><?php _e('Content type','wp-html-mail') ?></label></th>
                     <td>
@@ -35,6 +46,17 @@
                         <?php do_action( 'haet_mail_plugin_reset_buttons' ) ?>
                     </td>
                 </tr>
+                <?php if( class_exists( 'WPHTMLMail_Woocommerce' ) ): ?>
+                    <tr valign="top">
+                        <th scope="row"><label><?php _e('Mailbuilder custom posts','wp-html-mail') ?></label></th>
+                        <td>
+                            <a href="<?php echo get_admin_url( null, 'edit.php?post_type=wphtmlmail_mail' ); ?>" class="button-secondary"><?php _e('Show all emails', 'wp-html-mail'); ?></a>
+                            <p class="description">
+                                <?php _e('All emails created with our mailbuilder are stored as custom post types. You can manage them at the link above','wp-html-mail'); ?>
+                            </p>
+                        </td>
+                    </tr>
+                <?php endif; ?>
                 <?php
                 $theme_is_writable = is_writable(get_stylesheet_directory());
                 ?>

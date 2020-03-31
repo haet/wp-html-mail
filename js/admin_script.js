@@ -180,6 +180,67 @@ jQuery(document).ready(function($) {
 	});
 
 	/*************************************
+	 * MOBILE PREVIEW
+	 * ***********************************/
+	$(".haet-mail-preview-size-button").click(function() {
+		var $button = $(this);
+		$button
+			.addClass("nav-tab-active")
+			.siblings(".nav-tab-active")
+			.removeClass("nav-tab-active");
+		$("#mailtemplatepreview").animate(
+			{ width: $button.data("previewwidth") },
+			500
+		);
+	});
+
+	/*************************************
+	 * TEMPLATE LIBRARY
+	 * ***********************************/
+	$(".haet-mail-template").on("click", function(e) {
+		e.preventDefault();
+		var $link = $(this);
+		$("#haet_mail_template_preview_dialog .screenshot").attr(
+			"src",
+			$link.data("screenshot")
+		);
+		$("#haet_mail_template_preview_dialog h2").text($link.data("name"));
+		$("#haet_mail_template_preview_dialog p.template-description-text")
+			.html($link.data("description"))
+			.find("a")
+			.attr("tabindex", -1);
+
+		$("#haet_mail_template_preview_dialog").dialog({
+			dialogClass: "no-close",
+			modal: true,
+			width: 800,
+			height: 600,
+			maxWidth: "96%",
+			maxHeight: "96%",
+			buttons: [
+				{
+					text: $("#haet_mail_template_preview_dialog").data(
+						"button-caption"
+					),
+					click: function() {
+						$(
+							'#haet_mail_import_form input[name="haet_mail_import_template_url"]'
+						).val($link.data("config"));
+						$("#haet_mail_import_form").submit();
+						$(this).dialog("close");
+
+						$("#haet_mail_template_importing_dialog").dialog({
+							dialogClass: "no-close",
+							modal: true,
+							buttons: []
+						});
+					}
+				}
+			]
+		});
+	});
+
+	/*************************************
 	 * INFO ICONS
 	 * ***********************************/
 	$(".haet-mail-info-icon").on("click", function(e) {
@@ -189,6 +250,29 @@ jQuery(document).ready(function($) {
 				content: "<p>" + $(this).data("tooltip") + "</p>"
 			})
 			.pointer("open");
+	});
+
+	/*************************************
+	 * IMPORT EXPORT
+	 * ***********************************/
+	$(".haet-mail-toggle-export-button").on("click", function() {
+		$(this)
+			.siblings(".haet-mail-toggle-export")
+			.addClass("toggle-active");
+		$(this).remove();
+		$(".haet-mail-toggle-import-button").remove();
+	});
+
+	$(".haet-mail-toggle-import-button").on("click", function() {
+		$(this)
+			.siblings(".haet-mail-toggle-import")
+			.addClass("toggle-active");
+		$(this).remove();
+		$(".haet-mail-toggle-export-button").remove();
+		$(".haet-mail-import-start").on("click", function() {
+			$("#haet_mail_enable_import_theme_options").val(1);
+			$("#haet_mail_form input[name='update_haet_mailSettings']").click();
+		});
 	});
 
 	/*************************************

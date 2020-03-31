@@ -1,9 +1,10 @@
 === WP HTML Mail - Email Designer ===
 Contributors: haet
 Tags: email template, html mail, email design, mail, email templates, ninja-forms, caldera-forms, wp-e-commerce, easy-digital-downloads, woocommerce, contact-form-7, mandrill, postman, gravityforms
-Requires at least: 4.9
+Requires at least: 5.0
 Tested up to: 5.4
-Stable tag: 2.9.3
+Requires PHP: 7.2
+Stable tag: 2.9.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -136,6 +137,15 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 == Changelog ==
 
+= 2.9.4 =
+* added a link to manage all custom posts created by mailbuilder (tab "advanced")
+* added export and import functions (tab "advanced")
+* added uppercase formatting to font settings
+* added a few more web safe fonts
+* removed call to libxml_disable_entity_loader to support Kinsta hosting
+* tagged minimum PHP version 7.2
+
+
 = 2.9.3 =
 * Header and Footer translatable with WPML
 
@@ -143,7 +153,6 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 = 2.9.2 =
 * Fix: WooCommerce tab has overwritten some settings set on the plugins tab
 * Fixed issue with password reset mail when plain text is interpreted as HTML: https://wordpress.org/support/topic/password-recover-link/
-
 
 
 = 2.9.1.4 =
