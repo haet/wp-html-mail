@@ -604,16 +604,25 @@ final class Haet_Mail {
 	}
 
 
-	public function get_template($options){
-		$template=$this->load_template_file('default');
+
+	private function get_header( $options ){
+		$headerimg_placement = $options['headerimg_placement'];
+		if( !$headerimg_placement ) 
+			$headerimg_placement = 'replace_text';
+
 		$headertext_field_key = $this->multilanguage->get_translateable_theme_options_key( $options, 'headertext' );
-		$options['headertext'] = $options[$headertext_field_key];
+		$headertext = $options[$headertext_field_key];
 
 		$headerimg_field_key = $this->multilanguage->get_translateable_theme_options_key( $options, 'headerimg' );
-		if(isset($options[$headerimg_field_key]) && strlen($options[$headerimg_field_key])>5 ){
+
+		if( $headerimg_placement != 'just_text' 
+			&& isset($options[$headerimg_field_key]) 
+			&& strlen($options[$headerimg_field_key])>5 ){
+
 			$width = isset($options['headerimg_width']) && intval( $options['headerimg_width'] ) ? $options['headerimg_width'] : 0;
 			$height = isset($options['headerimg_height']) && intval( $options['headerimg_height'] ) ? $options['headerimg_height'] : 0;
-			$options['headertext'] = '<img class="header-image' . ($width>580?' full-width-header-image':'').'" 
+			$alt_text = ( $headerimg_placement == 'replace_text' ? $headertext : '' );
+			$headerimg = '<img class="header-image' . ($width>580?' full-width-header-image':'').'" 
 										src="'.$options[$headerimg_field_key].'" 
 										style="'.
 											( $width ?'width:' . $width . 'px; ' : '' ) .
@@ -622,12 +631,104 @@ final class Haet_Mail {
 										( $width ? ' width="' . $width . '" ' : '' ) .
 										( $height ? ' height="' . $height . '" ' : '' ) .
 										'
-										alt="'.$options['headertext'].'">';
-		}
-		if( apply_filters( 'haet_mail_link_header', true ) )
-			$options['headertext'] = '<a href="' . get_home_url() . '">' . $options['headertext'] . '</a>';
+										alt="'.$alt_text.'">';
 
-		$options['headertext'] = apply_filters( 'haet_mail_header', $options['headertext'] );
+			if( !$options['headerimg_align'] )
+				$options['headerimg_align'] = $options['headeralign'];
+			if( !$options['header_spacer'] )
+				$options['header_spacer'] = 10;
+		}else{
+			$headerimg_placement = 'just_text';
+		}
+
+		switch( $headerimg_placement ){
+			case 'just_text':
+				$header = $headertext;
+				break;
+			case 'replace_text':
+				ob_start();
+				?>
+				<table width="100%" cellpadding="0" cellspacing="0">
+					<tr>
+						<td 
+							class="header-image" 
+							align="<?php echo $options['headerimg_align']; ?>" 
+							style="text-align: <?php echo $options['headerimg_align']; ?>;">
+							<?php echo $headerimg; ?>
+						</td>
+					<tr>
+				</table>
+				<?php
+				$header = ob_get_clean();
+				break;
+			case 'above_text':
+				ob_start();
+				?>
+				<table width="100%" cellpadding="0" cellspacing="0">
+					<tr>
+						<td 
+							class="header-image" 
+							align="<?php echo $options['headerimg_align']; ?>" 
+							style="
+								text-align: <?php echo $options['headerimg_align']; ?>; 
+								padding-bottom: <?php echo $options['header_spacer']; ?>px; 
+								">
+							<?php echo $headerimg; ?>
+						</td>
+					<tr>
+					<tr>
+						<td 
+							class="header-text"
+							align="<?php echo $options['headeralign']; ?>" 
+							style="text-align: <?php echo $options['headeralign']; ?>">
+							<?php echo $headertext; ?>
+						</td>
+					<tr>
+				</table>
+				<?php
+				$header = ob_get_clean();
+				break;
+			case 'below_text':
+				ob_start();
+				?>
+				<table width="100%" cellpadding="0" cellspacing="0">
+					<tr>
+						<td 
+							class="header-text"
+							align="<?php echo $options['headeralign']; ?>" 
+							style="text-align: <?php echo $options['headeralign']; ?>">
+							<?php echo $headertext; ?>
+						</td>
+					<tr>
+					<tr>
+						<td 
+							class="header-image" 
+							align="<?php echo $options['headerimg_align']; ?>" 
+							style="
+								text-align: <?php echo $options['headerimg_align']; ?>; 
+								padding-top: <?php echo $options['header_spacer']; ?>px; 
+								">
+							<?php echo $headerimg; ?>
+						</td>
+					<tr>
+				</table>
+				<?php
+				$header = ob_get_clean();
+				break;
+		}
+
+		if( apply_filters( 'haet_mail_link_header', true ) )
+			$header = '<a href="' . get_home_url() . '">' . $header . '</a>';
+
+		return $header;
+	}
+
+
+
+	public function get_template($options){
+		$template=$this->load_template_file('default');
+		
+		$options['headertext'] = apply_filters( 'haet_mail_header', $this->get_header( $options ) );
 
 		if( !$options['headerbackground'] )
 			$options['headerbackground'] = 'transparent';

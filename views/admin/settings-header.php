@@ -3,13 +3,34 @@
     <div style="" class="inside">
         <table class="form-table">
             <tbody>
+                
+                <tr valign="top">
+                    <th scope="row"><label for="haet_mailheaderimg_placement"><?php _e('Image and text placement','wp-html-mail'); ?></label></th>
+                    <td>
+                        <?php 
+                        $placement_options = [
+                                'just_text'     =>  __('Show just a text header','wp-html-mail'),
+                                'replace_text'  =>  __('Show image only (use text as alt attribute)','wp-html-mail'),
+                                'above_text'    =>  __('Show image above text','wp-html-mail'),
+                                'below_text'    =>  __('Show image below text','wp-html-mail'),
+                            ];
+                        ?>
+                        <select id="haet_mailheaderimg_placement" name="haet_mail_theme[headerimg_placement]">
+                            <?php foreach ( $placement_options as $key => $label ) :?>
+                                <option value="<?php echo $key; ?>" <?php echo ($theme_options['headerimg_placement']==$key?'selected':''); ?>>
+                                    <?php echo $label; ?>
+                                </option>        
+                            <?php endforeach; ?>
+                        </select>
+                    </td>
+                </tr>
                 <tr valign="top">
                     <th scope="row"><label for="haet_mailheaderbackground"><?php _e('Background color','wp-html-mail'); ?></label></th>
                     <td>
                         <input type="text" class="color" id="haet_mailheaderbackground" name="haet_mail_theme[headerbackground]" value="<?php echo $theme_options['headerbackground']; ?>">
                     </td>
                 </tr>
-                <tr>
+                <tr class="collapse-headerimg">
                     <th scope="row">
                         <label for="haet_mailheaderimg"><?php _e('Header image','wp-html-mail'); ?></label>
                     </th>
@@ -25,9 +46,23 @@
                             <input type="checkbox" id="haet_mail_headerimg_advanced" class="haet-toggle" value="1">
                             <label for="haet_mail_headerimg_advanced"><span class="dashicons dashicons-admin-generic"></span></label>
                             <div class="collapse-headerimg_advanced">
-                                <label for="haet_mailheaderimg_width"><?php _e('width','wp-html-mail'); ?></label><input id="haet_mailheaderimg_width" name="haet_mail_theme[headerimg_width]" type="number" value="<?php echo $theme_options['headerimg_width']; ?>"/>px
-                                <label for="haet_mailheaderimg_height"><?php _e('height','wp-html-mail'); ?></label><input id="haet_mailheaderimg_height" name="haet_mail_theme[headerimg_height]" type="number" value="<?php echo $theme_options['headerimg_height']; ?>"/>px
+                                <label for="haet_mailheaderimg_width"><?php _e('width','wp-html-mail'); ?></label>
+                                <input id="haet_mailheaderimg_width" name="haet_mail_theme[headerimg_width]" type="number" value="<?php echo $theme_options['headerimg_width']; ?>"/>px
+                                <label for="haet_mailheaderimg_height"><?php _e('height','wp-html-mail'); ?></label>
+                                <input id="haet_mailheaderimg_height" name="haet_mail_theme[headerimg_height]" type="number" value="<?php echo $theme_options['headerimg_height']; ?>"/>px
                                 <span class="dashicons dashicons-editor-help haet-mail-info-icon" data-tooltip="<?php esc_attr_e( 'If you would like to provide the header image in retina quality, upload an image with a higher resultion, such as for example 1200px x 400px and enter only half the size values in the input fields on the left (600 x 200).','wp-html-mail' ); ?>"></span>
+
+                                <span class="headerimg-align">
+                                    <?php _e('align','wp-html-mail'); ?>
+                                    <input type="radio" name="haet_mail_theme[headerimg_align]" class="haet-toggle" id="haet_mailheaderimg_align_left" value="left" <?php echo ($theme_options['headerimg_align']=="left"?"checked":""); ?>>
+                                    <label for="haet_mailheaderimg_align_left"><span class="dashicons dashicons-arrow-left"></span></label>
+
+                                    <input type="radio" name="haet_mail_theme[headerimg_align]" class="haet-toggle" id="haet_mailheaderimg_align_center" value="center" <?php echo ($theme_options['headerimg_align']=="center"?"checked":""); ?>>
+                                    <label for="haet_mailheaderimg_align_center"><span class="dashicons dashicons-leftright"></span></label>
+
+                                    <input type="radio" name="haet_mail_theme[headerimg_align]" class="haet-toggle" id="haet_mailheaderimg_align_right" value="right" <?php echo ($theme_options['headerimg_align']=="right"?"checked":""); ?>>
+                                    <label for="haet_mailheaderimg_align_right"><span class="dashicons dashicons-arrow-right"></span></label>
+                                </span>
                             </div>
                             <?php if( $this->multilanguage->is_multilanguage_site() ): ?>
                             <input type="hidden" name="haet_mail_theme[headerimg_enable_translation]" value="0">

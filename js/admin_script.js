@@ -1,13 +1,10 @@
 var haet_mail = haet_mail || {};
 
-haet_mail.previewMail = function(template_code) {
+haet_mail.previewMail = function (template_code) {
 	var $ = jQuery;
 	if (!$("#mailtemplatepreview").length) return;
 
-	$("#mailtemplatepreview")
-		.contents()
-		.find("html")
-		.html(template_code);
+	$("#mailtemplatepreview").contents().find("html").html(template_code);
 
 	var iframe = document.getElementById("mailtemplatepreview");
 	iframe = iframe.contentWindow
@@ -20,18 +17,18 @@ haet_mail.previewMail = function(template_code) {
 	iframe.document.close();
 };
 
-haet_mail.ajaxSave = function() {
+haet_mail.ajaxSave = function () {
 	var $ = jQuery;
 	$.post(
 		$("#haet_mail_form").attr("action"),
 		$("#haet_mail_form").serialize(),
-		function(data) {
+		function (data) {
 			haet_mail.previewMail($("#haet_mailtemplate", data).val());
 		}
 	);
 };
 
-haet_mail.createCustomTemplate = function() {
+haet_mail.createCustomTemplate = function () {
 	var $ = jQuery;
 	$('input[name="haet_mail_create_template"]').val(1);
 	haet_mail.ajaxSave();
@@ -42,11 +39,11 @@ haet_mail.createCustomTemplate = function() {
 		buttons: [
 			{
 				text: "OK",
-				click: function() {
+				click: function () {
 					$(this).dialog("close");
-				}
-			}
-		]
+				},
+			},
+		],
 	});
 };
 
@@ -56,7 +53,7 @@ haet_mail.createCustomTemplate = function() {
  *   mails or create each email
  *   individually
  * ***********************************/
-haet_mail.switch_edit_mode = function() {
+haet_mail.switch_edit_mode = function () {
 	var $ = jQuery;
 	if (
 		$(
@@ -73,30 +70,42 @@ haet_mail.switch_edit_mode = function() {
 	}
 };
 
-jQuery(document).ready(function($) {
-	$("input,textarea,select").change(function() {
+haet_mail.maybe_hide_headerimage_fields = function () {
+	var $ = jQuery;
+	$(".collapse-headerimg").toggle(
+		$("#haet_mailheaderimg_placement").val() != "just_text"
+	);
+};
+
+jQuery(document).ready(function ($) {
+	$("input,textarea,select").change(function () {
 		haet_mail.ajaxSave();
+	});
+
+	haet_mail.maybe_hide_headerimage_fields();
+	$("#haet_mailheaderimg_placement").change(function () {
+		haet_mail.maybe_hide_headerimage_fields();
 	});
 
 	haet_mail.switch_edit_mode();
 	$("input[name='haet_mail_plugins[woocommerce][edit_mode]']").change(
-		function() {
+		function () {
 			haet_mail.switch_edit_mode();
 		}
 	);
 
 	var self = this;
 	$("input.color").wpColorPicker({
-		change: function(event) {
-			window.setTimeout(function() {
+		change: function (event) {
+			window.setTimeout(function () {
 				haet_mail.ajaxSave();
 			}, 50);
-		}
+		},
 	});
 
 	// Uploading files
 	var file_frame;
-	$(".upload_image_button").live("click", function(event) {
+	$(".upload_image_button").live("click", function (event) {
 		event.preventDefault();
 		// If the media frame already exists, reopen it.
 		if (file_frame) {
@@ -107,18 +116,14 @@ jQuery(document).ready(function($) {
 		file_frame = wp.media.frames.file_frame = wp.media({
 			title: jQuery(this).data("uploader_title"),
 			button: {
-				text: jQuery(this).data("uploader_button_text")
+				text: jQuery(this).data("uploader_button_text"),
 			},
-			multiple: false // Set to true to allow multiple files to be selected
+			multiple: false, // Set to true to allow multiple files to be selected
 		});
 		// When an image is selected, run a callback.
-		file_frame.on("select", function() {
+		file_frame.on("select", function () {
 			// We set multiple to false so only get one image from the uploader
-			attachment = file_frame
-				.state()
-				.get("selection")
-				.first()
-				.toJSON();
+			attachment = file_frame.state().get("selection").first().toJSON();
 			// Do something with attachment.id and/or attachment.url here
 			$("#haet_mailheaderimg").val(attachment.url);
 			$("#haet_mailheaderimg_width").val(attachment.width);
@@ -129,29 +134,29 @@ jQuery(document).ready(function($) {
 		file_frame.open();
 	});
 
-	$("#haet_mail_test_submit").click(function() {
+	$("#haet_mail_test_submit").click(function () {
 		var email = $("#haet_mail_test_address").val();
 		$.post(
 			ajaxurl,
 			{ action: "haet_mail_send_test", email: email },
-			function(response) {
+			function (response) {
 				$("#haet_mail_test_sent").dialog({
 					dialogClass: "no-close",
 					modal: true,
 					buttons: [
 						{
 							text: "OK",
-							click: function() {
+							click: function () {
 								$(this).dialog("close");
-							}
-						}
-					]
+							},
+						},
+					],
 				});
 			}
 		);
 	});
 
-	$("#haet_mail_create_template_button").click(function() {
+	$("#haet_mail_create_template_button").click(function () {
 		if (
 			!$(this).hasClass("button-disabled") &&
 			confirm($(this).data("haet-confirm"))
@@ -161,28 +166,29 @@ jQuery(document).ready(function($) {
 	});
 	haet_mail.previewMail($("#haet_mailtemplate").val());
 
-	$("a[data-haet-confirm]").click(function(e) {
+	$("a[data-haet-confirm]").click(function (e) {
 		return confirm($(this).data("haet-confirm"));
 	});
 
 	/*************************************
 	 * ENABLE/DISABLE Field Translation
 	 * ***********************************/
-	$("#haet_mail_form input[id$='_enable_translation']").on("change", function(
-		e
-	) {
-		$("#haet_mail_enable_translation_dialog").dialog({
-			dialogClass: "no-close",
-			modal: true,
-			buttons: []
-		});
-		$("#haet_mail_form input[name='update_haet_mailSettings']").click();
-	});
+	$("#haet_mail_form input[id$='_enable_translation']").on(
+		"change",
+		function (e) {
+			$("#haet_mail_enable_translation_dialog").dialog({
+				dialogClass: "no-close",
+				modal: true,
+				buttons: [],
+			});
+			$("#haet_mail_form input[name='update_haet_mailSettings']").click();
+		}
+	);
 
 	/*************************************
 	 * MOBILE PREVIEW
 	 * ***********************************/
-	$(".haet-mail-preview-size-button").click(function() {
+	$(".haet-mail-preview-size-button").click(function () {
 		var $button = $(this);
 		$button
 			.addClass("nav-tab-active")
@@ -197,7 +203,7 @@ jQuery(document).ready(function($) {
 	/*************************************
 	 * TEMPLATE LIBRARY
 	 * ***********************************/
-	$(".haet-mail-template").on("click", function(e) {
+	$(".haet-mail-template").on("click", function (e) {
 		e.preventDefault();
 		var $link = $(this);
 		$("#haet_mail_template_preview_dialog .screenshot").attr(
@@ -222,7 +228,7 @@ jQuery(document).ready(function($) {
 					text: $("#haet_mail_template_preview_dialog").data(
 						"button-caption"
 					),
-					click: function() {
+					click: function () {
 						$(
 							'#haet_mail_import_form input[name="haet_mail_import_template_url"]'
 						).val($link.data("config"));
@@ -232,22 +238,22 @@ jQuery(document).ready(function($) {
 						$("#haet_mail_template_importing_dialog").dialog({
 							dialogClass: "no-close",
 							modal: true,
-							buttons: []
+							buttons: [],
 						});
-					}
-				}
-			]
+					},
+				},
+			],
 		});
 	});
 
 	/*************************************
 	 * INFO ICONS
 	 * ***********************************/
-	$(".haet-mail-info-icon").on("click", function(e) {
+	$(".haet-mail-info-icon").on("click", function (e) {
 		e.preventDefault();
 		$(this)
 			.pointer({
-				content: "<p>" + $(this).data("tooltip") + "</p>"
+				content: "<p>" + $(this).data("tooltip") + "</p>",
 			})
 			.pointer("open");
 	});
@@ -255,21 +261,17 @@ jQuery(document).ready(function($) {
 	/*************************************
 	 * IMPORT EXPORT
 	 * ***********************************/
-	$(".haet-mail-toggle-export-button").on("click", function() {
-		$(this)
-			.siblings(".haet-mail-toggle-export")
-			.addClass("toggle-active");
+	$(".haet-mail-toggle-export-button").on("click", function () {
+		$(this).siblings(".haet-mail-toggle-export").addClass("toggle-active");
 		$(this).remove();
 		$(".haet-mail-toggle-import-button").remove();
 	});
 
-	$(".haet-mail-toggle-import-button").on("click", function() {
-		$(this)
-			.siblings(".haet-mail-toggle-import")
-			.addClass("toggle-active");
+	$(".haet-mail-toggle-import-button").on("click", function () {
+		$(this).siblings(".haet-mail-toggle-import").addClass("toggle-active");
 		$(this).remove();
 		$(".haet-mail-toggle-export-button").remove();
-		$(".haet-mail-import-start").on("click", function() {
+		$(".haet-mail-import-start").on("click", function () {
 			$("#haet_mail_enable_import_theme_options").val(1);
 			$("#haet_mail_form input[name='update_haet_mailSettings']").click();
 		});
@@ -279,7 +281,7 @@ jQuery(document).ready(function($) {
 	 * SURVEY
 	 * ***********************************/
 	$(".haet-star-rating a")
-		.mouseenter(function() {
+		.mouseenter(function () {
 			var $current_star = $(this);
 			$current_star
 				.removeClass("dashicons-star-empty")
@@ -289,10 +291,8 @@ jQuery(document).ready(function($) {
 				.removeClass("dashicons-star-empty")
 				.addClass("dashicons-star-filled");
 		})
-		.mouseleave(function() {
-			var current_rating = $(this)
-				.siblings("input")
-				.val();
+		.mouseleave(function () {
+			var current_rating = $(this).siblings("input").val();
 			if (current_rating == 0)
 				$(this)
 					.parent()
@@ -316,13 +316,11 @@ jQuery(document).ready(function($) {
 					.addClass("dashicons-star-empty");
 			}
 		})
-		.click(function(e) {
+		.click(function (e) {
 			if ($(this).parents(".update-nag").length) return true;
 			e.preventDefault();
 			var $current_star = $(this);
-			$(this)
-				.siblings("input")
-				.val($current_star.data("rating"));
+			$(this).siblings("input").val($current_star.data("rating"));
 			$current_star
 				.removeClass("dashicons-star-empty")
 				.addClass("dashicons-star-filled");
