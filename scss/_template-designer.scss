@@ -1,0 +1,59 @@
+#wp-html-mail-template-designer {
+	display: flex;
+
+	.mail-optionspanel {
+		width: 300px;
+
+		.components-panel__header {
+			background-color: #f3f4f5;
+		}
+
+		.components-range-control {
+			width: 100%;
+		}
+
+		.components-color-picker {
+			.components-base-control__label,
+			.components-visually-hidden {
+				display: none;
+			}
+		}
+	}
+
+	.mail-container {
+		width: calc(100% - 300px);
+		min-width: 700px;
+		min-height: 300px;
+
+		.mail-content-wrap {
+			width: 600px;
+			margin: 10px auto;
+		}
+	}
+
+	.editable-element {
+		cursor: pointer;
+		position: relative;
+
+		.edit-frame-default,
+		.edit-frame-hover,
+		.edit-frame-active {
+			position: absolute;
+			width: calc(100% + 6px);
+			height: calc(100% + 6px);
+			left: -4px;
+			top: -4px;
+			border: 1px dashed rgba(0, 0, 0, 0);
+			transition: all 0.5s ease-out;
+			pointer-events: none;
+
+			&.edit-frame-hover {
+				border-color: rgba(0, 0, 0, 0.2);
+			}
+
+			&.edit-frame-active {
+				border-color: #0071a1;
+			}
+		}
+	}
+}

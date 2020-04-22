@@ -54,6 +54,9 @@ if( !isset( $options['survey2020_completed'] ) && !isset( $options['survey2020_d
 		case 'footer':
 			include('settings-footer.php');
 			break;
+		case 'template':
+			include('settings-template.php');
+			break;
 		case 'plugins':
 			include('settings-plugins.php');
 			break;

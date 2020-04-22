@@ -1,12 +1,14 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 require HAET_MAIL_PATH . 'includes/class-multilanguage.php';
+require HAET_MAIL_PATH . 'includes/class-template-designer.php';
 require HAET_MAIL_PATH . 'includes/class-template-library.php';
 
 final class Haet_Mail {
 	
 	private static $instance;
 	private $multilanguage;
+	private $templatedesigner;
 	
 	public static function instance(){
 		if (!isset(self::$instance) && !(self::$instance instanceof Haet_Mail)) {
@@ -19,6 +21,7 @@ final class Haet_Mail {
 
 	function __construct(){
 		$this->multilanguage = new Haet_Multilanguage();
+		$this->templatedesigner = new Haet_TemplateDesigner();
 		add_action( 'plugins_loaded', 'Haet_Sender_Plugin::hook_plugins', 30 );
 
 		add_action( 'admin_notices', array( $this, 'maybe_show_testmode_warning' ) );
