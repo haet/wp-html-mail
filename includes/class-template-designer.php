@@ -11,11 +11,7 @@ class Haet_TemplateDesigner {
 	
 	
 	public function admin_page_scripts_and_styles($page){
-		if(strpos($page, 'wp-html-mail')){
-			//wp_enqueue_style( 'wp-color-picker' );
-			wp_enqueue_script('haet_mail_admin_script',  HAET_MAIL_URL.'/js/admin_script.js', array( 'wp-color-picker','jquery-ui-dialog','wp-pointer','jquery'));
-			//wp_enqueue_style('haet_mail_admin_style',  HAET_MAIL_URL.'/css/style.css');
-			//wp_enqueue_style (  'wp-jquery-ui-dialog');
+		if(strpos($page, 'wp-html-mail') && ( !$_GET['tab'] || $_GET['tab'] =="template" ) ){
 			
 			// style out options panel like the block editor
 			wp_enqueue_style( 'wp-editor' );
@@ -25,12 +21,15 @@ class Haet_TemplateDesigner {
 			wp_enqueue_style( 'wp-components' );
 			wp_enqueue_style( 'forms' );
 
-			wp_enqueue_script('wp-html-mail-template-designer',  HAET_MAIL_URL.'/js/template-designer/dist/bundle.js', array( 'wp-color-picker','wp-pointer', 'wp-element', 'jquery'));
+			wp_enqueue_script('wp-html-mail-template-designer',  HAET_MAIL_URL.'/js/template-designer/' . ( $this->isScriptDebug() ? 'dev' : 'dist' ) . '/main.js', array( 'wp-color-picker','wp-pointer', 'wp-element', 'jquery'));
 			wp_localize_script('wp-html-mail-template-designer', 'mailTemplateDesigner', [
 				'restUrl' => $this->getRestUrl(),
-				'nonce' => wp_create_nonce( 'wp_rest' )
+				'nonce' => wp_create_nonce( 'wp_rest' ),
+				'fonts' => $this->getAvailableFonts(),
+				'templateLibraryUrl' => Haet_Mail()->get_tab_url('template-library')
 			]);
 			wp_enqueue_media();
+			wp_enqueue_editor();
 		} 
 	}
 
@@ -42,10 +41,10 @@ class Haet_TemplateDesigner {
             'callback' => [ $this, 'getThemeSettings' ]
 		));
 		
-		register_rest_route( $this->api_base, '/fonts', array(
-            'methods' => 'GET',
-            'callback' => [ $this, 'getAvailableFonts' ]
-        ));
+		register_rest_route( $this->api_base, '/themesettings', array(
+            'methods' => 'POST',
+            'callback' => [ $this, 'saveThemeSettings' ]
+		));
 	}
 
 
@@ -54,15 +53,37 @@ class Haet_TemplateDesigner {
         return new \WP_REST_Response( $theme_options );
 	}
 	
+	public function saveThemeSettings( $request ){
+		if( $request->get_params() ){
+			$theme_options = $request->get_params();
+			update_option('haet_mail_theme_options', $theme_options);
+		}
+		
+		$preview = Haet_Mail()->get_preview( Haet_Sender_Plugin::get_active_plugins(), 'template', $theme_options );
+		return new \WP_REST_Response( ['preview' => $preview] );
+	}
 
-	public function getAvailableFonts(){
-        return new \WP_REST_Response( Haet_Mail()->get_fonts() );
+	private function getAvailableFonts(){
+		$fonts = Haet_Mail()->get_fonts();
+		$fonts_select_options = [];
+		foreach( $fonts as $value => $label ){
+			$fonts_select_options[] = [
+				'value'	=> $value,
+				'label' => $label
+			];
+		}
+        return $fonts_select_options;
 	}
 
 
 
 	private function getRestUrl( $endpoint = '' ) {
         return site_url(rest_get_url_prefix()) . '/' . $this->api_base . '/' . $endpoint;
+	}
+	
+
+	public function isScriptDebug() {
+        return defined('SCRIPT_DEBUG') && SCRIPT_DEBUG === true;
     }
 }
 

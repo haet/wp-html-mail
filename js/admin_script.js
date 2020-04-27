@@ -1,9 +1,14 @@
 var haet_mail = haet_mail || {};
 
+/**
+ * this function is also used by our new template builder
+ */
 haet_mail.previewMail = function (template_code) {
 	var $ = jQuery;
 	if (!$("#mailtemplatepreview").length) return;
-
+	$("#mailtemplatepreview").animate({ opacity: 0.3 }, 500, function () {
+		$("#mailtemplatepreview").animate({ opacity: 1.0 }, 500);
+	});
 	$("#mailtemplatepreview").contents().find("html").html(template_code);
 
 	var iframe = document.getElementById("mailtemplatepreview");

@@ -1,427 +1,399 @@
 @import "template-designer";
 
 .clearfix {
-    zoom: 1
+	zoom: 1;
 }
 
 .clearfix:before,
 .clearfix:after {
-    content: "";
-    display: table
+	content: "";
+	display: table;
 }
 
 .clearfix:after {
-    clear: both
+	clear: both;
 }
 
 #haet_mail_form {
-    .wp-picker-container {
-        line-height: 25px;
-        display: inline-block !important;
-        width: auto;
+	.wp-picker-container {
+		line-height: 25px;
+		display: inline-block !important;
+		width: auto;
 
-        a {
-            margin-right: 0;
-        }
-    }
+		a {
+			margin-right: 0;
+		}
+	}
 
-    .wp-color-result {
-        margin-bottom: 0;
-    }
+	.wp-color-result {
+		margin-bottom: 0;
+	}
 
-    .postbox .hndle,
-    .haet-mail-send-test .hndle {
-        padding-left: 10px;
-        cursor: text;
-    }
+	.postbox .hndle,
+	.haet-mail-send-test .hndle {
+		padding-left: 10px;
+		cursor: text;
+	}
 
-    .form-table th,
-    .form-table td {
-        padding-top: 8px;
-        padding-bottom: 8px;
-    }
+	.form-table th,
+	.form-table td {
+		padding-top: 8px;
+		padding-bottom: 8px;
+	}
 
-    .border-choice-label {
-        display: inline-block;
-        font-size: 8px;
-        line-height: 10px;
-        margin-right: 20px;
-    }
+	.border-choice-label {
+		display: inline-block;
+		font-size: 8px;
+		line-height: 10px;
+		margin-right: 20px;
+	}
 
-    .border-choice {
-        width: 16px;
-        height: 16px;
-        border: none;
-        border-collapse: collapse;
-        display: inline-table;
-        vertical-align: 1px;
-    }
+	.border-choice {
+		width: 16px;
+		height: 16px;
+		border: none;
+		border-collapse: collapse;
+		display: inline-table;
+		vertical-align: 1px;
+	}
 
-    .border-choice td {
-        width: 8px;
-        height: 7px;
-        font-size: 0px;
-        line-height: 0px;
-        border: 1px dotted #999;
-        padding: 0;
-    }
+	.border-choice td {
+		width: 8px;
+		height: 7px;
+		font-size: 0px;
+		line-height: 0px;
+		border: 1px dotted #999;
+		padding: 0;
+	}
 
-    /* outer vertical */
-    .border-choice.border-choice-outer-v td:first-child {
-        border-left: solid 2px #000 !important;
-    }
+	/* outer vertical */
+	.border-choice.border-choice-outer-v td:first-child {
+		border-left: solid 2px #000 !important;
+	}
 
-    .border-choice.border-choice-outer-v td:last-child {
-        border-right: solid 2px #000;
-    }
+	.border-choice.border-choice-outer-v td:last-child {
+		border-right: solid 2px #000;
+	}
 
-    /* inner vertical */
-    .border-choice.border-choice-inner-v td:last-child {
-        border-left: solid 2px #000;
-    }
+	/* inner vertical */
+	.border-choice.border-choice-inner-v td:last-child {
+		border-left: solid 2px #000;
+	}
 
+	/* outer horizontal */
+	.border-choice.border-choice-outer-h tr:first-child td {
+		border-top: solid 2px #000 !important;
+	}
 
-    /* outer horizontal */
-    .border-choice.border-choice-outer-h tr:first-child td {
-        border-top: solid 2px #000 !important;
-    }
+	.border-choice.border-choice-outer-h tr:last-child td {
+		border-bottom: solid 2px #000;
+	}
 
-    .border-choice.border-choice-outer-h tr:last-child td {
-        border-bottom: solid 2px #000;
-    }
+	/* inner horizontal */
+	.border-choice.border-choice-inner-h tr:last-child td {
+		border-top: solid 2px #000;
+	}
 
-    /* inner horizontal */
-    .border-choice.border-choice-inner-h tr:last-child td {
-        border-top: solid 2px #000;
-    }
+	/* top */
+	.border-choice.border-choice-top tr:first-child td {
+		border-top: solid 2px #000;
+	}
 
-    /* top */
-    .border-choice.border-choice-top tr:first-child td {
-        border-top: solid 2px #000;
-    }
+	/* bottom */
+	.border-choice.border-choice-bottom tr:last-child td {
+		border-bottom: solid 2px #000;
+	}
 
-    /* bottom */
-    .border-choice.border-choice-bottom tr:last-child td {
-        border-bottom: solid 2px #000;
-    }
+	input[type="number"] {
+		width: 50px;
+	}
 
+	.collapse-testmode,
+	.collapse-headerimg_advanced {
+		display: none;
+	}
 
-    input[type="number"] {
-        width: 50px;
-    }
-
-    .collapse-testmode,
-    .collapse-headerimg_advanced {
-        display: none;
-    }
-
-    #haet_mail_testmode:checked+label+.collapse-testmode,
-    #haet_mail_headerimg_advanced:checked+label+.collapse-headerimg_advanced {
-        display: block;
-    }
+	#haet_mail_testmode:checked + label + .collapse-testmode,
+	#haet_mail_headerimg_advanced:checked
+		+ label
+		+ .collapse-headerimg_advanced {
+		display: block;
+	}
 }
 
 .haet-mail-info-icon {
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .haet-font-toolbar {
-    select {
-        height: 25px;
-    }
+	select {
+		height: 25px;
+	}
 }
 
+#haet_mail_form input[type="checkbox"].haet-toggle,
+#haet_mail_form input[type="radio"].haet-toggle {
+	display: none;
 
-#haet_mail_form input[type=checkbox].haet-toggle,
-#haet_mail_form input[type=radio].haet-toggle {
-    display: none;
+	& + label {
+		display: inline-block;
+		text-align: center;
+		height: 28px;
+		width: 28px;
+		background-color: #f7f7f7;
+		border: 1px solid #ccc;
+		-webkit-border-radius: 3px;
+		border-radius: 3px;
+		-webkit-box-shadow: 0 1px 0 #ccc;
+		box-shadow: 0 1px 0 #ccc;
 
-    &+label {
-        display: inline-block;
-        text-align: center;
-        height: 28px;
-        width: 28px;
-        background-color: #f7f7f7;
-        border: 1px solid #ccc;
-        -webkit-border-radius: 3px;
-        border-radius: 3px;
-        -webkit-box-shadow: 0 1px 0 #ccc;
-        box-shadow: 0 1px 0 #ccc;
+		.dashicons {
+			font-size: 19px;
+			line-height: 1.5;
+		}
 
-        .dashicons {
-            font-size: 19px;
-            line-height: 1.5;
-        }
+		&.border-choice-label {
+			margin-right: 0;
+		}
+	}
 
-        &.border-choice-label {
-            margin-right: 0;
-        }
-    }
+	&:checked + label {
+		background-color: #dddddd;
+		-webkit-box-shadow: 0 2px 0 #ccc inset;
+		box-shadow: 0 2px 0 #ccc inset;
 
-    &:checked+label {
-        background-color: #dddddd;
-        -webkit-box-shadow: 0 2px 0 #ccc inset;
-        box-shadow: 0 2px 0 #ccc inset;
-
-        .dashicons {
-            line-height: 1.45;
-        }
-    }
+		.dashicons {
+			line-height: 1.45;
+		}
+	}
 }
 
 /****************************************
 *   HEADER
 ****************************************/
 #haet_mailheaderimg {
-    width: 380px;
-    max-width: 90%;
+	width: 380px;
+	max-width: 90%;
 }
 
 label[for="haet_mail_headerimg_advanced"] {
-    vertical-align: 5px;
+	vertical-align: 5px;
 }
 
 .collapse-headerimg_advanced {
-    margin-top: 5px;
+	margin-top: 5px;
 
-    input#haet_mailheaderimg_width,
-    input#haet_mailheaderimg_height {
-        width: 60px;
-        margin: 0 5px;
-        text-align: right;
-    }
+	input#haet_mailheaderimg_width,
+	input#haet_mailheaderimg_height {
+		width: 60px;
+		margin: 0 5px;
+		text-align: right;
+	}
 
-    label {
-        margin-left: 20px;
+	label {
+		margin-left: 20px;
 
-        &:first-child {
-            margin-left: 0;
-        }
-    }
+		&:first-child {
+			margin-left: 0;
+		}
+	}
 }
 
 .haet-mail-send-test {
-    max-width: 800px;
+	max-width: 800px;
 }
 
 .haet-mail-dialog {
-    display: none;
+	display: none;
 }
 
 .customize-email-content-selection {
-    a {
-        text-decoration: none;
-    }
+	a {
+		text-decoration: none;
+	}
 }
 
 /****************************************
 *   SEND PREVIEW
 ****************************************/
 .haet-mail-send-preview {
-    border: 1px solid #ccc;
-    margin-bottom: 3px;
-    display: inline-block;
-    margin-left: 100px;
-    padding-left: 10px;
+	border: 1px solid #ccc;
+	margin-bottom: 3px;
+	display: inline-block;
+	margin-left: 100px;
+	padding-left: 10px;
 
-    input {
-        background: transparent;
-        border-radius: 0;
-        border: none;
-        border-bottom: 1px dashed #0071a1;
-        margin-left: 5px;
-        margin-right: 5px;
-    }
+	input {
+		background: transparent;
+		border-radius: 0;
+		border: none;
+		border-bottom: 1px dashed #0071a1;
+		margin-left: 5px;
+		margin-right: 5px;
+	}
 
-    button {
-        background: transparent;
-        border: none;
-        color: #0071a1;
-        text-shadow: 0 0 3px rgba(0, 0, 0, 0.0);
-        transition: all 0.4s ease-out;
+	button {
+		background: transparent;
+		border: none;
+		color: #0071a1;
+		text-shadow: 0 0 3px rgba(0, 0, 0, 0);
+		transition: all 0.4s ease-out;
 
-
-        &:hover {
-            text-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
-            color: #000;
-        }
-    }
+		&:hover {
+			text-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+			color: #000;
+		}
+	}
 }
-
 
 /****************************************
 *   PLUGINS
 ****************************************/
 .haet-mail-plugin {
-    width: 350px;
-    margin: 20px;
-    float: left;
-    display: block;
-    height: 128px;
-    padding: 15px;
-    border: 1px solid #eee;
-    background: #f1f1f1;
+	width: 350px;
+	margin: 20px;
+	float: left;
+	display: block;
+	height: 128px;
+	padding: 15px;
+	border: 1px solid #eee;
+	background: #f1f1f1;
 }
 
 .haet-mail-plugin.not-installed img {
-    opacity: 0.5;
-    transition: opacity 0.4s;
+	opacity: 0.5;
+	transition: opacity 0.4s;
 }
 
 .haet-mail-plugin.not-installed:hover img {
-    opacity: 1.0;
+	opacity: 1;
 }
 
-
 .haet-mail-plugin .haet-mail-plugin-left {
-    width: 128px;
-    float: left;
+	width: 128px;
+	float: left;
 }
 
 .haet-mail-plugin .haet-mail-plugin-right {
-    margin-left: 10px;
-    width: 205px;
-    float: left;
+	margin-left: 10px;
+	width: 205px;
+	float: left;
 }
-
 
 /****************************************
 *   TEMPLATE LIBRARY
 ****************************************/
-.haet-mail-template-button-wrap {
-    text-align: right;
-    padding-right: 20px;
-    max-width: 800px;
-    padding-top: 20px;
-
-    .haet-mail-new-notice {
-        text-transform: uppercase;
-    }
-
-    .haet-mail-browse-templates {
-        text-transform: uppercase;
-
-        .dashicons {
-            vertical-align: -4px;
-        }
-    }
-}
 
 .haet-mail-template-list {
-    margin-top: 30px;
+	margin-top: 30px;
 
-    .haet-mail-template {
-        position: relative;
-        display: block;
-        width: 300px;
-        height: 250px;
-        margin-right: 40px;
-        margin-bottom: 40px;
-        float: left;
-        background-size: cover;
-        background-position: top center;
-        outline: 10px solid #FFF;
-        box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.4) inset;
+	.haet-mail-template {
+		position: relative;
+		display: block;
+		width: 300px;
+		height: 250px;
+		margin-right: 40px;
+		margin-bottom: 40px;
+		float: left;
+		background-size: cover;
+		background-position: top center;
+		outline: 10px solid #fff;
+		box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.4) inset;
 
-
-        .template-name {
-            position: absolute;
-            display: inline-block;
-            left: -1px;
-            bottom: -1px;
-            padding: 5px 10px;
-            background: #fff;
-            font-size: 13px;
-            text-transform: uppercase;
-            box-shadow: 2px -2px 3px rgba(0, 0, 0, 0.4);
-        }
-    }
+		.template-name {
+			position: absolute;
+			display: inline-block;
+			left: -1px;
+			bottom: -1px;
+			padding: 5px 10px;
+			background: #fff;
+			font-size: 13px;
+			text-transform: uppercase;
+			box-shadow: 2px -2px 3px rgba(0, 0, 0, 0.4);
+		}
+	}
 }
 
 #haet_mail_template_preview_dialog {
-    .screenshot {
-        width: 55%;
-        margin-right: 5%;
-        min-width: 300px;
-        float: left;
-        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
-    }
+	.screenshot {
+		width: 55%;
+		margin-right: 5%;
+		min-width: 300px;
+		float: left;
+		box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+	}
 
-    .template-description {
-        width: 40%;
-        float: left;
-        min-width: 200px;
-    }
+	.template-description {
+		width: 40%;
+		float: left;
+		min-width: 200px;
+	}
 }
-
 
 /****************************************
 *   ADVANCED
 ****************************************/
 .haet-mail-toggle-export,
 .haet-mail-toggle-import {
-    max-height: 0;
-    overflow: hidden;
-    transition: all 0.5s ease-out;
+	max-height: 0;
+	overflow: hidden;
+	transition: all 0.5s ease-out;
 
-    textarea {
-        width: 100%;
-        height: 200px;
-        font-family: 'Courier New', Courier, monospace;
-        font-size: 13px;
-    }
+	textarea {
+		width: 100%;
+		height: 200px;
+		font-family: "Courier New", Courier, monospace;
+		font-size: 13px;
+	}
 
-    &.toggle-active {
-        max-height: 500px;
-    }
+	&.toggle-active {
+		max-height: 500px;
+	}
 }
-
-
-
 
 /****************************************
 *   SURVEY
 ****************************************/
 .haet-survey-nag {
-    display: block;
+	display: block;
 
-    .haet-star-rating {
-        margin-left: 20px;
-        vertical-align: -6px;
-    }
+	.haet-star-rating {
+		margin-left: 20px;
+		vertical-align: -6px;
+	}
 }
 
 .haet-star-rating {
-    display: inline-block;
+	display: inline-block;
 
-    a {
-        display: inline-block;
-        padding: 2px;
-        float: left;
-    }
+	a {
+		display: inline-block;
+		padding: 2px;
+		float: left;
+	}
 }
 
 .haet-mail-survey {
-    .form-table th {
-        width: 460px;
-    }
+	.form-table th {
+		width: 460px;
+	}
 
-    textarea {
-        width: 400px;
-        height: 120px;
-    }
+	textarea {
+		width: 400px;
+		height: 120px;
+	}
 
-    .testimonial-inline-label {
-        display: inline-block;
-        width: 250px;
-    }
+	.testimonial-inline-label {
+		display: inline-block;
+		width: 250px;
+	}
 
-    .testimonial-inline-field {
-        display: inline-block;
-        width: 250px;
-    }
+	.testimonial-inline-field {
+		display: inline-block;
+		width: 250px;
+	}
 
-    .button-primary .dashicons {
-        vertical-align: -5px;
-    }
+	.button-primary .dashicons {
+		vertical-align: -5px;
+	}
 }

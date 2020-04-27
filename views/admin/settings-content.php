@@ -1,3 +1,9 @@
+<?php
+/**
+ * Design settings for email content
+ * has been replaced by the email designer in 3.0 and will be removed in a future version
+ */
+?>
 <div class="postbox">
     <h3 class="hndle"><span><?php _e('Content','wp-html-mail'); ?></span></h3>
     <div style="" class="inside">

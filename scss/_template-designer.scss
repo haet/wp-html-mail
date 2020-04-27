@@ -1,5 +1,18 @@
 #wp-html-mail-template-designer {
 	display: flex;
+	position: relative;
+	min-height: 600px;
+
+	.mail-loader {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	.components-notice {
+		margin: 0;
+	}
 
 	.mail-optionspanel {
 		width: 300px;
@@ -25,6 +38,11 @@
 		min-width: 700px;
 		min-height: 300px;
 
+		.save-button-pane {
+			margin-bottom: 20px;
+			justify-content: flex-end;
+		}
+
 		.mail-content-wrap {
 			width: 600px;
 			margin: 10px auto;
@@ -36,24 +54,127 @@
 		position: relative;
 
 		.edit-frame-default,
-		.edit-frame-hover,
 		.edit-frame-active {
 			position: absolute;
 			width: calc(100% + 6px);
 			height: calc(100% + 6px);
-			left: -4px;
+			left: -6px;
 			top: -4px;
-			border: 1px dashed rgba(0, 0, 0, 0);
+			border: 1px solid transparent;
+			border-left: 3px solid transparent;
 			transition: all 0.5s ease-out;
 			pointer-events: none;
 
-			&.edit-frame-hover {
-				border-color: rgba(0, 0, 0, 0.2);
+			.edit-frame-handle {
+				position: absolute;
+				top: -32px;
+				height: 20px;
+				left: -3px;
+				background: #fff;
+				border-top: 1px solid;
+				border-right: 1px solid;
+				border-left: 3px solid;
+				padding: 10px 40px 0px 20px;
+				pointer-events: all;
+				opacity: 0;
+				transition: all 0.5s ease-out;
+				font-size: 12px;
+				text-transform: uppercase;
+				z-index: 20;
+
+				.dashicon {
+					position: absolute;
+					right: 5px;
+					top: 5px;
+				}
+			}
+
+			&.frame-size-xs {
+				width: calc(100% - 4px);
+				height: calc(100% - 4px);
+				left: 0px;
+				top: 2px;
+			}
+
+			&.frame-size-s {
+				width: 100%;
+				height: 100%;
+				left: -2px;
+				top: 0;
+			}
+
+			&.handle-align-right {
+				border-left-width: 1px;
+				border-right-width: 3px;
+
+				.edit-frame-handle {
+					right: -3px;
+					left: auto;
+					border-left-width: 1px;
+					border-right: 3px solid;
+				}
 			}
 
 			&.edit-frame-active {
-				border-color: #0071a1;
+				border-color: rgba(83, 94, 102, 1);
+
+				.edit-frame-handle {
+					opacity: 1;
+					border-color: rgba(83, 94, 102, 1);
+				}
 			}
 		}
+
+		&:hover {
+			& > .edit-frame-default {
+				border-color: rgba(83, 94, 102, 0.5);
+				box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+			}
+
+			& > .edit-frame-default,
+			& > .edit-frame-active {
+				.edit-frame-handle {
+					opacity: 1;
+					box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+					border-color: rgba(83, 94, 102, 0.5);
+				}
+			}
+		}
+	}
+
+	// header image component
+	.headerimage {
+		.components-resizable-box__container {
+			display: inline-block;
+
+			img {
+				max-width: 600px;
+				width: 100%;
+				height: 100%;
+			}
+		}
+	}
+
+	.header-image-placeholder {
+		display: inline-block;
+		background: rgba(83, 94, 102, 0.5);
+	}
+
+	.editor-post-featured-image__toggle {
+		background-position: center;
+		background-size: cover;
+		text-shadow: 1px -1px #fff, 1px 1px #fff, -1px 1px #fff, -1px -1px #fff;
+	}
+
+	// content component
+	.mail-content {
+		padding-left: 24px;
+		padding-right: 24px;
+	}
+
+	//footer component
+	.mail-footer {
+		padding-left: 24px;
+		padding-right: 24px;
 	}
 }

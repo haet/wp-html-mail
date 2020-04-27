@@ -3,7 +3,7 @@
 } ?>
 <?php /* disabled survey after 2.7.3 for a while and enabled in 2.9.2 again */
 if( !isset( $options['survey2020_completed'] ) && !isset( $options['survey2020_dismissed'] ) && $tab != 'survey' ): ?>
-	<div class="update-nag haet-survey-nag">
+	<div class="notice notice-warning haet-survey-nag">
 	    <p>
 	    	<?php _e('Please help us to improve this plugin.','wp-html-mail'); ?>
 	    	<?php _e('How do you like WP HTML Mail so far?','wp-html-mail'); ?>
@@ -18,15 +18,6 @@ if( !isset( $options['survey2020_completed'] ) && !isset( $options['survey2020_d
 	    </p>
 	</div>
 <?php endif; ?>
-
-
-<div class="haet-mail-template-button-wrap">
-	<span class="haet-mail-new-notice"><?php _e('New'); ?>!!! <span class="dashicons dashicons-arrow-right-alt"></span></span>
-	<a href="<?php echo $this->get_tab_url('template-library'); ?>" class="button-secondary haet-mail-browse-templates">
-		<span class="dashicons dashicons-admin-appearance"></span>
-		<?php _e('Load a template', 'wp-html-mail'); ?>
-	</a>
-</div>
 
 
 <h2 class="nav-tab-wrapper">
@@ -57,6 +48,9 @@ if( !isset( $options['survey2020_completed'] ) && !isset( $options['survey2020_d
 		case 'template':
 			include('settings-template.php');
 			break;
+		case 'sender':
+			include('settings-sender.php');
+			break;
 		case 'plugins':
 			include('settings-plugins.php');
 			break;
@@ -74,7 +68,7 @@ if( !isset( $options['survey2020_completed'] ) && !isset( $options['survey2020_d
 			}
 		break; ?>
 	<?php } //switch Tab ?>
-	<?php if( $tab != 'survey' ): ?>
+	<?php if( $tab != 'survey' && $tab != 'template' ): ?>
 		<div class="submit">
 			<input type="submit" name="update_haet_mailSettings" class="button-primary" value="<?php _e('Save and Preview', 'wp-html-mail') ?>" />
 			<!--<input type="submit" name="reload_haet_mailtemplate" class="button-secondary" value="<?php _e('Discard changes and reload template', 'wp-html-mail') ?>" />-->

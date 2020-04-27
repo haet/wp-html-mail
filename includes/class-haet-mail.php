@@ -33,7 +33,8 @@ final class Haet_Mail {
 			'fromname' 				=> 	get_bloginfo('name'),
 			'fromaddress'			=> 	get_bloginfo('admin_email'),
 			'testmode'				=>	false,
-			'testmode_recipient'	=>	''
+			'testmode_recipient'	=>	'',
+			'use_classic_template_editor' => false
 		);
 	}
 
@@ -72,6 +73,7 @@ final class Haet_Mail {
 			'headerimg'				=>	'',
 			'headerimg_width'		=>	'',
 			'headerimg_height'		=>	'',
+			'headerimg_alt'			=>	'',
 			'headlinefont'			=>	'Georgia,Times New Roman,serif',
 			'headlinealign'			=> 	'left',
 			'headlinefontsize'		=>	25,
@@ -175,28 +177,9 @@ final class Haet_Mail {
 
 
 	function print_admin_page(){
-		if(array_key_exists('tab', $_GET))
-			$tab = $_GET['tab'];
-		else
-			$tab = 'general';
-
-		// template library
-		if( $tab == 'template-library' ){
-			$template_library = new Haet_Template_Library();
-		
-			if( isset($_POST['haet_mail_import_template_url']) && filter_var($_POST['haet_mail_import_template_url'], FILTER_VALIDATE_URL) !== FALSE ){
-				$theme_options = $this->get_theme_options('default');
-				$theme_options = $template_library->import_template( $_POST['haet_mail_import_template_url'], $theme_options, $this->multilanguage );
-				if( $theme_options )
-					wp_redirect( $this->get_tab_url('header') );
-			}
-
-			include HAET_MAIL_PATH.'views/admin/template-library.php';
-			return; // not further execution if we are on template library
-		}
-
-		$this->process_admin_page_actions();
 		$options = $this->get_options();
+		$this->process_admin_page_actions();
+		
 		$theme_options = $this->get_theme_options('default');
 		$plugin_options = Haet_Sender_Plugin::get_plugin_options();
 		if( isset($_POST['enable_import_theme_options']) && $_POST['enable_import_theme_options'] && isset($_POST['import_theme_options']) ){
@@ -214,6 +197,27 @@ final class Haet_Mail {
 					_e('Settings Updated.', 'wp-html-mail');
 			echo '</strong></p></div>';	
 		} 
+
+		$use_old_editor = isset( $options['use_classic_template_editor'] ) && $options['use_classic_template_editor'];
+		if(array_key_exists('tab', $_GET))
+			$tab = $_GET['tab'];
+		else
+			$tab = $use_old_editor ? 'general' : 'template';
+
+		// template library
+		if( $tab == 'template-library' ){
+			$template_library = new Haet_Template_Library();
+		
+			if( isset($_POST['haet_mail_import_template_url']) && filter_var($_POST['haet_mail_import_template_url'], FILTER_VALIDATE_URL) !== FALSE ){
+				$theme_options = $this->get_theme_options('default');
+				$theme_options = $template_library->import_template( $_POST['haet_mail_import_template_url'], $theme_options, $this->multilanguage );
+				if( $theme_options )
+					wp_redirect( $this->get_tab_url('header') );
+			}
+
+			include HAET_MAIL_PATH.'views/admin/template-library.php';
+			return; // not further execution if we are on template library
+		}
 		
 		$active_plugins = Haet_Sender_Plugin::get_active_plugins();
 		$available_plugins = Haet_Sender_Plugin::get_available_plugins();
@@ -227,6 +231,55 @@ final class Haet_Mail {
 		if(isset($_POST['haet_mail_create_template']) && $_POST['haet_mail_create_template']==1 )
 			$this->create_custom_template();
 
+		$template = $this->get_preview( $active_plugins, $tab, $theme_options );
+
+		if( $use_old_editor ){
+			$tabs = array(
+				'general' 	=>  __('General','wp-html-mail'),
+				'header' 	=>  __('Header','wp-html-mail'),
+				'content' 	=>  __('Content','wp-html-mail')
+			);
+			foreach ($active_plugins as $plugin) {
+				if ( method_exists( $plugin['class'], 'settings_tab' ) )
+					$tabs[ $plugin['name'] ] =  $plugin['display_name'];
+			}
+
+			$tabs['footer']		=  __('Footer','wp-html-mail');
+		}else{
+			$tabs = array(
+				'template' 	=>  __('Template','wp-html-mail'),
+				'sender' 	=>  __('Sender','wp-html-mail'),
+			);
+			foreach ($active_plugins as $plugin) {
+				if ( method_exists( $plugin['class'], 'settings_tab' ) )
+					$tabs[ $plugin['name'] ] =  $plugin['display_name'];
+			}			
+		}
+		
+		$tabs['plugins']	=  __('Plugins','wp-html-mail');
+
+		// removed after 2.7.3 because custom templates caused confusion
+		// added again in 2.8 to add "settings reset" buttons
+		$tabs['advanced']	=  __('Advanced','wp-html-mail');
+		
+		include HAET_MAIL_PATH.'views/admin/settings.php';
+	
+	}
+
+
+
+	public function get_demo_content(){
+		$demo_content = '<h1>Lorem ipsum dolor sit amet</h1>
+			<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed <a href="#">diam nonumy</a> eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.<br>Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+			<h2>Sed diam nonumy eirmod tempor</h2>
+			<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>';
+
+		return apply_filters( 'haet_mail_demo_content' , $demo_content, $options, $plugin_options, $tab );
+	}
+
+
+
+	public function get_preview( $active_plugins, $tab, $theme_options ){
 		foreach ($active_plugins as $plugin) {
 			if ( $plugin['name'] == $tab ){
 				$sender_plugin = $plugin['class']::request_preview_instance();
@@ -240,11 +293,7 @@ final class Haet_Mail {
 			$template = $sender_plugin->modify_template($template);
 		}
 
-		$demo_content = '<h1>Lorem ipsum dolor sit amet</h1>
-			<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed <a href="#">diam nonumy</a> eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.<br>Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-			<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>';
-
-		$demo_content = apply_filters( 'haet_mail_demo_content' , $demo_content, $options, $plugin_options, $tab );
+		$demo_content = $this->get_demo_content();
 		if( isset( $sender_plugin ) )
 			$demo_content = $sender_plugin->modify_content($demo_content);
 
@@ -260,27 +309,7 @@ final class Haet_Mail {
 
 		$template = apply_filters( 'haet_mail_modify_styled_mail', $template );
 
-		$template = $this->prepare_email_for_delivery($template);
-
-		$tabs = array(
-			'general' 	=>  __('General','wp-html-mail'),
-			'header' 	=>  __('Header','wp-html-mail'),
-			'content' 	=>  __('Content','wp-html-mail')
-		);
-		foreach ($active_plugins as $plugin) {
-			if ( method_exists( $plugin['class'], 'settings_tab' ) )
-				$tabs[ $plugin['name'] ] =  $plugin['display_name'];
-		}
-
-		$tabs['footer']		=  __('Footer','wp-html-mail');
-		$tabs['plugins']	=  __('Plugins','wp-html-mail');
-		
-		// removed after 2.7.3 because custom templates caused confusion
-		// added again in 2.8 to add "settings reset" buttons
-		$tabs['advanced']	=  __('Advanced','wp-html-mail');
-		
-		include HAET_MAIL_PATH.'views/admin/settings.php';
-	
+		return $this->prepare_email_for_delivery($template);
 	}
 
 	function save_options($saved_options){    
@@ -624,7 +653,7 @@ final class Haet_Mail {
 
 			$width = isset($options['headerimg_width']) && intval( $options['headerimg_width'] ) ? $options['headerimg_width'] : 0;
 			$height = isset($options['headerimg_height']) && intval( $options['headerimg_height'] ) ? $options['headerimg_height'] : 0;
-			$alt_text = ( $headerimg_placement == 'replace_text' ? $headertext : '' );
+			$alt_text = ( $headerimg_placement == 'replace_text' ? $headertext : $options['headerimg_alt'] );
 			$headerimg = '<img class="header-image' . ($width>580?' full-width-header-image':'').'" 
 										src="'.$options[$headerimg_field_key].'" 
 										style="'.
@@ -820,7 +849,7 @@ final class Haet_Mail {
 	}
 
 
-	private function get_tab_url($tab) {
+	public function get_tab_url($tab) {
 		return add_query_arg( 'tab', $tab, remove_query_arg( 'advanced-action' ) );
 	}
 
