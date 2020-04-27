@@ -23,10 +23,12 @@ class Haet_TemplateDesigner {
 
 			wp_enqueue_script('wp-html-mail-template-designer',  HAET_MAIL_URL.'/js/template-designer/' . ( $this->isScriptDebug() ? 'dev' : 'dist' ) . '/main.js', array( 'wp-color-picker','wp-pointer', 'wp-element', 'jquery'));
 			wp_localize_script('wp-html-mail-template-designer', 'mailTemplateDesigner', [
-				'restUrl' => $this->getRestUrl(),
-				'nonce' => wp_create_nonce( 'wp_rest' ),
-				'fonts' => $this->getAvailableFonts(),
-				'templateLibraryUrl' => Haet_Mail()->get_tab_url('template-library')
+				'restUrl' 				=> $this->getRestUrl(),
+				'nonce' 				=> wp_create_nonce( 'wp_rest' ),
+				'fonts' 				=> $this->getAvailableFonts(),
+				'templateLibraryUrl' 	=> Haet_Mail()->get_tab_url('template-library'),
+				'isMultiLanguageSite' 	=> Haet_Mail()->multilanguage->is_multilanguage_site(),
+				'currentLanguage' 		=> Haet_Mail()->multilanguage->get_current_language()
 			]);
 			wp_enqueue_media();
 			wp_enqueue_editor();
@@ -59,7 +61,10 @@ class Haet_TemplateDesigner {
 			update_option('haet_mail_theme_options', $theme_options);
 		}
 		
-		$preview = Haet_Mail()->get_preview( Haet_Sender_Plugin::get_active_plugins(), 'template', $theme_options );
+		$options = $this->get_options();
+		$plugin_options = Haet_Sender_Plugin::get_plugin_options();
+
+		$preview = Haet_Mail()->get_preview( Haet_Sender_Plugin::get_active_plugins(), 'template', $options, $plugin_options, $theme_options );
 		return new \WP_REST_Response( ['preview' => $preview] );
 	}
 

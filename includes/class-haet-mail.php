@@ -7,7 +7,7 @@ require HAET_MAIL_PATH . 'includes/class-template-library.php';
 final class Haet_Mail {
 	
 	private static $instance;
-	private $multilanguage;
+	public $multilanguage;
 	private $templatedesigner;
 	
 	public static function instance(){
@@ -70,10 +70,13 @@ final class Haet_Mail {
 			'headerpaddingright'	=> 	24,
 			'headerpaddingbottom'	=>	12,
 			'headerpaddingleft'		=>	24,
+			'header_spacer'			=>	10,
+			'headerimg_placement'	=>  'just_text',
 			'headerimg'				=>	'',
 			'headerimg_width'		=>	'',
 			'headerimg_height'		=>	'',
 			'headerimg_alt'			=>	'',
+			'headerimg_align'		=>  '',
 			'headlinefont'			=>	'Georgia,Times New Roman,serif',
 			'headlinealign'			=> 	'left',
 			'headlinefontsize'		=>	25,
@@ -212,7 +215,7 @@ final class Haet_Mail {
 				$theme_options = $this->get_theme_options('default');
 				$theme_options = $template_library->import_template( $_POST['haet_mail_import_template_url'], $theme_options, $this->multilanguage );
 				if( $theme_options )
-					wp_redirect( $this->get_tab_url('header') );
+					wp_redirect( remove_query_arg( 'tab' ) );
 			}
 
 			include HAET_MAIL_PATH.'views/admin/template-library.php';
@@ -231,7 +234,7 @@ final class Haet_Mail {
 		if(isset($_POST['haet_mail_create_template']) && $_POST['haet_mail_create_template']==1 )
 			$this->create_custom_template();
 
-		$template = $this->get_preview( $active_plugins, $tab, $theme_options );
+		$template = $this->get_preview( $active_plugins, $tab, $options, $plugin_options, $theme_options );
 
 		if( $use_old_editor ){
 			$tabs = array(
@@ -269,17 +272,15 @@ final class Haet_Mail {
 
 
 	public function get_demo_content(){
-		$demo_content = '<h1>Lorem ipsum dolor sit amet</h1>
+		return '<h1>Lorem ipsum dolor sit amet</h1>
 			<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed <a href="#">diam nonumy</a> eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.<br>Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
 			<h2>Sed diam nonumy eirmod tempor</h2>
 			<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>';
-
-		return apply_filters( 'haet_mail_demo_content' , $demo_content, $options, $plugin_options, $tab );
 	}
 
 
 
-	public function get_preview( $active_plugins, $tab, $theme_options ){
+	public function get_preview( $active_plugins, $tab, $options, $plugin_options, $theme_options ){
 		foreach ($active_plugins as $plugin) {
 			if ( $plugin['name'] == $tab ){
 				$sender_plugin = $plugin['class']::request_preview_instance();
@@ -293,7 +294,7 @@ final class Haet_Mail {
 			$template = $sender_plugin->modify_template($template);
 		}
 
-		$demo_content = $this->get_demo_content();
+		$demo_content = apply_filters( 'haet_mail_demo_content' , $this->get_demo_content(), $options, $plugin_options, $tab );
 		if( isset( $sender_plugin ) )
 			$demo_content = $sender_plugin->modify_content($demo_content);
 

@@ -43,7 +43,6 @@ class Haet_Template_Library {
         $request_body = wp_remote_retrieve_body( $request );
         $new_options = json_decode( $request_body, true );
 
-		error_log( print_r( $new_options,true ) );
 		if( $new_options ){
 			$options = array_merge($saved_options,$new_options);
 

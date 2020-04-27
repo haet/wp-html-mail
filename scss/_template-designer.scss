@@ -41,6 +41,7 @@
 		.save-button-pane {
 			margin-bottom: 20px;
 			justify-content: flex-end;
+			background-color: #f3f4f5;
 		}
 
 		.mail-content-wrap {
@@ -140,6 +141,10 @@
 				}
 			}
 		}
+	}
+
+	.components-base-control__field + .components-base-control__help {
+		margin-top: 0;
 	}
 
 	// header image component

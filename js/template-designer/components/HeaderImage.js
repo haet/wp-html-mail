@@ -97,7 +97,10 @@ export default function HeaderImage({}) {
 					<TextControl
 						name="headerimg"
 						value={settings.headerimg}
-						style={{ width: "100%" }}
+						help={__(
+							"You can use this field to add an external image url.",
+							"wp-html-mail"
+						)}
 						onChange={(value) => {
 							templateDesignerContext.updateSetting(
 								"headertext",
@@ -168,7 +171,10 @@ export default function HeaderImage({}) {
 					settings.headerimg_placement === "below_text") && (
 					<PanelRow>
 						<RangeControl
-							label={__("Spacing", "wp-html-mail")}
+							label={__(
+								"Spacing between image and text",
+								"wp-html-mail"
+							)}
 							beforeIcon={"sort"}
 							value={getIntVal(settings.header_spacer, 10)}
 							onChange={(value) => {
@@ -182,6 +188,14 @@ export default function HeaderImage({}) {
 						/>
 					</PanelRow>
 				)}
+				<PanelRow>
+					<p>
+						{__(
+							"If you would like to provide the header image in retina quality, upload an image with a higher resultion, such as for example 1200px x 400px and enter only half the size values in the input fields on the left (600 x 200).",
+							"wp-html-mail"
+						)}
+					</p>
+				</PanelRow>
 			</PanelBody>
 		</React.Fragment>
 	);
