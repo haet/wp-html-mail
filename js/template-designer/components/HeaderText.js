@@ -1,11 +1,9 @@
 import { useState, useEffect, useContext } from "@wordpress/element";
 
 import {
-	Panel,
 	PanelBody,
 	PanelRow,
-	RangeControl,
-	TextControl,
+	FormToggle,
 	ColorPicker,
 	SelectControl,
 	Toolbar,
@@ -17,7 +15,12 @@ import { RichText } from "@wordpress/block-editor";
 
 import { TemplateDesignerContext } from "../contexts/TemplateDesignerContext";
 
-import { getIntVal } from "../functions/helper-functions";
+import {
+	getIntVal,
+	isTranslationEnabledForField,
+	getTranslateableThemeOption,
+	getTranslateableThemeOptionsKey,
+} from "../functions/helper-functions";
 import EditableElement from "./EditableElement.js";
 
 export default function HeaderText({}) {
@@ -135,6 +138,42 @@ export default function HeaderText({}) {
 					/>
 				</PanelRow>
 			</PanelBody>
+			{window.mailTemplateDesigner.isMultiLanguageSite == 1 && (
+				<PanelBody
+					title={__("Translation", "wp-html-mail")}
+					initialOpen={false}
+				>
+					<PanelRow>
+						<FormToggle
+							checked={isTranslationEnabledForField(
+								settings,
+								"headertext"
+							)}
+							onChange={(e) =>
+								templateDesignerContext.updateSetting(
+									"headertext_enable_translation",
+									!isTranslationEnabledForField(
+										settings,
+										"headertext"
+									)
+								)
+							}
+						/>
+						{__(
+							"Enable translation for this field",
+							"wp-html-mail"
+						)}
+					</PanelRow>
+					<PanelRow>
+						<p className="description">
+							{__(
+								"If enabled you can use individual settings depending on the current language selected at the top of the page in your admin bar.",
+								"wp-html-mail"
+							)}
+						</p>
+					</PanelRow>
+				</PanelBody>
+			)}
 		</React.Fragment>
 	);
 
@@ -150,6 +189,11 @@ export default function HeaderText({}) {
 		}
 	}, [templateDesignerContext.editingElement, settings]);
 
+	const headertext = getTranslateableThemeOption(settings, "headertext");
+	const headertext_field_key = getTranslateableThemeOptionsKey(
+		settings,
+		"headertext"
+	);
 	return (
 		<EditableElement
 			elementTitle={elementTitle}
@@ -177,11 +221,11 @@ export default function HeaderText({}) {
 			>
 				<RichText
 					tagName="div"
-					value={settings.headertext}
+					value={headertext}
 					allowedFormats={[]}
 					onChange={(value) =>
 						templateDesignerContext.updateSetting(
-							"headertext",
+							headertext_field_key,
 							value
 						)
 					}

@@ -71,7 +71,7 @@ final class Haet_Mail {
 			'headerpaddingbottom'	=>	12,
 			'headerpaddingleft'		=>	24,
 			'header_spacer'			=>	10,
-			'headerimg_placement'	=>  'just_text',
+			'headerimg_placement'	=>  'replace_text',
 			'headerimg'				=>	'',
 			'headerimg_width'		=>	'',
 			'headerimg_height'		=>	'',

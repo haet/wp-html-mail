@@ -11,7 +11,7 @@ class Haet_TemplateDesigner {
 	
 	
 	public function admin_page_scripts_and_styles($page){
-		if(strpos($page, 'wp-html-mail') && ( !$_GET['tab'] || $_GET['tab'] =="template" ) ){
+		if(strpos($page, 'wp-html-mail') && ( !array_key_exists( 'tab', $_GET ) || $_GET['tab'] =="template" ) ){
 			
 			// style out options panel like the block editor
 			wp_enqueue_style( 'wp-editor' );
@@ -61,7 +61,7 @@ class Haet_TemplateDesigner {
 			update_option('haet_mail_theme_options', $theme_options);
 		}
 		
-		$options = $this->get_options();
+		$options = Haet_Mail()->get_options();
 		$plugin_options = Haet_Sender_Plugin::get_plugin_options();
 
 		$preview = Haet_Mail()->get_preview( Haet_Sender_Plugin::get_active_plugins(), 'template', $options, $plugin_options, $theme_options );

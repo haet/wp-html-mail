@@ -3,18 +3,20 @@ import { useState, useEffect, useContext } from "@wordpress/element";
 import {
 	PanelBody,
 	PanelRow,
-	RangeControl,
-	RadioControl,
 	ColorPicker,
+	FormToggle,
 } from "@wordpress/components";
-import { RichText } from "@wordpress/block-editor";
 
 import { __ } from "@wordpress/i18n";
 
 import { arrowUp, arrowLeft, arrowRight, arrowDown } from "@wordpress/icons";
 
 import { TemplateDesignerContext } from "../contexts/TemplateDesignerContext";
-import { getIntVal } from "../functions/helper-functions";
+import {
+	isTranslationEnabledForField,
+	getTranslateableThemeOption,
+	getTranslateableThemeOptionsKey,
+} from "../functions/helper-functions";
 
 import EditableElement from "./EditableElement.js";
 
@@ -24,6 +26,11 @@ export default function MailFooter({}) {
 	const { settings } = templateDesignerContext;
 	const elementTitle = __("Email footer", "wp-html-mail");
 	const elementName = "footer";
+	const footer = getTranslateableThemeOption(settings, "footer");
+	const footer_field_key = getTranslateableThemeOptionsKey(
+		settings,
+		"footer"
+	);
 
 	const options = (
 		<React.Fragment>
@@ -105,39 +112,59 @@ export default function MailFooter({}) {
 					/>
 				</PanelRow>
 			</PanelBody> */}
+			{window.mailTemplateDesigner.isMultiLanguageSite == 1 && (
+				<PanelBody
+					title={__("Translation", "wp-html-mail")}
+					initialOpen={false}
+				>
+					<PanelRow>
+						<FormToggle
+							checked={isTranslationEnabledForField(
+								settings,
+								"footer"
+							)}
+							onChange={(e) =>
+								templateDesignerContext.updateSetting(
+									"footer_enable_translation",
+									!isTranslationEnabledForField(
+										settings,
+										"footer"
+									)
+								)
+							}
+						/>
+						{__(
+							"Enable translation for this field",
+							"wp-html-mail"
+						)}
+					</PanelRow>
+					<PanelRow>
+						<p className="description">
+							{__(
+								"If enabled you can use individual settings depending on the current language selected at the top of the page in your admin bar.",
+								"wp-html-mail"
+							)}
+						</p>
+					</PanelRow>
+				</PanelBody>
+			)}
 		</React.Fragment>
 	);
 
 	const onEditorSetup = (newEditor) => {
 		setEditor(newEditor);
-		if (settings.footer) {
-			newEditor.on("loadContent", () =>
-				newEditor.setContent(settings.footer)
-			);
+		if (footer) {
+			newEditor.on("loadContent", () => newEditor.setContent(footer));
 		}
 
 		newEditor.on("blur", () => {
 			templateDesignerContext.updateSetting(
-				"footer",
+				footer_field_key,
 				newEditor.getContent()
 			);
 
 			return false;
 		});
-
-		// editor.on("mousedown touchstart", () => {
-		// 	bookmark = null;
-		// });
-
-		// editor.on("init", () => {
-		// 	const rootNode = editor.getBody();
-
-		// 	// Create the toolbar by refocussing the editor.
-		// 	if (document.activeElement === rootNode) {
-		// 		rootNode.blur();
-		// 		this.editor.focus();
-		// 	}
-		// });
 	};
 
 	useEffect(() => {
@@ -185,14 +212,9 @@ export default function MailFooter({}) {
 				<div
 					key="toolbar"
 					id="footer-editor-toolbar"
-					//ref={(ref) => (this.ref = ref)}
 					className="block-library-classic__toolbar"
-					//onClick={this.focus}
-					data-placeholder={__("Classic")}
 					onKeyDown={(e) => {
-						// Prevent WritingFlow from kicking in and allow arrows navigation on the toolbar.
 						elementName.stopPropagation();
-						// Prevent Mousetrap from moving focus to the top toolbar when pressing `alt+f10` on this block toolbar.
 						e.nativeEvent.stopImmediatePropagation();
 					}}
 				/>
@@ -201,7 +223,7 @@ export default function MailFooter({}) {
 					id="footer-html"
 					className="wp-block-freeform block-library-rich-text__tinymce"
 					dangerouslySetInnerHTML={{
-						__html: settings.footer,
+						__html: footer,
 					}}
 				/>
 			</div>

@@ -6,6 +6,7 @@ import {
 	PanelRow,
 	RangeControl,
 	TextControl,
+	FormToggle,
 	Button,
 	Toolbar,
 	ResizableBox,
@@ -14,11 +15,14 @@ import {
 
 import { __ } from "@wordpress/i18n";
 
-import { arrowUp } from "@wordpress/icons";
-
 import { TemplateDesignerContext } from "../contexts/TemplateDesignerContext";
 
-import { getIntVal } from "../functions/helper-functions";
+import {
+	getIntVal,
+	isTranslationEnabledForField,
+	getTranslateableThemeOption,
+	getTranslateableThemeOptionsKey,
+} from "../functions/helper-functions";
 import EditableElement from "./EditableElement.js";
 
 export default function HeaderImage({}) {
@@ -27,9 +31,13 @@ export default function HeaderImage({}) {
 	const elementTitle = __("Header image", "wp-html-mail");
 	const elementName = "headerimage";
 	const [fileFrame, setFileFrame] = useState();
-	const instructions = (
-		<p>{__("Select you logo or header image", "wp-html-mail")}</p>
+
+	const headerimg = getTranslateableThemeOption(settings, "headerimg");
+	const headerimg_field_key = getTranslateableThemeOptionsKey(
+		settings,
+		"headerimg"
 	);
+
 	const options = (
 		<React.Fragment>
 			<PanelBody title={__("Image", "wp-html-mail")} initialOpen={true}>
@@ -37,10 +45,10 @@ export default function HeaderImage({}) {
 					<Button
 						className={"editor-post-featured-image__toggle"}
 						style={
-							settings.headerimg
+							headerimg
 								? {
 										backgroundImage:
-											"url(" + settings.headerimg + ")",
+											"url(" + headerimg + ")",
 								  }
 								: {}
 						}
@@ -79,7 +87,7 @@ export default function HeaderImage({}) {
 										: attachment.width;
 								templateDesignerContext.setSettings({
 									...settings,
-									headerimg: attachment.url,
+									[headerimg_field_key]: attachment.url,
 									headerimg_width: width,
 									headerimg_height: height,
 									headerimg_alt: attachment.alt,
@@ -96,14 +104,14 @@ export default function HeaderImage({}) {
 				<PanelRow>
 					<TextControl
 						name="headerimg"
-						value={settings.headerimg}
+						value={headerimg}
 						help={__(
 							"You can use this field to add an external image url.",
 							"wp-html-mail"
 						)}
 						onChange={(value) => {
 							templateDesignerContext.updateSetting(
-								"headertext",
+								headerimg_field_key,
 								value
 							);
 						}}
@@ -197,6 +205,50 @@ export default function HeaderImage({}) {
 					</p>
 				</PanelRow>
 			</PanelBody>
+			{window.mailTemplateDesigner.isMultiLanguageSite == 1 && (
+				<PanelBody
+					title={__("Translation", "wp-html-mail")}
+					initialOpen={true}
+				>
+					<PanelRow>
+						<FormToggle
+							checked={isTranslationEnabledForField(
+								settings,
+								"headerimg"
+							)}
+							onChange={(e) =>
+								templateDesignerContext.updateSetting(
+									"headerimg_enable_translation",
+									!isTranslationEnabledForField(
+										settings,
+										"headerimg"
+									)
+								)
+							}
+						/>
+						{__(
+							"Enable translation for this field",
+							"wp-html-mail"
+						)}
+					</PanelRow>
+					<PanelRow>
+						<p className="description">
+							{__(
+								"If enabled you can use individual settings depending on the current language selected at the top of the page in your admin bar.",
+								"wp-html-mail"
+							)}
+						</p>
+					</PanelRow>
+					<PanelRow>
+						<p className="description">
+							{__(
+								"Please make sure all images have the same size because only the image url is language dependent.",
+								"wp-html-mail"
+							)}
+						</p>
+					</PanelRow>
+				</PanelBody>
+			)}
 		</React.Fragment>
 	);
 
@@ -262,7 +314,6 @@ export default function HeaderImage({}) {
 							topLeft: true,
 						}}
 						onResizeStop={(event, direction, elt, delta) => {
-							console.log(settings.headerimg_width, delta.width);
 							templateDesignerContext.setSettings({
 								...settings,
 								headerimg_width:
@@ -274,7 +325,7 @@ export default function HeaderImage({}) {
 							});
 						}}
 					>
-						<img src={settings.headerimg} />
+						<img src={headerimg} />
 					</ResizableBox>
 				) : (
 					<div
