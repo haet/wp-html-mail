@@ -7,7 +7,7 @@ import {
 	ColorPicker,
 	SelectControl,
 	Toolbar,
-	__experimentalNumberControl as NumberControl,
+	TextControl,
 } from "@wordpress/components";
 
 import { __ } from "@wordpress/i18n";
@@ -59,7 +59,8 @@ export default function HeaderText({}) {
 					/>
 				</PanelRow>
 				<PanelRow>
-					<NumberControl
+					<TextControl
+						type="number"
 						onChange={(value) => {
 							templateDesignerContext.updateSetting(
 								"headerfontsize",

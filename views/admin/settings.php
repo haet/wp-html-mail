@@ -78,6 +78,9 @@ if( !isset( $options['survey2020_completed'] ) && !isset( $options['survey2020_d
 
 <?php if( $tab != 'survey' ): ?>
 	<div class="nav-tab-wrapper">
+		<h3 class="haet-mail-preview-headline">
+			<?php _e('Preview','wp-html-mail'); ?>
+		</h3>
 		<a class="nav-tab nav-tab-active haet-mail-preview-size-button" data-previewwidth="800">
 			<span class="dashicons dashicons-desktop"></span> &amp; <span class="dashicons dashicons-tablet" ></span>
 		</a>

@@ -10,8 +10,6 @@ import {
 
 import { __ } from "@wordpress/i18n";
 
-import { arrowUp, arrowLeft, arrowRight, arrowDown } from "@wordpress/icons";
-
 import { TemplateDesignerContext } from "../contexts/TemplateDesignerContext";
 import { getIntVal } from "../functions/helper-functions";
 
@@ -103,7 +101,7 @@ export default function MailHeader({}) {
 			>
 				<PanelRow>
 					<RangeControl
-						beforeIcon={arrowDown}
+						beforeIcon="arrow-down"
 						value={getIntVal(settings.headerpaddingtop, 10)}
 						onChange={(value) => {
 							templateDesignerContext.updateSetting(
@@ -118,7 +116,7 @@ export default function MailHeader({}) {
 				</PanelRow>
 				<PanelRow>
 					<RangeControl
-						beforeIcon={arrowLeft}
+						beforeIcon="arrow-left"
 						value={getIntVal(settings.headerpaddingright, 10)}
 						onChange={(value) => {
 							templateDesignerContext.updateSetting(
@@ -133,7 +131,7 @@ export default function MailHeader({}) {
 				</PanelRow>
 				<PanelRow>
 					<RangeControl
-						beforeIcon={arrowUp}
+						beforeIcon="arrow-up"
 						value={getIntVal(settings.headerpaddingbottom, 10)}
 						onChange={(value) => {
 							templateDesignerContext.updateSetting(
@@ -148,7 +146,7 @@ export default function MailHeader({}) {
 				</PanelRow>
 				<PanelRow>
 					<RangeControl
-						beforeIcon={arrowRight}
+						beforeIcon="arrow-right"
 						value={getIntVal(settings.headerpaddingleft, 10)}
 						onChange={(value) => {
 							templateDesignerContext.updateSetting(

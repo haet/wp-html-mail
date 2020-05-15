@@ -33,13 +33,6 @@
                         <?php endif; ?>
                     </td>
                 </tr>
-                <tr>
-                    <td colspan="2">
-                        <input type="hidden" name="haet_mail_theme[footerlink]" value="0">
-                        <input type="checkbox" id="haet_mail_theme_footerlink" name="haet_mail_theme[footerlink]" value="1" <?php echo ($theme_options['footerlink']==1 || !isset($theme_options['footerlink'])?'checked':''); ?>>
-                        <label for="haet_mail_theme_footerlink"><?php _e('Show "powered by" link in email footer','wp-html-mail'); ?></label>
-                    </td>
-                </tr>
             </tbody>
         </table>
     </div>

@@ -8,6 +8,7 @@ var path = require("path"),
 		"/js/template-designer/",
 		NODE_ENV === "production" ? "dist" : "dev"
 	);
+const DependencyExtractionWebpackPlugin = require("@wordpress/dependency-extraction-webpack-plugin");
 
 module.exports = {
 	mode: NODE_ENV,
@@ -15,14 +16,6 @@ module.exports = {
 	output: {
 		path: dist,
 		filename: "[name].js",
-	},
-	externals: {
-		react: "React",
-		"react-dom": "ReactDOM",
-		jquery: "jQuery",
-		wp: "wp",
-		_: "_",
-		wpApiSettings: "wpApiSettings",
 	},
 	devtool: "#source-map",
 	module: {
@@ -65,5 +58,6 @@ module.exports = {
 			},
 		}),
 		new MiniCssExtractPlugin("[name].css"),
+		new DependencyExtractionWebpackPlugin(),
 	],
 };

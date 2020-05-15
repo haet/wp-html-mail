@@ -5,6 +5,7 @@ import {
 	PanelRow,
 	ColorPicker,
 	FormToggle,
+	TextareaControl,
 } from "@wordpress/components";
 
 import { __ } from "@wordpress/i18n";
@@ -26,7 +27,10 @@ export default function MailFooter({}) {
 	const { settings } = templateDesignerContext;
 	const elementTitle = __("Email footer", "wp-html-mail");
 	const elementName = "footer";
-	const footer = getTranslateableThemeOption(settings, "footer");
+	const footer = getTranslateableThemeOption(settings, "footer").replace(
+		/\\(.)/gm,
+		"$1"
+	); // this is some kind of stripslashes
 	const footer_field_key = getTranslateableThemeOptionsKey(
 		settings,
 		"footer"
@@ -112,6 +116,28 @@ export default function MailFooter({}) {
 					/>
 				</PanelRow>
 			</PanelBody> */}
+			<PanelBody
+				title={__("Edit HTML", "wp-html-mail")}
+				initialOpen={false}
+			>
+				<PanelRow>
+					<TextareaControl
+						help={__(
+							"Just in case the editor on the left is not flexible enough you can use this field to edit the HTML code.",
+							"wp-html-mail"
+						)}
+						className="footer-html"
+						value={footer}
+						onChange={(value) => {
+							templateDesignerContext.updateSetting(
+								footer_field_key,
+								value
+							);
+						}}
+						placeholder={__("your code snippet…")}
+					/>
+				</PanelRow>
+			</PanelBody>
 			{window.mailTemplateDesigner.isMultiLanguageSite == 1 && (
 				<PanelBody
 					title={__("Translation", "wp-html-mail")}
@@ -204,7 +230,7 @@ export default function MailFooter({}) {
 	return (
 		<EditableElement elementTitle={elementTitle} elementName={elementName}>
 			<div
-				className="mail-footer"
+				className="mail-footer clearfix"
 				style={{
 					backgroundColor: settings.footerbackground,
 				}}

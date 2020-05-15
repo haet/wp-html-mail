@@ -2,9 +2,9 @@
 Contributors: haet
 Tags: email template, html mail, email design, mail, email templates, ninja-forms, caldera-forms, wp-e-commerce, easy-digital-downloads, woocommerce, contact-form-7, mandrill, postman, gravityforms
 Requires at least: 5.0
-Tested up to: 5.4
+Tested up to: 5.4.1
 Requires PHP: 7.2
-Stable tag: 3.0beta
+Stable tag: 3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,10 +14,16 @@ All in one email template solution for Ninja Forms, Caldera Forms, Gravity Forms
 Beautiful responsive HTML mails, fully customizable without any coding knowledge 
 Create your own professional email template within a few minutes. 
 
+= See how it works =
+
+https://youtu.be/h-bFpPqkAzk
+
 = Features = 
 
 * **Responsive & Device independent:**
 Our e-mail template has been tested in all major desktop, web and mobile mailclients. 
+* **Template library:**
+Start your email design with one of our templates created by professional designer
 * **Text or image header:** 
 Either style your email header with colors and text, use your logo or design a banner.
 * **Customize colors and fonts:**
@@ -35,10 +41,6 @@ Customize design, text, products table, simply everything with our Drag & Drop M
 * **Easy Digital Downloads AddOn (PRO):**
 Read more about the [Easy Digital Downloads Email template](https://codemiq.com/en/downloads/wp-html-mail-easy-digital-downloads/)
 
-
-= Tutorial: Create your WordPress email template in 2 minutes =
-
-https://youtu.be/FwtG9NqoeJA
 
 
 Turn email formatting on/off for specific plugins.
@@ -128,7 +130,7 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 == Screenshots ==
 
-1. WooCommerce Demo
+1. Our template library
 2. Use text or image header
 3. set global font settings
 4. append you contact details to the mail footer
@@ -136,6 +138,15 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 
 == Changelog ==
+
+= 3.0.1 =
+* enabled transient caching for template library
+
+
+= 3.0 =
+* brand new react based template editor (for WP 5.4+)
+* template library with 25+ email templates
+
 
 = 2.9.4 =
 * added a link to manage all custom posts created by mailbuilder (tab "advanced")

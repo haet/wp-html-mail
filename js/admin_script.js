@@ -322,7 +322,7 @@ jQuery(document).ready(function ($) {
 			}
 		})
 		.click(function (e) {
-			if ($(this).parents(".update-nag").length) return true;
+			if ($(this).parents(".haet-survey-nag").length) return true;
 			e.preventDefault();
 			var $current_star = $(this);
 			$(this).siblings("input").val($current_star.data("rating"));

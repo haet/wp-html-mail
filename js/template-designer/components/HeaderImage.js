@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext } from "@wordpress/element";
 
 import {
-	Panel,
 	PanelBody,
 	PanelRow,
 	RangeControl,
@@ -10,7 +9,6 @@ import {
 	Button,
 	Toolbar,
 	ResizableBox,
-	__experimentalNumberControl as NumberControl,
 } from "@wordpress/components";
 
 import { __ } from "@wordpress/i18n";
@@ -91,6 +89,7 @@ export default function HeaderImage({}) {
 									headerimg_width: width,
 									headerimg_height: height,
 									headerimg_alt: attachment.alt,
+									headerimg_notice: "",
 								});
 							});
 							// Finally, open the modal
@@ -117,30 +116,42 @@ export default function HeaderImage({}) {
 						}}
 					/>
 				</PanelRow>
+				{settings.headerimg_notice &&
+					settings.headerimg_notice.length > 5 && (
+						<PanelRow>
+							<p
+								dangerouslySetInnerHTML={{
+									__html: settings.headerimg_notice,
+								}}
+							/>
+						</PanelRow>
+					)}
 			</PanelBody>
 			<PanelBody
 				title={__("Size & Align", "wp-html-mail")}
 				initialOpen={false}
 			>
 				<PanelRow>
-					<NumberControl
+					<TextControl
+						type="number"
 						onChange={(value) => {
 							templateDesignerContext.updateSetting(
 								"headerimg_width",
 								value
 							);
 						}}
-						value={getIntVal(settings.headerimg_width)}
+						value={getIntVal(settings.headerimg_width, 400)}
 						style={{ width: 70 }}
 					/>
-					<NumberControl
+					<TextControl
+						type="number"
 						onChange={(value) => {
 							templateDesignerContext.updateSetting(
 								"headerimg_height",
 								value
 							);
 						}}
-						value={getIntVal(settings.headerimg_height)}
+						value={getIntVal(settings.headerimg_height, 100)}
 						style={{ width: 70 }}
 					/>
 					<Toolbar
@@ -177,29 +188,33 @@ export default function HeaderImage({}) {
 				</PanelRow>
 				{(settings.headerimg_placement === "above_text" ||
 					settings.headerimg_placement === "below_text") && (
-					<PanelRow>
-						<RangeControl
-							label={__(
+					<>
+						<PanelRow>
+							{__(
 								"Spacing between image and text",
 								"wp-html-mail"
 							)}
-							beforeIcon={"sort"}
-							value={getIntVal(settings.header_spacer, 10)}
-							onChange={(value) => {
-								templateDesignerContext.updateSetting(
-									"header_spacer",
-									value
-								);
-							}}
-							min={0}
-							max={100}
-						/>
-					</PanelRow>
+						</PanelRow>
+						<PanelRow>
+							<RangeControl
+								beforeIcon={"sort"}
+								value={getIntVal(settings.header_spacer, 10)}
+								onChange={(value) => {
+									templateDesignerContext.updateSetting(
+										"header_spacer",
+										value
+									);
+								}}
+								min={0}
+								max={100}
+							/>
+						</PanelRow>
+					</>
 				)}
 				<PanelRow>
 					<p>
 						{__(
-							"If you would like to provide the header image in retina quality, upload an image with a higher resultion, such as for example 1200px x 400px and enter only half the size values in the input fields on the left (600 x 200).",
+							"If you would like to provide the header image in retina quality, upload an image with a higher resultion, such as for example 1200px x 400px and enter only half the size values in the input fields above (600 x 200).",
 							"wp-html-mail"
 						)}
 					</p>
@@ -264,6 +279,10 @@ export default function HeaderImage({}) {
 		}
 	}, [templateDesignerContext.editingElement, settings]);
 
+	const headerimg_align = settings.headerimg_align
+		? settings.headerimg_align
+		: settings.headeralign;
+
 	return (
 		<EditableElement
 			elementTitle={elementTitle}
@@ -274,7 +293,7 @@ export default function HeaderImage({}) {
 			<div
 				className={elementName}
 				style={{
-					textAlign: settings.headerimg_align,
+					textAlign: headerimg_align,
 				}}
 			>
 				{settings.headerimg ? (
@@ -333,10 +352,10 @@ export default function HeaderImage({}) {
 						style={{
 							width: settings.headerimg_width
 								? settings.headerimg_width + "px"
-								: "600px",
+								: "400px",
 							height: settings.headerimg_height
 								? settings.headerimg_height + "px"
-								: "200px",
+								: "100px",
 							marginTop:
 								settings.headerimg_placement === "below_text"
 									? settings.header_spacer + "px"

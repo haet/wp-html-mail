@@ -87,14 +87,16 @@
                         </div>
                     </td>
                 </tr>
-                <tr valign="top">
-                    <th scope="row"><label><?php _e('Old template editor','wp-html-mail') ?></label></th>
-                    <td>
-                        <input type="hidden" name="haet_mail[use_classic_template_editor]" value="0">
-                        <input type="checkbox" id="haet_mail_use_classic_template_editor" name="haet_mail[use_classic_template_editor]" value="1" <?php echo ( isset( $options['use_classic_template_editor'] ) && $options['use_classic_template_editor']==1 ?'checked':''); ?>>
-                        <label for="haet_mail_use_classic_template_editor"><?php _e('Go back to our old editor if you don\'t like our new JavaScript based template designer.','wp-html-mail'); ?></label>
-                    </td>
-                </tr>
+                <?php if( $is_able_to_use_new_editor ): ?>
+                    <tr valign="top">
+                        <th scope="row"><label><?php _e('Old template editor','wp-html-mail') ?></label></th>
+                        <td>
+                            <input type="hidden" name="haet_mail[use_classic_template_editor]" value="0">
+                            <input type="checkbox" id="haet_mail_use_classic_template_editor" name="haet_mail[use_classic_template_editor]" value="1" <?php echo ( isset( $options['use_classic_template_editor'] ) && $options['use_classic_template_editor']==1 ?'checked':''); ?>>
+                            <label for="haet_mail_use_classic_template_editor"><?php _e('Go back to our old editor if you don\'t like our new JavaScript based template designer.','wp-html-mail'); ?></label>
+                        </td>
+                    </tr>
+                <?php endif; ?>
                 <tr valign="top">
                     <th scope="row"><label><?php _e('E-Mail test mode','wp-html-mail') ?></label></th>
                     <td>

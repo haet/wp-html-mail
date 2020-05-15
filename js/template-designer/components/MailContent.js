@@ -6,7 +6,7 @@ import {
 	SelectControl,
 	ColorPicker,
 	Toolbar,
-	__experimentalNumberControl as NumberControl,
+	TextControl,
 } from "@wordpress/components";
 
 import { __ } from "@wordpress/i18n";
@@ -72,7 +72,8 @@ export default function MailContent({}) {
 					/>
 				</PanelRow>
 				<PanelRow>
-					<NumberControl
+					<TextControl
+						type="number"
 						onChange={(value) => {
 							templateDesignerContext.updateSetting(
 								"headlinefontsize",
@@ -181,7 +182,8 @@ export default function MailContent({}) {
 					/>
 				</PanelRow>
 				<PanelRow>
-					<NumberControl
+					<TextControl
+						type="number"
 						onChange={(value) => {
 							templateDesignerContext.updateSetting(
 								"subheadlinefontsize",
@@ -295,7 +297,8 @@ export default function MailContent({}) {
 					/>
 				</PanelRow>
 				<PanelRow>
-					<NumberControl
+					<TextControl
+						type="number"
 						onChange={(value) => {
 							templateDesignerContext.updateSetting(
 								"textfontsize",

@@ -4,7 +4,7 @@
 
 
 	<br/>
-	<a href="<?php echo $this->get_tab_url('general'); ?>" class="button-secondary haet-mail-browse-templates">
+	<a href="<?php echo $this->get_tab_url(); ?>" class="button-secondary haet-mail-browse-templates">
 		&lt; <?php _e('back', 'wp-html-mail'); ?>
 	</a>
 	<br/>

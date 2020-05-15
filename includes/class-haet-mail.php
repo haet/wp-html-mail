@@ -19,7 +19,7 @@ final class Haet_Mail {
 	}
 
 
-	function __construct(){
+	public function __construct(){
 		$this->multilanguage = new Haet_Multilanguage();
 		$this->templatedesigner = new Haet_TemplateDesigner();
 		add_action( 'plugins_loaded', 'Haet_Sender_Plugin::hook_plugins', 30 );
@@ -28,7 +28,7 @@ final class Haet_Mail {
 	}
 	
 	
-	function get_default_options() {
+	public function get_default_options() {
 		return array(
 			'fromname' 				=> 	get_bloginfo('name'),
 			'fromaddress'			=> 	get_bloginfo('admin_email'),
@@ -54,59 +54,61 @@ final class Haet_Mail {
 	}
 
 	function get_default_theme_options() {	
-		return array(
-			'background'			=>	'#ffffff',
-			'contentbackground'		=>	'#FFFFFF',
-			'headertext' 			=> 	get_bloginfo('name'),
-			'headerfont'			=>	'Georgia,Times New Roman,serif',
-			'headeralign'			=> 	'right',
-			'headerfontsize'		=>	40,
-			'headerbold'			=>	0,
-			'headeritalic'			=>	1,
-			'headertexttranform'	=>	'none',
-			'headerbackground'		=>	'#28717f',
-			'headercolor'			=>	'#ffffff',
-			'headerpaddingtop'		=>	50,
-			'headerpaddingright'	=> 	24,
-			'headerpaddingbottom'	=>	12,
-			'headerpaddingleft'		=>	24,
-			'header_spacer'			=>	10,
-			'headerimg_placement'	=>  'replace_text',
-			'headerimg'				=>	'',
-			'headerimg_width'		=>	'',
-			'headerimg_height'		=>	'',
-			'headerimg_alt'			=>	'',
-			'headerimg_align'		=>  '',
-			'headlinefont'			=>	'Georgia,Times New Roman,serif',
-			'headlinealign'			=> 	'left',
-			'headlinefontsize'		=>	25,
-			'headlinebold'			=>	0,
-			'headlineitalic'		=>	1,
-			'headlinetexttranform'	=>	'none',
-			'headlinecolor'			=>	'#2d8496',
-			'subheadlinefont'		=>	'Georgia,Times New Roman,serif',
-			'subheadlinealign'		=> 	'left',
-			'subheadlinefontsize'	=>	20,
-			'subheadlinebold'		=>	0,
-			'subheadlineitalic'		=>	1,
-			'subheadlinetexttranform'	=>	'none',
-			'subheadlinecolor'		=>	'#28717f',
-			'textfont'				=>	'Helvetica, Arial, sans-serif',
-			'textalign'				=> 	'left',
-			'textfontsize'			=>	14,
-			'textbold'				=>	0,
-			'textitalic'			=>	0,
-			'textcolor'				=>	'#878787',
-			'linkcolor'				=>	'#777777',
-			'linkbold'				=>	0,
-			'linkitalic'			=>	0,
-			'linktexttranform'		=>	'none',
-			'linkunderline'			=>	1,
-			'footer'				=> 	'<p>&nbsp;</p>
-<p style="text-align: center;"><span style="color: #d6d6d6;"><span style="font-family: Helvetica, Arial, sans-serif;"><span style="font-size: 12px;">Sample Footer text: © 2017 Acme, Inc.<br /></span><span style="font-size: 12px;"><strong>Acme, Inc.<br /></strong></span><span style="font-size: 12px;">123 Main St., </span></span><span style="font-size: 12px; font-family: Helvetica, Arial, sans-serif;">Springfield, MA 12345</span></span><br /><span style="font-size: 12px; font-family: Helvetica, Arial, sans-serif; color: #d6d6d6;"><a href="http://www.acme-inc.com"><span style="color: #d6d6d6;">www.acme-inc.com</span></a></span></p>',
-			'footerlink'			=>	1,
-			'footerbackground'		=>	'#28717f',
-		);
+		return json_decode('{
+			"background": "#ffffff",
+			"contentbackground": "#f3f3f3",
+			"headertext": "' . get_bloginfo('name') . '",
+			"headerfont": "Trebuchet, sans-serif",
+			"headeralign": "center",
+			"headerfontsize": "21",
+			"headerbold": "0",
+			"headeritalic": 0,
+			"headertexttransform": "uppercase",
+			"headerbackground": "#ffffff",
+			"headercolor": "#595959",
+			"headerpaddingtop": "50",
+			"headerpaddingright": 0,
+			"headerpaddingbottom": 31,
+			"headerpaddingleft": 0,
+			"header_spacer": 10,
+			"headerimg_placement": "just_text",
+			"headerimg": "",
+			"headerimg_width": "600",
+			"headerimg_height": "1",
+			"headerimg_alt": "",
+			"headerimg_align": "",
+			"headlinefont": "Trebuchet, sans-serif",
+			"headlinealign": "left",
+			"headlinefontsize": "19",
+			"headlinebold": 0,
+			"headlineitalic": 0,
+			"headlinetexttransform": "none",
+			"headlinecolor": "#343434",
+			"subheadlinefont": "Trebuchet, sans-serif",
+			"subheadlinealign": "left",
+			"subheadlinefontsize": "18",
+			"subheadlinebold": 0,
+			"subheadlineitalic": 0,
+			"subheadlinetexttransform": "none",
+			"subheadlinecolor": "#343434",
+			"textfont": "Helvetica, Arial, sans-serif",
+			"textalign": "left",
+			"textfontsize": 14,
+			"textbold": 0,
+			"textitalic": 0,
+			"textcolor": "#878787",
+			"linkcolor": "#777777",
+			"linkbold": 0,
+			"linkitalic": 0,
+			"linktexttransform": "none",
+			"linkunderline": 1,
+			"footer": "<p><span style=\"color: #595959;\">\u00a0<\/span><\/p>\n<p style=\"text-align: center;\"><span style=\"color: #808080; font-family: Helvetica, Arial, sans-serif;\"><span style=\"font-size: 12px;\">WordPress email template created with <a style=\"color: #808080;\" href=\"https:\/\/wordpress.org\/plugins\/wp-html-mail\/\" target=\"_blank\" rel=\"noopener\">WP HTML Mail<\/a><\/span><\/span><br \/><span style=\"font-size: 12px; font-family: Helvetica, Arial, sans-serif; color: #808080;\"><a style=\"color: #808080;\" href=\"' . get_home_url() . '\">' . str_replace( 'http://', '', str_replace( 'https://', '', untrailingslashit( get_home_url() ) ) ) . '<\/a><\/span><\/p>",
+			"footerbackground": "#ffffff",
+			"headertexttranform": "none",
+			"headlinetexttranform": "none",
+			"subheadlinetexttranform": "none",
+			"linktexttranform": "none"
+		}',true);
 	}
 
 
@@ -137,10 +139,12 @@ final class Haet_Mail {
 	
 	function admin_page_scripts_and_styles($page){
 		if(strpos($page, 'wp-html-mail')){
+			$plugin_data = get_plugin_data( HAET_MAIL_PATH.'/wp-html-mail.php' );
+            
 			wp_enqueue_style( 'wp-color-picker' );
-			wp_enqueue_script('haet_mail_admin_script',  HAET_MAIL_URL.'/js/admin_script.js', array( 'wp-color-picker','jquery-ui-dialog','wp-pointer','jquery'));
-			wp_enqueue_style('haet_mail_admin_style',  HAET_MAIL_URL.'/css/style.css');
-			wp_enqueue_style (  'wp-jquery-ui-dialog');
+			wp_enqueue_script( 'haet_mail_admin_script',  HAET_MAIL_URL.'/js/admin_script.js', [ 'wp-color-picker','jquery-ui-dialog','wp-pointer','jquery' ], $plugin_data['Version'] );
+			wp_enqueue_style( 'haet_mail_admin_style',  HAET_MAIL_URL.'/css/style.css', [], $plugin_data['Version'] );
+			wp_enqueue_style ( 'wp-jquery-ui-dialog' );
 			wp_enqueue_media();
 		}
 	}
@@ -184,6 +188,8 @@ final class Haet_Mail {
 		$this->process_admin_page_actions();
 		
 		$theme_options = $this->get_theme_options('default');
+		$theme_options = $this->init_headerimg_placement( $theme_options );
+
 		$plugin_options = Haet_Sender_Plugin::get_plugin_options();
 		if( isset($_POST['enable_import_theme_options']) && $_POST['enable_import_theme_options'] && isset($_POST['import_theme_options']) ){
 			$theme_options = $this->import_theme_options( $_POST['import_theme_options'], $theme_options );
@@ -201,7 +207,20 @@ final class Haet_Mail {
 			echo '</strong></p></div>';	
 		} 
 
-		$use_old_editor = isset( $options['use_classic_template_editor'] ) && $options['use_classic_template_editor'];
+		$is_able_to_use_new_editor = $this->templatedesigner->isWPVersionCompatible();
+
+		// we show a notice to the users until they have called the settings at least once in order to make sure they checked the updated template
+		if( $is_able_to_use_new_editor 
+			&& ( 
+				!array_key_exists( 'user_checked_settings_in_v3', $options ) 
+				|| !$options['user_checked_settings_in_v3'] 
+			)){
+			$options['user_checked_settings_in_v3'] = true;
+			update_option('haet_mail_options', $options);
+		}
+
+		$use_old_editor = !$is_able_to_use_new_editor || ( isset( $options['use_classic_template_editor'] ) && $options['use_classic_template_editor'] );
+
 		if(array_key_exists('tab', $_GET))
 			$tab = $_GET['tab'];
 		else
@@ -612,32 +631,6 @@ final class Haet_Mail {
 
 
 
-
-	function get_footer_link_color( $hex ) {
-		$color = '#999999';
-		// validate hex string
-		preg_match("/#([0-9a-f]*)/", $hex, $output_array);
-		if( count($output_array) <= 0 || $output_array[1] == '' || strlen($output_array[1]) != 3 || strlen($output_array[1]) != 6 )
-			return $color;
-		$hex = $output_array[1];
-
-		if ( strlen( $hex ) == 3 ) {
-			$hex = $hex[0] + $hex[0] + $hex[1] + $hex[1] + $hex[2] + $hex[2];
-		}
-		
-		$sum_color = 0;
-		for ($i = 0; $i < 3; $i++) {
-			$sum_color += hexdec( substr( $hex, $i*2, 2 ) );
-		}
-		if( ($sum_color/3) > 128 )//it's a light background color
-			$color = '#555555';
-		
-		
-		return $color;
-	}
-
-
-
 	private function get_header( $options ){
 		$headerimg_placement = $options['headerimg_placement'];
 		if( !$headerimg_placement ) 
@@ -645,6 +638,7 @@ final class Haet_Mail {
 
 		$headertext_field_key = $this->multilanguage->get_translateable_theme_options_key( $options, 'headertext' );
 		$headertext = $options[$headertext_field_key];
+		$headertext = str_replace( '  ', ' &nbsp;', $headertext );
 
 		$headerimg_field_key = $this->multilanguage->get_translateable_theme_options_key( $options, 'headerimg' );
 
@@ -774,11 +768,6 @@ final class Haet_Mail {
 
 		$footer_field_key = $this->multilanguage->get_translateable_theme_options_key( $options, 'footer' );
 
-		if(isset($options['footerlink']) && $options['footerlink']==1){
-			$footerlinkcolor = $this->get_footer_link_color( ($options['footerbackground']!=''?$options['footerbackground']:$options['background']) ); 
-			$options[$footer_field_key].= '<p style="text-align:center;"><br><br><a href="https://wordpress.org/plugins/wp-html-mail/" class="footerlink" style="color:'.$footerlinkcolor.'; font-size:11px;">create your own WordPress email template with WP HTML Mail</a></p>';
-		}
-
 		$options[$footer_field_key] = stripslashes( $options[$footer_field_key] );
 		$options['footer'] = apply_filters( 'haet_mail_footer', $options[$footer_field_key] );
 
@@ -850,8 +839,10 @@ final class Haet_Mail {
 	}
 
 
-	public function get_tab_url($tab) {
-		return add_query_arg( 'tab', $tab, remove_query_arg( 'advanced-action' ) );
+	public function get_tab_url($tab = "") {
+		if( $tab )
+			return add_query_arg( 'tab', $tab, remove_query_arg( 'advanced-action' ) );
+		return remove_query_arg( 'tab', remove_query_arg( 'advanced-action' ) );
 	}
 
 
@@ -983,6 +974,22 @@ final class Haet_Mail {
 				&& isset( $options['debugmode'] ) 
 				&& $options['debugmode']
 		);
+	}
+
+	/**
+	 * set a default value for the header image placement.
+	 * this is especially important for upgrading from versions before 3.0 where this parameter didn't exist
+	 */
+	public function init_headerimg_placement( $theme_options ){
+		$headerimg_field_key = $this->multilanguage->get_translateable_theme_options_key( $theme_options, 'headerimg' );
+
+		if( $theme_options['headerimg_placement'] != 'just_text' 
+			&& (
+				!isset($theme_options[$headerimg_field_key]) 
+				|| strlen($theme_options[$headerimg_field_key])<5
+		 	) )
+			$theme_options['headerimg_placement'] = 'just_text';
+		return $theme_options;
 	}
 }
 

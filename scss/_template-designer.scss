@@ -27,6 +27,7 @@
 		}
 
 		.components-color-picker {
+
 			.components-base-control__label,
 			.components-visually-hidden {
 				display: none;
@@ -47,7 +48,7 @@
 
 		.mail-content-wrap {
 			width: 600px;
-			margin: 10px auto;
+			margin: 1em auto 0 auto;
 		}
 	}
 
@@ -128,13 +129,13 @@
 		}
 
 		&:hover {
-			& > .edit-frame-default {
+			&>.edit-frame-default {
 				border-color: rgba(83, 94, 102, 0.5);
 				box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
 			}
 
-			& > .edit-frame-default,
-			& > .edit-frame-active {
+			&>.edit-frame-default,
+			&>.edit-frame-active {
 				.edit-frame-handle {
 					opacity: 1;
 					box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
@@ -144,11 +145,17 @@
 		}
 	}
 
-	.components-base-control__field + .components-base-control__help {
+	.components-base-control__field+.components-base-control__help {
 		margin-top: 0;
 	}
 
-	// header image component
+	.components-base-control+.components-base-control {
+		margin-bottom: 0;
+	}
+
+	/*********************************
+	* header image component
+	*********************************/
 	.headerimage {
 		.components-resizable-box__container {
 			display: inline-block;
@@ -172,15 +179,33 @@
 		text-shadow: 1px -1px #fff, 1px 1px #fff, -1px 1px #fff, -1px -1px #fff;
 	}
 
-	// content component
+	/*********************************
+	* content component
+	*********************************/
 	.mail-content {
 		padding-left: 24px;
 		padding-right: 24px;
 	}
 
-	//footer component
+	/*********************************
+	* footer component
+	*********************************/
 	.mail-footer {
 		padding-left: 24px;
 		padding-right: 24px;
+		padding-bottom: 1em;
+		font-size: 12px;
+		line-height: 16px;
+		color: #aaaaaa;
+
+		a {
+			color: #aaaaaa;
+		}
+	}
+
+	.footer-html .components-textarea-control__input {
+		font-family: 'Courier New', Courier, monospace;
+		font-size: 13px;
+		min-height: 300px;
 	}
 }
