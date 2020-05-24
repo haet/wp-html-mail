@@ -67,7 +67,6 @@ export default function MailHeader({}) {
 							},
 						]}
 						onChange={(value) => {
-							console.log(value, settings.headerimg_placement);
 							templateDesignerContext.updateSetting(
 								"headerimg_placement",
 								value

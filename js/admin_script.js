@@ -71,7 +71,7 @@ haet_mail.switch_edit_mode = function () {
 			.slideUp(400);
 	} else {
 		$(".haet-mail-woocommerce-global-template").slideDown(400);
-		$(".haet-mail-woocommerce-mailbuilder").slideUp(400);
+		$(".haet-mail-woocommerce-mailbuilder, .addon-emails").slideUp(400);
 	}
 };
 

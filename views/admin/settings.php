@@ -32,17 +32,22 @@ if( !isset( $options['survey2020_completed'] ) && !isset( $options['survey2020_d
 	
 <form method="post" id="haet_mail_form" action="<?php echo $_SERVER["REQUEST_URI"]; ?>">
 	<?php
+	do_action( 'haet_mail_before_settings_tab_' . $tab );
 	switch ($tab){
 		case 'general':
+			// for backwards 2.x compatibility
 			include('settings-general.php');
 			break; 
 		case 'header': 
+			// for backwards 2.x compatibility
 			include('settings-header.php');
 			break; 
 		case 'content': 
+			// for backwards 2.x compatibility
 			include('settings-content.php');
 			break;
 		case 'footer':
+			// for backwards 2.x compatibility
 			include('settings-footer.php');
 			break;
 		case 'template':
@@ -60,15 +65,23 @@ if( !isset( $options['survey2020_completed'] ) && !isset( $options['survey2020_d
 		case 'survey':
 			include('settings-survey.php');
 			break;
+		case 'webfonts':
+			if( defined( 'HAET_MAIL_WEBFONTS_PATH' ) )
+				include( HAET_MAIL_WEBFONTS_PATH.'views/admin/settings-webfonts.php' );
+			else
+				include('settings-webfonts-sales-page.php');
+			break;
 		default:
 			$is_plugin_tab = false;
 			if( isset($active_plugins[ $_GET['tab'] ] ) ){
 				$active_plugins[ $_GET['tab'] ]['class']::settings_tab();
 				$is_plugin_tab = true;
 			}
-		break; ?>
-	<?php } //switch Tab ?>
-	<?php if( $tab != 'survey' && $tab != 'template' ): ?>
+		break;  
+	} //switch Tab 
+	do_action( 'haet_mail_after_settings_tab_' . $tab );
+	?>
+	<?php if( $tab != 'survey' && $tab != 'template' && $tab != 'webfonts' ): ?>
 		<div class="submit">
 			<input type="submit" name="update_haet_mailSettings" class="button-primary" value="<?php _e('Save and Preview', 'wp-html-mail') ?>" />
 			<!--<input type="submit" name="reload_haet_mailtemplate" class="button-secondary" value="<?php _e('Discard changes and reload template', 'wp-html-mail') ?>" />-->
@@ -76,7 +89,7 @@ if( !isset( $options['survey2020_completed'] ) && !isset( $options['survey2020_d
 	<?php endif; ?>
 </form>
 
-<?php if( $tab != 'survey' ): ?>
+<?php if( $tab != 'survey' && $tab != 'webfonts' ): ?>
 	<div class="nav-tab-wrapper">
 		<h3 class="haet-mail-preview-headline">
 			<?php _e('Preview','wp-html-mail'); ?>

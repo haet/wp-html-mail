@@ -1,19 +1,4 @@
 #wp-html-mail-template-designer {
-	display: flex;
-	position: relative;
-	min-height: 600px;
-
-	.mail-loader {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-	}
-
-	.components-notice {
-		margin: 0;
-	}
-
 	.mail-optionspanel {
 		width: 300px;
 		z-index: 10;
@@ -39,12 +24,6 @@
 		width: calc(100% - 300px);
 		min-width: 700px;
 		min-height: 300px;
-
-		.save-button-pane {
-			margin-bottom: 20px;
-			justify-content: flex-end;
-			background-color: #f3f4f5;
-		}
 
 		.mail-content-wrap {
 			width: 600px;

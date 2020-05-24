@@ -45,9 +45,10 @@ final class Haet_Mail {
 	function send_test() {
 		$email = $_POST['email'];
 		echo $email;		
-		wp_mail( $email, 'WP HTML mail - TEST', '<h1>Lorem ipsum dolor sit amet</h1>
-			<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed <a href="#">diam nonumy</a> eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.<br>Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-			<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>',
+		wp_mail( 
+			$email, 
+			'WP HTML mail - TEST', 
+			$this->get_demo_content(),
 			'Content-Type: text/html'
 		);
 		wp_die();
@@ -277,13 +278,13 @@ final class Haet_Mail {
 					$tabs[ $plugin['name'] ] =  $plugin['display_name'];
 			}			
 		}
-		
+		$tabs['webfonts'] 	=  __('Webfonts', 'wp-html-mail');
 		$tabs['plugins']	=  __('Plugins','wp-html-mail');
 
 		// removed after 2.7.3 because custom templates caused confusion
 		// added again in 2.8 to add "settings reset" buttons
 		$tabs['advanced']	=  __('Advanced','wp-html-mail');
-		
+
 		include HAET_MAIL_PATH.'views/admin/settings.php';
 	
 	}
@@ -361,7 +362,7 @@ final class Haet_Mail {
 
 	private function import_theme_options( $new_options, $saved_options ){
 		$new_options = json_decode( stripslashes( $new_options ), true );
-		error_log( print_r( $new_options,true ) );
+		
 		if( $new_options ){
 			$options = array_merge($saved_options,$new_options);
 
@@ -440,8 +441,17 @@ final class Haet_Mail {
 			if( is_array( $headers_string ) )
 				$headers_string =  implode( "\n", $headers_string );
 
-			$is_plaintext = ( stripos($headers_string, 'Content-Type:') === false || stripos($headers_string, 'Content-Type: text/plain') !== false );
-
+			// check the content type passed via wp_mail and the 
+			// content type passed via filter. If one them is text/html 
+			// the sender already did his work and we don't have to escape 
+			// the content anymore.
+			$is_plaintext = ( 
+					( 
+						stripos( $headers_string, 'Content-Type:' ) === false 
+						|| stripos( $headers_string, 'Content-Type: text/plain' ) !== false 
+					)
+					&& apply_filters( 'wp_mail_content_type', 'text/plain' ) != 'text/html'
+				);
 
 			if( $sender_plugin ){
 				$template = str_replace('###plugin-class###','plugin-'.$sender_plugin->get_plugin_name(), $template);
@@ -824,7 +834,8 @@ final class Haet_Mail {
 	}
 
 
-	function get_fonts(){
+
+	public function get_default_fonts(){
 		return array(
 			'Arial, Helvetica, sans-serif' 		=>	'Arial',
 			'Helvetica, Arial, sans-serif' 		=>	'Helvetica',
@@ -836,6 +847,11 @@ final class Haet_Mail {
 			'Trebuchet, sans-serif'				=>  'Trebuchet',
 			'Verdana, sans-serif'				=>  'Verdana',
 		);
+	}
+
+
+	public function get_fonts(){
+		return apply_filters( 'haet_mail_fonts', $this->get_default_fonts() );
 	}
 
 

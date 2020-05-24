@@ -1,10 +1,5 @@
-import { useState, useEffect, useContext } from "@wordpress/element";
-import { Panel, PanelBody, PanelRow } from "@wordpress/components";
-import { more } from "@wordpress/icons";
-import { Card, CardBody } from "@wordpress/components";
-import { BaseControl } from "@wordpress/components";
-import { ColorPicker } from "@wordpress/components";
-import { FontSizePicker } from "@wordpress/components";
+import { useContext } from "@wordpress/element";
+import { Panel } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 
 import { TemplateDesignerContext } from "../contexts/TemplateDesignerContext";
