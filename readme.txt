@@ -1,6 +1,6 @@
-=== WordPress Email Template Designer - WP HTML Mail ===
-Contributors: codemiq,haet
-Tags: email template, html mail, email design, mail, woocommerce, ninja-forms, caldera-forms, wp-e-commerce, easy-digital-downloads, contact-form-7, mandrill, postman, gravityforms
+=== WP HTML Mail - Email Designer ===
+Contributors: haet
+Tags: email template, html mail, email design, mail, email templates, ninja-forms, caldera-forms, wp-e-commerce, easy-digital-downloads, woocommerce, contact-form-7, mandrill, postman, gravityforms
 Requires at least: 5.0
 Tested up to: 5.4.1
 Requires PHP: 7.2
@@ -8,7 +8,7 @@ Stable tag: 3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-All in one email template design solution for Ninja Forms, Caldera Forms, Gravity Forms, WooCommerce, CF7, Support Plus, EDD, ...
+All in one email template solution for Ninja Forms, Caldera Forms, Gravity Forms, WooCommerce, CF7, Support Plus, EDD, ...
 
 == Description ==
 Beautiful responsive HTML mails, fully customizable without any coding knowledge 
@@ -46,6 +46,8 @@ Read more about the [Easy Digital Downloads Email template](https://codemiq.com/
 Turn email formatting on/off for specific plugins.
 Currently supported are
 
+* Formidable Forms
+* WP Foro
 * Ninja Forms
 * Caldera Forms
 * Contact Form 7
@@ -75,7 +77,6 @@ Allthough we didn't optimize WP HTML Mail for these plugins our users use it wit
 * Memberpress
 * Modern Events Calendar
 * Uncanny Owl Groups
-* ShieldSecurity
 * ...
 
 
@@ -139,12 +140,6 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 
 == Changelog ==
-
-= 3.0.1 =
-* enabled transient caching for template library
-* changed the way content type is detected to also support filters
-* improved support for ShieldSecurity 
-
 
 = 3.0 =
 * brand new react based template editor (for WP 5.4+)
