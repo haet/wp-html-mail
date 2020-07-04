@@ -12,6 +12,8 @@ require HAET_MAIL_PATH . 'includes/class-haet-sender-plugin-happyforms.php';
 require HAET_MAIL_PATH . 'includes/class-haet-sender-plugin-ultimate-wp-mail.php';
 require HAET_MAIL_PATH . 'includes/class-haet-sender-plugin-divi-theme.php';
 require HAET_MAIL_PATH . 'includes/class-haet-sender-plugin-terawallet.php';
+require HAET_MAIL_PATH . 'includes/class-haet-sender-plugin-formidable.php';
+require HAET_MAIL_PATH . 'includes/class-haet-sender-plugin-wpforo.php';
 
 class Haet_Different_Plugin_Exception extends Exception {}
 
@@ -100,6 +102,20 @@ class Haet_Sender_Plugin {
                 'class'     =>  'Haet_Sender_Plugin_Tera_Wallet',
                 'display_name' => 'Tera Wallet',
                 'image_url' =>  HAET_MAIL_URL . '/images/woo-wallet.png'
+            ),
+            'formidable'   =>  array(
+                'name'      =>  'formidable',
+                'file'      =>  'formidable/formidable.php',
+                'class'     =>  'Haet_Sender_Plugin_Formidable',
+                'display_name' => 'Formidable Forms',
+                'image_url' =>  HAET_MAIL_URL . '/images/formidable.png'
+            ),
+            'wpforo'   =>  array(
+                'name'      =>  'wpforo',
+                'file'      =>  'wpforo/wpforo.php',
+                'class'     =>  'Haet_Sender_Plugin_WPForo',
+                'display_name' => 'WP Foro',
+                'image_url' =>  HAET_MAIL_URL . '/images/wpforo-logo.png'
             ),
         );
 
