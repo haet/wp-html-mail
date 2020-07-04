@@ -59,7 +59,6 @@ class Haet_TemplateDesigner {
 
 	public function getThemeSettings(){
 		$theme_options = Haet_Mail()->get_theme_options('default');
-		$theme_options = Haet_Mail()->init_headerimg_placement( $theme_options );
 
         return new \WP_REST_Response( $theme_options );
 	}

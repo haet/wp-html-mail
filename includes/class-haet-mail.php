@@ -130,6 +130,8 @@ final class Haet_Mail {
 		$options = $this->get_default_theme_options();
 		 
 		$haet_mail_options = get_option('haet_mail_theme_options');
+
+		$haet_mail_options = $this->init_headerimg_placement( $haet_mail_options );
 		if (!empty($haet_mail_options)) {
 			foreach ($haet_mail_options as $key => $option)
 				$options[$key] = $option;
@@ -189,7 +191,6 @@ final class Haet_Mail {
 		$this->process_admin_page_actions();
 		
 		$theme_options = $this->get_theme_options('default');
-		$theme_options = $this->init_headerimg_placement( $theme_options );
 
 		$plugin_options = Haet_Sender_Plugin::get_plugin_options();
 		if( isset($_POST['enable_import_theme_options']) && $_POST['enable_import_theme_options'] && isset($_POST['import_theme_options']) ){
@@ -278,11 +279,9 @@ final class Haet_Mail {
 					$tabs[ $plugin['name'] ] =  $plugin['display_name'];
 			}			
 		}
-		$tabs['webfonts'] 	=  __('Webfonts', 'wp-html-mail');
+		// $tabs['webfonts'] 	=  __('Webfonts', 'wp-html-mail');
 		$tabs['plugins']	=  __('Plugins','wp-html-mail');
 
-		// removed after 2.7.3 because custom templates caused confusion
-		// added again in 2.8 to add "settings reset" buttons
 		$tabs['advanced']	=  __('Advanced','wp-html-mail');
 
 		include HAET_MAIL_PATH.'views/admin/settings.php';
@@ -647,13 +646,16 @@ final class Haet_Mail {
 			$headerimg_placement = 'replace_text';
 
 		$headertext_field_key = $this->multilanguage->get_translateable_theme_options_key( $options, 'headertext' );
-		$headertext = $options[$headertext_field_key];
+		if( array_key_exists( $headertext_field_key, $options ) )
+			$headertext = $options[$headertext_field_key];
+		else
+			$headertext = $options['header'];
 		$headertext = str_replace( '  ', ' &nbsp;', $headertext );
 
 		$headerimg_field_key = $this->multilanguage->get_translateable_theme_options_key( $options, 'headerimg' );
 
 		if( $headerimg_placement != 'just_text' 
-			&& isset($options[$headerimg_field_key]) 
+			&& array_key_exists( $headerimg_field_key, $options )  
 			&& strlen($options[$headerimg_field_key])>5 ){
 
 			$width = isset($options['headerimg_width']) && intval( $options['headerimg_width'] ) ? $options['headerimg_width'] : 0;
@@ -777,8 +779,10 @@ final class Haet_Mail {
 			$options['footerbackground'] = 'transparent';
 
 		$footer_field_key = $this->multilanguage->get_translateable_theme_options_key( $options, 'footer' );
-
-		$options[$footer_field_key] = stripslashes( $options[$footer_field_key] );
+		if( array_key_exists( $footer_field_key, $options ) )
+			$options[$footer_field_key] = stripslashes( $options[$footer_field_key] );
+		else
+			$options[$footer_field_key] = $options['footer'];
 		$options['footer'] = apply_filters( 'haet_mail_footer', $options[$footer_field_key] );
 
 		foreach ($options as $option => $value) {
@@ -998,13 +1002,15 @@ final class Haet_Mail {
 	 */
 	public function init_headerimg_placement( $theme_options ){
 		$headerimg_field_key = $this->multilanguage->get_translateable_theme_options_key( $theme_options, 'headerimg' );
+		if( !array_key_exists( 'headerimg_placement', $theme_options ) )
+			$theme_options['headerimg_placement'] = '';
 
 		if( $theme_options['headerimg_placement'] != 'just_text' 
 			&& (
 				!isset($theme_options[$headerimg_field_key]) 
 				|| strlen($theme_options[$headerimg_field_key])<5
 		 	) )
-			$theme_options['headerimg_placement'] = 'just_text';
+			$theme_options['headerimg_placement'] = 'replace_text';
 		return $theme_options;
 	}
 }

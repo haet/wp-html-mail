@@ -4,7 +4,9 @@ class Haet_Multilanguage {
 	private $multilang_plugin;
 
 	function __construct(){
-		if( apply_filters( 'wpml_current_language', NULL ) )
+		if( defined( 'POLYLANG_BASENAME' ) )
+			$this->multilang_plugin = 'Polylang';
+		elseif( apply_filters( 'wpml_current_language', NULL ) )
 			$this->multilang_plugin = 'WPML';
 		else
 			$this->multilang_plugin = false;
@@ -14,11 +16,18 @@ class Haet_Multilanguage {
 		return $this->multilang_plugin !== false;
 	}	
 
+	public function get_multilang_plugin(){
+		return $this->multilang_plugin;
+	}
+
 	public function get_current_language(){
 		if( $this->multilang_plugin == 'WPML' ){
 			$current_language = apply_filters( 'wpml_current_language', NULL );
 			if( $current_language != 'all' )
 				return $current_language;
+		}elseif( $this->multilang_plugin == 'Polylang' ){
+			$current_language = pll_current_language();
+			return $current_language;
 		}
 
 		return '';
@@ -60,6 +69,21 @@ class Haet_Multilanguage {
 			return $key . '_' . $current_language;
 		
 		return $key;
+	}
+
+
+	public function get_email_post_id_in_current_language( $post_id ){
+		if( !$this->is_multilanguage_site() )
+			return false;
+
+		if( $this->multilang_plugin == 'WPML' )
+			$translated_post_id = apply_filters( 'wpml_object_id',  $post_id, 'wphtmlmail_mail', FALSE );
+		elseif( $this->multilang_plugin == 'Polylang' )
+			$translated_post_id = pll_get_post( $post_id );
+		
+		return ( $translated_post_id ? $translated_post_id : false );
+
+			
 	}
 }
 

@@ -2,9 +2,9 @@
 Contributors: codemiq,haet
 Tags: email template, html mail, email design, mail, woocommerce, ninja-forms, caldera-forms, wp-e-commerce, easy-digital-downloads, contact-form-7, mandrill, postman, gravityforms
 Requires at least: 5.0
-Tested up to: 5.4.1
+Tested up to: 5.4.2
 Requires PHP: 7.2
-Stable tag: 3.0
+Stable tag: 3.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,10 +140,15 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 == Changelog ==
 
+= 3.0.2 =
+* forgot to remove the webfonts tab in previous version which is still under development
+
+
 = 3.0.1 =
 * enabled transient caching for template library
 * changed the way content type is detected to also support filters
 * improved support for ShieldSecurity 
+* Header and Footer also translatable with Polylang now
 
 
 = 3.0 =

@@ -16,7 +16,6 @@ class Haet_Sender_Plugin_Ninja_forms extends Haet_Sender_Plugin {
     *   mofify the email content before applying the template
     **/
     public function modify_content($content){
-        $content = $this->replace_checkbox_values($content);
         $content = $this->add_blank_between_multiple_options($content);
         return $content;
     }
@@ -36,12 +35,6 @@ class Haet_Sender_Plugin_Ninja_forms extends Haet_Sender_Plugin {
     public function modify_styled_mail($message){
         return $message;
     }  
-
-    private function replace_checkbox_values($message){
-        $message = preg_replace('/\<td(.*)\>(checked)\<\/td\>/', '<td $1>'.__('Yes').'</td>', $message);
-        $message = preg_replace('/\<td(.*)\>(unchecked)\<\/td\>/', '<td $1>'.__('No').'</td>', $message);
-        return $message;
-    }
 
     private function add_blank_between_multiple_options($message){
         $message = str_replace(',',', ', $message);

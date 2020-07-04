@@ -89,7 +89,13 @@ if( !isset( $options['survey2020_completed'] ) && !isset( $options['survey2020_d
 	<?php endif; ?>
 </form>
 
-<?php if( $tab != 'survey' && $tab != 'webfonts' ): ?>
+<?php if( 
+		$tab != 'survey' 
+		&& $tab != 'webfonts' 
+		&& ( 
+			!Haet_Mail()->multilanguage->is_multilanguage_site() 
+			|| Haet_Mail()->multilanguage->get_current_language() 
+		) ): ?>
 	<div class="nav-tab-wrapper">
 		<h3 class="haet-mail-preview-headline">
 			<?php _e('Preview','wp-html-mail'); ?>
@@ -117,18 +123,6 @@ if( !isset( $options['survey2020_completed'] ) && !isset( $options['survey2020_d
 <?php endif; ?>
 
 <?php if( ( !isset($is_plugin_tab) || false===$is_plugin_tab ) && $tab != 'survey' ): ?>
-	<?php /*<div class="postbox haet-mail-send-test">
-		<h3 class="hndle"><span><?php _e('Send a test mail','wp-html-mail'); ?></span></h3>
-		<div style="" class="inside">
-			<input id="haet_mail_test_address" required type="email" placeholder="you@example.org"> 
-			<button class="button-secondary" id="haet_mail_test_submit"><?php _e('send test mail','wp-html-mail'); ?></button>
-			<div id="haet_mail_test_sent" class="haet-mail-dialog" title="<?php _e('Email sent','wp-html-mail'); ?>">
-				<p>
-					<?php _e('Your message has been sent.','wp-html-mail'); ?>
-				</p>
-			</div>
-		</div>
-	</div>*/ ?>
 	<div id="haet_mail_enable_translation_dialog" class="haet-mail-dialog" title="<?php _e('Please wait','wp-html-mail'); ?>">
 		<p style="text-align:center;">
 			<?php _e('Translation settings for this field are updated.','wp-html-mail'); ?><br/><img src="<?php echo get_admin_url(null,'/images/spinner.gif'); ?>">
