@@ -394,9 +394,9 @@ final class Haet_Mail_Builder
             $post_type = get_post_type( $post->ID );
             if ( $post_type == 'wphtmlmail_mail' ){
                 wp_enqueue_style( 'wp-color-picker' );
-                wp_enqueue_script('haet_mailbuilder_js',  HAET_MAIL_URL.'/js/mailbuilder.js', array( 'wp-color-picker', 'jquery-ui-dialog', 'jquery-ui-sortable', 'jquery'),'2.9', true);
-                wp_enqueue_style('haet_mailbuilder_css',  HAET_MAIL_URL.'/css/mailbuilder.css', array(), '2.9');
-                wp_enqueue_style('haet_mail_admin_style',  HAET_MAIL_URL.'/css/style.css', array(), '2.9');
+                wp_enqueue_script('haet_mailbuilder_js',  HAET_MAIL_URL.'/js/mailbuilder.js', array( 'wp-color-picker', 'jquery-ui-dialog', 'jquery-ui-sortable', 'jquery'),'3.0', true);
+                wp_enqueue_style('haet_mailbuilder_css',  HAET_MAIL_URL.'/css/mailbuilder.css', array(), '3.0');
+                wp_enqueue_style('haet_mail_admin_style',  HAET_MAIL_URL.'/css/style.css', array(), '3.0');
 
                 $enqueue_data = array(
                         'translations'  =>  array(),

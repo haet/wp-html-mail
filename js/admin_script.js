@@ -110,7 +110,7 @@ jQuery(document).ready(function ($) {
 
 	// Uploading files
 	var file_frame;
-	$(".upload_image_button").live("click", function (event) {
+	$(".upload_image_button").on("click", function (event) {
 		event.preventDefault();
 		// If the media frame already exists, reopen it.
 		if (file_frame) {

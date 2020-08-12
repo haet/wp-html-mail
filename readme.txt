@@ -2,9 +2,9 @@
 Contributors: codemiq,haet
 Tags: email template, html mail, email design, mail, woocommerce, ninja-forms, caldera-forms, wp-e-commerce, easy-digital-downloads, contact-form-7, mandrill, postman, gravityforms
 Requires at least: 5.0
-Tested up to: 5.4.2
+Tested up to: 5.5
 Requires PHP: 7.2
-Stable tag: 3.0.2
+Stable tag: 3.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -63,13 +63,14 @@ Currently supported are
 * [Give – Donation and Fundraising](https://wordpress.org/plugins/wp-html-mail-give/)
 * TeraWallet
 * WP E-Commerce
+* Formidable Forms
+* WP Foro
 
 Allthough we didn't optimize WP HTML Mail for these plugins our users use it with many more plugins
 
 * ACF Advanced Forms
 * Elementor Forms
 * Events Made Easy
-* Formidable Forms
 * Learndash Notifications
 * Matador Jobs
 * Memberpress
@@ -139,6 +140,11 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 
 == Changelog ==
+
+= 3.0.3 =
+* JS and CSS updates for WP 5.5
+* optimized for Formidable Forms and WP Foro
+
 
 = 3.0.2 =
 * forgot to remove the webfonts tab in previous version which is still under development
@@ -423,5 +429,7 @@ function customize_template_usage( $use_template, $mail ){
     return true;
 }
 `
+
+[another example](https://wordpress.org/support/topic/how-to-disable-template-for-certain-emails/)
 
 

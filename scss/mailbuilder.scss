@@ -62,9 +62,11 @@ $white: #FFF;
         z-index: 50;
 
         .handlediv,
-        h2 {
+        h2,
+        .postbox-header {
             display: none;
         }
+
 
         .inside {
             margin-top: 12px;
