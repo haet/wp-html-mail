@@ -521,7 +521,7 @@ final class Haet_Mail_Builder
                 $initArray['block_formats'] = 'Headline=h1;Subheadline=h2;Paragraph=p;';
 
                 $fonts = Haet_Mail()->get_fonts();
-                $initArray['font_formats'] = "";
+                $initArray['font_formats'] = " =-;";
                 foreach ($fonts as $font => $display_name) {
                     $initArray['font_formats'] .= "$display_name=$font;";
                 }

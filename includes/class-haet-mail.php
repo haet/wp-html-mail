@@ -32,6 +32,7 @@ final class Haet_Mail {
 		return array(
 			'fromname' 				=> 	get_bloginfo('name'),
 			'fromaddress'			=> 	get_bloginfo('admin_email'),
+			'disable_sender'		=>  false,
 			'testmode'				=>	false,
 			'testmode_recipient'	=>	'',
 			'use_classic_template_editor' => false
@@ -515,7 +516,9 @@ final class Haet_Mail {
 			$email['message'] = $this->prepare_email_for_delivery($email['message']);
 		}
 		
-		$use_sender = !$sender_plugin || $sender_plugin->use_sender();
+		$use_sender = !isset( $options['disable_sender'] ) || !$options['disable_sender'];
+		if( $sender_plugin )
+			$use_sender = $sender_plugin->use_sender();
 		$use_sender = apply_filters( 'haet_mail_use_sender', $use_sender, array('to' => $email['to'], 'subject' => $email['subject'], 'message' => $email['message'], 'headers' => $email['headers'], 'attachments' => $email['attachments'], 'sender_plugin' => ($sender_plugin?$sender_plugin->get_plugin_name():null)) );
 
 		if ( $use_sender ){
