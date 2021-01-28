@@ -276,7 +276,7 @@ haet_mailbuilder.close_wysiwyg_sidebar = function (
 	}
 };
 
-jQuery(document).ready(function ($) {
+jQuery( function ($) {
 	haet_mailbuilder.read_serialized_content();
 
 	$("#mailbuilder-content").sortable({
@@ -531,7 +531,7 @@ jQuery(document).ready(function ($) {
 	}
 
 	// custom CSS
-	$(".mailbuilder-custom-css-button").click(function (e) {
+	$(".mailbuilder-custom-css-button").on('click',function (e) {
 		e.preventDefault();
 
 		var $settings = $("#mb-css-edit");
@@ -584,7 +584,7 @@ jQuery(document).ready(function ($) {
 	// hide header or footer
 	$(
 		"#mailbuilder-header  .mailbuilder-hide-button,#mailbuilder-footer .mailbuilder-hide-button"
-	).click(function (e) {
+	).on('click',function (e) {
 		e.preventDefault();
 		var $button = $(this);
 		var $element = $button.parent();

@@ -33,10 +33,3 @@ mb_socialicons.apply_content = function( $element, content ){
         .siblings( '.mb-content-preview' ).html( preview_content );
 
 }
-
-
-
-
-jQuery(document).ready(function($) {
-
-});
