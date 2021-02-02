@@ -92,34 +92,50 @@ if( !isset( $options['survey2020_completed'] ) && !isset( $options['survey2020_d
 <?php if( 
 		$tab != 'survey' 
 		&& $tab != 'webfonts' 
-		&& ( 
+		): 
+		if( 
 			!Haet_Mail()->multilanguage->is_multilanguage_site() 
 			|| Haet_Mail()->multilanguage->get_current_language() 
-		) ): ?>
-	<div class="nav-tab-wrapper">
-		<h3 class="haet-mail-preview-headline">
-			<?php _e('Preview','wp-html-mail'); ?>
-		</h3>
-		<a class="nav-tab nav-tab-active haet-mail-preview-size-button" data-previewwidth="800">
-			<span class="dashicons dashicons-desktop"></span> &amp; <span class="dashicons dashicons-tablet" ></span>
-		</a>
-		<a class="nav-tab haet-mail-preview-size-button" data-previewwidth="360">
-			<span class="dashicons dashicons-smartphone"></span>
-		</a>
+		): ?>
+			<div class="nav-tab-wrapper">
+				<h3 class="haet-mail-preview-headline">
+					<?php _e('Preview','wp-html-mail'); ?>
+				</h3>
+				<a class="nav-tab nav-tab-active haet-mail-preview-size-button" data-previewwidth="800">
+					<span class="dashicons dashicons-desktop"></span> &amp; <span class="dashicons dashicons-tablet" ></span>
+				</a>
+				<a class="nav-tab haet-mail-preview-size-button" data-previewwidth="360">
+					<span class="dashicons dashicons-smartphone"></span>
+				</a>
 
-		<div class="haet-mail-send-preview">
-			<?php _e('Send a test mail','wp-html-mail'); ?>
-			<input id="haet_mail_test_address" required type="email" placeholder="you@example.org"> 
-			<button id="haet_mail_test_submit"><span class="dashicons dashicons-arrow-right-alt2"></span></button>
-			<div id="haet_mail_test_sent" class="haet-mail-dialog" title="<?php _e('Email sent','wp-html-mail'); ?>">
-				<p>
-					<?php _e('Your message has been sent.','wp-html-mail'); ?>
-				</p>
+				<div class="haet-mail-send-preview">
+					<?php _e('Send a test mail','wp-html-mail'); ?>
+					<input id="haet_mail_test_address" required type="email" placeholder="you@example.org"> 
+					<button id="haet_mail_test_submit"><span class="dashicons dashicons-arrow-right-alt2"></span></button>
+					<div id="haet_mail_test_sent" class="haet-mail-dialog" title="<?php _e('Email sent','wp-html-mail'); ?>">
+						<p>
+							<?php _e('Your message has been sent.','wp-html-mail'); ?>
+						</p>
+					</div>
+				</div>
 			</div>
-		</div>
-	</div>
-	<iframe id="mailtemplatepreview" style="width:800px; height:480px; border:1px solid #ccc;" ></iframe>
-	<br>
+			<iframe id="mailtemplatepreview" style="width:800px; height:480px; border:1px solid #ccc;" ></iframe>
+			<br>
+		<?php elseif( 
+				Haet_Mail()->multilanguage->is_multilanguage_site() 
+				&& !Haet_Mail()->multilanguage->get_current_language() 
+			): ?>
+			<div class="nav-tab-wrapper">
+				<h3 class="haet-mail-preview-headline">
+					<?php _e('Preview','wp-html-mail'); ?>
+				</h3>
+			</div>
+			<div class="notice notice-warning">
+				<p><?php _e( 'Please select a language in your admin bar at the top of the page to show the preview.', 'wp-html-mail' ); ?></p>
+			</div>
+			
+		<?php endif; ?>
+	
 <?php endif; ?>
 
 <?php if( ( !isset($is_plugin_tab) || false===$is_plugin_tab ) && $tab != 'survey' ): ?>

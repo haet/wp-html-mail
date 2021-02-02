@@ -128,15 +128,12 @@ final class Haet_Mail {
 	}
 
 	function get_theme_options($theme) {
-		$options = $this->get_default_theme_options();
-		 
-		$haet_mail_options = get_option('haet_mail_theme_options');
+		$defaults = $this->get_default_theme_options();
+		$options = get_option('haet_mail_theme_options');
 
-		$haet_mail_options = $this->init_headerimg_placement( $haet_mail_options );
-		if (!empty($haet_mail_options)) {
-			foreach ($haet_mail_options as $key => $option)
-				$options[$key] = $option;
-		}				
+		if( $options )
+			$options = $this->init_headerimg_placement( $options );
+		$options = wp_parse_args( $options, $defaults );
 		update_option('haet_mail_theme_options', $options);
 		return $options;
 	}

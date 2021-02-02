@@ -2,9 +2,9 @@
 Contributors: codemiq,haet
 Tags: email template, html mail, email design, woocommerce email, ninja-forms, caldera-forms, wp-e-commerce, easy-digital-downloads, contact-form-7, mandrill, postman, gravityforms
 Requires at least: 5.0
-Tested up to: 5.5.1
+Tested up to: 5.6
 Requires PHP: 7.2
-Stable tag: 3.0.4
+Stable tag: 3.0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -113,6 +113,12 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 
 == Changelog ==
+
+= 3.0.5 =
+* Fixed a notice about REST endpoint
+* jQuery fixes for WP 5.6
+* fixed a warning initializing options with Polylang enabled
+
 
 = 3.0.4 =
 * added an option to disable overriding the sender by default (can still be enabled for individual plugins)
