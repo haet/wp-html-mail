@@ -497,8 +497,10 @@ final class Haet_Mail_Builder
 
 
     private function create_email( $email_name ){
+        // backslash is not supported in post titles
+        $email_post_title = str_replace( '\\', '__', $email_name ); 
         $postarr = array(
-                'post_title'    =>  $email_name,
+                'post_title'    =>  $email_post_title,
                 'post_status'   =>  'publish',
                 'post_type'     =>  'wphtmlmail_mail'
             );

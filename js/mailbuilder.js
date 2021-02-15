@@ -86,7 +86,17 @@ haet_mailbuilder.read_serialized_content = function () {
 	//console.log(raw_content);
 	var content_array = [];
 
-	if (raw_content.length) content_array = JSON.parse(raw_content);
+	if (raw_content.length) {
+		// find an replace unescaped double quotes inside escaped quotes 
+		// especially for <a href=\"http://[ORDER_META field="my_field"]\" ...
+		raw_content = raw_content.replace(/(\\"[^"]*[^\\])(")([^"]*[^\\])(")([^"]*[^"]*\\")/gmi, `$1'$3'$5`);
+		try {
+			content_array = JSON.parse(raw_content);
+		} catch (e) {
+			console.log(e);
+		}
+
+	}
 
 	for (var i in content_array) {
 		haet_mailbuilder.add_content_element(
