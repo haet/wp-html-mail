@@ -2,9 +2,9 @@
 Contributors: codemiq,haet
 Tags: email template, html mail, email design, woocommerce email, ninja-forms, caldera-forms, wp-e-commerce, easy-digital-downloads, contact-form-7, mandrill, postman, gravityforms
 Requires at least: 5.0
-Tested up to: 5.6
+Tested up to: 5.7
 Requires PHP: 7.2
-Stable tag: 3.0.5
+Stable tag: 3.0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -113,6 +113,11 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 
 == Changelog ==
+
+= 3.0.6 =
+* make URLs clickable in plain text email (eg. reset password)
+* fixed missing line breaks if multiple emails are sent at once
+
 
 = 3.0.5 =
 * Fixed a notice about REST endpoint

@@ -71,7 +71,7 @@ if( !isset( $options['survey2020_completed'] ) && !isset( $options['survey2020_d
 			else
 				include('settings-webfonts-sales-page.php');
 			break;
-		default:
+		default: 
 			$is_plugin_tab = false;
 			if( isset($active_plugins[ $_GET['tab'] ] ) ){
 				$active_plugins[ $_GET['tab'] ]['class']::settings_tab();

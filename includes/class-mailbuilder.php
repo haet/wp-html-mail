@@ -419,6 +419,8 @@ final class Haet_Mail_Builder
 
 
     public function get_email_post_id( $email_name ){
+        // backslash is not supported in post titles
+        $email_name = str_replace( '\\', '__', $email_name ); 
         $options = Haet_Mail()->get_options();
         if( !isset($options['email_post_ids']) )
             $options['email_post_ids'] = array();
@@ -630,9 +632,13 @@ final class Haet_Mail_Builder
 
 
     public function print_email($email_name,$settings){
+        // backslash is not supported in post titles
+        // $email_name = str_replace( '\\', '__', $email_name ); 
         $email_id = Haet_Mail_Builder()->get_email_post_id( $email_name );
         $mailbuilder_json = get_post_meta( $email_id, 'mailbuilder_json', true );
         $mailbuilder_array = json_decode( $mailbuilder_json );
+        error_log("print_email($email_name,$settings) $email_id");
+        error_log(print_r($mailbuilder_array,true));
         if ( $mailbuilder_array != null ):
             echo '<!--mailbuilder[' . $email_name . ']-->';
             echo '<!--mailbuilder-content-start-->';

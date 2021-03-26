@@ -277,7 +277,8 @@ final class Haet_Mail {
 					$tabs[ $plugin['name'] ] =  $plugin['display_name'];
 			}			
 		}
-		// $tabs['webfonts'] 	=  __('Webfonts', 'wp-html-mail');
+		
+		$tabs['webfonts'] 	=  __('Webfonts', 'wp-html-mail');
 		$tabs['plugins']	=  __('Plugins','wp-html-mail');
 
 		$tabs['advanced']	=  __('Advanced','wp-html-mail');
@@ -416,6 +417,13 @@ final class Haet_Mail {
 		return ( is_array( $email_name ) && count( $email_name ) > 1 );
 	}
 
+	// https://stackoverflow.com/questions/3904482/match-url-pattern-in-php-using-a-regular-expression/15690891#15690891
+	// match all URLs except those preceded with " or ' which indicates the URL is already part of an attribute src="htt or href="htt...
+	private function make_urls_clickable($html){
+		return preg_replace(
+			'/\b(?<!"|\')(([\w-]+:\/\/?|www[.])[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|\/)))/s', 
+			'<a href="$1">$1</a>', $html);
+	}
 
 
 	function style_mail($email){
@@ -423,6 +431,9 @@ final class Haet_Mail {
 		$theme_options = $this->get_theme_options('default');
 		$template = $this->get_template($theme_options);
   
+		if( $this->is_debug_mode() )
+			$original_email = $email;
+
 		$sender_plugin = Haet_Sender_Plugin::detect_plugin($email);
 		if(!$sender_plugin)
 			$use_template = true;
@@ -438,6 +449,9 @@ final class Haet_Mail {
 			if( is_array( $headers_string ) )
 				$headers_string =  implode( "\n", $headers_string );
 
+			// remove our own filter (just in case it is still set because of a previous email)
+			remove_filter('wp_mail_content_type',array($this, 'set_mail_content_type'),20);
+
 			// check the content type passed via wp_mail and the 
 			// content type passed via filter. If one them is text/html 
 			// the sender already did his work and we don't have to escape 
@@ -449,6 +463,7 @@ final class Haet_Mail {
 					)
 					&& apply_filters( 'wp_mail_content_type', 'text/plain' ) != 'text/html'
 				);
+
 
 			if( $sender_plugin ){
 				$template = str_replace('###plugin-class###','plugin-'.$sender_plugin->get_plugin_name(), $template);
@@ -465,10 +480,13 @@ final class Haet_Mail {
 					$email['message'] = htmlentities($email['message']);
 				
 					$email['message'] = wpautop($email['message']);
+					
 				}elseif( $is_plaintext && isset( $options['invalid_contenttype_to_html'] ) && $options['invalid_contenttype_to_html'] ) {
 					// user has explicitly decided to interpret text as html
 					// but if the text doesn't contain any html tags but \n it get's merged into a single line
 					// see: https://wordpress.org/support/topic/password-recover-link/
+					
+					
 					if( !preg_match('/<[^h][^>]*>/m', $email['message'], $output_array) 
 						&& strpos( $email['message'], "\n" ) !== false ){
 						// found no HTML tags but line breaks
@@ -476,10 +494,22 @@ final class Haet_Mail {
 						//replace links like <http://... with <a href="http://..."
 						// removed in 2.9.1 because we should not convert plaintext to html 
 						// added again in 2.9.2 because of the password reset link
+						// not necessary anymore sind WP 5.4 but we keep it for a while for backwards compatibility
 						$email['message'] = preg_replace('/\<http(.*)\>/', '<a href="http$1">http$1</a>', $email['message']); 
 					}
-
 				}
+
+				if( $is_plaintext ){
+					// nor matter whether or not invalid_contenttype_to_html is set
+
+					// SINCE 3.0.6: in WP version 5.4 the brackets around the password reset link 
+					// have been removed ( https://core.trac.wordpress.org/ticket/44589 )
+					// some email client now show the link as plain text not as link
+					// https://wordpress.org/support/topic/no-links-9/
+					// we keep the line preg_replace('/\<http... below for backwards compatibility and add a general URL matcher here
+					$email['message'] = $this->make_urls_clickable( $email['message'] );
+				}
+				
 			}
 
 			// drop <style> blocks in content
@@ -548,7 +578,9 @@ final class Haet_Mail {
             $debug .= '=====GET:'.print_r($_GET,true)."\n\n";
             $debug .= 'SENDER-PLUGIN: '.print_r($sender_plugin,true)."\n\n";
             $debug .= 'ACTIVE-PLUGINS: <pre>'.print_r(Haet_Sender_Plugin::get_active_plugins(),true)."\n\n";
-            
+			$debug .= 'is_plaintext: ' . ( $is_plaintext ? 'YES' : 'NO' ) . "\n";
+			$debug .= '===== ORIGINAL EMAIL====='."\n";
+            $debug .= print_r( $original_email, true );
             file_put_contents( $debug_filename, $debug );
 			$email['attachments'][] = $debug_filename;
 		}
