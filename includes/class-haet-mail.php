@@ -826,7 +826,7 @@ final class Haet_Mail {
 				$value=($value==1?'underline':'none');
 			$template = str_replace('###'.$option.'###', $value, $template);
 		}
-		return $template;
+		return do_shortcode($template);
 	}
 
 
