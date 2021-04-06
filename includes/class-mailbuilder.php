@@ -637,8 +637,8 @@ final class Haet_Mail_Builder
         $email_id = Haet_Mail_Builder()->get_email_post_id( $email_name );
         $mailbuilder_json = get_post_meta( $email_id, 'mailbuilder_json', true );
         $mailbuilder_array = json_decode( $mailbuilder_json );
-        error_log("print_email($email_name,$settings) $email_id");
-        error_log(print_r($mailbuilder_array,true));
+        // error_log("print_email($email_name,$settings) $email_id");
+        // error_log(print_r($mailbuilder_array,true));
         if ( $mailbuilder_array != null ):
             echo '<!--mailbuilder[' . $email_name . ']-->';
             echo '<!--mailbuilder-content-start-->';
