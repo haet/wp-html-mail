@@ -333,10 +333,10 @@ final class Haet_Mail {
 
 	function save_options($saved_options){    
 		$new_options = $_POST['haet_mail'];
+		if ( ! isset( $_POST[ 'email_options_nonce' ] ) ||
+            ! wp_verify_nonce( $_POST[ 'email_options_nonce' ], 'save_email_options' ) )
+            return $saved_options;
 		$options = array_merge($saved_options,$new_options);
-		if(isset($_POST['reload_haet_mailtemplate'])){
-			$options = $this->get_default_theme_options();
-		}
 
 		update_option('haet_mail_options', $options);
 		return $options;
@@ -674,6 +674,8 @@ final class Haet_Mail {
 
 	private function get_header( $options ){
 		$headerimg_placement = $options['headerimg_placement'];
+		$link_header = apply_filters( 'haet_mail_link_header', true );
+
 		if( !$headerimg_placement ) 
 			$headerimg_placement = 'replace_text';
 
@@ -703,6 +705,8 @@ final class Haet_Mail {
 										( $height ? ' height="' . $height . '" ' : '' ) .
 										'
 										alt="'.$alt_text.'">';
+			if( $link_header )
+				$headerimg = '<a href="' . get_home_url() . '">' . $headerimg . '</a>';
 
 			if( !$options['headerimg_align'] )
 				$options['headerimg_align'] = $options['headeralign'];
@@ -712,6 +716,9 @@ final class Haet_Mail {
 			$headerimg_placement = 'just_text';
 		}
 
+		if( $link_header )
+			$headertext = '<a href="' . get_home_url() . '">' . $headertext . '</a>';
+			
 		switch( $headerimg_placement ){
 			case 'just_text':
 				$header = $headertext;
@@ -727,7 +734,7 @@ final class Haet_Mail {
 							style="text-align: <?php echo $options['headerimg_align']; ?>;">
 							<?php echo $headerimg; ?>
 						</td>
-					<tr>
+					</tr>
 				</table>
 				<?php
 				$header = ob_get_clean();
@@ -746,7 +753,7 @@ final class Haet_Mail {
 								">
 							<?php echo $headerimg; ?>
 						</td>
-					<tr>
+					</tr>
 					<tr>
 						<td 
 							class="header-text"
@@ -754,7 +761,7 @@ final class Haet_Mail {
 							style="text-align: <?php echo $options['headeralign']; ?>">
 							<?php echo $headertext; ?>
 						</td>
-					<tr>
+					</tr>
 				</table>
 				<?php
 				$header = ob_get_clean();
@@ -770,7 +777,7 @@ final class Haet_Mail {
 							style="text-align: <?php echo $options['headeralign']; ?>">
 							<?php echo $headertext; ?>
 						</td>
-					<tr>
+					</tr>
 					<tr>
 						<td 
 							class="header-image" 
@@ -781,15 +788,13 @@ final class Haet_Mail {
 								">
 							<?php echo $headerimg; ?>
 						</td>
-					<tr>
+					</tr>
 				</table>
 				<?php
 				$header = ob_get_clean();
 				break;
 		}
 
-		if( apply_filters( 'haet_mail_link_header', true ) )
-			$header = '<a href="' . get_home_url() . '">' . $header . '</a>';
 
 		return $header;
 	}
@@ -800,7 +805,7 @@ final class Haet_Mail {
 		$template=$this->load_template_file('default');
 		
 		$options['headertext'] = apply_filters( 'haet_mail_header', $this->get_header( $options ) );
-
+		
 		if( !$options['headerbackground'] )
 			$options['headerbackground'] = 'transparent';
 
@@ -862,11 +867,8 @@ final class Haet_Mail {
 	function inline_css($html){
 		require_once(HAET_MAIL_PATH.'/vendor/autoload.php');
 
-		$cssToInlineStyles = new voku\CssToInlineStyles\CssToInlineStyles( $html );
-
-		$cssToInlineStyles->setExcludeConditionalInlineStylesBlock(false);
-		$cssToInlineStyles->setUseInlineStylesBlock(true);
-		return $cssToInlineStyles->convert();
+		$cssToInlineStyles = new TijsVerkoyen\CssToInlineStyles\CssToInlineStyles();
+		return $cssToInlineStyles->convert($html);
 	}
 
 

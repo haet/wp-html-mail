@@ -32,6 +32,7 @@ if( !isset( $options['survey2020_completed'] ) && !isset( $options['survey2020_d
 	
 <form method="post" id="haet_mail_form" action="<?php echo $_SERVER["REQUEST_URI"]; ?>">
 	<?php
+	wp_nonce_field( 'save_email_options', 'email_options_nonce' );
 	do_action( 'haet_mail_before_settings_tab_' . $tab );
 	switch ($tab){
 		case 'general':
