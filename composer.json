@@ -1,7 +1,7 @@
 {
     "require": {
-        "voku/css-to-inline-styles": "^2.0",
         "sabberworm/php-css-parser": "*",
-        "barryvdh/composer-cleanup-plugin": "0.2.x"
+        "barryvdh/composer-cleanup-plugin": "0.2.x",
+        "tijsverkoyen/css-to-inline-styles": "^2.2"
     }
 }
