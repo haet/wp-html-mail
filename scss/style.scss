@@ -564,3 +564,27 @@ label[for="haet_mail_headerimg_advanced"] {
 		vertical-align: -5px;
 	}
 }
+
+
+
+/****************************************
+*   WOOCOMMERCE
+****************************************/
+.haet-mail-headline-row{
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-end;
+
+	a{
+		margin: 0 8px;
+	}
+
+	h4 {
+		min-width: 200px;
+
+		a {
+			margin-left: 0;
+			margin-right: 20px;
+		}
+	}
+}

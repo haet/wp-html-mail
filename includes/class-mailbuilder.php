@@ -632,8 +632,6 @@ final class Haet_Mail_Builder
 
 
     public function print_email($email_name,$settings){
-        // backslash is not supported in post titles
-        // $email_name = str_replace( '\\', '__', $email_name ); 
         $email_id = Haet_Mail_Builder()->get_email_post_id( $email_name );
         $mailbuilder_json = get_post_meta( $email_id, 'mailbuilder_json', true );
         $mailbuilder_array = json_decode( $mailbuilder_json );

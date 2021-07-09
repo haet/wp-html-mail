@@ -1,24 +1,56 @@
 === WordPress Email Template Designer - WP HTML Mail ===
 Contributors: codemiq,haet
-Tags: email template, html mail, email design, woocommerce email, ninja-forms, caldera-forms, wp-e-commerce, easy-digital-downloads, contact-form-7, mandrill, postman, gravityforms
+Tags: email, email template, woocommerce email, email design, elementor, caldera-forms, wp-e-commerce, easy-digital-downloads, contact-form-7, mandrill, postman, gravityforms
 Requires at least: 5.0
-Tested up to: 5.7.1
+Tested up to: 5.7.2
 Requires PHP: 7.2
-Stable tag: 3.0.8
+Stable tag: 3.0.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-All in one email template design solution for Ninja Forms, Caldera Forms, Gravity Forms, WooCommerce, CF7, Support Plus, EDD, ...
+All in one email template designer for WooCommerce, Ninja Forms, Elementor Forms, Gravity Forms, CF7, Support Plus, EDD, ...
 
 == Description ==
-Beautiful WordPress emails for your contact form notifications, your WooCommerce and EDD transactional emails, WordPress core emails, BuddyPress and many more. 
+Custom designed WordPress emails for your WooCommerce and EDD transactional emails, contact form notifications, your WordPress core emails, BuddyPress and many more. 
 Create your own professional email design within a few minutes without any coding. 
 
-= See how we create an email template within two and a half minutes =
+= See how we design our WordPress emails within two and a half minutes =
 
 https://youtu.be/h-bFpPqkAzk
 
 = All in one email designer for your contact forms, WooCommerce, Easy Digital Downloads and many more... = 
+
+🆓 Elementor Forms
+🆓 Ninja Forms
+🆓 Caldera Forms
+🆓 Contact Form 7
+🆓 Gravity Forms
+🆓 Gravity Flow
+🆓 HappyForms
+🆓 WP Support Plus Responsive Ticket System
+🆓 Birthday Emails
+🆓 Ultimate WP Mail
+🆓 Divi Theme contact forms
+🆓 [BuddyPress](https://wordpress.org/plugins/wp-html-mail-buddypress/)
+🆓 [Give – Donation and Fundraising](https://wordpress.org/plugins/wp-html-mail-give/)
+🆓 TeraWallet
+🆓 WP E-Commerce
+🆓 Formidable Forms
+🆓 WP Foro
+🆓 ACF Advanced Forms
+🆓 Elementor Forms
+🆓 Events Made Easy
+🆓 Learndash Notifications
+🆓 Matador Jobs
+🆓 Memberpress
+🆓 Modern Events Calendar
+🆓 Uncanny Owl Groups
+🆓 ShieldSecurity
+➕ [WPForms and WPForms Lite](https://codemiq.com/en/downloads/wp-html-mail-wpforms/)
+➕ [WooCommerce](https://codemiq.com/en/downloads/wp-html-mail-woocommerce/)
+➕ [Easy Digital Downloads](https://codemiq.com/en/downloads/wp-html-mail-easy-digital-downloads/)
+...
+
 
 * **Responsive & Device independent:**
 Our e-mail template has been tested in all major desktop, web and mobile mailclients. 
@@ -39,7 +71,9 @@ See all your changes immediately in the live preview.
 
 
 
-= WooCommerce Drag & Drop Email Customizer =
+= ★★★★★ pro addon WooCommerce Drag & Drop Email Customizer =
+
+**trusted by more than 2000 pro users**
 
 Use our [WooCommerce email customizer addon](https://codemiq.com/en/downloads/wp-html-mail-woocommerce/) to customize all your store emails. For all standard emails you can also edit the email content as well as the products table. 
 Most emails from third party WooCommerce plugins can be styled and for some of them we created special integrations:
@@ -51,6 +85,7 @@ Most emails from third party WooCommerce plugins can be styled and for some of t
 * With **AutomateWoo** you can use your email template for your **abandoned cart mails** and other **automated emails**
 * [WooCommerce Advanced Shipment Tracking](https://wordpress.org/plugins/woo-advanced-shipment-tracking/)
 You can try the plugin in [our WooCommerce Demo](https://wp-html-mail-woocommerce-demo.codemiq.com/).
+* **WooCommerce Germanized and Germanized Pro** are integrated
 
 [get WooCommerce Email Customizer >](https://codemiq.com/en/plugins/wp-html-mail-woocommerce/)
 
@@ -113,6 +148,10 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 
 == Changelog ==
+
+= 3.0.9 =
+* reverted change of inline css library because of several compatibility issues
+
 
 = 3.0.8 =
 * changed inline css library

@@ -867,8 +867,12 @@ final class Haet_Mail {
 	function inline_css($html){
 		require_once(HAET_MAIL_PATH.'/vendor/autoload.php');
 
-		$cssToInlineStyles = new TijsVerkoyen\CssToInlineStyles\CssToInlineStyles();
-		return $cssToInlineStyles->convert($html);
+		$cssToInlineStyles = new voku\CssToInlineStyles\CssToInlineStyles( $html );
+
+		$cssToInlineStyles->setExcludeConditionalInlineStylesBlock(false);
+		$cssToInlineStyles->setUseInlineStylesBlock(true);
+		return $cssToInlineStyles->convert();
+
 	}
 
 
