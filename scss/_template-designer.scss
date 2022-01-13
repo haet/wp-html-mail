@@ -18,6 +18,26 @@
 				display: none;
 			}
 		}
+
+		.components-toolbar{
+			min-height: 40px;
+		}
+
+		.components-toolbar__control{
+			padding:2px;
+			min-width: 40px;
+			height: 40px;
+
+			&:before{
+				left: 4px;
+				right: 4px;
+			}
+		}
+
+		.components-color-picker__body{
+			padding-left: 0;
+			padding-bottom: 0;
+		}
 	}
 
 	.mail-container {

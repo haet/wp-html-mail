@@ -47,7 +47,18 @@ export default function MailTemplate() {
 	);
 
 	const loadSettings = () => {
-		fetch(window.mailTemplateDesigner.restUrl + "themesettings")
+		var request = new Request(
+			window.mailTemplateDesigner.restUrl + "themesettings",
+			{
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+					"X-WP-Nonce": window.mailTemplateDesigner.nonce
+				},
+				credentials: "same-origin"
+			}
+		);
+		fetch(request)
 			.then((resp) => resp.json())
 			.then((data) => {
 				templateDesignerContext.setSettings(data);
@@ -62,7 +73,10 @@ export default function MailTemplate() {
 			{
 				method: "POST",
 				body: JSON.stringify(settings),
-				headers: { "Content-Type": "application/json" },
+				headers: {
+					"Content-Type": "application/json",
+					"X-WP-Nonce": window.mailTemplateDesigner.nonce
+				},
 			}
 		);
 		fetch(request)

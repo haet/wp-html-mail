@@ -427,13 +427,13 @@ function HeaderText(_ref) {
     onChange: function onChange(value) {
       templateDesignerContext.updateSetting("headerfont", value);
     }
-  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelRow"], null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["TextControl"], {
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["TextControl"], {
     type: "number",
     onChange: function onChange(value) {
       templateDesignerContext.updateSetting("headerfontsize", value);
     },
     value: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.headerfontsize)
-  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Toolbar"], {
+  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelRow"], null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Toolbar"], {
     controls: [{
       icon: "editor-alignleft",
       isActive: settings.headeralign === "left",
@@ -585,13 +585,13 @@ function MailContent(_ref) {
     onChange: function onChange(value) {
       templateDesignerContext.updateSetting("headlinefont", value);
     }
-  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelRow"], null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["TextControl"], {
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["TextControl"], {
     type: "number",
     onChange: function onChange(value) {
       templateDesignerContext.updateSetting("headlinefontsize", value);
     },
     value: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.headlinefontsize)
-  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Toolbar"], {
+  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelRow"], null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Toolbar"], {
     controls: [{
       icon: "editor-alignleft",
       isActive: settings.headlinealign === "left",
@@ -644,13 +644,13 @@ function MailContent(_ref) {
     onChange: function onChange(value) {
       templateDesignerContext.updateSetting("subheadlinefont", value);
     }
-  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelRow"], null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["TextControl"], {
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["TextControl"], {
     type: "number",
     onChange: function onChange(value) {
       templateDesignerContext.updateSetting("subheadlinefontsize", value);
     },
     value: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.subheadlinefontsize)
-  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Toolbar"], {
+  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelRow"], null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Toolbar"], {
     controls: [{
       icon: "editor-alignleft",
       isActive: settings.subheadlinealign === "left",
@@ -703,13 +703,13 @@ function MailContent(_ref) {
     onChange: function onChange(value) {
       templateDesignerContext.updateSetting("textfont", value);
     }
-  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelRow"], null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["TextControl"], {
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["TextControl"], {
     type: "number",
     onChange: function onChange(value) {
       templateDesignerContext.updateSetting("textfontsize", value);
     },
     value: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.textfontsize)
-  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Toolbar"], {
+  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelRow"], null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Toolbar"], {
     controls: [{
       icon: "editor-alignleft",
       isActive: settings.textalign === "left",
@@ -1099,7 +1099,6 @@ function MailHeader(_ref) {
       label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])("Show image below text", "wp-html-mail")
     }],
     onChange: function onChange(value) {
-      console.log(value, settings.headerimg_placement);
       templateDesignerContext.updateSetting("headerimg_placement", value);
       forceRerender();
     }
@@ -1258,7 +1257,15 @@ function MailTemplate() {
   })));
 
   var loadSettings = function loadSettings() {
-    fetch(window.mailTemplateDesigner.restUrl + "themesettings").then(function (resp) {
+    var request = new Request(window.mailTemplateDesigner.restUrl + "themesettings", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "X-WP-Nonce": window.mailTemplateDesigner.nonce
+      },
+      credentials: "same-origin"
+    });
+    fetch(request).then(function (resp) {
       return resp.json();
     }).then(function (data) {
       templateDesignerContext.setSettings(data);
@@ -1272,7 +1279,8 @@ function MailTemplate() {
       method: "POST",
       body: JSON.stringify(settings),
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "X-WP-Nonce": window.mailTemplateDesigner.nonce
       }
     });
     fetch(request).then(function (resp) {
@@ -1353,21 +1361,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/index.js");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _contexts_TemplateDesignerContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../contexts/TemplateDesignerContext */ "./js/template-designer/contexts/TemplateDesignerContext.js");
-
-
-
-
-
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _contexts_TemplateDesignerContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../contexts/TemplateDesignerContext */ "./js/template-designer/contexts/TemplateDesignerContext.js");
 
 
 
 
 function OptionsPanel() {
-  var templateDesignerContext = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_contexts_TemplateDesignerContext__WEBPACK_IMPORTED_MODULE_4__["TemplateDesignerContext"]);
+  var templateDesignerContext = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_contexts_TemplateDesignerContext__WEBPACK_IMPORTED_MODULE_3__["TemplateDesignerContext"]);
   if (templateDesignerContext.settings === {} || !templateDesignerContext.editingElement) return null;else return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Panel"], {
     header: templateDesignerContext.panelTitle,
     className: "mail-optionspanel"

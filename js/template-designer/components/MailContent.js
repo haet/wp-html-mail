@@ -70,8 +70,6 @@ export default function MailContent({}) {
 							);
 						}}
 					/>
-				</PanelRow>
-				<PanelRow>
 					<TextControl
 						type="number"
 						onChange={(value) => {
@@ -82,6 +80,8 @@ export default function MailContent({}) {
 						}}
 						value={getIntVal(settings.headlinefontsize)}
 					/>
+				</PanelRow>
+				<PanelRow>
 					<Toolbar
 						controls={[
 							{
@@ -180,8 +180,6 @@ export default function MailContent({}) {
 							);
 						}}
 					/>
-				</PanelRow>
-				<PanelRow>
 					<TextControl
 						type="number"
 						onChange={(value) => {
@@ -192,6 +190,8 @@ export default function MailContent({}) {
 						}}
 						value={getIntVal(settings.subheadlinefontsize)}
 					/>
+				</PanelRow>
+				<PanelRow>
 					<Toolbar
 						controls={[
 							{
@@ -295,8 +295,6 @@ export default function MailContent({}) {
 							);
 						}}
 					/>
-				</PanelRow>
-				<PanelRow>
 					<TextControl
 						type="number"
 						onChange={(value) => {
@@ -307,6 +305,8 @@ export default function MailContent({}) {
 						}}
 						value={getIntVal(settings.textfontsize)}
 					/>
+				</PanelRow>
+				<PanelRow>
 					<Toolbar
 						controls={[
 							{

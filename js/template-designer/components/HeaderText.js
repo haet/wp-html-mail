@@ -57,8 +57,6 @@ export default function HeaderText({}) {
 							);
 						}}
 					/>
-				</PanelRow>
-				<PanelRow>
 					<TextControl
 						type="number"
 						onChange={(value) => {
@@ -69,6 +67,8 @@ export default function HeaderText({}) {
 						}}
 						value={getIntVal(settings.headerfontsize)}
 					/>
+				</PanelRow>
+				<PanelRow>
 					<Toolbar
 						controls={[
 							{

@@ -2,9 +2,9 @@
 Contributors: codemiq,haet
 Tags: email, email template, woocommerce email, email design, elementor, caldera-forms, wp-e-commerce, easy-digital-downloads, contact-form-7, mandrill, postman, gravityforms
 Requires at least: 5.0
-Tested up to: 5.7.2
+Tested up to: 5.8.3
 Requires PHP: 7.2
-Stable tag: 3.0.9
+Stable tag: 3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -148,6 +148,11 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 
 == Changelog ==
+
+= 3.1 =
+* Changed initialization of default options to fix some notices in WooCommerce add-on
+* Improved settings REST API security 
+* Improved font formatting toolbars in editor
 
 = 3.0.9 =
 * reverted change of inline css library because of several compatibility issues

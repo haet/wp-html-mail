@@ -251,10 +251,11 @@ class Haet_Sender_Plugin {
         $options = get_option('haet_mail_plugin_options');
         
         if (!empty($options)) {
-            foreach ($options as $plugin_name => $plugin_options){
-                if( array_key_exists( $plugin_name, $default_options ) )
-                    $options[$plugin_name] = wp_parse_args( $plugin_options, $default_options[$plugin_name] );
-
+            foreach ($default_options as $plugin_name => $plugin_default_options){
+                if( array_key_exists( $plugin_name, $options ) )
+                    $options[$plugin_name] = wp_parse_args( $options[$plugin_name], $plugin_default_options );
+                else
+                    $options[$plugin_name] = $plugin_default_options;
             }
         } else {
             $options = $default_options;
