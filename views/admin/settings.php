@@ -113,9 +113,9 @@
 				<?php _e('Send a test mail', 'wp-html-mail'); ?>
 				<input id="haet_mail_test_address" required type="email" placeholder="you@example.org">
 				<button id="haet_mail_test_submit"><span class="dashicons dashicons-arrow-right-alt2"></span></button>
-				<div id="haet_mail_test_sent" class="haet-mail-dialog" title="<?php _e('Email sent', 'wp-html-mail'); ?>">
+				<div id="haet_mail_test_sent" class="haet-mail-dialog" title="<?php _e('Send a test mail', 'wp-html-mail'); ?>">
 					<p>
-						<?php _e('Your message has been sent.', 'wp-html-mail'); ?>
+
 					</p>
 				</div>
 			</div>

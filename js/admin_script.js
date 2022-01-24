@@ -145,6 +145,12 @@ jQuery(function ($) {
 			ajaxurl,
 			{ action: "haet_mail_send_test", email: email },
 			function (response) {
+				if (typeof response === 'object' && 'success' in response && 'message' in response) {
+					$("#haet_mail_test_sent p").text(response.message);
+				} else {
+					$("#haet_mail_test_sent p").text('Preview could not be sent');
+				}
+
 				$("#haet_mail_test_sent").dialog({
 					dialogClass: "no-close",
 					modal: true,
