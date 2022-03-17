@@ -1,4 +1,7 @@
 #wp-html-mail-template-designer {
+	display: flex;
+	flex-direction:row;
+	
 	.mail-optionspanel {
 		width: 300px;
 		z-index: 10;

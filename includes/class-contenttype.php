@@ -1,11 +1,12 @@
-<?php if ( ! defined( 'ABSPATH' ) ) exit;
+<?php if ( ! defined( 'ABSPATH' ) ) {
+	exit;}
 
-abstract class Haet_MB_ContentType
-{
+abstract class Haet_MB_ContentType {
+
 	/**
 	 * @var string
 	 */
-	protected $_name  = '';
+	protected $_name = '';
 
 	/**
 	 * @var string
@@ -24,79 +25,79 @@ abstract class Haet_MB_ContentType
 	protected $_once = false;
 
 	/**
-	 * @var string 
+	 * @var string
 	 * Dashicon or image url
 	 */
 	protected $_icon = 'dashicons-screenoptions';
 
 
-	public function __construct(){
-		add_filter( 'haet_mail_content_types', array( $this, 'register_contenttype'), $this->_priority, 3 );
-		add_action( 'admin_enqueue_scripts', array($this, 'enqueue_scripts_and_styles'));
-		add_action( 'haet_mail_content_template', array($this, 'admin_render_contentelement_template'), $this->_priority );
-		add_action( 'haet_mail_content_settings', array($this, 'admin_print_contentelement_settings'), $this->_priority );
+	public function __construct() {
+		add_filter( 'haet_mail_content_types', array( $this, 'register_contenttype' ), $this->_priority, 3 );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts_and_styles' ) );
+		add_action( 'haet_mail_content_template', array( $this, 'admin_render_contentelement_template' ), $this->_priority );
+		add_action( 'haet_mail_content_settings', array( $this, 'admin_print_contentelement_settings' ), $this->_priority );
 	}
 
 
 
 
 
-	public function register_contenttype( $content_types, $email_name, $email_post = null ){
-		$content_types[$this->_name] = array(
-				'name'		=>	$this->_name,
-				'nicename'	=>	$this->_nicename,
-				'icon'		=>	$this->_icon,
-				'once'		=>	$this->_once,
-				'elementclass'	=>	get_called_class()
-			);
+	public function register_contenttype( $content_types, $email_name, $email_post = null ) {
+		$content_types[ $this->_name ] = array(
+			'name'         => $this->_name,
+			'nicename'     => $this->_nicename,
+			'icon'         => $this->_icon,
+			'once'         => $this->_once,
+			'elementclass' => get_called_class(),
+		);
 		return $content_types;
 	}
 
 
-	protected function get_element_settings(){
-		return array( 
-				'styles'	=>	$this->get_element_styles()
-			);
-	}
-
-
-	protected function get_element_styles(){
+	protected function get_element_settings() {
 		return array(
-			'desktop'	=> array(
-					'padding-top'	=> '0px',
-					'padding-right'	=> '24px',
-					'padding-bottom'=> '0px',
-					'padding-left'	=> '24px',
-					'background-color'	=> '',
-				),
-			'mobile'	=> array(
-					'padding-top'	=> '0px',
-					'padding-right'	=> '12px',
-					'padding-bottom'=> '0px',
-					'padding-left'	=> '12px'
-				)
-			);
+			'styles' => $this->get_element_styles(),
+		);
+	}
+
+
+	protected function get_element_styles() {
+		return array(
+			'desktop' => array(
+				'padding-top'      => '0px',
+				'padding-right'    => '24px',
+				'padding-bottom'   => '0px',
+				'padding-left'     => '24px',
+				'background-color' => '',
+			),
+			'mobile'  => array(
+				'padding-top'    => '0px',
+				'padding-right'  => '12px',
+				'padding-bottom' => '0px',
+				'padding-left'   => '12px',
+			),
+		);
 	}
 
 
 
-	protected function admin_print_element_start(){
+	protected function admin_print_element_start() {
 		?>
-		<div class="mb-contentelement mb-contentelement-<?php echo $this->_name; ?> clearfix container-padding" data-type="<?php echo $this->_name; ?>">
-			<input type="hidden" class="mb-element-settings" value='<?php echo json_encode( $this->get_element_settings() ); ?>'>
+		<div class="mb-contentelement mb-contentelement-<?php echo esc_attr( $this->_name ); ?> clearfix container-padding" data-type="<?php echo esc_attr( $this->_name ); ?>">
+			<input type="hidden" class="mb-element-settings" value='<?php echo esc_attr( wp_json_encode( $this->get_element_settings() ) ); ?>'>
 		<?php
-		$this->admin_print_element_title_bar(); 
+		$this->admin_print_element_title_bar();
 	}
 
 
 
 
-	protected function admin_print_element_title_bar(){
+	protected function admin_print_element_title_bar() {
 		?>
 		<div class="mb-title-bar">
-			<?php echo ( false !== strpos( $this->_icon,'dashicons-') ? '<span class="dashicons '.$this->_icon.'"></span>' : '<img class="mb-type-icon" src="'.$this->_icon.'">' ); ?>
+			<?php echo ( false !== strpos( $this->_icon, 'dashicons-' ) ? '<span class="dashicons ' . esc_attr( $this->_icon ) . '"></span>' : '<img class="mb-type-icon" src="' . esc_url( $this->_icon ) . '">' ); ?>
 			<span class="mb-title">
-				<?php echo $this->_nicename; ?>
+				<?php echo esc_html( $this->_nicename ); ?>
 			</span>
 			<a href='#' class="mb-edit-element">
 				<span class="dashicons dashicons-edit"></span>
@@ -111,7 +112,7 @@ abstract class Haet_MB_ContentType
 
 
 
-	protected function admin_print_element_end(){
+	protected function admin_print_element_end() {
 		?>
 		</div>
 		<?php
@@ -119,94 +120,94 @@ abstract class Haet_MB_ContentType
 
 
 
-	public function admin_print_contentelement_settings(){
-	    ?>
-	    <div class="mb-element-settings-<?php echo $this->_name; ?> mailbuilder-sidebar-element">
-	        <h3>
-	            <?php _e('Content Element Settings','wp-html-mail'); ?>
-	        </h3> 
-	        <table class="form-table">
-	            <tbody>
-	                <tr valign="top">
-	                    <th scope="row"><label><?php _e('Background color','wp-html-mail'); ?></label></th>
-	                    <td>
-	                        <input type="text" class="background-color color" value="">
-	                    </td>
-	                </tr>
-		    	</tbody>
-		    </table>
-	        <h4><?php _e('Padding desktop','wp-html-mail'); ?></h4>
-	        <div class="mb-element-padding-desktop padding-settings clearfix">
-	            <select class="padding-left">
-	                <?php for ($width=0; $width<=60; $width++) :?>
-	                    <option value="<?php echo $width.'px'; ?>"><?php echo $width.'px'; ?></option>      
-	                <?php endfor; ?>
-	            </select>
-	            
-	            <select class="padding-top">
-	                <?php for ($width=0; $width<=60; $width++) :?>
-	                    <option value="<?php echo $width.'px'; ?>"><?php echo $width.'px'; ?></option>      
-	                <?php endfor; ?>
-	            </select>
-	            
-	            <select class="padding-right">
-	                <?php for ($width=0; $width<=60; $width++) :?>
-	                    <option value="<?php echo $width.'px'; ?>"><?php echo $width.'px'; ?></option>      
-	                <?php endfor; ?>
-	            </select>
-	            
-	            <select class="padding-bottom">
-	                <?php for ($width=0; $width<=60; $width++) :?>
-	                    <option value="<?php echo $width.'px'; ?>"><?php echo $width.'px'; ?></option>      
-	                <?php endfor; ?>
-	            </select>
-	        </div>
+	public function admin_print_contentelement_settings() {
+		?>
+		<div class="mb-element-settings-<?php echo esc_attr( $this->_name ); ?> mailbuilder-sidebar-element">
+			<h3>
+				<?php esc_html_e( 'Content Element Settings', 'wp-html-mail' ); ?>
+			</h3> 
+			<table class="form-table">
+				<tbody>
+					<tr valign="top">
+						<th scope="row"><label><?php esc_html_e( 'Background color', 'wp-html-mail' ); ?></label></th>
+						<td>
+							<input type="text" class="background-color color" value="">
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<h4><?php esc_html_e( 'Padding desktop', 'wp-html-mail' ); ?></h4>
+			<div class="mb-element-padding-desktop padding-settings clearfix">
+				<select class="padding-left">
+					<?php for ( $width = 0; $width <= 60; $width++ ) : ?>
+						<option value="<?php echo esc_attr( $width ) . 'px'; ?>"><?php echo esc_attr( $width ) . 'px'; ?></option>      
+					<?php endfor; ?>
+				</select>
 
-	        <h4><?php _e('Padding mobile','wp-html-mail'); ?></h4>
-	        <div class="mb-element-padding-mobile padding-settings clearfix">
-	            <select class="padding-left">
-	                <?php for ($width=0; $width<=60; $width++) :?>
-	                    <option value="<?php echo $width.'px'; ?>"><?php echo $width.'px'; ?></option>      
-	                <?php endfor; ?>
-	            </select>
-	            
-	            <select class="padding-top">
-	                <?php for ($width=0; $width<=60; $width++) :?>
-	                    <option value="<?php echo $width.'px'; ?>"><?php echo $width.'px'; ?></option>      
-	                <?php endfor; ?>
-	            </select>
-	            
-	            <select class="padding-right">
-	                <?php for ($width=0; $width<=60; $width++) :?>
-	                    <option value="<?php echo $width.'px'; ?>"><?php echo $width.'px'; ?></option>      
-	                <?php endfor; ?>
-	            </select>
-	            
-	            <select class="padding-bottom">
-	                <?php for ($width=0; $width<=60; $width++) :?>
-	                    <option value="<?php echo $width.'px'; ?>"><?php echo $width.'px'; ?></option>      
-	                <?php endfor; ?>
-	            </select>
-	        </div>
+				<select class="padding-top">
+					<?php for ( $width = 0; $width <= 60; $width++ ) : ?>
+						<option value="<?php echo esc_attr( $width ) . 'px'; ?>"><?php echo esc_attr( $width ) . 'px'; ?></option>      
+					<?php endfor; ?>
+				</select>
 
-	        <div class="mb-popup-buttons">
-	            <button class="mb-apply button button-primary" type="button">
-	                <span class="dashicons dashicons-yes"></span>
-	                <?php _e('Apply', 'wp-html-mail'); ?>
-	            </button>
-	            <button class="mb-cancel button button-secondary" type="button">
-	                <span class="dashicons dashicons-no-alt"></span>
-	                <?php _e('Cancel', 'wp-html-mail'); ?>
-	            </button>
-	        </div>
-	    </div>
-	    <?php
+				<select class="padding-right">
+					<?php for ( $width = 0; $width <= 60; $width++ ) : ?>
+						<option value="<?php echo esc_attr( $width ) . 'px'; ?>"><?php echo esc_attr( $width ) . 'px'; ?></option>      
+					<?php endfor; ?>
+				</select>
+
+				<select class="padding-bottom">
+					<?php for ( $width = 0; $width <= 60; $width++ ) : ?>
+						<option value="<?php echo esc_attr( $width ) . 'px'; ?>"><?php echo esc_attr( $width ) . 'px'; ?></option>      
+					<?php endfor; ?>
+				</select>
+			</div>
+
+			<h4><?php esc_html_e( 'Padding mobile', 'wp-html-mail' ); ?></h4>
+			<div class="mb-element-padding-mobile padding-settings clearfix">
+				<select class="padding-left">
+					<?php for ( $width = 0; $width <= 60; $width++ ) : ?>
+						<option value="<?php echo esc_attr( $width ) . 'px'; ?>"><?php echo esc_attr( $width ) . 'px'; ?></option>      
+					<?php endfor; ?>
+				</select>
+
+				<select class="padding-top">
+					<?php for ( $width = 0; $width <= 60; $width++ ) : ?>
+						<option value="<?php echo esc_attr( $width ) . 'px'; ?>"><?php echo esc_attr( $width ) . 'px'; ?></option>      
+					<?php endfor; ?>
+				</select>
+
+				<select class="padding-right">
+					<?php for ( $width = 0; $width <= 60; $width++ ) : ?>
+						<option value="<?php echo esc_attr( $width ) . 'px'; ?>"><?php echo esc_attr( $width ) . 'px'; ?></option>      
+					<?php endfor; ?>
+				</select>
+
+				<select class="padding-bottom">
+					<?php for ( $width = 0; $width <= 60; $width++ ) : ?>
+						<option value="<?php echo esc_attr( $width ) . 'px'; ?>"><?php echo esc_attr( $width ) . 'px'; ?></option>      
+					<?php endfor; ?>
+				</select>
+			</div>
+
+			<div class="mb-popup-buttons">
+				<button class="mb-apply button button-primary" type="button">
+					<span class="dashicons dashicons-yes"></span>
+					<?php esc_html_e( 'Apply', 'wp-html-mail' ); ?>
+				</button>
+				<button class="mb-cancel button button-secondary" type="button">
+					<span class="dashicons dashicons-no-alt"></span>
+					<?php esc_html_e( 'Cancel', 'wp-html-mail' ); ?>
+				</button>
+			</div>
+		</div>
+		<?php
 	}
 
-	public abstract function enqueue_scripts_and_styles($page);
+	abstract public function enqueue_scripts_and_styles( $page);
 
-	public abstract function admin_render_contentelement_template( $current_email );
+	abstract public function admin_render_contentelement_template( $current_email );
 
-	public abstract function print_content( $element_content, $settings );
+	abstract public function print_content( $element_content, $settings );
 }
 

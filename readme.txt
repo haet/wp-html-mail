@@ -1,10 +1,10 @@
-=== WordPress Email Template Designer - WP HTML Mail ===
+=== Email Template Designer - WP HTML Mail ===
 Contributors: codemiq,haet
 Tags: email, email template, woocommerce email, email design, elementor, caldera-forms, wp-e-commerce, easy-digital-downloads, contact-form-7, mandrill, postman, gravityforms
 Requires at least: 5.0
-Tested up to: 5.9
+Tested up to: 5.9.2
 Requires PHP: 7.2
-Stable tag: 3.1.1
+Stable tag: 3.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -148,6 +148,15 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 
 == Changelog ==
+
+= 3.2 =
+* improved code according to WordPress coding standard
+
+= 3.1.4 =
+* improved input and output validation
+* enqueued websfonts script correctly
+* removed "WordPress" from plugin title
+* Custom CSS field validation
 
 = 3.1.1 =
 * added permission check to preview function
