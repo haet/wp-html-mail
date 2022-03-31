@@ -149,10 +149,12 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 == Changelog ==
 
+= 3.x =
+* improved color picker
+* visual style selector for header 
+
 = 3.2 =
 * improved code according to WordPress coding standard
-
-= 3.1.4 =
 * improved input and output validation
 * enqueued websfonts script correctly
 * removed "WordPress" from plugin title

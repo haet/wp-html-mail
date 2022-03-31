@@ -388,10 +388,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _contexts_TemplateDesignerContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../contexts/TemplateDesignerContext */ "./js/template-designer/contexts/TemplateDesignerContext.js");
-/* harmony import */ var _functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../functions/helper-functions */ "./js/template-designer/functions/helper-functions.js");
-/* harmony import */ var _EditableElement_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./EditableElement.js */ "./js/template-designer/components/EditableElement.js");
+/* harmony import */ var _options_PopoverPicker__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./options/PopoverPicker */ "./js/template-designer/components/options/PopoverPicker.js");
+/* harmony import */ var _contexts_TemplateDesignerContext__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../contexts/TemplateDesignerContext */ "./js/template-designer/contexts/TemplateDesignerContext.js");
+/* harmony import */ var _functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../functions/helper-functions */ "./js/template-designer/functions/helper-functions.js");
+/* harmony import */ var _EditableElement_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./EditableElement.js */ "./js/template-designer/components/EditableElement.js");
 function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("Cannot destructure undefined"); }
+
 
 
 
@@ -403,24 +405,15 @@ function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("
 function HeaderText(_ref) {
   _objectDestructuringEmpty(_ref);
 
-  var templateDesignerContext = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_contexts_TemplateDesignerContext__WEBPACK_IMPORTED_MODULE_4__["TemplateDesignerContext"]);
+  var templateDesignerContext = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_contexts_TemplateDesignerContext__WEBPACK_IMPORTED_MODULE_5__["TemplateDesignerContext"]);
   var settings = templateDesignerContext.settings;
 
   var elementTitle = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])("Header text", "wp-html-mail");
 
   var elementName = "headertext";
   var options = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelBody"], {
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])("Color", "wp-html-mail"),
-    initialOpen: false
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelRow"], null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["ColorPicker"], {
-    color: settings.headercolor,
-    onChangeComplete: function onChangeComplete(value) {
-      templateDesignerContext.updateSetting("headercolor", value.hex);
-    },
-    disableAlpha: true
-  }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelBody"], {
     title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])("Font", "wp-html-mail"),
-    initialOpen: false
+    initialOpen: true
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelRow"], null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["SelectControl"], {
     value: settings.headerfont,
     options: window.mailTemplateDesigner.fonts,
@@ -432,7 +425,12 @@ function HeaderText(_ref) {
     onChange: function onChange(value) {
       templateDesignerContext.updateSetting("headerfontsize", value);
     },
-    value: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.headerfontsize)
+    value: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.headerfontsize)
+  }), /*#__PURE__*/React.createElement(_options_PopoverPicker__WEBPACK_IMPORTED_MODULE_4__["PopoverPicker"], {
+    color: settings.headercolor,
+    onChange: function onChange(value) {
+      templateDesignerContext.updateSetting("headercolor", value.hex);
+    }
   })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelRow"], null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Toolbar"], {
     controls: [{
       icon: "editor-alignleft",
@@ -454,15 +452,15 @@ function HeaderText(_ref) {
       }
     }, {
       icon: "editor-bold",
-      isActive: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.headerbold) === 1,
+      isActive: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.headerbold) === 1,
       onClick: function onClick() {
-        return templateDesignerContext.updateSetting("headerbold", Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.headerbold) === 1 ? 0 : 1);
+        return templateDesignerContext.updateSetting("headerbold", Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.headerbold) === 1 ? 0 : 1);
       }
     }, {
       icon: "editor-italic",
-      isActive: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.headeritalic) === 1,
+      isActive: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.headeritalic) === 1,
       onClick: function onClick() {
-        return templateDesignerContext.updateSetting("headeritalic", Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.headeritalic) === 1 ? 0 : 1);
+        return templateDesignerContext.updateSetting("headeritalic", Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.headeritalic) === 1 ? 0 : 1);
       }
     }, {
       icon: "arrow-up",
@@ -475,9 +473,9 @@ function HeaderText(_ref) {
     title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])("Translation", "wp-html-mail"),
     initialOpen: false
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelRow"], null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["FormToggle"], {
-    checked: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["isTranslationEnabledForField"])(settings, "headertext"),
+    checked: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["isTranslationEnabledForField"])(settings, "headertext"),
     onChange: function onChange(e) {
-      return templateDesignerContext.updateSetting("headertext_enable_translation", !Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["isTranslationEnabledForField"])(settings, "headertext"));
+      return templateDesignerContext.updateSetting("headertext_enable_translation", !Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["isTranslationEnabledForField"])(settings, "headertext"));
     }
   }), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])("Enable translation for this field", "wp-html-mail")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelRow"], null, /*#__PURE__*/React.createElement("p", {
     className: "description"
@@ -492,9 +490,9 @@ function HeaderText(_ref) {
       templateDesignerContext.setPanelOptions(options);
     }
   }, [templateDesignerContext.editingElement, settings]);
-  var headertext = Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getTranslateableThemeOption"])(settings, "headertext");
-  var headertext_field_key = Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getTranslateableThemeOptionsKey"])(settings, "headertext");
-  return /*#__PURE__*/React.createElement(_EditableElement_js__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  var headertext = Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getTranslateableThemeOption"])(settings, "headertext");
+  var headertext_field_key = Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getTranslateableThemeOptionsKey"])(settings, "headertext");
+  return /*#__PURE__*/React.createElement(_EditableElement_js__WEBPACK_IMPORTED_MODULE_7__["default"], {
     elementTitle: elementTitle,
     elementName: elementName,
     frameSize: "s",
@@ -504,10 +502,10 @@ function HeaderText(_ref) {
     style: {
       color: settings.headercolor,
       textAlign: settings.headeralign,
-      fontSize: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.headerfontsize),
+      fontSize: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.headerfontsize),
       fontFamily: settings.headerfont,
-      fontStyle: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.headeritalic) === 1 ? "italic" : "normal",
-      fontWeight: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.headerbold) === 1 ? "bold" : "normal",
+      fontStyle: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.headeritalic) === 1 ? "italic" : "normal",
+      fontWeight: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.headerbold) === 1 ? "bold" : "normal",
       textTransform: settings.headertexttransform
     }
   }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["RichText"], {
@@ -537,13 +535,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/index.js");
-/* harmony import */ var _contexts_TemplateDesignerContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../contexts/TemplateDesignerContext */ "./js/template-designer/contexts/TemplateDesignerContext.js");
-/* harmony import */ var _functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../functions/helper-functions */ "./js/template-designer/functions/helper-functions.js");
-/* harmony import */ var _EditableElement_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./EditableElement.js */ "./js/template-designer/components/EditableElement.js");
+/* harmony import */ var _options_PopoverPicker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./options/PopoverPicker */ "./js/template-designer/components/options/PopoverPicker.js");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/index.js");
+/* harmony import */ var _contexts_TemplateDesignerContext__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../contexts/TemplateDesignerContext */ "./js/template-designer/contexts/TemplateDesignerContext.js");
+/* harmony import */ var _functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../functions/helper-functions */ "./js/template-designer/functions/helper-functions.js");
+/* harmony import */ var _EditableElement_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./EditableElement.js */ "./js/template-designer/components/EditableElement.js");
 function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("Cannot destructure undefined"); }
+
 
 
 
@@ -555,14 +555,14 @@ function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("
 function MailContent(_ref) {
   _objectDestructuringEmpty(_ref);
 
-  var templateDesignerContext = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_contexts_TemplateDesignerContext__WEBPACK_IMPORTED_MODULE_4__["TemplateDesignerContext"]);
+  var templateDesignerContext = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_contexts_TemplateDesignerContext__WEBPACK_IMPORTED_MODULE_5__["TemplateDesignerContext"]);
   var settings = templateDesignerContext.settings;
 
-  var elementTitle = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])("Email content", "wp-html-mail");
+  var elementTitle = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])("Email content", "wp-html-mail");
 
   var elementName = "content";
   var options = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelBody"], {
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])("Background color", "wp-html-mail"),
+    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])("Background color", "wp-html-mail"),
     initialOpen: false
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelRow"], null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["ColorPicker"], {
     color: settings.contentbackground,
@@ -571,15 +571,9 @@ function MailContent(_ref) {
     },
     disableAlpha: true
   }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelBody"], {
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])("Headline Font", "wp-html-mail"),
+    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])("Headline Font", "wp-html-mail"),
     initialOpen: false
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelRow"], null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["ColorPicker"], {
-    color: settings.headlinecolor,
-    onChangeComplete: function onChangeComplete(value) {
-      templateDesignerContext.updateSetting("headlinecolor", value.hex);
-    },
-    disableAlpha: true
-  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelRow"], null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["SelectControl"], {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelRow"], null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["SelectControl"], {
     value: settings.headlinefont,
     options: window.mailTemplateDesigner.fonts,
     onChange: function onChange(value) {
@@ -590,7 +584,12 @@ function MailContent(_ref) {
     onChange: function onChange(value) {
       templateDesignerContext.updateSetting("headlinefontsize", value);
     },
-    value: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.headlinefontsize)
+    value: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.headlinefontsize)
+  }), /*#__PURE__*/React.createElement(_options_PopoverPicker__WEBPACK_IMPORTED_MODULE_2__["PopoverPicker"], {
+    color: settings.headlinecolor,
+    onChange: function onChange(value) {
+      templateDesignerContext.updateSetting("headlinecolor", value.hex);
+    }
   })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelRow"], null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Toolbar"], {
     controls: [{
       icon: "editor-alignleft",
@@ -612,15 +611,15 @@ function MailContent(_ref) {
       }
     }, {
       icon: "editor-bold",
-      isActive: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.headlinebold) === 1,
+      isActive: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.headlinebold) === 1,
       onClick: function onClick() {
-        return templateDesignerContext.updateSetting("headlinebold", Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.headlinebold) === 1 ? 0 : 1);
+        return templateDesignerContext.updateSetting("headlinebold", Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.headlinebold) === 1 ? 0 : 1);
       }
     }, {
       icon: "editor-italic",
-      isActive: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.headlineitalic) === 1,
+      isActive: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.headlineitalic) === 1,
       onClick: function onClick() {
-        return templateDesignerContext.updateSetting("headlineitalic", Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.headlineitalic) === 1 ? 0 : 1);
+        return templateDesignerContext.updateSetting("headlineitalic", Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.headlineitalic) === 1 ? 0 : 1);
       }
     }, {
       icon: "arrow-up",
@@ -630,15 +629,9 @@ function MailContent(_ref) {
       }
     }]
   }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelBody"], {
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])("Subheadline Font", "wp-html-mail"),
+    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])("Subheadline Font", "wp-html-mail"),
     initialOpen: false
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelRow"], null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["ColorPicker"], {
-    color: settings.subheadlinecolor,
-    onChangeComplete: function onChangeComplete(value) {
-      templateDesignerContext.updateSetting("subheadlinecolor", value.hex);
-    },
-    disableAlpha: true
-  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelRow"], null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["SelectControl"], {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelRow"], null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["SelectControl"], {
     value: settings.subheadlinefont,
     options: window.mailTemplateDesigner.fonts,
     onChange: function onChange(value) {
@@ -649,7 +642,12 @@ function MailContent(_ref) {
     onChange: function onChange(value) {
       templateDesignerContext.updateSetting("subheadlinefontsize", value);
     },
-    value: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.subheadlinefontsize)
+    value: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.subheadlinefontsize)
+  }), /*#__PURE__*/React.createElement(_options_PopoverPicker__WEBPACK_IMPORTED_MODULE_2__["PopoverPicker"], {
+    color: settings.subheadlinecolor,
+    onChange: function onChange(value) {
+      templateDesignerContext.updateSetting("subheadlinecolor", value.hex);
+    }
   })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelRow"], null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Toolbar"], {
     controls: [{
       icon: "editor-alignleft",
@@ -671,15 +669,15 @@ function MailContent(_ref) {
       }
     }, {
       icon: "editor-bold",
-      isActive: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.subheadlinebold) === 1,
+      isActive: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.subheadlinebold) === 1,
       onClick: function onClick() {
-        return templateDesignerContext.updateSetting("subheadlinebold", Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.subheadlinebold) === 1 ? 0 : 1);
+        return templateDesignerContext.updateSetting("subheadlinebold", Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.subheadlinebold) === 1 ? 0 : 1);
       }
     }, {
       icon: "editor-italic",
-      isActive: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.subheadlineitalic) === 1,
+      isActive: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.subheadlineitalic) === 1,
       onClick: function onClick() {
-        return templateDesignerContext.updateSetting("subheadlineitalic", Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.subheadlineitalic) === 1 ? 0 : 1);
+        return templateDesignerContext.updateSetting("subheadlineitalic", Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.subheadlineitalic) === 1 ? 0 : 1);
       }
     }, {
       icon: "arrow-up",
@@ -689,15 +687,9 @@ function MailContent(_ref) {
       }
     }]
   }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelBody"], {
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])("Content Font", "wp-html-mail"),
+    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])("Content Font", "wp-html-mail"),
     initialOpen: false
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelRow"], null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["ColorPicker"], {
-    color: settings.textcolor,
-    onChangeComplete: function onChangeComplete(value) {
-      templateDesignerContext.updateSetting("textcolor", value.hex);
-    },
-    disableAlpha: true
-  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelRow"], null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["SelectControl"], {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelRow"], null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["SelectControl"], {
     value: settings.textfont,
     options: window.mailTemplateDesigner.fonts,
     onChange: function onChange(value) {
@@ -708,7 +700,12 @@ function MailContent(_ref) {
     onChange: function onChange(value) {
       templateDesignerContext.updateSetting("textfontsize", value);
     },
-    value: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.textfontsize)
+    value: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.textfontsize)
+  }), /*#__PURE__*/React.createElement(_options_PopoverPicker__WEBPACK_IMPORTED_MODULE_2__["PopoverPicker"], {
+    color: settings.textcolor,
+    onChange: function onChange(value) {
+      templateDesignerContext.updateSetting("textcolor", value.hex);
+    }
   })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelRow"], null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Toolbar"], {
     controls: [{
       icon: "editor-alignleft",
@@ -730,44 +727,38 @@ function MailContent(_ref) {
       }
     }, {
       icon: "editor-bold",
-      isActive: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.textbold) === 1,
+      isActive: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.textbold) === 1,
       onClick: function onClick() {
-        return templateDesignerContext.updateSetting("textbold", Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.textbold) === 1 ? 0 : 1);
+        return templateDesignerContext.updateSetting("textbold", Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.textbold) === 1 ? 0 : 1);
       }
     }, {
       icon: "editor-italic",
-      isActive: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.textitalic) === 1,
+      isActive: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.textitalic) === 1,
       onClick: function onClick() {
-        return templateDesignerContext.updateSetting("textitalic", Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.textitalic) === 1 ? 0 : 1);
+        return templateDesignerContext.updateSetting("textitalic", Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.textitalic) === 1 ? 0 : 1);
       }
     }]
   }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelBody"], {
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])("Link styling", "wp-html-mail"),
+    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])("Link styling", "wp-html-mail"),
     initialOpen: false
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelRow"], null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["ColorPicker"], {
-    color: settings.linkcolor,
-    onChangeComplete: function onChangeComplete(value) {
-      templateDesignerContext.updateSetting("linkcolor", value.hex);
-    },
-    disableAlpha: true
-  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelRow"], null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Toolbar"], {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelRow"], null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Toolbar"], {
     controls: [{
       icon: "editor-bold",
-      isActive: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.linkbold) === 1,
+      isActive: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.linkbold) === 1,
       onClick: function onClick() {
-        return templateDesignerContext.updateSetting("linkbold", Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.linkbold) === 1 ? 0 : 1);
+        return templateDesignerContext.updateSetting("linkbold", Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.linkbold) === 1 ? 0 : 1);
       }
     }, {
       icon: "editor-italic",
-      isActive: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.linkitalic) === 1,
+      isActive: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.linkitalic) === 1,
       onClick: function onClick() {
-        return templateDesignerContext.updateSetting("linkitalic", Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.linkitalic) === 1 ? 0 : 1);
+        return templateDesignerContext.updateSetting("linkitalic", Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.linkitalic) === 1 ? 0 : 1);
       }
     }, {
       icon: "editor-underline",
-      isActive: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.linkunderline) === 1,
+      isActive: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.linkunderline) === 1,
       onClick: function onClick() {
-        return templateDesignerContext.updateSetting("linkunderline", Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.linkunderline) === 1 ? 0 : 1);
+        return templateDesignerContext.updateSetting("linkunderline", Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.linkunderline) === 1 ? 0 : 1);
       }
     }, {
       icon: "arrow-up",
@@ -776,7 +767,14 @@ function MailContent(_ref) {
         return templateDesignerContext.updateSetting("linktexttransform", settings.linktexttransform === "uppercase" ? "none" : "uppercase");
       }
     }]
-  }))));
+  }), /*#__PURE__*/React.createElement(_options_PopoverPicker__WEBPACK_IMPORTED_MODULE_2__["PopoverPicker"], {
+    color: settings.linkcolor,
+    onChange: function onChange(value) {
+      templateDesignerContext.updateSetting("linkcolor", value.hex);
+    }
+  }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelRow"], {
+    className: "mail-info-panel"
+  }, /*#__PURE__*/React.createElement("p", null, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])("Do you wonder why you can't change the email content?", "wp-html-mail"), /*#__PURE__*/React.createElement("br", null), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])("This is not a newsletter tool, this plugins catches all outgoing WordPress emails as well as mails from most of your plugins and wraps those messages in your nice template. So the content could come from your contact form, a comment notification your store sales and many more emails.", "wp-html-mail"))));
   Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     if (templateDesignerContext.editingElement === elementName) {
       templateDesignerContext.setPanelTitle(elementTitle);
@@ -788,10 +786,10 @@ function MailContent(_ref) {
     }
   }, [templateDesignerContext.editingElement, settings]);
   var h1Styles = {
-    fontSize: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.headlinefontsize),
+    fontSize: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.headlinefontsize),
     fontFamily: settings.headlinefont,
-    fontStyle: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.headlineitalic) === 1 ? "italic" : "normal",
-    fontWeight: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.headlinebold) === 1 ? "bold" : "normal",
+    fontStyle: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.headlineitalic) === 1 ? "italic" : "normal",
+    fontWeight: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.headlinebold) === 1 ? "bold" : "normal",
     textTransform: settings.headlinetexttransform,
     color: settings.headlinecolor,
     textAlign: settings.headlinealign,
@@ -800,10 +798,10 @@ function MailContent(_ref) {
     marginBottom: "0.67em"
   };
   var h2Styles = {
-    fontSize: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.subheadlinefontsize),
+    fontSize: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.subheadlinefontsize),
     fontFamily: settings.subheadlinefont,
-    fontStyle: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.subheadlineitalic) === 1 ? "italic" : "normal",
-    fontWeight: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.subheadlinebold) === 1 ? "bold" : "normal",
+    fontStyle: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.subheadlineitalic) === 1 ? "italic" : "normal",
+    fontWeight: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.subheadlinebold) === 1 ? "bold" : "normal",
     textTransform: settings.subheadlinetexttransform,
     color: settings.subheadlinecolor,
     textAlign: settings.subheadlinealign,
@@ -812,10 +810,10 @@ function MailContent(_ref) {
     marginBottom: "0.83em"
   };
   var pStyles = {
-    fontSize: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.textfontsize),
+    fontSize: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.textfontsize),
     fontFamily: settings.textfont,
-    fontStyle: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.textitalic) === 1 ? "italic" : "normal",
-    fontWeight: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.textbold) === 1 ? "bold" : "normal",
+    fontStyle: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.textitalic) === 1 ? "italic" : "normal",
+    fontWeight: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.textbold) === 1 ? "bold" : "normal",
     color: settings.textcolor,
     textAlign: settings.textalign,
     lineHeight: 1.5,
@@ -823,13 +821,13 @@ function MailContent(_ref) {
     marginBottom: "0.83em"
   };
   var aStyles = {
-    fontStyle: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.linkitalic) === 1 ? "italic" : "normal",
-    fontWeight: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.linkbold) === 1 ? "bold" : "normal",
-    textDecoration: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_5__["getIntVal"])(settings.linkunderline) === 1 ? "underline" : "none",
+    fontStyle: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.linkitalic) === 1 ? "italic" : "normal",
+    fontWeight: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.linkbold) === 1 ? "bold" : "normal",
+    textDecoration: Object(_functions_helper_functions__WEBPACK_IMPORTED_MODULE_6__["getIntVal"])(settings.linkunderline) === 1 ? "underline" : "none",
     textTransform: settings.linktexttransform,
     color: settings.linkcolor
   };
-  return /*#__PURE__*/React.createElement(_EditableElement_js__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  return /*#__PURE__*/React.createElement(_EditableElement_js__WEBPACK_IMPORTED_MODULE_7__["default"], {
     elementTitle: elementTitle,
     elementName: elementName
   }, /*#__PURE__*/React.createElement("div", {
@@ -1085,18 +1083,167 @@ function MailHeader(_ref) {
     initialOpen: true
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelRow"], null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["RadioControl"], {
     selected: headerimg_placement,
+    className: "mail-header-type",
     options: [{
       value: "just_text",
-      label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])("Show just a text header", "wp-html-mail")
+      label: /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
+        icon: /*#__PURE__*/React.createElement("svg", {
+          xmlns: "http://www.w3.org/2000/svg",
+          width: "278",
+          height: "45",
+          viewBox: "0 0 278 45"
+        }, /*#__PURE__*/React.createElement("g", {
+          transform: "translate(-80 -463)"
+        }, /*#__PURE__*/React.createElement("rect", {
+          width: "278",
+          height: "45",
+          transform: "translate(80 463)",
+          fill: "#9cbecd"
+        }), /*#__PURE__*/React.createElement("text", {
+          transform: "translate(219 488)",
+          fill: "#fff",
+          fontSize: "18",
+          fontFamily: "OpenSans-Extrabold, Open Sans",
+          fontWeight: "800"
+        }, /*#__PURE__*/React.createElement("tspan", {
+          x: "-28.208",
+          y: "0"
+        }, "YOUR "), /*#__PURE__*/React.createElement("tspan", {
+          x: "-44.868",
+          y: "15"
+        }, "SITE TITLE")))),
+        className: "mail-header-type-icon"
+      })
     }, {
       value: "replace_text",
-      label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])("Show image only", "wp-html-mail")
+      label: /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
+        icon: /*#__PURE__*/React.createElement("svg", {
+          xmlns: "http://www.w3.org/2000/svg",
+          width: "278",
+          height: "71",
+          viewBox: "0 0 278 71"
+        }, /*#__PURE__*/React.createElement("g", {
+          transform: "translate(-81 -358)"
+        }, /*#__PURE__*/React.createElement("rect", {
+          width: "278",
+          height: "71",
+          transform: "translate(81 358)",
+          fill: "#9cbecd"
+        }), /*#__PURE__*/React.createElement("g", {
+          transform: "translate(-136 -101)"
+        }, /*#__PURE__*/React.createElement("path", {
+          d: "M20,0,40,30H0Z",
+          transform: "translate(347 490)",
+          fill: "#fff"
+        }), /*#__PURE__*/React.createElement("path", {
+          d: "M14,0,28,21H0Z",
+          transform: "translate(327 499)",
+          fill: "#fff"
+        }), /*#__PURE__*/React.createElement("circle", {
+          cx: "7",
+          cy: "7",
+          r: "7",
+          transform: "translate(326 478)",
+          fill: "#fff"
+        })))),
+        className: "mail-header-type-icon"
+      })
     }, {
       value: "above_text",
-      label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])("Show image above text", "wp-html-mail")
+      label: /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
+        icon: /*#__PURE__*/React.createElement("svg", {
+          xmlns: "http://www.w3.org/2000/svg",
+          width: "278",
+          height: "90",
+          viewBox: "0 0 278 90"
+        }, /*#__PURE__*/React.createElement("g", {
+          transform: "translate(-80 -109)"
+        }, /*#__PURE__*/React.createElement("rect", {
+          width: "278",
+          height: "71",
+          transform: "translate(80 109)",
+          fill: "#9cbecd"
+        }), /*#__PURE__*/React.createElement("g", {
+          transform: "translate(-137 -350)"
+        }, /*#__PURE__*/React.createElement("path", {
+          d: "M20,0,40,30H0Z",
+          transform: "translate(347 490)",
+          fill: "#fff"
+        }), /*#__PURE__*/React.createElement("path", {
+          d: "M14,0,28,21H0Z",
+          transform: "translate(327 499)",
+          fill: "#fff"
+        }), /*#__PURE__*/React.createElement("circle", {
+          cx: "7",
+          cy: "7",
+          r: "7",
+          transform: "translate(326 478)",
+          fill: "#fff"
+        })), /*#__PURE__*/React.createElement("rect", {
+          width: "278",
+          height: "15",
+          transform: "translate(80 184)",
+          fill: "#9cbecd"
+        }), /*#__PURE__*/React.createElement("text", {
+          transform: "translate(220 195)",
+          fill: "#fff",
+          fontSize: "12",
+          fontFamily: "OpenSans-Extrabold, Open Sans",
+          fontWeight: "800"
+        }, /*#__PURE__*/React.createElement("tspan", {
+          x: "-48.718",
+          y: "0"
+        }, "YOUR SITE TITLE")))),
+        className: "mail-header-type-icon"
+      })
     }, {
       value: "below_text",
-      label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])("Show image below text", "wp-html-mail")
+      label: /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
+        icon: /*#__PURE__*/React.createElement("svg", {
+          xmlns: "http://www.w3.org/2000/svg",
+          width: "278",
+          height: "92",
+          viewBox: "0 0 278 92"
+        }, /*#__PURE__*/React.createElement("g", {
+          transform: "translate(-80 -229)"
+        }, /*#__PURE__*/React.createElement("rect", {
+          width: "278",
+          height: "71",
+          transform: "translate(80 250)",
+          fill: "#9cbecd"
+        }), /*#__PURE__*/React.createElement("g", {
+          transform: "translate(-137 -209)"
+        }, /*#__PURE__*/React.createElement("path", {
+          d: "M20,0,40,30H0Z",
+          transform: "translate(347 490)",
+          fill: "#fff"
+        }), /*#__PURE__*/React.createElement("path", {
+          d: "M14,0,28,21H0Z",
+          transform: "translate(327 499)",
+          fill: "#fff"
+        }), /*#__PURE__*/React.createElement("circle", {
+          cx: "7",
+          cy: "7",
+          r: "7",
+          transform: "translate(326 478)",
+          fill: "#fff"
+        })), /*#__PURE__*/React.createElement("rect", {
+          width: "278",
+          height: "15",
+          transform: "translate(80 231)",
+          fill: "#9cbecd"
+        }), /*#__PURE__*/React.createElement("text", {
+          transform: "translate(220 242)",
+          fill: "#fff",
+          fontSize: "12",
+          fontFamily: "OpenSans-Extrabold, Open Sans",
+          fontWeight: "800"
+        }, /*#__PURE__*/React.createElement("tspan", {
+          x: "-48.718",
+          y: "0"
+        }, "YOUR SITE TITLE")))),
+        className: "mail-header-type-icon"
+      })
     }],
     onChange: function onChange(value) {
       templateDesignerContext.updateSetting("headerimg_placement", value);
@@ -1375,6 +1522,118 @@ function OptionsPanel() {
     className: "mail-optionspanel"
   }, templateDesignerContext.panelOptions);
 }
+
+/***/ }),
+
+/***/ "./js/template-designer/components/options/PopoverPicker.js":
+/*!******************************************************************!*\
+  !*** ./js/template-designer/components/options/PopoverPicker.js ***!
+  \******************************************************************/
+/*! exports provided: PopoverPicker */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PopoverPicker", function() { return PopoverPicker; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _useClickOutside__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./useClickOutside */ "./js/template-designer/components/options/useClickOutside.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+var PopoverPicker = function PopoverPicker(_ref) {
+  var color = _ref.color,
+      onChange = _ref.onChange;
+  var popover = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])();
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      isOpen = _useState2[0],
+      toggle = _useState2[1];
+
+  var close = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(function () {
+    return toggle(false);
+  }, []);
+  Object(_useClickOutside__WEBPACK_IMPORTED_MODULE_2__["default"])(popover, close);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "color-picker-popoper"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "swatch",
+    style: {
+      backgroundColor: color
+    },
+    onClick: function onClick() {
+      return toggle(true);
+    }
+  }), isOpen && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "popover",
+    ref: popover
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["ColorPicker"], {
+    color: color,
+    onChangeComplete: onChange,
+    disableAlpha: true
+  })));
+};
+
+/***/ }),
+
+/***/ "./js/template-designer/components/options/useClickOutside.js":
+/*!********************************************************************!*\
+  !*** ./js/template-designer/components/options/useClickOutside.js ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+ // Improved version of https://usehooks.com/useOnClickOutside/
+
+var useClickOutside = function useClickOutside(ref, handler) {
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    var startedInside = false;
+    var startedWhenMounted = false;
+
+    var listener = function listener(event) {
+      // Do nothing if `mousedown` or `touchstart` started inside ref element
+      if (startedInside || !startedWhenMounted) return; // Do nothing if clicking ref's element or descendent elements
+
+      if (!ref.current || ref.current.contains(event.target)) return;
+      handler(event);
+    };
+
+    var validateEventStart = function validateEventStart(event) {
+      startedWhenMounted = ref.current;
+      startedInside = ref.current && ref.current.contains(event.target);
+    };
+
+    document.addEventListener("mousedown", validateEventStart);
+    document.addEventListener("touchstart", validateEventStart);
+    document.addEventListener("click", listener);
+    return function () {
+      document.removeEventListener("mousedown", validateEventStart);
+      document.removeEventListener("touchstart", validateEventStart);
+      document.removeEventListener("click", listener);
+    };
+  }, [ref, handler]);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (useClickOutside);
 
 /***/ }),
 

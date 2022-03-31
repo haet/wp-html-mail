@@ -6,6 +6,7 @@ import {
 	RangeControl,
 	RadioControl,
 	ColorPicker,
+	Icon
 } from "@wordpress/components";
 
 import { __ } from "@wordpress/i18n";
@@ -39,31 +40,47 @@ export default function MailHeader({}) {
 				<PanelRow>
 					<RadioControl
 						selected={headerimg_placement}
+						className="mail-header-type"
 						options={[
 							{
 								value: "just_text",
-								label: __(
-									"Show just a text header",
-									"wp-html-mail"
-								),
+								label:
+									<Icon
+										icon={
+											<svg xmlns="http://www.w3.org/2000/svg" width="278" height="45" viewBox="0 0 278 45"><g transform="translate(-80 -463)"><rect width="278" height="45" transform="translate(80 463)" fill="#9cbecd"/><text transform="translate(219 488)" fill="#fff" fontSize="18" fontFamily="OpenSans-Extrabold, Open Sans" fontWeight="800"><tspan x="-28.208" y="0">YOUR </tspan><tspan x="-44.868" y="15">SITE TITLE</tspan></text></g></svg>
+										}
+										className="mail-header-type-icon"
+									/>,
 							},
 							{
 								value: "replace_text",
-								label: __("Show image only", "wp-html-mail"),
+								label: 
+									<Icon
+										icon={
+											<svg xmlns="http://www.w3.org/2000/svg" width="278" height="71" viewBox="0 0 278 71"><g transform="translate(-81 -358)"><rect width="278" height="71" transform="translate(81 358)" fill="#9cbecd"/><g transform="translate(-136 -101)"><path d="M20,0,40,30H0Z" transform="translate(347 490)" fill="#fff"/><path d="M14,0,28,21H0Z" transform="translate(327 499)" fill="#fff"/><circle cx="7" cy="7" r="7" transform="translate(326 478)" fill="#fff"/></g></g></svg>
+										}
+										className="mail-header-type-icon"
+									/>,
 							},
 							{
 								value: "above_text",
-								label: __(
-									"Show image above text",
-									"wp-html-mail"
-								),
+								label: 
+									<Icon
+										icon={
+											<svg xmlns="http://www.w3.org/2000/svg" width="278" height="90" viewBox="0 0 278 90"><g transform="translate(-80 -109)"><rect width="278" height="71" transform="translate(80 109)" fill="#9cbecd"/><g transform="translate(-137 -350)"><path d="M20,0,40,30H0Z" transform="translate(347 490)" fill="#fff"/><path d="M14,0,28,21H0Z" transform="translate(327 499)" fill="#fff"/><circle cx="7" cy="7" r="7" transform="translate(326 478)" fill="#fff"/></g><rect width="278" height="15" transform="translate(80 184)" fill="#9cbecd"/><text transform="translate(220 195)" fill="#fff" fontSize="12" fontFamily="OpenSans-Extrabold, Open Sans" fontWeight="800"><tspan x="-48.718" y="0">YOUR SITE TITLE</tspan></text></g></svg>
+										}
+										className="mail-header-type-icon"
+									/>,
 							},
 							{
 								value: "below_text",
-								label: __(
-									"Show image below text",
-									"wp-html-mail"
-								),
+								label: 
+									<Icon
+										icon={
+											<svg xmlns="http://www.w3.org/2000/svg" width="278" height="92" viewBox="0 0 278 92"><g transform="translate(-80 -229)"><rect width="278" height="71" transform="translate(80 250)" fill="#9cbecd"/><g transform="translate(-137 -209)"><path d="M20,0,40,30H0Z" transform="translate(347 490)" fill="#fff"/><path d="M14,0,28,21H0Z" transform="translate(327 499)" fill="#fff"/><circle cx="7" cy="7" r="7" transform="translate(326 478)" fill="#fff"/></g><rect width="278" height="15" transform="translate(80 231)" fill="#9cbecd"/><text transform="translate(220 242)" fill="#fff" fontSize="12" fontFamily="OpenSans-Extrabold, Open Sans" fontWeight="800"><tspan x="-48.718" y="0">YOUR SITE TITLE</tspan></text></g></svg>
+										}
+										className="mail-header-type-icon"
+									/>,
 							},
 						]}
 						onChange={(value) => {

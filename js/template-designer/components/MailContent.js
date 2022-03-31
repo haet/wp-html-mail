@@ -9,6 +9,8 @@ import {
 	TextControl,
 } from "@wordpress/components";
 
+import { PopoverPicker } from "./options/PopoverPicker";
+
 import { __ } from "@wordpress/i18n";
 
 import { arrowUp, arrowLeft, arrowRight, arrowDown } from "@wordpress/icons";
@@ -48,18 +50,6 @@ export default function MailContent({}) {
 				initialOpen={false}
 			>
 				<PanelRow>
-					<ColorPicker
-						color={settings.headlinecolor}
-						onChangeComplete={(value) => {
-							templateDesignerContext.updateSetting(
-								"headlinecolor",
-								value.hex
-							);
-						}}
-						disableAlpha
-					/>
-				</PanelRow>
-				<PanelRow>
 					<SelectControl
 						value={settings.headlinefont}
 						options={window.mailTemplateDesigner.fonts}
@@ -79,6 +69,15 @@ export default function MailContent({}) {
 							);
 						}}
 						value={getIntVal(settings.headlinefontsize)}
+					/>
+					<PopoverPicker
+						color={settings.headlinecolor}
+						onChange={(value) => {
+							templateDesignerContext.updateSetting(
+								"headlinecolor",
+								value.hex
+							);
+						}}
 					/>
 				</PanelRow>
 				<PanelRow>
@@ -158,18 +157,6 @@ export default function MailContent({}) {
 				initialOpen={false}
 			>
 				<PanelRow>
-					<ColorPicker
-						color={settings.subheadlinecolor}
-						onChangeComplete={(value) => {
-							templateDesignerContext.updateSetting(
-								"subheadlinecolor",
-								value.hex
-							);
-						}}
-						disableAlpha
-					/>
-				</PanelRow>
-				<PanelRow>
 					<SelectControl
 						value={settings.subheadlinefont}
 						options={window.mailTemplateDesigner.fonts}
@@ -189,6 +176,15 @@ export default function MailContent({}) {
 							);
 						}}
 						value={getIntVal(settings.subheadlinefontsize)}
+					/>
+					<PopoverPicker
+						color={settings.subheadlinecolor}
+						onChange={(value) => {
+							templateDesignerContext.updateSetting(
+								"subheadlinecolor",
+								value.hex
+							);
+						}}
 					/>
 				</PanelRow>
 				<PanelRow>
@@ -273,18 +269,6 @@ export default function MailContent({}) {
 				initialOpen={false}
 			>
 				<PanelRow>
-					<ColorPicker
-						color={settings.textcolor}
-						onChangeComplete={(value) => {
-							templateDesignerContext.updateSetting(
-								"textcolor",
-								value.hex
-							);
-						}}
-						disableAlpha
-					/>
-				</PanelRow>
-				<PanelRow>
 					<SelectControl
 						value={settings.textfont}
 						options={window.mailTemplateDesigner.fonts}
@@ -304,6 +288,15 @@ export default function MailContent({}) {
 							);
 						}}
 						value={getIntVal(settings.textfontsize)}
+					/>
+					<PopoverPicker
+						color={settings.textcolor}
+						onChange={(value) => {
+							templateDesignerContext.updateSetting(
+								"textcolor",
+								value.hex
+							);
+						}}
 					/>
 				</PanelRow>
 				<PanelRow>
@@ -368,18 +361,6 @@ export default function MailContent({}) {
 				initialOpen={false}
 			>
 				<PanelRow>
-					<ColorPicker
-						color={settings.linkcolor}
-						onChangeComplete={(value) => {
-							templateDesignerContext.updateSetting(
-								"linkcolor",
-								value.hex
-							);
-						}}
-						disableAlpha
-					/>
-				</PanelRow>
-				<PanelRow>
 					<Toolbar
 						controls={[
 							{
@@ -431,8 +412,30 @@ export default function MailContent({}) {
 							},
 						]}
 					/>
+					<PopoverPicker
+						color={settings.linkcolor}
+						onChange={(value) => {
+							templateDesignerContext.updateSetting(
+								"linkcolor",
+								value.hex
+							);
+						}}
+					/>
 				</PanelRow>
 			</PanelBody>
+			<PanelRow className="mail-info-panel">
+				<p>
+					{__(
+						"Do you wonder why you can't change the email content?",
+						"wp-html-mail"
+					)}
+					<br/>
+					{__(
+						"This is not a newsletter tool, this plugins catches all outgoing WordPress emails as well as mails from most of your plugins and wraps those messages in your nice template. So the content could come from your contact form, a comment notification your store sales and many more emails.",
+						"wp-html-mail"
+					)}
+				</p>
+			</PanelRow>
 		</React.Fragment>
 	);
 

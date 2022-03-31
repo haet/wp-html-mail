@@ -42,7 +42,7 @@ final class Haet_Mail_Builder {
 
 		add_filter( 'haet_mail_modify_styled_mail', array( $this, 'modify_styled_mail' ) );
 
-		// make post type translateabble if polylang is active.
+		// make post type translateable if polylang is active.
 		add_filter(
 			'pll_get_post_types',
 			function ( $post_types, $is_settings ) {

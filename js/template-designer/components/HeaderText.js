@@ -4,7 +4,6 @@ import {
 	PanelBody,
 	PanelRow,
 	FormToggle,
-	ColorPicker,
 	SelectControl,
 	Toolbar,
 	TextControl,
@@ -12,6 +11,8 @@ import {
 
 import { __ } from "@wordpress/i18n";
 import { RichText } from "@wordpress/block-editor";
+
+import { PopoverPicker } from "./options/PopoverPicker";
 
 import { TemplateDesignerContext } from "../contexts/TemplateDesignerContext";
 
@@ -31,21 +32,7 @@ export default function HeaderText({}) {
 
 	const options = (
 		<React.Fragment>
-			<PanelBody title={__("Color", "wp-html-mail")} initialOpen={false}>
-				<PanelRow>
-					<ColorPicker
-						color={settings.headercolor}
-						onChangeComplete={(value) => {
-							templateDesignerContext.updateSetting(
-								"headercolor",
-								value.hex
-							);
-						}}
-						disableAlpha
-					/>
-				</PanelRow>
-			</PanelBody>
-			<PanelBody title={__("Font", "wp-html-mail")} initialOpen={false}>
+			<PanelBody title={__("Font", "wp-html-mail")} initialOpen={true}>
 				<PanelRow>
 					<SelectControl
 						value={settings.headerfont}
@@ -66,6 +53,15 @@ export default function HeaderText({}) {
 							);
 						}}
 						value={getIntVal(settings.headerfontsize)}
+					/>
+					<PopoverPicker
+						color={settings.headercolor}
+						onChange={(value) => {
+							templateDesignerContext.updateSetting(
+								"headercolor",
+								value.hex
+							);
+						}}
 					/>
 				</PanelRow>
 				<PanelRow>
