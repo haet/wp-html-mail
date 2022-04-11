@@ -778,6 +778,10 @@ final class Haet_Mail {
 	}
 
 
+	public function allow_base64_encoded_images_in_header( $protocols ){
+		$protocols[] = 'data';
+    	return $protocols;
+	}
 
 	private function get_header( $options ) {
 		$headerimg_placement = $options['headerimg_placement'];
@@ -802,7 +806,6 @@ final class Haet_Mail {
 			&& array_key_exists( $headerimg_field_key, $options )
 			&& strlen( $options[ $headerimg_field_key ] ) > 5
 		) {
-
 			$width     = isset( $options['headerimg_width'] ) && intval( $options['headerimg_width'] ) ? $options['headerimg_width'] : 0;
 			$height    = isset( $options['headerimg_height'] ) && intval( $options['headerimg_height'] ) ? $options['headerimg_height'] : 0;
 			$alt_text  = ( $headerimg_placement == 'replace_text' ? $headertext : $options['headerimg_alt'] );
@@ -844,7 +847,11 @@ final class Haet_Mail {
 				<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
 						<td class="header-image" align="<?php echo esc_attr( $options['headerimg_align'] ); ?>" style="text-align: <?php echo esc_attr( $options['headerimg_align'] ); ?>;">
-							<?php echo wp_kses_post( $headerimg ); ?>
+							<?php 
+							add_filter('kses_allowed_protocols', [$this,'allow_base64_encoded_images_in_header'] );
+							echo wp_kses_post( $headerimg ); 
+							remove_filter('kses_allowed_protocols', [$this,'allow_base64_encoded_images_in_header'] );
+							?>
 						</td>
 					</tr>
 				</table>
