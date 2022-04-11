@@ -35,6 +35,9 @@
 		case 'template':
 			include 'settings-template.php';
 			break;
+		case 'content-editor':
+			include 'settings-content-editor.php';
+			break;
 		case 'sender':
 			include 'settings-sender.php';
 			break;
@@ -69,7 +72,7 @@
 </form>
 
 <?php
-if ( $tab !== 'webfonts' ) :
+if ( in_array( $tab, [ 'webfonts', 'content-editor' ] ) ) :
 	if (
 		! Haet_Mail()->multilanguage->is_multilanguage_site()
 		|| Haet_Mail()->multilanguage->get_current_language()

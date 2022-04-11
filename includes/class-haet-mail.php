@@ -3,6 +3,7 @@
 
 require HAET_MAIL_PATH . 'includes/class-multilanguage.php';
 require HAET_MAIL_PATH . 'includes/class-template-designer.php';
+require HAET_MAIL_PATH . 'includes/class-content-editor.php';
 require HAET_MAIL_PATH . 'includes/class-template-library.php';
 
 final class Haet_Mail {
@@ -11,6 +12,7 @@ final class Haet_Mail {
 	private static $instance;
 	public $multilanguage;
 	private $templatedesigner;
+	private $contenteditor;
 
 	public static function instance() {
 		if ( ! isset( self::$instance ) && ! ( self::$instance instanceof Haet_Mail ) ) {
@@ -24,6 +26,7 @@ final class Haet_Mail {
 	public function __construct() {
 		$this->multilanguage    = new Haet_Multilanguage();
 		$this->templatedesigner = new Haet_TemplateDesigner();
+		$this->contenteditor    = new Haet_ContentEditor();
 		add_action( 'plugins_loaded', 'Haet_Sender_Plugin::hook_plugins', 30 );
 
 		add_action( 'admin_notices', array( $this, 'maybe_show_testmode_warning' ) );
@@ -316,6 +319,7 @@ final class Haet_Mail {
 			$tabs = array(
 				'template' => __( 'Template', 'wp-html-mail' ),
 				'sender'   => __( 'Sender', 'wp-html-mail' ),
+				'content-editor' => __( 'Content editor', 'wp-html-mail' ),
 			);
 			foreach ( $active_plugins as $plugin ) {
 				if ( method_exists( $plugin['class'], 'settings_tab' ) ) {
@@ -400,9 +404,9 @@ final class Haet_Mail {
 	private function validate_theme_options( $options ) {
 		foreach ( $options as $option_key => $option_value ) {
 			if ( 'footer' === $option_key ) {
-				$options[ $option_key ] = strip_tags( $option_value, '<h1><h2><h3><h4><h5><blockquote><center><p><a><div><b><strong><i><em><button><table><thead><tbody><tr><th><td><span>' );
+				$options[ $option_key ] = strip_tags( $option_value, '<h1><h2><h3><h4><h5><blockquote><center><p><a><div><b><strong><i><em><button><table><thead><tbody><tr><th><td><span><br>' );
 			} elseif ( 'headertext' === $option_key ) {
-				$options[ $option_key ] = strip_tags( $option_value, '<b><strong><i><em><span>' );
+				$options[ $option_key ] = strip_tags( $option_value, '<b><strong><i><em><span><br>' );
 			} else {
 				$options[ $option_key ] = sanitize_text_field( $option_value );
 			}

@@ -17,21 +17,20 @@ class Haet_TemplateDesigner {
 	public function admin_page_scripts_and_styles( $page ) {
 		if ( strpos( $page, 'wp-html-mail' ) && ( ! array_key_exists( 'tab', $_GET ) || $_GET['tab'] == 'template' ) ) {
 
-			// style our options panel like the block editor
+			// style our options panel like the block editor.
 			wp_enqueue_style( 'wp-editor' );
 			wp_enqueue_style( 'wp-components' );
 			wp_enqueue_style( 'forms' );
 
-			// https://developer.wordpress.org/block-editor/packages/packages-dependency-extraction-webpack-plugin/
-			$script_path       = HAET_MAIL_PATH . 'js/template-designer/' . ( $this->is_script_debug() ? 'dev' : 'dist' ) . '/main.js';
-			$script_asset_path = HAET_MAIL_PATH . 'js/template-designer/' . ( $this->is_script_debug() ? 'dev' : 'dist' ) . '/main.asset.php';
+			$script_path       = HAET_MAIL_PATH . 'js/template-designer/build/index.js';
+			$script_asset_path = HAET_MAIL_PATH . 'js/template-designer/build/index.asset.php';
 			$script_asset      = file_exists( $script_asset_path )
 				? require $script_asset_path
 				: array(
 					'dependencies' => array(),
 					'version'      => filemtime( $script_path ),
 				);
-			$script_url        = HAET_MAIL_URL . 'js/template-designer/' . ( $this->is_script_debug() ? 'dev' : 'dist' ) . '/main.js';
+			$script_url        = HAET_MAIL_URL . 'js/template-designer/build/index.js';
 
 			wp_enqueue_script( 
 				'wp-html-mail-template-designer',
