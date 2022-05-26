@@ -400,7 +400,7 @@ final class Haet_Mail {
 	private function validate_theme_options( $options ) {
 		foreach ( $options as $option_key => $option_value ) {
 			if ( 'footer' === $option_key ) {
-				$options[ $option_key ] = strip_tags( $option_value, '<h1><h2><h3><h4><h5><blockquote><center><p><a><div><b><strong><i><em><button><table><thead><tbody><tr><th><td><span>' );
+				$options[ $option_key ] = strip_tags( $option_value, '<h1><h2><h3><h4><h5><blockquote><center><p><a><div><b><strong><i><em><button><table><thead><tbody><tr><th><td><span><br><img><style>' );
 			} elseif ( 'headertext' === $option_key ) {
 				$options[ $option_key ] = strip_tags( $option_value, '<b><strong><i><em><span>' );
 			} else {
@@ -778,10 +778,6 @@ final class Haet_Mail {
 	}
 
 
-	public function allow_base64_encoded_images_in_header( $protocols ){
-		$protocols[] = 'data';
-    	return $protocols;
-	}
 
 	private function get_header( $options ) {
 		$headerimg_placement = $options['headerimg_placement'];
@@ -847,11 +843,7 @@ final class Haet_Mail {
 				<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
 						<td class="header-image" align="<?php echo esc_attr( $options['headerimg_align'] ); ?>" style="text-align: <?php echo esc_attr( $options['headerimg_align'] ); ?>;">
-							<?php 
-							add_filter('kses_allowed_protocols', [$this,'allow_base64_encoded_images_in_header'] );
-							echo wp_kses_post( $headerimg ); 
-							remove_filter('kses_allowed_protocols', [$this,'allow_base64_encoded_images_in_header'] );
-							?>
+							<?php echo $headerimg; ?>
 						</td>
 					</tr>
 				</table>
@@ -867,7 +859,7 @@ final class Haet_Mail {
 								text-align: <?php echo esc_attr( $options['headerimg_align'] ); ?>; 
 								padding-bottom: <?php echo esc_attr( $options['header_spacer'] ); ?>px; 
 								">
-							<?php echo wp_kses_post( $headerimg ); ?>
+							<?php echo $headerimg; ?>
 						</td>
 					</tr>
 					<tr>
@@ -893,7 +885,7 @@ final class Haet_Mail {
 								text-align: <?php echo esc_attr( $options['headerimg_align'] ); ?>; 
 								padding-top: <?php echo esc_attr( $options['header_spacer'] ); ?>px; 
 								">
-							<?php echo wp_kses_post( $headerimg ); ?>
+							<?php echo $headerimg; ?>
 						</td>
 					</tr>
 				</table>
@@ -1092,12 +1084,22 @@ final class Haet_Mail {
 		<?php
 	}
 
+	/**
+	 * customized version of wp_kses_post
+	 */
+	public function kses_mailcontent( $html ){
+		$allowed_tags = wp_kses_allowed_html('post');
+		$allowed_tags['style'] = [];
+		return wp_kses($html, $allowed_tags);
+	}
+
+
 
 	public function wrap_in_padding_container( $content, $id = '' ) {
 		return '<table width="100%" border="0" cellpadding="0" cellspacing="0" id="' . $id . '">
 					<tr>
 						<td class="container-padding">
-							' . wp_kses_post( $content ) . '
+							' . $this->kses_mailcontent( $content ) . '
 						</td>
 					</tr>
 				</table>';

@@ -111,7 +111,7 @@ final class Haet_MB_ContentType_Text extends Haet_MB_ContentType {
 		$html = Haet_Mail()->wrap_in_padding_container( $html, $element_content->id );
 		$html = apply_filters( 'haet_mail_print_content_' . $this->_name, $html, $element_content, $settings );
 
-		echo wp_kses_post( $html );
+		echo Haet_Mail()->kses_mailcontent( $html );
 	}
 }
 

@@ -429,7 +429,7 @@ final class Haet_Mail_Builder {
 			return $contents;
 		} else {
 			// reached a value.
-			return strip_tags( $contents, '<h1><h2><h3><h4><h5><blockquote><center><p><a><div><b><strong><i><em><button><table><thead><tbody><tr><th><td><span><br>' );
+			return strip_tags( $contents, '<h1><h2><h3><h4><h5><blockquote><center><p><a><div><b><strong><i><em><button><table><thead><tbody><tr><th><td><span><br><img><style>' );
 		}
 	}
 
