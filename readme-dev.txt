@@ -2,7 +2,8 @@ to get all dependencies:
 npn install 
 
 during development:
-npm run dev 
+go to template-designer/ folder
+npm start 
 Enable SCRIPT_DEBUG for your DEV site in wp-config.php
 define('SCRIPT_DEBUG',true);
 

@@ -1,7 +1,7 @@
 === Email Template Designer - WP HTML Mail ===
 Contributors: codemiq,haet
 Tags: email, email template, woocommerce email, email design, elementor, caldera-forms, wp-e-commerce, easy-digital-downloads, contact-form-7, mandrill, postman, gravityforms
-Requires at least: 5.0
+Requires at least: 5.4
 Tested up to: 5.9.3
 Requires PHP: 7.2
 Stable tag: 3.2.2

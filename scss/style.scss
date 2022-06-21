@@ -15,6 +15,43 @@
 	clear: both;
 }
 
+.wp-html-mail-header{
+	background: #fff;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    position: fixed;
+    width: calc(100% - 160px);
+    top: 32px;
+	left:160px;
+    z-index: 1001;
+	display: flex;
+	justify-content: space-between;
+
+	.heading-wrap{
+		display: flex;
+		gap: 20px;
+
+		h2{
+			margin-top: 0;
+			margin-bottom: 4px;
+		}
+
+		.subtitle{
+			padding-left: 0;
+			font-size: 12px;
+			text-transform: uppercase;
+		}
+	}
+
+	.nav-buttons a{
+		margin-left:15px;
+	}
+}
+
+.settings_page_wp-html-mail #wpbody{
+	padding-top: 60px;
+}
+
 #haet_mail_form {
 	margin-bottom: 80px;
 
@@ -110,16 +147,6 @@
 
 	input[type="number"] {
 		width: 50px;
-	}
-
-	.collapse-testmode,
-	.collapse-headerimg_advanced {
-		display: none;
-	}
-
-	#haet_mail_testmode:checked+label+.collapse-testmode,
-	#haet_mail_headerimg_advanced:checked+label+.collapse-headerimg_advanced {
-		display: block;
 	}
 }
 

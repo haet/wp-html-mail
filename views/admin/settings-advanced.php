@@ -87,35 +87,11 @@
 						</div>
 					</td>
 				</tr>
-				<?php if ( $is_able_to_use_new_editor ) : ?>
-					<tr valign="top">
-						<th scope="row"><label><?php esc_html_e( 'Old template editor', 'wp-html-mail' ); ?></label></th>
-						<td>
-							<input type="hidden" name="haet_mail[use_classic_template_editor]" value="0">
-							<input type="checkbox" id="haet_mail_use_classic_template_editor" name="haet_mail[use_classic_template_editor]" value="1" <?php echo ( isset( $options['use_classic_template_editor'] ) && $options['use_classic_template_editor'] == 1 ? 'checked' : '' ); ?>>
-							<label for="haet_mail_use_classic_template_editor"><?php esc_html_e( 'Go back to our old editor if you don\'t like our new JavaScript based template designer.', 'wp-html-mail' ); ?></label>
-						</td>
-					</tr>
-				<?php endif; ?>
-				<tr valign="top">
-					<th scope="row"><label><?php esc_html_e( 'E-Mail test mode', 'wp-html-mail' ); ?></label></th>
-					<td>
-						<input type="hidden" name="haet_mail[testmode]" value="0">
-						<input type="checkbox" id="haet_mail_testmode" name="haet_mail[testmode]" value="1" <?php echo ( isset( $options['testmode'] ) && $options['testmode'] == 1 ? 'checked' : '' ); ?>>
-						<label for="haet_mail_testmode"><?php esc_html_e( 'enable test mode', 'wp-html-mail' ); ?></label>
-						<div class="collapse-testmode">
-							<input type="text" id="haet_mail_testmode_recipient" name="haet_mail[testmode_recipient]" placeholder="you@example.org" value="<?php echo ( isset( $options['testmode_recipient'] ) ? esc_attr( $options['testmode_recipient'] ) : '' ); ?>">
-							<br>
-							<input type="hidden" name="haet_mail[debugmode]" value="0">
-							<input type="checkbox" id="haet_mail_debugmode" name="haet_mail[debugmode]" value="1" <?php echo ( isset( $options['debugmode'] ) && $options['debugmode'] == 1 ? 'checked' : '' ); ?>>
-							<label for="haet_mail_debugmode"><?php esc_html_e( 'also enable debug outputs', 'wp-html-mail' ); ?></label>
-						</div>
-						<p class="description">
-							<?php esc_html_e( 'Enable email test mode to redirect all messages to your own email address.', 'wp-html-mail' ); ?>
-						</p>
-					</td>
-				</tr>
 			</tbody>
 		</table>
 	</div>
+</div>
+
+<div class="submit">
+	<input type="submit" name="update_haet_mailSettings" class="button-primary" value="<?php esc_html_e( 'Save and Preview', 'wp-html-mail' ); ?>" />
 </div>

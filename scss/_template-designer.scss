@@ -1,13 +1,27 @@
 #wp-html-mail-template-designer {
-	display: flex;
-	flex-direction:row;
-	
+	max-width: 1000px;
+	margin-left: auto;
+	margin-right: auto;
+
+	.wp-html-mail-tabs{
+		width: 100%;
+		margin-top: 30px;
+		.components-tab-panel__tabs {
+    		justify-content: center;
+		}
+	}
+
+	.mail-designer{
+		display: flex;
+		flex-direction:row;
+	}
+
 	.mail-optionspanel {
 		width: 300px;
 		z-index: 10;
 
 		.components-panel__header {
-			background-color: #f3f4f5;
+			background-color: #dddddd;
 		}
 
 		.components-range-control {
@@ -266,5 +280,47 @@
 		font-family: 'Courier New', Courier, monospace;
 		font-size: 13px;
 		min-height: 300px;
+	}
+
+	// general settings wrapper 
+	.mail-settings-content{
+		width: 100%;
+		max-width: 100%;
+	}
+
+
+	.mail-plugin-icon{
+		width: 32px;
+		height: 32px;
+		object-fit:contain;
+		border-radius: 50%;
+		margin-right: 20px;
+	}
+
+	.save-button-pane-bottom{
+		text-align: center;
+		margin-top: 30px;
+		margin-bottom: 30px;
+	}
+
+	.mail-content-editor{
+
+		.interface-interface-skeleton{
+			position: relative;
+			left:0;
+		}
+
+		.editor-styles-wrapper{
+			min-height: 600px;
+		}
+		
+		.block-editor-block-list__layout {
+			max-width: 600px;
+			margin-left: auto;
+			margin-right: auto;
+			margin-top: 60px;
+			margin-bottom: 60px;
+			min-height: 150px;
+		}
 	}
 }

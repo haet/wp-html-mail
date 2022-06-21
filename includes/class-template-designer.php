@@ -1,15 +1,17 @@
 <?php if ( ! defined( 'ABSPATH' ) ) {
 	exit;}
 
+require HAET_MAIL_PATH . 'includes/class-content-editor.php';
+
 class Haet_TemplateDesigner {
 
 	private $api_base = 'whm/v3';
+	private $contenteditor;
 
 	public function __construct() {
+		$this->contenteditor = new Haet_ContentEditor();
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_page_scripts_and_styles' ) );
 		add_action( 'rest_api_init', array( $this, 'rest_api_init' ) );
-
-		add_action( 'admin_notices', array( $this, 'show_template_designer_update_notice' ) );
 	}
 
 
@@ -17,21 +19,23 @@ class Haet_TemplateDesigner {
 	public function admin_page_scripts_and_styles( $page ) {
 		if ( strpos( $page, 'wp-html-mail' ) && ( ! array_key_exists( 'tab', $_GET ) || $_GET['tab'] == 'template' ) ) {
 
-			// style our options panel like the block editor
+			// style our options panel like the block editor.
 			wp_enqueue_style( 'wp-editor' );
 			wp_enqueue_style( 'wp-components' );
 			wp_enqueue_style( 'forms' );
+			wp_enqueue_media();
 
-			// https://developer.wordpress.org/block-editor/packages/packages-dependency-extraction-webpack-plugin/
-			$script_path       = HAET_MAIL_PATH . 'js/template-designer/' . ( $this->is_script_debug() ? 'dev' : 'dist' ) . '/main.js';
-			$script_asset_path = HAET_MAIL_PATH . 'js/template-designer/' . ( $this->is_script_debug() ? 'dev' : 'dist' ) . '/main.asset.php';
+			$this->contenteditor->load();
+
+			$script_path       = HAET_MAIL_PATH . 'template-designer/build/index.js';
+			$script_asset_path = HAET_MAIL_PATH . 'template-designer/build/index.asset.php';
 			$script_asset      = file_exists( $script_asset_path )
 				? require $script_asset_path
 				: array(
 					'dependencies' => array(),
 					'version'      => filemtime( $script_path ),
 				);
-			$script_url        = HAET_MAIL_URL . 'js/template-designer/' . ( $this->is_script_debug() ? 'dev' : 'dist' ) . '/main.js';
+			$script_url        = HAET_MAIL_URL . 'template-designer/build/index.js';
 
 			wp_enqueue_script( 
 				'wp-html-mail-template-designer',
@@ -51,9 +55,25 @@ class Haet_TemplateDesigner {
 					'isMultiLanguageSite' => Haet_Mail()->multilanguage->is_multilanguage_site(),
 					'currentLanguage'     => Haet_Mail()->multilanguage->get_current_language(),
 					'nonce'               => wp_create_nonce( 'wp_rest' ),
+					'editorSettings'      => [
+						'editor' => $this->contenteditor->get_editor_settings(),
+						'iso' => [
+							'blocks' => [
+								'allowBlocks' => $this->contenteditor->get_allowed_blocks(),
+							],
+							'sidebar' => ['inspector' => true, 'inserter' => true],
+							'toolbar' => [
+								'inspector' => true, 
+								'navigation' => true,
+							],
+							'moreMenu' => [
+								'editor' => true,
+								'topToolbar' => true,
+							],
+						],
+					]
 				)
 			);
-			wp_enqueue_media();
 			wp_enqueue_editor();
 		}
 	}
@@ -84,6 +104,79 @@ class Haet_TemplateDesigner {
 				},
 			)
 		);
+
+		register_rest_route(
+			$this->api_base,
+			'/themecss/(?P<post_id>\d+)',
+			array(
+				'methods'             => 'GET',
+				'callback'            => array( $this->contenteditor, 'output_template_styles_for_contenteditor' ),
+				'permission_callback' => function () {
+					return current_user_can( 'manage_options' );
+				},
+			)
+		);
+
+		register_rest_route(
+			$this->api_base,
+			'/settings',
+			array(
+				'methods'             => 'GET',
+				'callback'            => array( $this, 'get_settings' ),
+				'permission_callback' => function () {
+					return current_user_can( 'manage_options' );
+				},
+			)
+		);
+
+		register_rest_route(
+			$this->api_base,
+			'/settings',
+			array(
+				'methods'             => 'POST',
+				'callback'            => array( $this, 'save_settings' ),
+				'permission_callback' => function () {
+					return current_user_can( 'manage_options' );
+				},
+			)
+		);
+
+		register_rest_route(
+			$this->api_base,
+			'/plugins',
+			array(
+				'methods'             => 'GET',
+				'callback'            => 'Haet_Sender_Plugin::get_plugins_for_rest',
+				'permission_callback' => function () {
+					return current_user_can( 'manage_options' );
+				},
+			)
+		);
+
+
+		register_rest_route(
+			$this->api_base,
+			'/pluginsettings',
+			array(
+				'methods'             => 'GET',
+				'callback'            => array( $this, 'get_pluginsettings' ),
+				'permission_callback' => function () {
+					return current_user_can( 'manage_options' );
+				},
+			)
+		);
+
+		register_rest_route(
+			$this->api_base,
+			'/pluginsettings',
+			array(
+				'methods'             => 'POST',
+				'callback'            => array( $this, 'save_pluginsettings' ),
+				'permission_callback' => function () {
+					return current_user_can( 'manage_options' );
+				},
+			)
+		);
 	}
 
 
@@ -106,6 +199,69 @@ class Haet_TemplateDesigner {
 		return new \WP_REST_Response( array( 'preview' => $preview ) );
 	}
 
+
+	/**
+	 * Get non-visual settings like sender, test mode...
+	 */
+	public function get_settings() {
+		$options = Haet_Mail()->get_options();
+
+		return new \WP_REST_Response( $options );
+	}
+
+
+
+	/**
+	 * Save non-visual settings like sender, test mode...
+	 *
+	 * @param object $request Rest Request object.
+	 */
+	public function save_settings( $request ) {
+		if ( $request->get_params() ) {
+			$new_options = $request->get_params();
+		} else {
+			$new_options = [ ];
+		}
+
+		$old_options = Haet_Mail()->get_options();
+		$new_options = Haet_Mail()->validate_options( $new_options );
+
+		$options = array_merge( $old_options, $new_options );
+
+		update_option( 'haet_mail_options', $options );
+
+		return new \WP_REST_Response( $options );
+	}
+
+
+
+	/**
+	 * Get plugin settings.
+	 */
+	public function get_pluginsettings() {
+		return new \WP_REST_Response( Haet_Sender_Plugin::get_plugin_options() );
+	}
+
+
+
+	/**
+	 * Save plugin settings.
+	 *
+	 * @param object $request Rest Request object.
+	 */
+	public function save_pluginsettings( $request ) {
+		if ( $request->get_params() ) {
+			$new_options = $request->get_params();
+			$old_options = Haet_Sender_Plugin::get_plugin_options();
+			$options = Haet_Sender_Plugin::save_plugin_options( $old_options, $new_options );
+		} else {
+			$options = Haet_Sender_Plugin::get_plugin_options();
+		}
+
+		return new \WP_REST_Response( $options );
+	}
+
+
 	private function get_available_fonts() {
 		$fonts                = Haet_Mail()->get_fonts();
 		$fonts_select_options = array();
@@ -127,26 +283,6 @@ class Haet_TemplateDesigner {
 
 	public function is_script_debug() {
 		return defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG === true;
-	}
-
-	public function is_wp_version_compatible() {
-		// our new JavaScript based editor relies on some WordPress React components available in 5.4
-		return version_compare( get_bloginfo( 'version' ), '5.4', '>=' );
-	}
-
-
-	/**
-	 * Show a notice on the backend
-	 * either to tell the users to check their settings in the new editor or to tell them to better update WP to see the new editor
-	 */
-	public function show_template_designer_update_notice() {
-		if ( ! $this->is_wp_version_compatible() && array_key_exists( 'page', $_GET ) && $_GET['page'] == 'wp-html-mail' ) {
-			?>
-			<div class="notice notice-warning">
-				<p><?php _e( 'In order to use our <strong>new email editor</strong> you need to upgrade to WordPress 5.4 or higher. In the meanwhile you can still use our classic settings pages.', 'wp-html-mail' ); ?></p>
-			</div>
-			<?php
-		}
 	}
 }
 

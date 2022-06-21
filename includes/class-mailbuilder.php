@@ -199,16 +199,16 @@ final class Haet_Mail_Builder {
 			$css = str_replace( '/**** ADD MOBILE CSS HERE ****/', $custom_css_mobile . '/**** ADD MOBILE CSS HERE ****/', $css );
 
 			include_once HAET_MAIL_PATH . '/vendor/autoload.php';
-			$mailbilder_id = '#mailbuilder-editor';
+			$mailbuilder_id = '#mailbuilder-editor';
 			$css_parser    = new Sabberworm\CSS\Parser( $css );
 			$css_object    = $css_parser->parse();
 			foreach ( $css_object->getAllDeclarationBlocks() as $css_block ) {
 				foreach ( $css_block->getSelectors() as $css_selector ) {
 					// Loop over all selector parts (the comma-separated strings in a selector) and prepend the id.
 					if ( $css_selector->getSelector() === 'body' ) {
-						$css_selector->setSelector( $mailbilder_id );
+						$css_selector->setSelector( $mailbuilder_id );
 					} else {
-						$css_selector->setSelector( $mailbilder_id . ' ' . $css_selector->getSelector() );
+						$css_selector->setSelector( $mailbuilder_id . ' ' . $css_selector->getSelector() );
 					}
 				}
 			}
@@ -568,7 +568,7 @@ final class Haet_Mail_Builder {
 		// backslash is not supported in post titles.
 		$email_name = str_replace( '\\', '__', $email_name );
 		$options    = Haet_Mail()->get_options();
-		if ( ! isset( $options['email_post_ids'] ) ) {
+		if ( ! isset( $options['email_post_ids'] ) || ! is_array( $options['email_post_ids'] ) ) {
 			$options['email_post_ids'] = array();
 		}
 
@@ -577,12 +577,13 @@ final class Haet_Mail_Builder {
 		}
 
 		$translated_email_post_id = false;
-		if ( $options['email_post_ids'][ $email_name ] && Haet_Mail()->multilanguage->is_multilanguage_site() ) {
+		if ( isset( $options['email_post_ids'][ $email_name ] ) && Haet_Mail()->multilanguage->is_multilanguage_site() ) {
 			$translated_email_post_id = Haet_Mail()->multilanguage->get_email_post_id_in_current_language( $options['email_post_ids'][ $email_name ] );
 		}
 
 		// post ID exists but post can't be loaded.
-		if ( ! get_post( $options['email_post_ids'][ $email_name ] )
+		if ( isset( $options['email_post_ids'][ $email_name ] )
+			&& ! get_post( $options['email_post_ids'][ $email_name ] )
 			&& ( ! Haet_Mail()->multilanguage->is_multilanguage_site() // just doesn't exist (language independent).
 			|| ! $translated_email_post_id                        // no translation exists.
 			|| ! get_post( $translated_email_post_id ) )          // translation id exists but post does not.

@@ -75,21 +75,10 @@ haet_mail.switch_edit_mode = function () {
 	}
 };
 
-haet_mail.maybe_hide_headerimage_fields = function () {
-	var $ = jQuery;
-	$(".collapse-headerimg").toggle(
-		$("#haet_mailheaderimg_placement").val() != "just_text"
-	);
-};
 
 jQuery(function ($) {
 	$("input,textarea,select").change(function () {
 		haet_mail.ajaxSave();
-	});
-
-	haet_mail.maybe_hide_headerimage_fields();
-	$("#haet_mailheaderimg_placement").change(function () {
-		haet_mail.maybe_hide_headerimage_fields();
 	});
 
 	haet_mail.switch_edit_mode();
