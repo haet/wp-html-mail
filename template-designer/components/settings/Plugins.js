@@ -18,41 +18,9 @@ import { __ } from "@wordpress/i18n";
 import { TemplateDesignerContext } from "../../contexts/TemplateDesignerContext";
 
 
-export default function Plugins() {
+export default function Plugins({plugins}) {
 	const templateDesignerContext = useContext(TemplateDesignerContext);
 	const [settings, setSettings] = useState([]);
-	const [plugins, setPlugins] = useState([]);
-	const [showSaveSuccess, setShowSaveSuccess] = useState(false);
-	
-	const loadPlugins = () => {
-		templateDesignerContext.setIsLoading(true);
-		const pluginsRequest = new Request(
-			window.mailTemplateDesigner.restUrl + "plugins",
-			{
-				method: "GET",
-				headers: {
-					"Content-Type": "application/json",
-					"X-WP-Nonce": window.mailTemplateDesigner.nonce
-				},
-				credentials: "same-origin"
-			}
-		);
-		fetch(pluginsRequest)
-			.then((resp) => resp.json())
-			.then((data) => {
-				setPlugins(data);
-				templateDesignerContext.setIsLoading(false);
-			});
-	};
-
-	
-
-	useEffect(() => {
-		loadPlugins();
-	}, []);
-
-	
-
 	
 	
 	if (templateDesignerContext.isLoading || !templateDesignerContext.theme)
@@ -64,16 +32,6 @@ export default function Plugins() {
 	else
 		return (
 			<div className="mail-settings">
-				{showSaveSuccess && (
-					<Notice status="success" isDismissible={false}>
-						<p>
-							{__(
-								"Your settings have been saved.",
-								"wp-html-mail"
-							)}
-						</p>
-					</Notice>
-				)}
 				<Card className="mail-settings-content">
 					<CardHeader>
 						<h3>{ __( 'Plugins', 'wp-html-mail' ) }</h3>
@@ -205,10 +163,10 @@ export default function Plugins() {
 						onClick={(e) => {
 							e.preventDefault();
 							templateDesignerContext.saveSettings(() => {
-								setShowSaveSuccess(true);
+								templateDesignerContext.setInfoMessage(__('Your settings have been saved.', 'wp-html-mail'))
 								setTimeout(() => {
-									setShowSaveSuccess(false);
-								}, 4000);
+									templateDesignerContext.setInfoMessage("");
+								}, 7000)
 							});
 						}}
 					>

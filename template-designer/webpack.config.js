@@ -1,5 +1,5 @@
 const path = require('path');
-
+const { ModuleFederationPlugin } = require('webpack').container;
 const defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
 
 const rootDir = path.resolve( __dirname );
@@ -15,6 +15,19 @@ console.log("buildDir: " + paths.buildDir);
 
 module.exports = {
 	...defaultConfig,
+	plugins: [
+    new ModuleFederationPlugin({
+      name: "wphtmlmail",
+      library: { type: "var", name: "wphtmlmail" },
+      remotes: {
+        wphtmlmailwoocommerce: "wphtmlmailwoocommerce",
+      },
+      shared: ["react", "react-dom"],
+    }),
+    new HtmlWebpackPlugin({
+      template: "./public/index.html",
+    }),
+  ],
 	resolve: {
 		...defaultConfig.resolve,
 		// alias directories to paths you can use in import() statements

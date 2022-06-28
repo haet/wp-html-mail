@@ -235,15 +235,7 @@ export default function MailFooter({}) {
 					backgroundColor: theme.footerbackground,
 				}}
 			>
-				<div
-					key="toolbar"
-					id="footer-editor-toolbar"
-					className="block-library-classic__toolbar"
-					onKeyDown={(e) => {
-						elementName.stopPropagation();
-						e.nativeEvent.stopImmediatePropagation();
-					}}
-				/>
+				
 				<div
 					key="editor"
 					id="footer-html"

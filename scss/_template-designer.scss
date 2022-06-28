@@ -1,5 +1,6 @@
 #wp-html-mail-template-designer {
 	max-width: 1000px;
+	margin-bottom: 80px;
 	margin-left: auto;
 	margin-right: auto;
 
@@ -297,6 +298,19 @@
 		margin-right: 20px;
 	}
 
+	.mail-import-export{
+		width: 100%;
+		
+		textarea{
+			word-break: break-all;
+			font-family: 'Courier New', Courier, monospace;
+		}
+	}
+
+	.mail-advanced-action-button{
+		margin-right: 15px;
+	}
+
 	.save-button-pane-bottom{
 		text-align: center;
 		margin-top: 30px;
@@ -313,8 +327,8 @@
 		.editor-styles-wrapper{
 			min-height: 600px;
 		}
-		
-		.block-editor-block-list__layout {
+
+		.is-root-container.block-editor-block-list__layout {
 			max-width: 600px;
 			margin-left: auto;
 			margin-right: auto;

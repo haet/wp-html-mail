@@ -8,9 +8,9 @@ function TemplateDesignerContextProvider(props) {
 	const [editingElement, setEditingElement] = useState("container");
 	const [theme, setTheme] = useState({});
 	const [settings, setSettings] = useState({});
-	// const [errorMessage, setErrorMessage] = useState("");
-	// const [infoMessage, setInfoMessage] = useState("");
-	// const [confirmDialog, setConfirmDialog] = useState({});
+	const [errorMessage, setErrorMessage] = useState("");
+	const [infoMessage, setInfoMessage] = useState("");
+	const [confirmDialog, setConfirmDialog] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
 	const [isSaving, setIsSaving] = useState(false);
 	
@@ -47,13 +47,13 @@ function TemplateDesignerContextProvider(props) {
 	};
 
 
-	const saveTheme = (successCallback) => {
+	const saveTheme = (successCallback = null, newTheme = null) => {
 		setIsSaving(true);
 		var request = new Request(
 			window.mailTemplateDesigner.restUrl + "themesettings",
 			{
 				method: "POST",
-				body: JSON.stringify(theme),
+				body: JSON.stringify( newTheme ? newTheme : theme),
 				headers: {
 					"Content-Type": "application/json",
 					"X-WP-Nonce": window.mailTemplateDesigner.nonce
@@ -95,13 +95,13 @@ function TemplateDesignerContextProvider(props) {
 		}
 	};
 
-	const saveSettings = () => {
+	const saveSettings = (saveCallback = null, newSettings = null) => {
 		setIsSaving(true);
 		var request = new Request(
 			window.mailTemplateDesigner.restUrl + "settings",
 			{
 				method: "POST",
-				body: JSON.stringify(settings),
+				body: JSON.stringify(newSettings ? newSettings : settings),
 				headers: {
 					"Content-Type": "application/json",
 					"X-WP-Nonce": window.mailTemplateDesigner.nonce
@@ -112,10 +112,9 @@ function TemplateDesignerContextProvider(props) {
 			.then((resp) => resp.json())
 			.then((data) => {
 				setIsSaving(false);
-				setShowSaveSuccess(true);
-				setTimeout(() => {
-					setShowSaveSuccess(false);
-				}, 4000);
+				if (saveCallback)
+					saveCallback()
+
 				setSettings(data);
 			});
 	};
@@ -139,12 +138,12 @@ function TemplateDesignerContextProvider(props) {
 				updateSetting,
 				loadSettings,
 				saveSettings,
-				// errorMessage,
-				// setErrorMessage,
-				// infoMessage,
-				// setInfoMessage,
-				// confirmDialog,
-				// setConfirmDialog,
+				errorMessage,
+				setErrorMessage,
+				infoMessage,
+				setInfoMessage,
+				confirmDialog,
+				setConfirmDialog,
 				isLoading,
 				setIsLoading,
 			}}

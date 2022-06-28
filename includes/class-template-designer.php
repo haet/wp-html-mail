@@ -37,6 +37,20 @@ class Haet_TemplateDesigner {
 				);
 			$script_url        = HAET_MAIL_URL . 'template-designer/build/index.js';
 
+			$react_component_files = $this->get_react_compontent_files();
+			if( is_array( $react_component_files ) && count( $react_component_files ) ){
+				foreach( $react_component_files as $plugin_name => $react_component_file ){
+					wp_enqueue_script( 
+						'wp-html-mail-' . $plugin_name,
+						$react_component_file,
+						[],
+						'1.0',
+						true
+					);
+
+					$script_asset['dependencies'][] = 'wp-html-mail-' . $plugin_name;
+				}
+			}
 			wp_enqueue_script( 
 				'wp-html-mail-template-designer',
 				$script_url,
@@ -78,7 +92,19 @@ class Haet_TemplateDesigner {
 		}
 	}
 
-
+	/**
+	 * Get a list of react components from plugins to be loaded.
+	 */
+	private function get_react_compontent_files(){
+		$plugins = Haet_Sender_Plugin::get_plugins_for_rest();
+		$js_files = [];
+		foreach( $plugins as $plugin_name => $plugin ){
+			if( $plugin['active'] && $plugin['has_addon'] && $plugin['is_addon_active'] && $plugin ['react_component'] ){
+				$js_files[$plugin_name] = $plugin ['react_component'];
+			}
+		}
+		return $js_files;
+	}
 
 	public function rest_api_init() {
 		register_rest_route(
@@ -146,7 +172,9 @@ class Haet_TemplateDesigner {
 			'/plugins',
 			array(
 				'methods'             => 'GET',
-				'callback'            => 'Haet_Sender_Plugin::get_plugins_for_rest',
+				'callback'            => function(){
+					return new \WP_REST_Response( array_values( Haet_Sender_Plugin::get_plugins_for_rest() ) );
+				},
 				'permission_callback' => function () {
 					return current_user_can( 'manage_options' );
 				},
@@ -172,6 +200,18 @@ class Haet_TemplateDesigner {
 			array(
 				'methods'             => 'POST',
 				'callback'            => array( $this, 'save_pluginsettings' ),
+				'permission_callback' => function () {
+					return current_user_can( 'manage_options' );
+				},
+			)
+		);
+
+		register_rest_route(
+			$this->api_base,
+			'/advancedactions',
+			array(
+				'methods'             => 'GET',
+				'callback'            => array( $this, 'get_advanced_actions' ),
 				'permission_callback' => function () {
 					return current_user_can( 'manage_options' );
 				},
@@ -259,6 +299,61 @@ class Haet_TemplateDesigner {
 		}
 
 		return new \WP_REST_Response( $options );
+	}
+
+
+	/**
+	 * Advanced actions are some additional actions on tab "advanced" which are formerly executed in PHP and called via URL parameters.
+	 */
+	public function get_advanced_actions() {
+		$actions = [
+			'reset' => [
+				'buttons' => [
+					[ 
+						'caption'	=> __( 'Delete design settings', 'wp-html-mail' ),
+						'href'		=> add_query_arg( 'advanced-action', 'delete-design', Haet_Mail()->get_tab_url() ),
+						'disabled'	=> false,
+						'confirm'	=> __('Are you sure? This can not be undone!', 'wp-html-mail')
+					],
+					[ 
+						'caption'	=> __( 'Delete ALL settings', 'wp-html-mail' ),
+						'href'		=> add_query_arg( 'advanced-action', 'delete-all', Haet_Mail()->get_tab_url() ),
+						'disabled'	=> false,
+						'confirm'	=> __('Are you sure? This can not be undone!', 'wp-html-mail')
+					],
+				]
+			],
+			'debug' => [
+				'buttons'	=> [],
+				'description' => ''
+			],
+			'template' => [],
+		];
+
+		$template_description = '';
+		if ( file_exists( get_stylesheet_directory() . '/wp-html-mail/template.html' ) )
+			$template_description .= '<p class="description">' . __( 'You already have a custom template. If you create a new one the existing template will be backed up.', 'wp-html-mail' ) . '</p>'; 
+		
+		$theme_is_writable = is_writable( get_stylesheet_directory() );
+		if ( ! $theme_is_writable )
+			$template_description .= '<p class="description">' . __( 'WARNING: Your theme directory is not writable by the server. Please change the permission to allow us to create the mail template.', 'wp-html-mail' ) . '</p>';
+		$template_description .= '<p class="description">' . __( 'Customize your mail template as far as you can. Then click this button to export the template to your theme directory for further modifications.<br>The template will be created in <strong>wp-content/YOUR-THEME/wp-html-mail/template.html</strong>', 'wp-html-mail' ) . '</p>';
+		$template_description .= '<p class="description">' . __( '<strong>Only use this feature if you know what you are doing!</strong><br>From this point you have to continue your work in HTML and CSS code.', 'wp-html-mail' ) . '</p>'; 
+		$template_description .= '<p class="description">' . __( "If you don't use a child theme and need an update save place to store your email template you can also copy the template file from the plugin to <strong>wp-content/uploads/wp-html-mail/template.html</strong>.", 'wp-html-mail' ) . '</p>';
+
+		$actions['template'] = [
+			'buttons' => [
+				[ 
+					'caption'	=> __( 'create template file in my theme folder', 'wp-html-mail' ),
+					'href'		=> add_query_arg( 'advanced-action', 'create-template-file', Haet_Mail()->get_tab_url() ),
+					'disabled'	=> false,
+					'confirm'	=> __('Are you sure you want to write your own code?', 'wp-html-mail')
+				],
+			],
+			'description' => $template_description
+		];
+		$actions = apply_filters( 'haet_mail_register_advanced_actions', $actions );
+		return new \WP_REST_Response( $actions );
 	}
 
 

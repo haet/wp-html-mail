@@ -22,7 +22,6 @@ import { TemplateDesignerContext } from "../../contexts/TemplateDesignerContext"
 export default function Sender() {
 	const templateDesignerContext = useContext(TemplateDesignerContext);
 	const { settings } = templateDesignerContext;
-	const [showSaveSuccess, setShowSaveSuccess] = useState(false);
 
 	useEffect(() => {
 		templateDesignerContext.loadSettings();
@@ -77,16 +76,6 @@ export default function Sender() {
 	else
 		return (
 			<div className="mail-settings">
-				{showSaveSuccess && (
-					<Notice status="success" isDismissible={false}>
-						<p>
-							{__(
-								"Your settings have been saved.",
-								"wp-html-mail"
-							)}
-						</p>
-					</Notice>
-				)}
 				{mailDeliveryPlugin && (
 					<Notice status="warning" isDismissible={true}>
 						<p>
@@ -168,10 +157,10 @@ export default function Sender() {
 						onClick={(e) => {
 							e.preventDefault();
 							templateDesignerContext.saveSettings(() => {
-								setShowSaveSuccess(true);
+								templateDesignerContext.setInfoMessage(__('Your settings have been saved.', 'wp-html-mail'))
 								setTimeout(() => {
-									setShowSaveSuccess(false);
-								}, 4000);
+									templateDesignerContext.setInfoMessage("");
+								}, 7000)
 							});
 						}}
 					>

@@ -20,8 +20,6 @@ import { TemplateDesignerContext } from "../../contexts/TemplateDesignerContext"
 export default function Redirect() {
 	const templateDesignerContext = useContext(TemplateDesignerContext);
 	const { settings } = templateDesignerContext;
-	const [showSaveSuccess, setShowSaveSuccess] = useState(false);
-	
 
 	useEffect(() => {
 		templateDesignerContext.loadSettings();
@@ -37,16 +35,6 @@ export default function Redirect() {
 	else
 		return (
 			<div className="mail-settings">
-				{showSaveSuccess && (
-					<Notice status="success" isDismissible={false}>
-						<p>
-							{__(
-								"Your settings have been saved.",
-								"wp-html-mail"
-							)}
-						</p>
-					</Notice>
-				)}
 				<Card className="mail-settings-content">
 					<CardHeader>
 						<h3>{ __( 'Redirect emails / Email test mode', 'wp-html-mail' ) }</h3>
@@ -109,10 +97,10 @@ export default function Redirect() {
 						onClick={(e) => {
 							e.preventDefault();
 							templateDesignerContext.saveSettings(() => {
-								setShowSaveSuccess(true);
+								templateDesignerContext.setInfoMessage(__('Your settings have been saved.', 'wp-html-mail'))
 								setTimeout(() => {
-									setShowSaveSuccess(false);
-								}, 4000);
+									templateDesignerContext.setInfoMessage("");
+								}, 7000)
 							});
 						}}
 					>

@@ -255,7 +255,7 @@ class Haet_Sender_Plugin {
 	/**
 	 * Get available plugins.
 	 */
-	public function get_plugins_for_rest(){
+	public static function get_plugins_for_rest(){
 		$addon_plugins = array(
 			'woocommerce'            => array(
 				'name'         => 'woocommerce',
@@ -302,17 +302,19 @@ class Haet_Sender_Plugin {
 		$plugins = array_merge( self::get_available_plugins(), $addon_plugins );
 		foreach ( $plugins as $plugin_name => $plugin ) {
 			$plugins[ $plugin_name ]['active'] = self::is_plugin_active( $plugin );
-			if( array_key_exists( $plugin_name, $addon_plugins ) ) {
+			$plugins[ $plugin_name ]['react_component'] = false;
+			
+			if ( array_key_exists( $plugin_name, $addon_plugins ) ) {
 				$plugins[ $plugin_name ]['has_addon'] = true;
 				$plugins[ $plugin_name ]['is_addon_active'] = class_exists( $plugin['class'] );
-			}else{
+				if ( $plugins[ $plugin_name ]['is_addon_active'] )
+					$plugins[ $plugin_name ]['react_component'] = $plugin['class']::get_react_component();
+			} else {
 				$plugins[ $plugin_name ]['has_addon'] = false;
 			}
 
-			if ( !array_key_exists( 'image_url', $plugin ) ){
+			if ( ! array_key_exists( 'image_url', $plugin ) ){
 				$plugins[ $plugin_name ]['image_url'] = 'https://ps.w.org/' . $plugin_name . '/assets/icon-128x128.png';
-				error_log('#### '.$plugins[ $plugin_name ]['image_url']);
-				error_log( print_r( @get_headers( $plugins[ $plugin_name ]['image_url'] ) ,true ));
 				if ( strpos( @get_headers( $plugins[ $plugin_name ]['image_url'] )[0], '200' ) === false ) {
 					$plugins[ $plugin_name ]['image_url'] = 'https://ps.w.org/' . $plugin_name . '/assets/icon-128x128.jpg';
 				}
@@ -326,7 +328,7 @@ class Haet_Sender_Plugin {
 		}
 
 
-		return new \WP_REST_Response( array_values( $plugins ) );
+		return $plugins;
 	}
 
 
@@ -441,5 +443,13 @@ class Haet_Sender_Plugin {
 	}
 
 	public static function plugin_actions_and_filters() {
+	}
+
+	/**
+	 * Plugins may have a react component. If they do they appear as a tab in template designer.
+	 * Otherwise - as a fallback - they still may have PHP tabs at the top of the page.
+	 */
+	public static function get_react_component() {
+		return false;
 	}
 }
