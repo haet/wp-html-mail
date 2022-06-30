@@ -10661,13 +10661,25 @@ function TemplateDesigner() {
     className: 'tab-advanced',
     component: /*#__PURE__*/React.createElement(_settings_AdvancedSettings__WEBPACK_IMPORTED_MODULE_9__["default"], null)
   });
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", null, templateDesignerContext.errorMessage && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Notice, {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", null, templateDesignerContext.errorMessage && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Snackbar, {
+    className: "snackbar error",
     status: "error",
     isDismissible: false
-  }, templateDesignerContext.errorMessage), templateDesignerContext.infoMessage && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Notice, {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Icon, {
+    icon: "warning",
+    style: {
+      color: 'red'
+    }
+  }), templateDesignerContext.errorMessage), templateDesignerContext.infoMessage && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Snackbar, {
+    className: "snackbar",
     status: "success",
     isDismissible: false
-  }, templateDesignerContext.infoMessage), templateDesignerContext.confirmDialog && templateDesignerContext.confirmDialog.message && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalConfirmDialog, {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Icon, {
+    icon: "yes-alt",
+    style: {
+      color: 'green'
+    }
+  }), templateDesignerContext.infoMessage), templateDesignerContext.confirmDialog && templateDesignerContext.confirmDialog.message && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalConfirmDialog, {
     onConfirm: function onConfirm() {
       if (templateDesignerContext.confirmDialog.callback) {
         var callback = templateDesignerContext.confirmDialog.callback;
@@ -10797,10 +10809,13 @@ function ContentEditor() {
     className: "mail-loader"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Spinner, null));else return /*#__PURE__*/React.createElement("div", {
     className: "mail-settings"
-  }, showSaveSuccess && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Notice, {
+  }, showSaveSuccess && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Snackbar, {
+    className: "snackbar",
     status: "success",
     isDismissible: false
-  }, /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Your settings have been saved.", "wp-html-mail"))), /*#__PURE__*/React.createElement(_Editor__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Icon, {
+    icon: "saved"
+  }), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Your settings have been saved.", "wp-html-mail"))), /*#__PURE__*/React.createElement(_Editor__WEBPACK_IMPORTED_MODULE_3__["default"], {
     css: css
   }));
 }
@@ -11495,7 +11510,7 @@ function Sender() {
     className: "mail-settings"
   }, mailDeliveryPlugin && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Notice, {
     status: "warning",
-    isDismissible: true
+    isDismissible: false
   }, /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.sprintf)((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('It seems you are using an email delivery plugin (%s).', "wp-html-mail"), mailDeliveryPlugin)), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.sprintf)((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Please make sure you use the same email address here as in %s. Otherwise your emails could be categorized as junk or not delivered at all.', "wp-html-mail"), mailDeliveryPlugin))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Card, {
     className: "mail-settings-content"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CardHeader, null, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Email sender', 'wp-html-mail'))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CardBody, null, /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Typically WordPress sends all emails using "WordPress" as sender name and "wordpress@yourserver.com" as sender address which is totally fine for admin notifications but not for any kind of emails to you users.', "wp-html-mail"))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CardBody, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
@@ -12802,18 +12817,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _MailContent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./MailContent */ "./components/template/MailContent.js");
 /* harmony import */ var _MailFooter__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./MailFooter */ "./components/template/MailFooter.js");
 /* harmony import */ var _EditableElement__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./EditableElement */ "./components/template/EditableElement.js");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 
 
 
@@ -12826,11 +12829,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 function MailTemplate() {
   var templateDesignerContext = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useContext)(_contexts_TemplateDesignerContext__WEBPACK_IMPORTED_MODULE_3__.TemplateDesignerContext);
   var theme = templateDesignerContext.theme;
-
-  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      showSaveSuccess = _useState2[0],
-      setShowSaveSuccess = _useState2[1];
 
   var elementTitle = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Email Container", "wp-html-mail");
 
@@ -12867,10 +12865,7 @@ function MailTemplate() {
     style: {
       backgroundColor: theme.background
     }
-  }, showSaveSuccess && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Notice, {
-    status: "success",
-    isDismissible: false
-  }, /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Your settings have been saved. Check the preview of your email at the bottom of the page.", "wp-html-mail"))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     className: "save-button-pane components-panel__header"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
     isSecondary: true,
@@ -12884,10 +12879,10 @@ function MailTemplate() {
     onClick: function onClick(e) {
       e.preventDefault();
       templateDesignerContext.saveTheme(function () {
-        setShowSaveSuccess(true);
+        templateDesignerContext.setInfoMessage((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Your settings have been saved.', 'wp-html-mail'));
         setTimeout(function () {
-          setShowSaveSuccess(false);
-        }, 4000);
+          templateDesignerContext.setInfoMessage("");
+        }, 7000);
       });
     }
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Save and Preview", "wp-html-mail"))), /*#__PURE__*/React.createElement(_EditableElement__WEBPACK_IMPORTED_MODULE_8__["default"], {

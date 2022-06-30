@@ -7,7 +7,8 @@ import {
 	CardDivider,
 	Card,
 	Spinner,
-	Notice,
+	Snackbar,
+	Icon,
 	TextControl,
 	CheckboxControl
 } from "@wordpress/components";
@@ -85,14 +86,15 @@ export default function ContentEditor() {
 		return (
 			<div className="mail-settings">
 				{showSaveSuccess && (
-					<Notice status="success" isDismissible={false}>
+					<Snackbar className="snackbar" status="success" isDismissible={false}>
+					<Icon icon="saved" />
 						<p>
 							{__(
 								"Your settings have been saved.",
 								"wp-html-mail"
 							)}
 						</p>
-					</Notice>
+					</Snackbar>
 				)}
 				<Editor css={css}/>
 			</div>

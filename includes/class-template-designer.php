@@ -68,7 +68,6 @@ class Haet_TemplateDesigner {
 					'templateLibraryUrl'  => Haet_Mail()->get_tab_url( 'template-library' ),
 					'isMultiLanguageSite' => Haet_Mail()->multilanguage->is_multilanguage_site(),
 					'currentLanguage'     => Haet_Mail()->multilanguage->get_current_language(),
-					'nonce'               => wp_create_nonce( 'wp_rest' ),
 					'editorSettings'      => [
 						'editor' => $this->contenteditor->get_editor_settings(),
 						'iso' => [

@@ -2,8 +2,9 @@ import { useState, useEffect, useContext, lazy, Suspense } from "@wordpress/elem
 
 import {
 	TabPanel,
-	Notice,
 	Spinner,
+	Snackbar,
+	Icon,
 	__experimentalConfirmDialog as ConfirmDialog
 } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
@@ -108,12 +109,12 @@ export default function TemplateDesigner() {
 	return (
 		<>
 			<div>
-				{ templateDesignerContext.errorMessage && <Notice status="error" isDismissible={false}>
-					{templateDesignerContext.errorMessage}
-				</Notice >}
-				{ templateDesignerContext.infoMessage && <Notice status="success" isDismissible={false}>
-					{templateDesignerContext.infoMessage}
-				</Notice >}
+				{ templateDesignerContext.errorMessage && <Snackbar className="snackbar error" status="error" isDismissible={false}>
+					<Icon icon="warning" style={{color: 'red'}} />{templateDesignerContext.errorMessage}
+				</Snackbar >}
+				{ templateDesignerContext.infoMessage && <Snackbar className="snackbar" status="success" isDismissible={false}>
+					<Icon icon="yes-alt" style={{color: 'green'}} />{templateDesignerContext.infoMessage}
+				</Snackbar >}
 				{templateDesignerContext.confirmDialog && templateDesignerContext.confirmDialog.message &&
 					<ConfirmDialog
 						onConfirm={() => {

@@ -9,9 +9,9 @@ import {
 	CardDivider,
 	Card,
 	Spinner,
-	Notice,
 	ToggleControl,
-	PanelRow
+	PanelRow,
+	Snackbar,
 } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 
@@ -25,17 +25,18 @@ export default function Plugins({plugins}) {
 	useEffect(() => {
 		loadPluginSettings();
 	}, []);
-
-
+ 
 	const handleToggle = (plugin_name, setting_name, checked) => {
 		const newPluginSettings = { ...pluginSettings, [plugin_name]: { ...pluginSettings[plugin_name], [setting_name]: checked } };
+
 		setPluginSettings(newPluginSettings);
 		templateDesignerContext.savePluginSettings(() => {
+	
 			templateDesignerContext.setInfoMessage(__('Your settings have been saved.', 'wp-html-mail'))
-				setTimeout(() => {
+				setTimeout(() => { 
 					templateDesignerContext.setInfoMessage("");
 				}, 7000)
-			}, newPluginSettings);
+			}, newPluginSettings,);
 	}
 
 	

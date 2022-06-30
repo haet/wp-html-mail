@@ -6,7 +6,7 @@ import {
 	PanelRow,
 	ColorPicker,
 	Spinner,
-	Notice,
+	Icon,
 	TabPanel,
 } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
@@ -22,7 +22,6 @@ import EditableElement from "./EditableElement";
 export default function MailTemplate() {
 	const templateDesignerContext = useContext(TemplateDesignerContext);
 	const { theme } = templateDesignerContext;
-	const [showSaveSuccess, setShowSaveSuccess] = useState(false);
 	const elementTitle = __("Email Container", "wp-html-mail");
 	const elementName = "container";
 	const options = (
@@ -79,17 +78,6 @@ export default function MailTemplate() {
 						backgroundColor: theme.background,
 					}}
 				>
-					{showSaveSuccess && (
-						<Notice status="success" isDismissible={false}>
-							<p>
-								{__(
-									"Your settings have been saved. Check the preview of your email at the bottom of the page.",
-									"wp-html-mail"
-								)}
-							</p>
-						</Notice>
-					)}
-
 					<div className="save-button-pane components-panel__header">
 						<Button
 							isSecondary
@@ -106,10 +94,10 @@ export default function MailTemplate() {
 							onClick={(e) => {
 								e.preventDefault();
 								templateDesignerContext.saveTheme(() => {
-								setShowSaveSuccess(true);
-								setTimeout(() => {
-									setShowSaveSuccess(false);
-								}, 4000);
+									templateDesignerContext.setInfoMessage(__('Your settings have been saved.', 'wp-html-mail'))
+									setTimeout(() => {
+										templateDesignerContext.setInfoMessage("");
+									}, 7000)
 							});
 							}}
 						>

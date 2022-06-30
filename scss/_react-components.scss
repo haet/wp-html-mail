@@ -18,4 +18,27 @@
 		justify-content: flex-end;
 		background-color: #dddddd;
 	}
+
+	.snackbar.components-snackbar {
+		position: fixed;
+		bottom: 0;
+		z-index: 10;
+		right: 0;
+		padding: 16px 24px;
+		margin: 30px;
+		
+		.components-snackbar__content {
+			align-items: center;
+
+			p {
+				margin: 1em;
+			}
+		}
+
+		.dashicon {
+			margin-right: 10px;
+		}
+	}
+
 }
+

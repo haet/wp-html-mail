@@ -15,6 +15,23 @@
 	.mail-designer{
 		display: flex;
 		flex-direction:row;
+
+		.snackbar.components-snackbar {
+			position: fixed;
+			bottom: 0;
+			z-index: 10;
+			right: 0;
+			padding: 16px 24px;
+			margin: 30px;
+			
+			.components-snackbar__content {
+				align-items: center;
+			}
+	
+			.dashicon {
+				margin-right: 10px;
+			}
+		}
 	}
 
 	.mail-optionspanel {

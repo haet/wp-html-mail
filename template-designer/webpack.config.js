@@ -7,7 +7,7 @@ const rootDir = path.resolve( __dirname );
 const NODE_ENV = process.env.NODE_ENV || "development";
 
 const paths = {
-	srcDir: path.resolve( rootDir, 'src' ),
+	srcDir: path.resolve( rootDir, 'wp-html-mail' ),
 	buildDir: path.resolve( rootDir, ( NODE_ENV === "production" ? "dist" : "dev" ) ),
 };
 console.log("srcDir: " + paths.srcDir);

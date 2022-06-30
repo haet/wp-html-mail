@@ -77,7 +77,7 @@ export default function Sender() {
 		return (
 			<div className="mail-settings">
 				{mailDeliveryPlugin && (
-					<Notice status="warning" isDismissible={true}>
+					<Notice status="warning" isDismissible={false}>
 						<p>
 							{sprintf(
 								__(
