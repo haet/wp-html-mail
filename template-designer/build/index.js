@@ -10550,6 +10550,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _settings_Plugins__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./settings/Plugins */ "./components/settings/Plugins.js");
 /* harmony import */ var _contenteditor_ContentEditor__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./contenteditor/ContentEditor */ "./components/contenteditor/ContentEditor.js");
 /* harmony import */ var _settings_AdvancedSettings__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./settings/AdvancedSettings */ "./components/settings/AdvancedSettings.js");
+/* harmony import */ var _options_PopoverPicker__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./options/PopoverPicker */ "./components/options/PopoverPicker.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -10572,6 +10573,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+var RemoteWoocommerceSettings = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.lazy)(function () {
+  return __webpack_require__.e(/*! import() */ "webpack_container_remote_wphtmlmailwoocommerce_WoocommerceSettings").then(__webpack_require__.t.bind(__webpack_require__, /*! wphtmlmailwoocommerce/WoocommerceSettings */ "webpack/container/remote/wphtmlmailwoocommerce/WoocommerceSettings", 23));
+});
 function TemplateDesigner() {
   var templateDesignerContext = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useContext)(_contexts_TemplateDesignerContext__WEBPACK_IMPORTED_MODULE_3__.TemplateDesignerContext);
 
@@ -10632,7 +10637,7 @@ function TemplateDesigner() {
           title: plugin.display_name,
           className: 'tab-' + plugin.name,
           component: null,
-          lazyComponent: plugin.react_component
+          lazyComponent: plugin.react_component.component
         });
       }
     });
@@ -10673,7 +10678,16 @@ function TemplateDesigner() {
     className: "wp-html-mail-tabs",
     tabs: tabs
   }, function (tab) {
-    return tab.component;
+    if (tab.component) return tab.component;
+
+    if (tab.lazyComponent) {
+      return /*#__PURE__*/React.createElement(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
+        fallback: /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Spinner, null)
+      }, /*#__PURE__*/React.createElement(RemoteWoocommerceSettings, {
+        templateDesignerContext: templateDesignerContext,
+        PopoverPicker: _options_PopoverPicker__WEBPACK_IMPORTED_MODULE_10__.PopoverPicker
+      }));
+    }
   }));
 }
 
@@ -11055,8 +11069,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function AdvancedSettings() {
   var templateDesignerContext = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useContext)(_contexts_TemplateDesignerContext__WEBPACK_IMPORTED_MODULE_3__.TemplateDesignerContext);
-  var setTheme = templateDesignerContext.setTheme,
-      setSettings = templateDesignerContext.setSettings,
+  var setSettings = templateDesignerContext.setSettings,
       settings = templateDesignerContext.settings,
       theme = templateDesignerContext.theme;
 
@@ -11231,18 +11244,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 
 
 
@@ -11250,19 +11251,32 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 function Plugins(_ref) {
   var plugins = _ref.plugins;
   var templateDesignerContext = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useContext)(_contexts_TemplateDesignerContext__WEBPACK_IMPORTED_MODULE_3__.TemplateDesignerContext);
+  var setPluginSettings = templateDesignerContext.setPluginSettings,
+      pluginSettings = templateDesignerContext.pluginSettings,
+      loadPluginSettings = templateDesignerContext.loadPluginSettings;
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    loadPluginSettings();
+  }, []);
 
-  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
-      _useState2 = _slicedToArray(_useState, 2),
-      settings = _useState2[0],
-      setSettings = _useState2[1];
+  var handleToggle = function handleToggle(plugin_name, setting_name, checked) {
+    var newPluginSettings = _objectSpread(_objectSpread({}, pluginSettings), {}, _defineProperty({}, plugin_name, _objectSpread(_objectSpread({}, pluginSettings[plugin_name]), {}, _defineProperty({}, setting_name, checked))));
+
+    setPluginSettings(newPluginSettings);
+    templateDesignerContext.savePluginSettings(function () {
+      templateDesignerContext.setInfoMessage((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Your settings have been saved.', 'wp-html-mail'));
+      setTimeout(function () {
+        templateDesignerContext.setInfoMessage("");
+      }, 7000);
+    }, newPluginSettings);
+  };
 
   if (templateDesignerContext.isLoading || !templateDesignerContext.theme) return /*#__PURE__*/React.createElement("div", {
     className: "mail-loader"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Spinner, null));else return /*#__PURE__*/React.createElement("div", {
-    className: "mail-settings"
+    className: "mail-pluginSettings"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Card, {
-    className: "mail-settings-content"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CardHeader, null, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Plugins', 'wp-html-mail'))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CardBody, null, /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('We try to detect the plugins sending emails so you can customize some settings for each type of emails.', "wp-html-mail"))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CardDivider, null), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CardBody, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Panel, {
+    className: "mail-pluginSettings-content"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CardHeader, null, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Plugins', 'wp-html-mail'))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CardBody, null, /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('We try to detect the plugins sending emails so you can customize some pluginSettings for each type of emails.', "wp-html-mail"))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CardDivider, null), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CardBody, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Panel, {
     header: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Active plugins', 'wp-html-mail')
   }, plugins.filter(function (plugin) {
     return plugin.active;
@@ -11277,39 +11291,31 @@ function Plugins(_ref) {
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, plugin.has_addon && !plugin.is_addon_active && plugin.addon_url ? /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
       isSecondary: true,
       href: plugin.addon_url.replaceAll('&amp;', '&')
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('get WP HTML Mail for', 'wp-html-mail') + ' ' + plugin.display_name) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CheckboxControl, {
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('get WP HTML Mail for', 'wp-html-mail') + ' ' + plugin.display_name) : pluginSettings.hasOwnProperty(plugin.name) ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Use template', 'wp-html-mail'),
-      checked: settings[plugin.name] && settings[plugin.name].hasOwnProperty('template') ? settings[plugin.name].template : true,
+      checked: pluginSettings[plugin.name] && pluginSettings[plugin.name].hasOwnProperty('template') ? pluginSettings[plugin.name].template : true,
       onChange: function onChange(checked) {
-        setSettings(_objectSpread(_objectSpread({}, settings), {}, _defineProperty({}, plugin.name, _objectSpread(_objectSpread({}, settings[plugin.name]), {}, {
-          template: checked
-        }))));
+        handleToggle(plugin.name, 'template', checked);
       }
-    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CheckboxControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Hide header', 'wp-html-mail'),
-      checked: settings[plugin.name] && settings[plugin.name].hasOwnProperty('hide_header') ? settings[plugin.name].hide_header : false,
-      onChange: function onChange(checked) {
-        setSettings(_objectSpread(_objectSpread({}, settings), {}, _defineProperty({}, plugin.name, _objectSpread(_objectSpread({}, settings[plugin.name]), {}, {
-          hide_header: checked
-        }))));
-      }
-    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CheckboxControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Hide footer', 'wp-html-mail'),
-      checked: settings[plugin.name] && settings[plugin.name].hasOwnProperty('hide_footer') ? settings[plugin.name].hide_footer : false,
-      onChange: function onChange(checked) {
-        setSettings(_objectSpread(_objectSpread({}, settings), {}, _defineProperty({}, plugin.name, _objectSpread(_objectSpread({}, settings[plugin.name]), {}, {
-          hide_footer: checked
-        }))));
-      }
-    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CheckboxControl, {
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Overwrite sender', 'wp-html-mail'),
-      checked: settings[plugin.name] && settings[plugin.name].hasOwnProperty('sender') ? settings[plugin.name].sender : false,
+      checked: pluginSettings[plugin.name] && pluginSettings[plugin.name].hasOwnProperty('sender') ? pluginSettings[plugin.name].sender : false,
       onChange: function onChange(checked) {
-        setSettings(_objectSpread(_objectSpread({}, settings), {}, _defineProperty({}, plugin.name, _objectSpread(_objectSpread({}, settings[plugin.name]), {}, {
-          sender: checked
-        }))));
+        handleToggle(plugin.name, 'sender', checked);
       }
-    }))));
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Hide header', 'wp-html-mail'),
+      checked: pluginSettings[plugin.name] && pluginSettings[plugin.name].hasOwnProperty('hide_header') ? pluginSettings[plugin.name].hide_header : false,
+      onChange: function onChange(checked) {
+        handleToggle(plugin.name, 'hide_header', checked);
+      }
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Hide footer', 'wp-html-mail'),
+      checked: pluginSettings[plugin.name] && pluginSettings[plugin.name].hasOwnProperty('hide_footer') ? pluginSettings[plugin.name].hide_footer : false,
+      onChange: function onChange(checked) {
+        handleToggle(plugin.name, 'hide_footer', checked);
+      }
+    })) : /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Spinner, null)));
   })), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Panel, {
     header: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('More supported plugins', 'wp-html-mail')
   }, plugins.filter(function (plugin) {
@@ -11329,21 +11335,7 @@ function Plugins(_ref) {
       isSecondary: true,
       href: plugin.addon_url.replaceAll('&amp;', '&')
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('get WP HTML Mail for', 'wp-html-mail') + ' ' + plugin.display_name)));
-  })))), /*#__PURE__*/React.createElement("div", {
-    className: "save-button-pane-bottom"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
-    isPrimary: true,
-    isBusy: templateDesignerContext.isSaving,
-    onClick: function onClick(e) {
-      e.preventDefault();
-      templateDesignerContext.saveSettings(function () {
-        templateDesignerContext.setInfoMessage((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Your settings have been saved.', 'wp-html-mail'));
-        setTimeout(function () {
-          templateDesignerContext.setInfoMessage("");
-        }, 7000);
-      });
-    }
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Save settings", "wp-html-mail"))));
+  })))));
 }
 
 /***/ }),
@@ -13001,30 +12993,35 @@ function TemplateDesignerContextProvider(props) {
       settings = _useState10[0],
       setSettings = _useState10[1];
 
-  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
       _useState12 = _slicedToArray(_useState11, 2),
-      errorMessage = _useState12[0],
-      setErrorMessage = _useState12[1];
+      pluginSettings = _useState12[0],
+      setPluginSettings = _useState12[1];
 
   var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
       _useState14 = _slicedToArray(_useState13, 2),
-      infoMessage = _useState14[0],
-      setInfoMessage = _useState14[1];
+      errorMessage = _useState14[0],
+      setErrorMessage = _useState14[1];
 
-  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
       _useState16 = _slicedToArray(_useState15, 2),
-      confirmDialog = _useState16[0],
-      setConfirmDialog = _useState16[1];
+      infoMessage = _useState16[0],
+      setInfoMessage = _useState16[1];
 
-  var _useState17 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+  var _useState17 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
       _useState18 = _slicedToArray(_useState17, 2),
-      isLoading = _useState18[0],
-      setIsLoading = _useState18[1];
+      confirmDialog = _useState18[0],
+      setConfirmDialog = _useState18[1];
 
-  var _useState19 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+  var _useState19 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
       _useState20 = _slicedToArray(_useState19, 2),
-      isSaving = _useState20[0],
-      setIsSaving = _useState20[1];
+      isLoading = _useState20[0],
+      setIsLoading = _useState20[1];
+
+  var _useState21 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState22 = _slicedToArray(_useState21, 2),
+      isSaving = _useState22[0],
+      setIsSaving = _useState22[1];
 
   var updateTheme = function updateTheme(key, value) {
     setTheme(_objectSpread(_objectSpread({}, theme), {}, _defineProperty({}, key, value)));
@@ -13032,6 +13029,10 @@ function TemplateDesignerContextProvider(props) {
 
   var updateSetting = function updateSetting(key, value) {
     setSettings(_objectSpread(_objectSpread({}, settings), {}, _defineProperty({}, key, value)));
+  };
+
+  var updatePluginSetting = function updatePluginSetting(plugin, key, value) {
+    setPluginSettings(_objectSpread(_objectSpread({}, pluginSettings), {}, _defineProperty({}, plugin, _objectSpread(_objectSpread({}, pluginSettings[plugin]), {}, _defineProperty({}, key, value)))));
   };
 
   var loadTheme = function loadTheme(successCallback) {
@@ -13118,6 +13119,46 @@ function TemplateDesignerContextProvider(props) {
     });
   };
 
+  var loadPluginSettings = function loadPluginSettings() {
+    if (Object.entries(settings).length === 0) {
+      var request = new Request(window.mailTemplateDesigner.restUrl + "pluginsettings", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "X-WP-Nonce": window.mailTemplateDesigner.nonce
+        },
+        credentials: "same-origin"
+      });
+      fetch(request).then(function (resp) {
+        return resp.json();
+      }).then(function (data) {
+        setPluginSettings(data);
+        setIsLoading(false);
+      });
+    }
+  };
+
+  var savePluginSettings = function savePluginSettings() {
+    var saveCallback = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+    var newPluginSettings = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+    setIsSaving(true);
+    var request = new Request(window.mailTemplateDesigner.restUrl + "pluginsettings", {
+      method: "POST",
+      body: JSON.stringify(newPluginSettings ? newPluginSettings : pluginSettings),
+      headers: {
+        "Content-Type": "application/json",
+        "X-WP-Nonce": window.mailTemplateDesigner.nonce
+      }
+    });
+    fetch(request).then(function (resp) {
+      return resp.json();
+    }).then(function (data) {
+      setIsSaving(false);
+      if (saveCallback) saveCallback();
+      setPluginSettings(data);
+    });
+  };
+
   return /*#__PURE__*/React.createElement(TemplateDesignerContext.Provider, {
     value: {
       panelTitle: panelTitle,
@@ -13136,6 +13177,11 @@ function TemplateDesignerContextProvider(props) {
       updateSetting: updateSetting,
       loadSettings: loadSettings,
       saveSettings: saveSettings,
+      pluginSettings: pluginSettings,
+      setPluginSettings: setPluginSettings,
+      updatePluginSetting: updatePluginSetting,
+      loadPluginSettings: loadPluginSettings,
+      savePluginSettings: savePluginSettings,
       errorMessage: errorMessage,
       setErrorMessage: setErrorMessage,
       infoMessage: infoMessage,
@@ -16555,6 +16601,17 @@ function validate(uuid) {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (validate);
+
+/***/ }),
+
+/***/ "webpack/container/reference/wphtmlmailwoocommerce":
+/*!****************************************!*\
+  !*** external "wphtmlmailwoocommerce" ***!
+  \****************************************/
+/***/ (function(module) {
+
+"use strict";
+module.exports = wphtmlmailwoocommerce;
 
 /***/ }),
 
@@ -31728,6 +31785,9 @@ glo[importIdentifier] = true;
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = __webpack_modules__;
 /******/ 	
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = __webpack_module_cache__;
+/******/ 	
 /************************************************************************/
 /******/ 	/* webpack/runtime/chunk loaded */
 /******/ 	!function() {
@@ -31775,6 +31835,36 @@ glo[importIdentifier] = true;
 /******/ 		};
 /******/ 	}();
 /******/ 	
+/******/ 	/* webpack/runtime/create fake namespace object */
+/******/ 	!function() {
+/******/ 		var getProto = Object.getPrototypeOf ? function(obj) { return Object.getPrototypeOf(obj); } : function(obj) { return obj.__proto__; };
+/******/ 		var leafPrototypes;
+/******/ 		// create a fake namespace object
+/******/ 		// mode & 1: value is a module id, require it
+/******/ 		// mode & 2: merge all properties of value into the ns
+/******/ 		// mode & 4: return value when already ns object
+/******/ 		// mode & 16: return value when it's Promise-like
+/******/ 		// mode & 8|1: behave like require
+/******/ 		__webpack_require__.t = function(value, mode) {
+/******/ 			if(mode & 1) value = this(value);
+/******/ 			if(mode & 8) return value;
+/******/ 			if(typeof value === 'object' && value) {
+/******/ 				if((mode & 4) && value.__esModule) return value;
+/******/ 				if((mode & 16) && typeof value.then === 'function') return value;
+/******/ 			}
+/******/ 			var ns = Object.create(null);
+/******/ 			__webpack_require__.r(ns);
+/******/ 			var def = {};
+/******/ 			leafPrototypes = leafPrototypes || [null, getProto({}), getProto([]), getProto(getProto)];
+/******/ 			for(var current = mode & 2 && value; typeof current == 'object' && !~leafPrototypes.indexOf(current); current = getProto(current)) {
+/******/ 				Object.getOwnPropertyNames(current).forEach(function(key) { def[key] = function() { return value[key]; }; });
+/******/ 			}
+/******/ 			def['default'] = function() { return value; };
+/******/ 			__webpack_require__.d(ns, def);
+/******/ 			return ns;
+/******/ 		};
+/******/ 	}();
+/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	!function() {
 /******/ 		// define getter functions for harmony exports
@@ -31787,9 +31877,98 @@ glo[importIdentifier] = true;
 /******/ 		};
 /******/ 	}();
 /******/ 	
+/******/ 	/* webpack/runtime/ensure chunk */
+/******/ 	!function() {
+/******/ 		__webpack_require__.f = {};
+/******/ 		// This file contains only the entry chunk.
+/******/ 		// The chunk loading function for additional chunks
+/******/ 		__webpack_require__.e = function(chunkId) {
+/******/ 			return Promise.all(Object.keys(__webpack_require__.f).reduce(function(promises, key) {
+/******/ 				__webpack_require__.f[key](chunkId, promises);
+/******/ 				return promises;
+/******/ 			}, []));
+/******/ 		};
+/******/ 	}();
+/******/ 	
+/******/ 	/* webpack/runtime/get javascript chunk filename */
+/******/ 	!function() {
+/******/ 		// This function allow to reference async chunks
+/******/ 		__webpack_require__.u = function(chunkId) {
+/******/ 			// return url for filenames based on template
+/******/ 			return "" + chunkId + ".js";
+/******/ 		};
+/******/ 	}();
+/******/ 	
+/******/ 	/* webpack/runtime/get mini-css chunk filename */
+/******/ 	!function() {
+/******/ 		// This function allow to reference async chunks
+/******/ 		__webpack_require__.miniCssF = function(chunkId) {
+/******/ 			// return url for filenames based on template
+/******/ 			return undefined;
+/******/ 		};
+/******/ 	}();
+/******/ 	
+/******/ 	/* webpack/runtime/global */
+/******/ 	!function() {
+/******/ 		__webpack_require__.g = (function() {
+/******/ 			if (typeof globalThis === 'object') return globalThis;
+/******/ 			try {
+/******/ 				return this || new Function('return this')();
+/******/ 			} catch (e) {
+/******/ 				if (typeof window === 'object') return window;
+/******/ 			}
+/******/ 		})();
+/******/ 	}();
+/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	!function() {
 /******/ 		__webpack_require__.o = function(obj, prop) { return Object.prototype.hasOwnProperty.call(obj, prop); }
+/******/ 	}();
+/******/ 	
+/******/ 	/* webpack/runtime/load script */
+/******/ 	!function() {
+/******/ 		var inProgress = {};
+/******/ 		var dataWebpackPrefix = "wp-html-mail-template-designer:";
+/******/ 		// loadScript function to load a script via script tag
+/******/ 		__webpack_require__.l = function(url, done, key, chunkId) {
+/******/ 			if(inProgress[url]) { inProgress[url].push(done); return; }
+/******/ 			var script, needAttach;
+/******/ 			if(key !== undefined) {
+/******/ 				var scripts = document.getElementsByTagName("script");
+/******/ 				for(var i = 0; i < scripts.length; i++) {
+/******/ 					var s = scripts[i];
+/******/ 					if(s.getAttribute("src") == url || s.getAttribute("data-webpack") == dataWebpackPrefix + key) { script = s; break; }
+/******/ 				}
+/******/ 			}
+/******/ 			if(!script) {
+/******/ 				needAttach = true;
+/******/ 				script = document.createElement('script');
+/******/ 		
+/******/ 				script.charset = 'utf-8';
+/******/ 				script.timeout = 120;
+/******/ 				if (__webpack_require__.nc) {
+/******/ 					script.setAttribute("nonce", __webpack_require__.nc);
+/******/ 				}
+/******/ 				script.setAttribute("data-webpack", dataWebpackPrefix + key);
+/******/ 				script.src = url;
+/******/ 			}
+/******/ 			inProgress[url] = [done];
+/******/ 			var onScriptComplete = function(prev, event) {
+/******/ 				// avoid mem leaks in IE.
+/******/ 				script.onerror = script.onload = null;
+/******/ 				clearTimeout(timeout);
+/******/ 				var doneFns = inProgress[url];
+/******/ 				delete inProgress[url];
+/******/ 				script.parentNode && script.parentNode.removeChild(script);
+/******/ 				doneFns && doneFns.forEach(function(fn) { return fn(event); });
+/******/ 				if(prev) return prev(event);
+/******/ 			}
+/******/ 			;
+/******/ 			var timeout = setTimeout(onScriptComplete.bind(null, undefined, { type: 'timeout', target: script }), 120000);
+/******/ 			script.onerror = onScriptComplete.bind(null, script.onerror);
+/******/ 			script.onload = onScriptComplete.bind(null, script.onload);
+/******/ 			needAttach && document.head.appendChild(script);
+/******/ 		};
 /******/ 	}();
 /******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
@@ -31801,6 +31980,133 @@ glo[importIdentifier] = true;
 /******/ 			}
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
+/******/ 	}();
+/******/ 	
+/******/ 	/* webpack/runtime/remotes loading */
+/******/ 	!function() {
+/******/ 		var chunkMapping = {
+/******/ 			"webpack_container_remote_wphtmlmailwoocommerce_WoocommerceSettings": [
+/******/ 				"webpack/container/remote/wphtmlmailwoocommerce/WoocommerceSettings"
+/******/ 			]
+/******/ 		};
+/******/ 		var idToExternalAndNameMapping = {
+/******/ 			"webpack/container/remote/wphtmlmailwoocommerce/WoocommerceSettings": [
+/******/ 				"default",
+/******/ 				"./WoocommerceSettings",
+/******/ 				"webpack/container/reference/wphtmlmailwoocommerce"
+/******/ 			]
+/******/ 		};
+/******/ 		__webpack_require__.f.remotes = function(chunkId, promises) {
+/******/ 			if(__webpack_require__.o(chunkMapping, chunkId)) {
+/******/ 				chunkMapping[chunkId].forEach(function(id) {
+/******/ 					var getScope = __webpack_require__.R;
+/******/ 					if(!getScope) getScope = [];
+/******/ 					var data = idToExternalAndNameMapping[id];
+/******/ 					if(getScope.indexOf(data) >= 0) return;
+/******/ 					getScope.push(data);
+/******/ 					if(data.p) return promises.push(data.p);
+/******/ 					var onError = function(error) {
+/******/ 						if(!error) error = new Error("Container missing");
+/******/ 						if(typeof error.message === "string")
+/******/ 							error.message += '\nwhile loading "' + data[1] + '" from ' + data[2];
+/******/ 						__webpack_require__.m[id] = function() {
+/******/ 							throw error;
+/******/ 						}
+/******/ 						data.p = 0;
+/******/ 					};
+/******/ 					var handleFunction = function(fn, arg1, arg2, d, next, first) {
+/******/ 						try {
+/******/ 							var promise = fn(arg1, arg2);
+/******/ 							if(promise && promise.then) {
+/******/ 								var p = promise.then(function(result) { return next(result, d); }, onError);
+/******/ 								if(first) promises.push(data.p = p); else return p;
+/******/ 							} else {
+/******/ 								return next(promise, d, first);
+/******/ 							}
+/******/ 						} catch(error) {
+/******/ 							onError(error);
+/******/ 						}
+/******/ 					}
+/******/ 					var onExternal = function(external, _, first) { return external ? handleFunction(__webpack_require__.I, data[0], 0, external, onInitialized, first) : onError(); };
+/******/ 					var onInitialized = function(_, external, first) { return handleFunction(external.get, data[1], getScope, 0, onFactory, first); };
+/******/ 					var onFactory = function(factory) {
+/******/ 						data.p = 1;
+/******/ 						__webpack_require__.m[id] = function(module) {
+/******/ 							module.exports = factory();
+/******/ 						}
+/******/ 					};
+/******/ 					handleFunction(__webpack_require__, data[2], 0, 0, onExternal, 1);
+/******/ 				});
+/******/ 			}
+/******/ 		}
+/******/ 	}();
+/******/ 	
+/******/ 	/* webpack/runtime/sharing */
+/******/ 	!function() {
+/******/ 		__webpack_require__.S = {};
+/******/ 		var initPromises = {};
+/******/ 		var initTokens = {};
+/******/ 		__webpack_require__.I = function(name, initScope) {
+/******/ 			if(!initScope) initScope = [];
+/******/ 			// handling circular init calls
+/******/ 			var initToken = initTokens[name];
+/******/ 			if(!initToken) initToken = initTokens[name] = {};
+/******/ 			if(initScope.indexOf(initToken) >= 0) return;
+/******/ 			initScope.push(initToken);
+/******/ 			// only runs once
+/******/ 			if(initPromises[name]) return initPromises[name];
+/******/ 			// creates a new share scope if needed
+/******/ 			if(!__webpack_require__.o(__webpack_require__.S, name)) __webpack_require__.S[name] = {};
+/******/ 			// runs all init snippets from all modules reachable
+/******/ 			var scope = __webpack_require__.S[name];
+/******/ 			var warn = function(msg) { return typeof console !== "undefined" && console.warn && console.warn(msg); };
+/******/ 			var uniqueName = "wp-html-mail-template-designer";
+/******/ 			var register = function(name, version, factory, eager) {
+/******/ 				var versions = scope[name] = scope[name] || {};
+/******/ 				var activeVersion = versions[version];
+/******/ 				if(!activeVersion || (!activeVersion.loaded && (!eager != !activeVersion.eager ? eager : uniqueName > activeVersion.from))) versions[version] = { get: factory, from: uniqueName, eager: !!eager };
+/******/ 			};
+/******/ 			var initExternal = function(id) {
+/******/ 				var handleError = function(err) { warn("Initialization of sharing external failed: " + err); };
+/******/ 				try {
+/******/ 					var module = __webpack_require__(id);
+/******/ 					if(!module) return;
+/******/ 					var initFn = function(module) { return module && module.init && module.init(__webpack_require__.S[name], initScope); }
+/******/ 					if(module.then) return promises.push(module.then(initFn, handleError));
+/******/ 					var initResult = initFn(module);
+/******/ 					if(initResult && initResult.then) return promises.push(initResult['catch'](handleError));
+/******/ 				} catch(err) { handleError(err); }
+/******/ 			}
+/******/ 			var promises = [];
+/******/ 			switch(name) {
+/******/ 				case "default": {
+/******/ 					initExternal("webpack/container/reference/wphtmlmailwoocommerce");
+/******/ 				}
+/******/ 				break;
+/******/ 			}
+/******/ 			if(!promises.length) return initPromises[name] = 1;
+/******/ 			return initPromises[name] = Promise.all(promises).then(function() { return initPromises[name] = 1; });
+/******/ 		};
+/******/ 	}();
+/******/ 	
+/******/ 	/* webpack/runtime/publicPath */
+/******/ 	!function() {
+/******/ 		var scriptUrl;
+/******/ 		if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
+/******/ 		var document = __webpack_require__.g.document;
+/******/ 		if (!scriptUrl && document) {
+/******/ 			if (document.currentScript)
+/******/ 				scriptUrl = document.currentScript.src
+/******/ 			if (!scriptUrl) {
+/******/ 				var scripts = document.getElementsByTagName("script");
+/******/ 				if(scripts.length) scriptUrl = scripts[scripts.length - 1].src
+/******/ 			}
+/******/ 		}
+/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
+/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
+/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
+/******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
+/******/ 		__webpack_require__.p = scriptUrl;
 /******/ 	}();
 /******/ 	
 /******/ 	/* webpack/runtime/jsonp chunk loading */
@@ -31815,7 +32121,44 @@ glo[importIdentifier] = true;
 /******/ 			"./style-index": 0
 /******/ 		};
 /******/ 		
-/******/ 		// no chunk on demand loading
+/******/ 		__webpack_require__.f.j = function(chunkId, promises) {
+/******/ 				// JSONP chunk loading for javascript
+/******/ 				var installedChunkData = __webpack_require__.o(installedChunks, chunkId) ? installedChunks[chunkId] : undefined;
+/******/ 				if(installedChunkData !== 0) { // 0 means "already installed".
+/******/ 		
+/******/ 					// a Promise means "currently loading".
+/******/ 					if(installedChunkData) {
+/******/ 						promises.push(installedChunkData[2]);
+/******/ 					} else {
+/******/ 						if("index" == chunkId) {
+/******/ 							// setup Promise in chunk cache
+/******/ 							var promise = new Promise(function(resolve, reject) { installedChunkData = installedChunks[chunkId] = [resolve, reject]; });
+/******/ 							promises.push(installedChunkData[2] = promise);
+/******/ 		
+/******/ 							// start chunk loading
+/******/ 							var url = __webpack_require__.p + __webpack_require__.u(chunkId);
+/******/ 							// create error before stack unwound to get useful stacktrace later
+/******/ 							var error = new Error();
+/******/ 							var loadingEnded = function(event) {
+/******/ 								if(__webpack_require__.o(installedChunks, chunkId)) {
+/******/ 									installedChunkData = installedChunks[chunkId];
+/******/ 									if(installedChunkData !== 0) installedChunks[chunkId] = undefined;
+/******/ 									if(installedChunkData) {
+/******/ 										var errorType = event && (event.type === 'load' ? 'missing' : event.type);
+/******/ 										var realSrc = event && event.target && event.target.src;
+/******/ 										error.message = 'Loading chunk ' + chunkId + ' failed.\n(' + errorType + ': ' + realSrc + ')';
+/******/ 										error.name = 'ChunkLoadError';
+/******/ 										error.type = errorType;
+/******/ 										error.request = realSrc;
+/******/ 										installedChunkData[1](error);
+/******/ 									}
+/******/ 								}
+/******/ 							};
+/******/ 							__webpack_require__.l(url, loadingEnded, "chunk-" + chunkId, chunkId);
+/******/ 						} else installedChunks[chunkId] = 0;
+/******/ 					}
+/******/ 				}
+/******/ 		};
 /******/ 		
 /******/ 		// no prefetching
 /******/ 		
@@ -31861,9 +32204,9 @@ glo[importIdentifier] = true;
 /******/ 	
 /************************************************************************/
 /******/ 	
+/******/ 	// module cache are used so entry inlining is disabled
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
-/******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
 /******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["./style-index"], function() { return __webpack_require__("./src/index.js"); })
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	

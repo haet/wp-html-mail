@@ -3,6 +3,7 @@ import { useState, useEffect, useContext, lazy, Suspense } from "@wordpress/elem
 import {
 	TabPanel,
 	Notice,
+	Spinner,
 	__experimentalConfirmDialog as ConfirmDialog
 } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
@@ -15,6 +16,9 @@ import Plugins from "./settings/Plugins";
 import ContentEditor from "./contenteditor/ContentEditor";
 import AdvancedSettings from "./settings/AdvancedSettings";
 
+import { PopoverPicker } from "./options/PopoverPicker";
+
+const RemoteWoocommerceSettings = lazy(() => import("wphtmlmailwoocommerce/WoocommerceSettings"));
 
 export default function TemplateDesigner() {
 	const templateDesignerContext = useContext(TemplateDesignerContext);
@@ -78,7 +82,7 @@ export default function TemplateDesigner() {
 					title: plugin.display_name,
 					className: 'tab-' + plugin.name,
 					component: null,
-					lazyComponent: plugin.react_component
+					lazyComponent: plugin.react_component.component
 				});
 			}
 		})
@@ -127,7 +131,18 @@ export default function TemplateDesigner() {
 				className="wp-html-mail-tabs"
 				tabs={tabs}
 			>
-				{ ( tab ) => tab.component }
+				{(tab) => {
+					if (tab.component)
+						return tab.component;
+					if (tab.lazyComponent) {
+						return (<Suspense fallback={<Spinner/>}>
+								<RemoteWoocommerceSettings
+									templateDesignerContext={templateDesignerContext}
+									PopoverPicker={PopoverPicker}
+								/>
+							</Suspense>);
+					}
+				}}
 			</TabPanel>
 		</>
 	);

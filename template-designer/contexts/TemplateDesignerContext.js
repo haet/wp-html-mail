@@ -8,6 +8,7 @@ function TemplateDesignerContextProvider(props) {
 	const [editingElement, setEditingElement] = useState("container");
 	const [theme, setTheme] = useState({});
 	const [settings, setSettings] = useState({});
+	const [pluginSettings, setPluginSettings] = useState({});
 	const [errorMessage, setErrorMessage] = useState("");
 	const [infoMessage, setInfoMessage] = useState("");
 	const [confirmDialog, setConfirmDialog] = useState({});
@@ -20,6 +21,10 @@ function TemplateDesignerContextProvider(props) {
 
 	const updateSetting = (key, value) => {
 		setSettings({ ...settings, [key]: value });
+	};
+
+	const updatePluginSetting = (plugin, key, value) => {
+		setPluginSettings({ ...pluginSettings, [plugin]: { ...pluginSettings[plugin], [key]: value } });
 	};
 
 	const loadTheme = (successCallback) => {
@@ -119,6 +124,53 @@ function TemplateDesignerContextProvider(props) {
 			});
 	};
 
+
+	const loadPluginSettings = () => {
+		if ( Object.entries(settings).length === 0 ) {
+			var request = new Request(
+				window.mailTemplateDesigner.restUrl + "pluginsettings",
+				{
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						"X-WP-Nonce": window.mailTemplateDesigner.nonce
+					},
+					credentials: "same-origin"
+				}
+			);
+			fetch(request)
+				.then((resp) => resp.json())
+				.then((data) => {
+					setPluginSettings(data);
+					setIsLoading(false);
+				});
+		}
+	};
+
+	const savePluginSettings = (saveCallback = null, newPluginSettings = null) => {
+		setIsSaving(true);
+		var request = new Request(
+			window.mailTemplateDesigner.restUrl + "pluginsettings",
+			{
+				method: "POST",
+				body: JSON.stringify(newPluginSettings ? newPluginSettings : pluginSettings),
+				headers: {
+					"Content-Type": "application/json",
+					"X-WP-Nonce": window.mailTemplateDesigner.nonce
+				},
+			}
+		);
+		fetch(request)
+			.then((resp) => resp.json())
+			.then((data) => {
+				setIsSaving(false);
+				if (saveCallback)
+					saveCallback()
+
+				setPluginSettings(data);
+			});
+	};
+
 	return (
 		<TemplateDesignerContext.Provider
 			value={{
@@ -138,6 +190,11 @@ function TemplateDesignerContextProvider(props) {
 				updateSetting,
 				loadSettings,
 				saveSettings,
+				pluginSettings,
+				setPluginSettings,
+				updatePluginSetting,
+				loadPluginSettings,
+				savePluginSettings,
 				errorMessage,
 				setErrorMessage,
 				infoMessage,

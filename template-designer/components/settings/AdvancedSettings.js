@@ -24,7 +24,7 @@ import { TemplateDesignerContext } from "../../contexts/TemplateDesignerContext"
 
 export default function AdvancedSettings() {
 	const templateDesignerContext = useContext(TemplateDesignerContext);
-	const { setTheme,setSettings,settings,theme } = templateDesignerContext;
+	const { setSettings,settings,theme } = templateDesignerContext;
 	const [importTheme, setImportTheme] = useState("");
 	const [advancedActions, setAdvancedActions] = useState("");
 	

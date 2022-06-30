@@ -16,3 +16,24 @@ but we also add js/template-designer/dev/main.js in case someone has SCRIPT_DEBU
 
 Build webfonts add-on for production
 cd wp-html-mail-webfonts; npm run build; cd ..; grunt release_webfonts
+
+
+WordPress Components
+List of Components & Documentation:
+https://developer.wordpress.org/block-editor/reference-guides/components/
+Component Demos:
+https://wordpress.github.io/gutenberg/?path=/docs/components-snackbar--with-explicit-dismiss
+
+
+Embedding React parts from addons
+We use the webpack ModuleFederationPlugin which has to be configured in each webpack.config.js
+As a starting point we used this post: https://stackoverflow.com/questions/40615038/load-react-js-component-from-external-script-in-run-time/61823689#61823689
+
+
+TODO:
+infoMessage, errorMessage,...
+auf Snackbar umbauen
+
+Rückmledung nach erfolgreichem Import von Themes
+
+DELETE buttons unter Advanced funktionieren nur 1x, beim nächsten Button geht der ConfirmationDialog nicht mehr auf.

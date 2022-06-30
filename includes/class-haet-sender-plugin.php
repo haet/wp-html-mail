@@ -49,12 +49,6 @@ class Haet_Sender_Plugin {
 				'class'        => 'Haet_Sender_Plugin_Ninja_forms',
 				'display_name' => 'Ninja Forms',
 			),
-			'wp-e-commerce'                            => array(
-				'name'         => 'wp-e-commerce',
-				'file'         => 'wp-e-commerce/wp-shopping-cart.php',
-				'class'        => 'Haet_Sender_Plugin_WP_E_Commerce',
-				'display_name' => 'WP eCommerce',
-			),
 			'caldera-forms'                            => array(
 				'name'         => 'caldera-forms',
 				'file'         => 'caldera-forms/caldera-core.php',
@@ -119,6 +113,12 @@ class Haet_Sender_Plugin {
 				'class'        => 'Haet_Sender_Plugin_WPForo',
 				'display_name' => 'WP Foro',
 				'image_url'    => HAET_MAIL_URL . '/images/wpforo-logo.png',
+			),
+			'wp-e-commerce'                            => array(
+				'name'         => 'wp-e-commerce',
+				'file'         => 'wp-e-commerce/wp-shopping-cart.php',
+				'class'        => 'Haet_Sender_Plugin_WP_E_Commerce',
+				'display_name' => 'WP eCommerce',
 			),
 		);
 

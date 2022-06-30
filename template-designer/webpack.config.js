@@ -16,6 +16,7 @@ console.log("buildDir: " + paths.buildDir);
 module.exports = {
 	...defaultConfig,
 	plugins: [
+		...defaultConfig.plugins,
     new ModuleFederationPlugin({
       name: "wphtmlmail",
       library: { type: "var", name: "wphtmlmail" },
@@ -23,9 +24,6 @@ module.exports = {
         wphtmlmailwoocommerce: "wphtmlmailwoocommerce",
       },
       shared: ["react", "react-dom"],
-    }),
-    new HtmlWebpackPlugin({
-      template: "./public/index.html",
     }),
   ],
 	resolve: {

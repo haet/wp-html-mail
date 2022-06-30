@@ -42,9 +42,9 @@ class Haet_TemplateDesigner {
 				foreach( $react_component_files as $plugin_name => $react_component_file ){
 					wp_enqueue_script( 
 						'wp-html-mail-' . $plugin_name,
-						$react_component_file,
+						$react_component_file['url'],
 						[],
-						'1.0',
+						$react_component_file['version'],
 						true
 					);
 
