@@ -24,7 +24,12 @@ const RemoteWoocommerceSettings = lazy(() => import("wphtmlmailwoocommerce/Wooco
 export default function TemplateDesigner() {
 	const templateDesignerContext = useContext(TemplateDesignerContext);
 	const [plugins, setPlugins] = useState([]);
+	const [ isOpen, setIsOpen ] = useState( true );
 
+    const handleCancel = () => {
+        setIsOpen( false );
+		templateDesignerContext.setConfirmDialog({})
+    };
 
 	const loadPlugins = () => {
 		templateDesignerContext.setIsLoading(true);
@@ -110,23 +115,24 @@ export default function TemplateDesigner() {
 		<>
 			<div>
 				{ templateDesignerContext.errorMessage && <Snackbar className="snackbar error" status="error" isDismissible={false}>
-					<Icon icon="warning" style={{color: 'red'}} />{templateDesignerContext.errorMessage}
+					<Icon icon="warning" style={{color: '#f78da7'}} />{templateDesignerContext.errorMessage}
 				</Snackbar >}
 				{ templateDesignerContext.infoMessage && <Snackbar className="snackbar" status="success" isDismissible={false}>
 					<Icon icon="yes-alt" style={{color: 'green'}} />{templateDesignerContext.infoMessage}
 				</Snackbar >}
-				{templateDesignerContext.confirmDialog && templateDesignerContext.confirmDialog.message &&
 					<ConfirmDialog
+						isOpen={ templateDesignerContext.confirmDialog && templateDesignerContext.confirmDialog.hasOwnProperty('message') }
+						onCancel={ handleCancel }
 						onConfirm={() => {
 							if (templateDesignerContext.confirmDialog.callback) {
 								const callback = templateDesignerContext.confirmDialog.callback;
+								setIsOpen( false );
 								callback();
 							}
 						}}
 					>
             {templateDesignerContext.confirmDialog.message}
         </ConfirmDialog>
-				}
 			</div>
 			<TabPanel
 				className="wp-html-mail-tabs"

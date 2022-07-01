@@ -27,6 +27,11 @@
 		padding: 16px 24px;
 		margin: 30px;
 		
+		&.error{
+			background: black;
+			border-left-color: #f78da7;
+		}
+
 		.components-snackbar__content {
 			align-items: center;
 

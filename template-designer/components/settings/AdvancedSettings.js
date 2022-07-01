@@ -74,8 +74,8 @@ export default function AdvancedSettings() {
 								window.location.href = button.href;
 							}
 						})
-					}
-							
+					} 
+						
 				}}
 			>
 				{button.caption}
@@ -109,7 +109,7 @@ export default function AdvancedSettings() {
 									templateDesignerContext.setInfoMessage(__('Your settings have been saved.', 'wp-html-mail'))
 										setTimeout(() => {
 											templateDesignerContext.setInfoMessage("");
-										}, 7000)
+										}, 40000)
 									}, newSettings);
 								}}
 						/>

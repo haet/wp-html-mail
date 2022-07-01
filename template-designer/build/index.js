@@ -10585,6 +10585,16 @@ function TemplateDesigner() {
       plugins = _useState2[0],
       setPlugins = _useState2[1];
 
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+      _useState4 = _slicedToArray(_useState3, 2),
+      isOpen = _useState4[0],
+      setIsOpen = _useState4[1];
+
+  var handleCancel = function handleCancel() {
+    setIsOpen(false);
+    templateDesignerContext.setConfirmDialog({});
+  };
+
   var loadPlugins = function loadPlugins() {
     templateDesignerContext.setIsLoading(true);
     var pluginsRequest = new Request(window.mailTemplateDesigner.restUrl + "plugins", {
@@ -10668,7 +10678,7 @@ function TemplateDesigner() {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Icon, {
     icon: "warning",
     style: {
-      color: 'red'
+      color: '#f78da7'
     }
   }), templateDesignerContext.errorMessage), templateDesignerContext.infoMessage && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Snackbar, {
     className: "snackbar",
@@ -10679,10 +10689,13 @@ function TemplateDesigner() {
     style: {
       color: 'green'
     }
-  }), templateDesignerContext.infoMessage), templateDesignerContext.confirmDialog && templateDesignerContext.confirmDialog.message && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalConfirmDialog, {
+  }), templateDesignerContext.infoMessage), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalConfirmDialog, {
+    isOpen: templateDesignerContext.confirmDialog && templateDesignerContext.confirmDialog.hasOwnProperty('message'),
+    onCancel: handleCancel,
     onConfirm: function onConfirm() {
       if (templateDesignerContext.confirmDialog.callback) {
         var callback = templateDesignerContext.confirmDialog.callback;
+        setIsOpen(false);
         callback();
       }
     }
@@ -11165,7 +11178,7 @@ function AdvancedSettings() {
         templateDesignerContext.setInfoMessage((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Your settings have been saved.', 'wp-html-mail'));
         setTimeout(function () {
           templateDesignerContext.setInfoMessage("");
-        }, 7000);
+        }, 40000);
       }, newSettings);
     }
   })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CardDivider, null), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CardBody, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Panel, {
