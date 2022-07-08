@@ -317,7 +317,22 @@ class Haet_Sender_Plugin {
 				$plugins[ $plugin_name ]['image_url'] = 'https://ps.w.org/' . $plugin_name . '/assets/icon-128x128.png';
 				if ( strpos( @get_headers( $plugins[ $plugin_name ]['image_url'] )[0], '200' ) === false ) {
 					$plugins[ $plugin_name ]['image_url'] = 'https://ps.w.org/' . $plugin_name . '/assets/icon-128x128.jpg';
+					if ( strpos( @get_headers( $plugins[ $plugin_name ]['image_url'] )[0], '200' ) === false ) {
+						$plugins[ $plugin_name ]['image_url'] = 'https://ps.w.org/' . $plugin_name . '/assets/icon-256x256.png';
+						if ( strpos( @get_headers( $plugins[ $plugin_name ]['image_url'] )[0], '200' ) === false ) {
+							$plugins[ $plugin_name ]['image_url'] = 'https://ps.w.org/' . $plugin_name . '/assets/icon-256x256.jpg';
+							if ( strpos( @get_headers( $plugins[ $plugin_name ]['image_url'] )[0], '200' ) === false ) {
+								$plugins[ $plugin_name ]['image_url'] = 'https://ps.w.org/' . $plugin_name . '/assets/icon-128x128.png';
+							}
+						}
+					}
+	
 				}
+
+
+
+
+
 			}
 
 			if( strpos( $plugin['name'], '-theme' ) !== false && $plugins[ $plugin_name ]['active'] ){
