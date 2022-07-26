@@ -3,8 +3,8 @@
 
 class Haet_ContentEditor {
 	public function __construct() {
-		add_filter( 'block_editor_settings', [ $this, 'block_editor_settings' ] );
-		add_filter( 'block_editor_settings', [ $this, 'remove_theme_json' ], 20 );
+		add_filter( 'block_editor_settings_all', [ $this, 'block_editor_settings' ] );
+		add_filter( 'block_editor_settings_all', [ $this, 'remove_theme_json' ], 20 );
 		// add_action(
 		// 	'enqueue_block_editor_assets',
 		// 	function () {

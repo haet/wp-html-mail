@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,kBAAmB,CACf,SAAS,CAAE,KAAK,CAGpB,sBAAuB,CACnB,SAAS,CAAE,KAAK,CAChB,KAAK,CAAE,IAAI,CACX,WAAW,CAAE,IAAI,CACjB,YAAY,CAAE,IAAI,CAClB,WAAW,CAAE,IAAI,CACjB,cAAc,CAAE,IAAI,CAGtB,gDAAiD,CAC/C,OAAO,CAAE,IAAI",
+"sources": ["../scss/block-editor.scss"],
+"names": [],
+"file": "block-editor.css"
+}

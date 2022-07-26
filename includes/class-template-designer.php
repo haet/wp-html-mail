@@ -12,6 +12,13 @@ class Haet_TemplateDesigner {
 		$this->contenteditor = new Haet_ContentEditor();
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_page_scripts_and_styles' ) );
 		add_action( 'rest_api_init', array( $this, 'rest_api_init' ) );
+
+		add_filter("haet_mail_enqueue_js_data", function($enqueue_data){
+			$enqueue_data['restURL']  = $this->get_rest_url();
+			$enqueue_data['nonce']  = wp_create_nonce( 'wp_rest' );
+
+			return $enqueue_data;
+		});
 	}
 
 

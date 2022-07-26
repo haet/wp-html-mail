@@ -10775,6 +10775,7 @@ function ContentEditor() {
 
   var loadCSS = function loadCSS() {
     if (Object.entries(settings).length === 0) {
+      console.log(window.mailTemplateDesigner.restUrl);
       var request = new Request(window.mailTemplateDesigner.restUrl + "themecss/0", {
         method: "GET",
         headers: {
