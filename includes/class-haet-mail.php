@@ -198,14 +198,6 @@ final class Haet_Mail {
 			wp_enqueue_style( 'haet_mail_admin_style', HAET_MAIL_URL . '/css/style.css', array(), $plugin_data['Version'] );
 			wp_enqueue_style( 'wp-jquery-ui-dialog' );
 			wp_enqueue_media();
-
-			if ( array_key_exists( 'tab', $_GET ) && 'webfonts' === $_GET['tab'] ) {
-				wp_enqueue_style( 'haet_mail_webfonts_oswald_css', 'https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap', array(), $plugin_data['Version'] );
-				wp_enqueue_style( 'haet_mail_webfonts_montserrat_css', 'https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300&display=swap', array(), $plugin_data['Version'] );
-				wp_enqueue_style( 'haet_mail_webfonts_rocksalt_css', 'https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap', array(), $plugin_data['Version'] );
-				wp_enqueue_style( 'haet_mail_webfonts_trainone_css', 'https://fonts.googleapis.com/css2?family=Train+One&display=swap', array(), $plugin_data['Version'] );
-
-			}
 		}
 	}
 
@@ -300,7 +292,6 @@ final class Haet_Mail {
 			}
 		}
 		$tabs['template-library'] = __( 'Template library', 'wp-html-mail' );
-		$tabs['webfonts'] = __( 'Webfonts', 'wp-html-mail' );
 
 		include HAET_MAIL_PATH . 'views/admin/settings.php';
 	}

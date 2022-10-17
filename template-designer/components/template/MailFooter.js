@@ -204,7 +204,7 @@ export default function MailFooter({}) {
 			templateDesignerContext.setPanelOptions(options);
 			window.setTimeout(() => {
 				let availableFonts = "";
-				window.mailTemplateDesigner.fonts.forEach((font) => {
+				templateDesignerContext.availableFonts.forEach((font) => {
 					availableFonts += font.label + "=" + font.value + ";";
 				});
 				wp.oldEditor.initialize("footer-html", {

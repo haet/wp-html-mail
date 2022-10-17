@@ -4,7 +4,7 @@ Tags: email, email template, woocommerce email, email design, elementor, caldera
 Requires at least: 5.4
 Tested up to: 6.0
 Requires PHP: 7.2
-Stable tag: 3.2.3
+Stable tag: 3.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -109,7 +109,7 @@ https://youtu.be/RV8vUNCWOZw
 
 = Works with most email delivery plugins =
 * [WP Offload SES](https://aff.deliciousbrains.com/idevaffiliate.php?id=21298_4_3_3)
-* Post SMTP Mailer/Email Log
+* [Post SMTP Mailer/Email Log](https://wordpress.org/plugins/post-smtp/) 
 * WP Mail SMTP
 * wpMandrill
 * ...
@@ -148,6 +148,10 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 
 == Changelog ==
+
+= 3.3 =
+* improved interface
+* allow HR tags in Mailbuilder
 
 = 3.2.3 =
 * improved url escaping

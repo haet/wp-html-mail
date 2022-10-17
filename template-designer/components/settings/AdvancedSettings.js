@@ -205,7 +205,7 @@ export default function AdvancedSettings() {
 							}
 						</CardBody>
 					}
-					{advancedActions && advancedActions.debug && advancedActions.debug.buttons &&
+					{advancedActions && advancedActions.debug && advancedActions.debug.buttons && advancedActions.debug.buttons.length > 0 &&
 						<>
 							<CardDivider />	
 							<CardBody>

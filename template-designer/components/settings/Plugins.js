@@ -57,7 +57,7 @@ export default function Plugins({plugins}) {
 					<CardBody>
 						<p>
 							{__(
-								'We try to detect the plugins sending emails so you can customize some pluginSettings for each type of emails.',
+								'We try to detect the plugins sending emails so you can customize some settings for each type of emails.',
 								"wp-html-mail"
 							)}
 						</p>

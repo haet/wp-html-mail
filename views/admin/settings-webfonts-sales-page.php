@@ -44,7 +44,9 @@
 		<div class="webfonts-cta-bar">
 			<h3><?php esc_html_e( 'Not the sales pitch you expected?', 'wp-html-mail' ); ?></h3>
 			<p>
-				<?php esc_html_e( 'You are a user of our product so we do not want you to buy something you can\'t use as expected.<br/>This is one of the reasons for our <i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i> ratings.', 'wp-html-mail' ); ?>
+				<?php esc_html_e( 'You are a user of our product so we do not want you to buy something you can\'t use as expected.', 'wp-html-mail' ); ?>
+				<br/>
+				<?php esc_html_e( 'This may be one of the reasons for our ★★★★★ ratings.', 'wp-html-mail' ); ?>
 			</p>
 			<p>
 				<span class="dashicons dashicons-yes"></span> <?php esc_html_e( 'Use more than 1000 Google fonts.', 'wp-html-mail' ); ?> 

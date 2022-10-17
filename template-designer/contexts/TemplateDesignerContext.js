@@ -12,6 +12,7 @@ function TemplateDesignerContextProvider(props) {
 	const [errorMessage, setErrorMessage] = useState("");
 	const [infoMessage, setInfoMessage] = useState("");
 	const [confirmDialog, setConfirmDialog] = useState({});
+	const [availableFonts, setAvailableFonts] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [isSaving, setIsSaving] = useState(false);
 	
@@ -126,7 +127,7 @@ function TemplateDesignerContextProvider(props) {
 
 
 	const loadPluginSettings = () => {
-		if ( Object.entries(settings).length === 0 ) {
+		if ( Object.entries(pluginSettings).length === 0 ) {
 			var request = new Request(
 				window.mailTemplateDesigner.restUrl + "pluginsettings",
 				{
@@ -171,6 +172,27 @@ function TemplateDesignerContextProvider(props) {
 			});
 	};
 
+
+	const loadAvailableFonts = () => {
+		var request = new Request(
+			window.mailTemplateDesigner.restUrl + "fonts",
+			{
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+					"X-WP-Nonce": window.mailTemplateDesigner.nonce
+				},
+				credentials: "same-origin"
+			}
+		);
+		fetch(request)
+			.then((resp) => resp.json())
+			.then((data) => {
+				setAvailableFonts(data);
+			});
+	};
+
+
 	return (
 		<TemplateDesignerContext.Provider
 			value={{
@@ -203,6 +225,8 @@ function TemplateDesignerContextProvider(props) {
 				setConfirmDialog,
 				isLoading,
 				setIsLoading,
+				loadAvailableFonts,
+				availableFonts
 			}}
 		>
 			{props.children}

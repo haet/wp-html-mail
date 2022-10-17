@@ -21,7 +21,8 @@ module.exports = {
       name: "wphtmlmail",
       library: { type: "var", name: "wphtmlmail" },
       remotes: {
-        wphtmlmailwoocommerce: "wphtmlmailwoocommerce",
+				wphtmlmailwoocommerce: "wphtmlmailwoocommerce",
+				wphtmlmailwebfonts: "wphtmlmailwebfonts",
       },
       shared: ["react", "react-dom"],
     }),

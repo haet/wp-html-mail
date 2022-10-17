@@ -375,13 +375,15 @@ label[for="haet_mail_headerimg_advanced"] {
 #wp-html-mail-webfonts-sales-page{
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: flex-start;
+	justify-content: space-between;
 	align-items: center;
 
 	.webfonts-intro{
 		width: 100%;
 		text-align: center;
 		padding: 40px 10px;
+		line-height: 1.0;
+
 		.small-heading{
 			font-family: 'Oswald',sans-serif;
 			font-weight: 300;
@@ -440,7 +442,6 @@ label[for="haet_mail_headerimg_advanced"] {
 
 	.webfonts-cta-bar {
 		width:100%;
-		max-width: 1200px;
 		background-color: #176588;
 		color: #fff;
 
@@ -479,27 +480,27 @@ label[for="haet_mail_headerimg_advanced"] {
 @media screen and (min-width:768px){
 	#wp-html-mail-webfonts-sales-page {
 		.webfonts-intro {
-			width: 500px;
-			padding: 40px 20px;
+			width: 36%;
+			padding: 40px 0;
 			
 			.small-heading {
-				font-size: 35px;
+				font-size: 28px;
 			}
 
 			.huge-heading {
-				font-size: 70px;
+				font-size: 56px;
 				margin: 10px 0;
 			}
 
 			.hand {
-				font-size: 17px;
+				font-size: 14px;
 			}
 		}
 
 		.webfonts-facts {
 			position: relative;
-			padding-left:40px;
-			padding-bottom: 40px;
+			width: 55%;
+			padding: 0 0  40px 40px;
 			
 			&:before{
 				content: '';

@@ -9,7 +9,7 @@ class Haet_TemplateDesigner {
 	private $contenteditor;
 
 	public function __construct() {
-		$this->contenteditor = new Haet_ContentEditor();
+		//$this->contenteditor = new Haet_ContentEditor();
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_page_scripts_and_styles' ) );
 		add_action( 'rest_api_init', array( $this, 'rest_api_init' ) );
 
@@ -32,7 +32,8 @@ class Haet_TemplateDesigner {
 			wp_enqueue_style( 'forms' );
 			wp_enqueue_media();
 
-			$this->contenteditor->load();
+			if( $this->contenteditor )
+				$this->contenteditor->load();
 
 			$script_path       = HAET_MAIL_PATH . 'template-designer/build/index.js';
 			$script_asset_path = HAET_MAIL_PATH . 'template-designer/build/index.asset.php';
@@ -71,27 +72,31 @@ class Haet_TemplateDesigner {
 				array(
 					'restUrl'             => $this->get_rest_url(),
 					'nonce'               => wp_create_nonce( 'wp_rest' ),
-					'fonts'               => $this->get_available_fonts(),
 					'templateLibraryUrl'  => Haet_Mail()->get_tab_url( 'template-library' ),
 					'isMultiLanguageSite' => Haet_Mail()->multilanguage->is_multilanguage_site(),
 					'currentLanguage'     => Haet_Mail()->multilanguage->get_current_language(),
-					'editorSettings'      => [
-						'editor' => $this->contenteditor->get_editor_settings(),
-						'iso' => [
-							'blocks' => [
-								'allowBlocks' => $this->contenteditor->get_allowed_blocks(),
-							],
-							'sidebar' => ['inspector' => true, 'inserter' => true],
-							'toolbar' => [
-								'inspector' => true, 
-								'navigation' => true,
-							],
-							'moreMenu' => [
-								'editor' => true,
-								'topToolbar' => true,
-							],
-						],
-					]
+					'editorSettings'      => (
+						$this->contenteditor ?
+							[
+								'editor' => $this->contenteditor->get_editor_settings(),
+								'iso' => [
+									'blocks' => [
+										'allowBlocks' => $this->contenteditor->get_allowed_blocks(),
+									],
+									'sidebar' => ['inspector' => true, 'inserter' => true],
+									'toolbar' => [
+										'inspector' => true, 
+										'navigation' => true,
+									],
+									'moreMenu' => [
+										'editor' => true,
+										'topToolbar' => true,
+									],
+								],
+							]
+							:
+							null
+					)
 				)
 			);
 			wp_enqueue_editor();
@@ -103,12 +108,13 @@ class Haet_TemplateDesigner {
 	 */
 	private function get_react_compontent_files(){
 		$plugins = Haet_Sender_Plugin::get_plugins_for_rest();
-		$js_files = [];
-		foreach( $plugins as $plugin_name => $plugin ){
+		$js_files = [ ];
+		foreach ( $plugins as $plugin_name => $plugin ){
 			if( $plugin['active'] && $plugin['has_addon'] && $plugin['is_addon_active'] && $plugin ['react_component'] ){
 				$js_files[$plugin_name] = $plugin ['react_component'];
 			}
 		}
+		$js_files = apply_filters( 'haet_mail_react_components', $js_files );
 		return $js_files;
 	}
 
@@ -223,6 +229,22 @@ class Haet_TemplateDesigner {
 				},
 			)
 		);
+
+		register_rest_route(
+			$this->api_base,
+			'/fonts',
+			array(
+				'methods'             => 'GET',
+				'callback'            => function(){
+					return new \WP_REST_Response( $this->get_available_fonts() );
+				},
+				'permission_callback' => function () {
+					return current_user_can( 'manage_options' );
+				},
+			)
+		);
+
+		do_action( 'haet_mail_rest_api_init', $this->api_base );
 	}
 
 

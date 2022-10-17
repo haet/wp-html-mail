@@ -52,7 +52,7 @@ export default function MailContent({}) {
 				<PanelRow>
 					<SelectControl
 						value={theme.headlinefont}
-						options={window.mailTemplateDesigner.fonts}
+						options={templateDesignerContext.availableFonts}
 						onChange={(value) => {
 							templateDesignerContext.updateTheme(
 								"headlinefont",
@@ -159,7 +159,7 @@ export default function MailContent({}) {
 				<PanelRow>
 					<SelectControl
 						value={theme.subheadlinefont}
-						options={window.mailTemplateDesigner.fonts}
+						options={templateDesignerContext.availableFonts}
 						onChange={(value) => {
 							templateDesignerContext.updateTheme(
 								"subheadlinefont",
@@ -271,7 +271,7 @@ export default function MailContent({}) {
 				<PanelRow>
 					<SelectControl
 						value={theme.textfont}
-						options={window.mailTemplateDesigner.fonts}
+						options={templateDesignerContext.availableFonts}
 						onChange={(value) => {
 							templateDesignerContext.updateTheme(
 								"textfont",

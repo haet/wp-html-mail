@@ -97,8 +97,7 @@ final class Haet_Mail_Builder {
 			'rewrite'              => false,
 			'capability_type'      => 'post',
 			'register_meta_box_cb' => array( $this, 'setup_meta_boxes' ),
-			'supports'             => array( 'editor' ),
-			'show_in_rest'			=> true
+			'supports'             => array( '' ),
 		);
 
 		register_post_type( 'wphtmlmail_mail', $args );
@@ -109,14 +108,14 @@ final class Haet_Mail_Builder {
 
 
 	public function setup_meta_boxes() {
-		// add_meta_box(
-		// 	'header',
-		// 	__( 'Message', 'wp-html-mail' ),
-		// 	array( $this, 'render_header_meta_box' ),
-		// 	'wphtmlmail_mail',
-		// 	'normal',
-		// 	'high'
-		// );
+		add_meta_box(
+			'header',
+			__( 'Message', 'wp-html-mail' ),
+			array( $this, 'render_header_meta_box' ),
+			'wphtmlmail_mail',
+			'normal',
+			'high'
+		);
 		add_meta_box(
 			'subject',
 			__( 'Email Subject', 'wp-html-mail' ),
@@ -125,14 +124,14 @@ final class Haet_Mail_Builder {
 			'normal',
 			'high'
 		);
-		// add_meta_box(
-		// 	'mailbuilder',
-		// 	__( 'Email Content Builder', 'wp-html-mail' ),
-		// 	array( $this, 'render_mailbuilder_meta_box' ),
-		// 	'wphtmlmail_mail',
-		// 	'normal',
-		// 	'high'
-		// );
+		add_meta_box(
+			'mailbuilder',
+			__( 'Email Content Builder', 'wp-html-mail' ),
+			array( $this, 'render_mailbuilder_meta_box' ),
+			'wphtmlmail_mail',
+			'normal',
+			'high'
+		);
 
 		add_meta_box(
 			'mb_attachments_metabox_fullwidth',
@@ -544,7 +543,6 @@ final class Haet_Mail_Builder {
 				wp_enqueue_script( 'haet_mailbuilder_js', HAET_MAIL_URL . '/js/mailbuilder.js', array( 'wp-color-picker', 'jquery-ui-dialog', 'jquery-ui-sortable', 'jquery' ), '3.0', false );
 				wp_enqueue_style( 'haet_mailbuilder_css', HAET_MAIL_URL . '/css/mailbuilder.css', array(), '3.0' );
 				wp_enqueue_style( 'haet_mail_admin_style', HAET_MAIL_URL . '/css/style.css', array(), '3.0' );
-				wp_enqueue_style( 'haet_editor_css', HAET_MAIL_URL . '/css/block-editor.css', array(), '1.0' );
 
 				$enqueue_data = array(
 					'translations'     => array(),

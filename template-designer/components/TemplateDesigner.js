@@ -16,10 +16,13 @@ import Redirect from "./settings/Redirect";
 import Plugins from "./settings/Plugins";
 import ContentEditor from "./contenteditor/ContentEditor";
 import AdvancedSettings from "./settings/AdvancedSettings";
+import RemoteComponentErrorBoundary from "./settings/RemoteComponentErrorBoundary"
 
 import { PopoverPicker } from "./options/PopoverPicker";
 
+
 const RemoteWoocommerceSettings = lazy(() => import("wphtmlmailwoocommerce/WoocommerceSettings"));
+const RemoteWebfontsSettings = lazy(() => import("wphtmlmailwebfonts/WebfontsSettings"));
 
 export default function TemplateDesigner() {
 	const templateDesignerContext = useContext(TemplateDesignerContext);
@@ -27,8 +30,8 @@ export default function TemplateDesigner() {
 	const [ isOpen, setIsOpen ] = useState( true );
 
     const handleCancel = () => {
-        setIsOpen( false );
-		templateDesignerContext.setConfirmDialog({})
+			setIsOpen( false );
+			templateDesignerContext.setConfirmDialog({})
     };
 
 	const loadPlugins = () => {
@@ -59,6 +62,7 @@ export default function TemplateDesigner() {
 		window.history.pushState({}, '', url);
 
 		loadPlugins();
+		templateDesignerContext.loadAvailableFonts();
 	}, []);
 	const tabs = [
 		{
@@ -93,11 +97,18 @@ export default function TemplateDesigner() {
 			}
 		})
 	}
+	// tabs.push({
+	// 	name: 'content',
+	// 	title: __('Content editor', 'wp-html-mail'),
+	// 	className: 'tab-content',
+	// 	component: <ContentEditor />
+	// });
 	tabs.push({
-		name: 'content',
-		title: __('Content editor', 'wp-html-mail'),
-		className: 'tab-content',
-		component: <ContentEditor />
+		name: 'webfonts',
+		title: __('Webfonts','wp-html-mail'),
+		className: 'tab-webfonts',
+		component: null,
+		lazyComponent: 'WebfontsSettings'
 	});
 	tabs.push({
 		name: 'redirect',
@@ -141,13 +152,24 @@ export default function TemplateDesigner() {
 				{(tab) => {
 					if (tab.component)
 						return tab.component;
-					if (tab.lazyComponent) {
+					if (tab.lazyComponent && tab.lazyComponent === 'WoocommerceSettings') {
 						return (<Suspense fallback={<Spinner/>}>
 								<RemoteWoocommerceSettings
 									templateDesignerContext={templateDesignerContext}
 									PopoverPicker={PopoverPicker}
 								/>
 							</Suspense>);
+					}
+					if (tab.lazyComponent && tab.lazyComponent === 'WebfontsSettings') {
+						return (
+							<Suspense fallback={<Spinner />}>
+								<RemoteComponentErrorBoundary>
+									<RemoteWebfontsSettings 
+										templateDesignerContext={templateDesignerContext}
+									/>
+								</RemoteComponentErrorBoundary>
+							</Suspense>
+						);
 					}
 				}}
 			</TabPanel>

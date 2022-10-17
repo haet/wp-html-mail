@@ -36,7 +36,7 @@ export default function HeaderText({}) {
 				<PanelRow>
 					<SelectControl
 						value={theme.headerfont}
-						options={window.mailTemplateDesigner.fonts}
+						options={templateDesignerContext.availableFonts}
 						onChange={(value) => {
 							templateDesignerContext.updateTheme(
 								"headerfont",
