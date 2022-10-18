@@ -568,6 +568,7 @@ final class Haet_Mail_Builder {
 		// backslash is not supported in post titles.
 		$email_name = str_replace( '\\', '__', $email_name );
 		$options    = Haet_Mail()->get_options();
+
 		if ( ! isset( $options['email_post_ids'] ) || ! is_array( $options['email_post_ids'] ) ) {
 			$options['email_post_ids'] = array();
 		}

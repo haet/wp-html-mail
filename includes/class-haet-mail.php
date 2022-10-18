@@ -42,6 +42,7 @@ final class Haet_Mail {
 			'testmode'                    => false,
 			'testmode_recipient'          => '',
 			'invalid_contenttype_to_html' => '0',
+			'email_post_ids'              => []
 		);
 	}
 
@@ -251,6 +252,14 @@ final class Haet_Mail {
 		$theme_options = $this->get_theme_options( 'default' );
 
 		$plugin_options = Haet_Sender_Plugin::get_plugin_options();
+		if ( isset( $_POST['haet_mail_plugins'] ) ) {
+			$plugin_options = Haet_Sender_Plugin::save_plugin_options( $plugin_options );
+		
+			echo '<div class="updated"><p><strong>';
+			esc_html_e( 'Settings Updated.', 'wp-html-mail' );
+			echo '</strong></p></div>';
+		}
+
 
 		if ( array_key_exists( 'tab', $_GET ) ) {
 			$tab = sanitize_key( $_GET['tab'] );
@@ -371,6 +380,9 @@ final class Haet_Mail {
 
 				if ( in_array( $option_key, array( 'fromaddress', 'testmode_recipient' ) ) ) {
 					$options[ $option_key ] = sanitize_email( $option_value );
+				} elseif ( in_array( $option_key, array( 'email_post_ids' ) ) ) {
+					if( !is_array( $options[ $option_key ] ) )
+						$options[ $option_key ] = [];
 				} else {
 					$options[ $option_key ] = sanitize_text_field( $option_value );
 				}

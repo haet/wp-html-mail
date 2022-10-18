@@ -51,6 +51,11 @@
 	} //switch Tab
 	do_action( 'haet_mail_after_settings_tab_' . $tab );
 	?>
+	<?php if ( $tab === 'woocommerce' ) : ?>
+		<div class="submit">
+			<input type="submit" name="update_haet_mailSettings" class="button-primary" value="<?php esc_html_e( 'Save and Preview', 'wp-html-mail' ); ?>" />
+		</div>
+	<?php endif; ?>
 </form>
 
 <?php
