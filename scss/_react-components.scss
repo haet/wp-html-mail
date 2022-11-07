@@ -1,5 +1,4 @@
 .wp-html-mail-react-component {
-	display: flex;
 	position: relative;
 	min-height: 600px;
 
@@ -17,6 +16,34 @@
 	.save-button-pane {
 		margin-bottom: 20px;
 		justify-content: flex-end;
-		background-color: #f3f4f5;
+		background-color: #dddddd;
 	}
+
+	.snackbar.components-snackbar {
+		position: fixed;
+		bottom: 0;
+		z-index: 10;
+		right: 0;
+		padding: 16px 24px;
+		margin: 30px;
+		
+		&.error{
+			background: black;
+			border-left-color: #f78da7;
+		}
+
+		.components-snackbar__content {
+			align-items: center;
+
+			p {
+				margin: 1em;
+			}
+		}
+
+		.dashicon {
+			margin-right: 10px;
+		}
+	}
+
 }
+

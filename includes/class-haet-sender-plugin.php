@@ -49,12 +49,6 @@ class Haet_Sender_Plugin {
 				'class'        => 'Haet_Sender_Plugin_Ninja_forms',
 				'display_name' => 'Ninja Forms',
 			),
-			'wp-e-commerce'                            => array(
-				'name'         => 'wp-e-commerce',
-				'file'         => 'wp-e-commerce/wp-shopping-cart.php',
-				'class'        => 'Haet_Sender_Plugin_WP_E_Commerce',
-				'display_name' => 'WP eCommerce',
-			),
 			'caldera-forms'                            => array(
 				'name'         => 'caldera-forms',
 				'file'         => 'caldera-forms/caldera-core.php',
@@ -119,6 +113,12 @@ class Haet_Sender_Plugin {
 				'class'        => 'Haet_Sender_Plugin_WPForo',
 				'display_name' => 'WP Foro',
 				'image_url'    => HAET_MAIL_URL . '/images/wpforo-logo.png',
+			),
+			'wp-e-commerce'                            => array(
+				'name'         => 'wp-e-commerce',
+				'file'         => 'wp-e-commerce/wp-shopping-cart.php',
+				'class'        => 'Haet_Sender_Plugin_WP_E_Commerce',
+				'display_name' => 'WP eCommerce',
 			),
 		);
 
@@ -217,23 +217,21 @@ class Haet_Sender_Plugin {
 
 
 	public static function is_plugin_active( $plugin ) {
-		if ( class_exists( $plugin['class'] ) ) {
-			if ( array_key_exists( 'file', $plugin ) && is_plugin_active( $plugin['file'] ) ) {
-				return true;
-			}
+		if ( array_key_exists( 'file', $plugin ) && is_plugin_active( $plugin['file'] ) ) {
+			return true;
+		}
 
-			// plugins can consist of mutliple plugins e.g. wpforms & wpforms-lite
-			if ( array_key_exists( 'files', $plugin ) && is_array( $plugin['files'] ) ) {
-				foreach ( $plugin['files'] as $plugin_file ) {
-					if ( is_plugin_active( $plugin_file ) ) {
-						return true;
-					}
+		// plugins can consist of mutliple plugins e.g. wpforms & wpforms-lite
+		if ( array_key_exists( 'files', $plugin ) && is_array( $plugin['files'] ) ) {
+			foreach ( $plugin['files'] as $plugin_file ) {
+				if ( is_plugin_active( $plugin_file ) ) {
+					return true;
 				}
 			}
-			$active_theme = wp_get_theme();
-			if ( $plugin['display_name'] == $active_theme->name || $plugin['display_name'] == $active_theme->parent_theme ) {
-				return true;
-			}
+		}
+		$active_theme = wp_get_theme();
+		if ( $plugin['display_name'] == $active_theme->name || $plugin['display_name'] == $active_theme->parent_theme ) {
+			return true;
 		}
 		return false;
 	}
@@ -252,6 +250,103 @@ class Haet_Sender_Plugin {
 		}
 		return $active_plugins;
 	}
+
+
+	/**
+	 * Get available plugins.
+	 */
+	public static function get_plugins_for_rest(){
+		$addon_plugins = array(
+			'woocommerce'            => array(
+				'name'         => 'woocommerce',
+				'file'         => 'woocommerce/woocommerce.php',
+				'class'        => 'Haet_Sender_Plugin_WooCommerce',
+				'display_name' => 'WooCommerce',
+				'addon_url'    => 'https://codemiq.com/en/downloads/wp-html-mail-woocommerce',
+				'image_url'    => 'https://ps.w.org/woocommerce/assets/icon-128x128.png',
+			),
+			'easy-digital-downloads' => array(
+				'name'         => 'easy-digital-downloads',
+				'file'         => 'easy-digital-downloads/easy-digital-downloads.php',
+				'class'        => 'Haet_Sender_Plugin_EDD',
+				'display_name' => 'Easy Digital Downloads',
+				'addon_url'    => 'https://codemiq.com/en/downloads/wp-html-mail-easy-digital-downloads',
+				'image_url'    => 'https://ps.w.org/easy-digital-downloads/assets/icon-128x128.png',
+			),
+			'wpforms-lite' => array(
+				'name'         => 'wpforms-lite',
+				'file'         => array( 'wpforms-lite/wpforms.php', 'wpforms/wpforms.php' ),
+				'class'        => 'Haet_Sender_Plugin_WPForms',
+				'display_name' => 'WPForms & WPForms Lite',
+				'addon_url'    => 'https://codemiq.com/en/downloads/wp-html-mail-wpforms',
+				'image_url'    => 'https://ps.w.org/wpforms-lite/assets/icon-128x128.png',
+			),
+			'buddypress' => array(
+				'name'         => 'buddypress',
+				'file'         => 'buddypress/bp-loader.php',
+				'class'        => 'Haet_Sender_Plugin_BuddyPress',
+				'display_name' => 'BuddyPress',
+				'addon_url'    => 'https://wordpress.org/plugins/wp-html-mail-buddypress/',
+				'image_url'    => 'https://ps.w.org/buddypress/assets/icon-128x128.png',
+			),
+			'give' => array(
+				'name'         => 'give',
+				'file'         => 'give/give.php',
+				'class'        => 'Haet_Sender_Plugin_Give',
+				'display_name' => 'GiveWP Donation & Fundraising',
+				'addon_url'    => 'https://wordpress.org/plugins/wp-html-mail-give/',
+				'image_url'    => 'https://ps.w.org/give/assets/icon-128x128.jpg',
+			),
+		);
+		
+		$plugins = array_merge( self::get_available_plugins(), $addon_plugins );
+		foreach ( $plugins as $plugin_name => $plugin ) {
+			$plugins[ $plugin_name ]['active'] = self::is_plugin_active( $plugin );
+			$plugins[ $plugin_name ]['react_component'] = false;
+			
+			if ( array_key_exists( $plugin_name, $addon_plugins ) ) {
+				$plugins[ $plugin_name ]['has_addon'] = true;
+				$plugins[ $plugin_name ]['is_addon_active'] = class_exists( $plugin['class'] );
+				if ( $plugins[ $plugin_name ]['is_addon_active'] )
+					$plugins[ $plugin_name ]['react_component'] = $plugin['class']::get_react_component();
+			} else {
+				$plugins[ $plugin_name ]['has_addon'] = false;
+			}
+
+			if ( ! array_key_exists( 'image_url', $plugin ) ){
+				$plugins[ $plugin_name ]['image_url'] = 'https://ps.w.org/' . $plugin_name . '/assets/icon-128x128.png';
+				if ( strpos( @get_headers( $plugins[ $plugin_name ]['image_url'] )[0], '200' ) === false ) {
+					$plugins[ $plugin_name ]['image_url'] = 'https://ps.w.org/' . $plugin_name . '/assets/icon-128x128.jpg';
+					if ( strpos( @get_headers( $plugins[ $plugin_name ]['image_url'] )[0], '200' ) === false ) {
+						$plugins[ $plugin_name ]['image_url'] = 'https://ps.w.org/' . $plugin_name . '/assets/icon-256x256.png';
+						if ( strpos( @get_headers( $plugins[ $plugin_name ]['image_url'] )[0], '200' ) === false ) {
+							$plugins[ $plugin_name ]['image_url'] = 'https://ps.w.org/' . $plugin_name . '/assets/icon-256x256.jpg';
+							if ( strpos( @get_headers( $plugins[ $plugin_name ]['image_url'] )[0], '200' ) === false ) {
+								$plugins[ $plugin_name ]['image_url'] = 'https://ps.w.org/' . $plugin_name . '/assets/icon-128x128.png';
+							}
+						}
+					}
+	
+				}
+
+
+
+
+
+			}
+
+			if( strpos( $plugin['name'], '-theme' ) !== false && $plugins[ $plugin_name ]['active'] ){
+				$plugins[ $plugin_name ]['installation_url'] = false;
+			}else{
+				$plugins[ $plugin_name ]['installation_url'] = wp_nonce_url( network_admin_url( 'update.php?action=install-plugin&plugin=' . $plugin_name ), 'install-plugin_' . $plugin_name );
+			}
+		}
+
+
+		return $plugins;
+	}
+
+
 
 	public static function get_plugin_options() {
 		$default_options = array();
@@ -287,8 +382,11 @@ class Haet_Sender_Plugin {
 		return $options;
 	}
 
-	public static function save_plugin_options( $old_options ) {
-		$new_options = self::validate_options( $_POST['haet_mail_plugins'] );
+	public static function save_plugin_options( $old_options, $new_options = null ) {
+		if( !$new_options ){
+			$new_options = $_POST['haet_mail_plugins'];
+		}
+		$new_options = self::validate_options( $new_options );
 
 		foreach ( $new_options as $plugin_name => $new_plugin_options ) {
 			$new_options[ $plugin_name ] = wp_parse_args( $new_plugin_options, $old_options[ $plugin_name ] );
@@ -360,5 +458,13 @@ class Haet_Sender_Plugin {
 	}
 
 	public static function plugin_actions_and_filters() {
+	}
+
+	/**
+	 * Plugins may have a react component. If they do they appear as a tab in template designer.
+	 * Otherwise - as a fallback - they still may have PHP tabs at the top of the page.
+	 */
+	public static function get_react_component() {
+		return false;
 	}
 }

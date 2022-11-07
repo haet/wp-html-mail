@@ -15,6 +15,43 @@
 	clear: both;
 }
 
+.wp-html-mail-header{
+	background: #fff;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    position: fixed;
+    width: calc(100% - 160px);
+    top: 32px;
+	left:160px;
+    z-index: 1001;
+	display: flex;
+	justify-content: space-between;
+
+	.heading-wrap{
+		display: flex;
+		gap: 20px;
+
+		h2{
+			margin-top: 0;
+			margin-bottom: 4px;
+		}
+
+		.subtitle{
+			padding-left: 0;
+			font-size: 12px;
+			text-transform: uppercase;
+		}
+	}
+
+	.nav-buttons a{
+		margin-left:15px;
+	}
+}
+
+.settings_page_wp-html-mail #wpbody{
+	padding-top: 60px;
+}
+
 #haet_mail_form {
 	margin-bottom: 80px;
 
@@ -110,16 +147,6 @@
 
 	input[type="number"] {
 		width: 50px;
-	}
-
-	.collapse-testmode,
-	.collapse-headerimg_advanced {
-		display: none;
-	}
-
-	#haet_mail_testmode:checked+label+.collapse-testmode,
-	#haet_mail_headerimg_advanced:checked+label+.collapse-headerimg_advanced {
-		display: block;
 	}
 }
 
@@ -348,13 +375,15 @@ label[for="haet_mail_headerimg_advanced"] {
 #wp-html-mail-webfonts-sales-page{
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: flex-start;
+	justify-content: space-between;
 	align-items: center;
 
 	.webfonts-intro{
 		width: 100%;
 		text-align: center;
 		padding: 40px 10px;
+		line-height: 1.0;
+
 		.small-heading{
 			font-family: 'Oswald',sans-serif;
 			font-weight: 300;
@@ -413,7 +442,6 @@ label[for="haet_mail_headerimg_advanced"] {
 
 	.webfonts-cta-bar {
 		width:100%;
-		max-width: 1200px;
 		background-color: #176588;
 		color: #fff;
 
@@ -452,27 +480,27 @@ label[for="haet_mail_headerimg_advanced"] {
 @media screen and (min-width:768px){
 	#wp-html-mail-webfonts-sales-page {
 		.webfonts-intro {
-			width: 500px;
-			padding: 40px 20px;
+			width: 36%;
+			padding: 40px 0;
 			
 			.small-heading {
-				font-size: 35px;
+				font-size: 28px;
 			}
 
 			.huge-heading {
-				font-size: 70px;
+				font-size: 56px;
 				margin: 10px 0;
 			}
 
 			.hand {
-				font-size: 17px;
+				font-size: 14px;
 			}
 		}
 
 		.webfonts-facts {
 			position: relative;
-			padding-left:40px;
-			padding-bottom: 40px;
+			width: 55%;
+			padding: 0 0  40px 40px;
 			
 			&:before{
 				content: '';

@@ -24,12 +24,16 @@ final class Haet_Mail {
 	public function __construct() {
 		$this->multilanguage    = new Haet_Multilanguage();
 		$this->templatedesigner = new Haet_TemplateDesigner();
+		
 		add_action( 'plugins_loaded', 'Haet_Sender_Plugin::hook_plugins', 30 );
 
 		add_action( 'admin_notices', array( $this, 'maybe_show_testmode_warning' ) );
 	}
 
-
+	/**
+	 * Get default values for plugin options.
+	 * This list of settings is also list list of available settings for validation.
+	 */
 	public function get_default_options() {
 		return array(
 			'fromname'                    => get_bloginfo( 'name' ),
@@ -37,7 +41,8 @@ final class Haet_Mail {
 			'disable_sender'              => false,
 			'testmode'                    => false,
 			'testmode_recipient'          => '',
-			'use_classic_template_editor' => false,
+			'invalid_contenttype_to_html' => '0',
+			'email_post_ids'              => []
 		);
 	}
 
@@ -145,11 +150,14 @@ final class Haet_Mail {
 	}
 
 
-
+	/**
+	 * Load saved options from database, merge with defaults save and validate.
+	 */
 	public function get_options() {
 		$options = $this->get_default_options();
 
 		$haet_mail_options = get_option( 'haet_mail_options' );
+		$haet_mail_options = $this->validate_options( $haet_mail_options );
 		if ( ! empty( $haet_mail_options ) ) {
 			foreach ( $haet_mail_options as $key => $option ) {
 				$options[ $key ] = $option;
@@ -159,6 +167,9 @@ final class Haet_Mail {
 		return $options;
 	}
 
+	/**
+	 * Load saved options from database, merge with defaults save and validate.
+	 */
 	public function get_theme_options( $theme ) {
 		$defaults = $this->get_default_theme_options();
 		$options  = get_option( 'haet_mail_theme_options' );
@@ -167,6 +178,8 @@ final class Haet_Mail {
 			$options = $this->init_headerimg_placement( $options );
 		}
 		$options = wp_parse_args( $options, $defaults );
+
+		$options = $this->validate_theme_options( $options );
 		update_option( 'haet_mail_theme_options', $options );
 		return $options;
 	}
@@ -186,14 +199,6 @@ final class Haet_Mail {
 			wp_enqueue_style( 'haet_mail_admin_style', HAET_MAIL_URL . '/css/style.css', array(), $plugin_data['Version'] );
 			wp_enqueue_style( 'wp-jquery-ui-dialog' );
 			wp_enqueue_media();
-
-			if ( array_key_exists( 'tab', $_GET ) && 'webfonts' === $_GET['tab'] ) {
-				wp_enqueue_style( 'haet_mail_webfonts_oswald_css', 'https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap', array(), $plugin_data['Version'] );
-				wp_enqueue_style( 'haet_mail_webfonts_montserrat_css', 'https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300&display=swap', array(), $plugin_data['Version'] );
-				wp_enqueue_style( 'haet_mail_webfonts_rocksalt_css', 'https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap', array(), $plugin_data['Version'] );
-				wp_enqueue_style( 'haet_mail_webfonts_trainone_css', 'https://fonts.googleapis.com/css2?family=Train+One&display=swap', array(), $plugin_data['Version'] );
-
-			}
 		}
 	}
 
@@ -207,6 +212,7 @@ final class Haet_Mail {
 
 	private function process_admin_page_actions() {
 		do_action( 'haet_mail_plugin_reset_actions' );
+		do_action( 'haet_mail_process_advanced_actions' );
 
 		if ( array_key_exists( 'advanced-action', $_GET ) ) {
 			$advanced_action = sanitize_key( $_GET['advanced-action'] );
@@ -226,6 +232,13 @@ final class Haet_Mail {
 					esc_html_e( 'Settings deleted.', 'wp-html-mail' );
 					echo '</strong></p></div>';
 					break;
+				
+				case 'create-template-file':
+					$this->create_custom_template();
+					echo '<div class="updated"><p><strong>';
+					esc_html_e( 'Template has been created in your theme folder.', 'wp-html-mail' );
+					echo '</strong></p></div>';
+					break;
 			}
 		}
 	}
@@ -239,34 +252,20 @@ final class Haet_Mail {
 		$theme_options = $this->get_theme_options( 'default' );
 
 		$plugin_options = Haet_Sender_Plugin::get_plugin_options();
-		if ( isset( $_POST['enable_import_theme_options'] ) && $_POST['enable_import_theme_options'] && isset( $_POST['import_theme_options'] ) ) {
-			$theme_options = $this->import_theme_options( $_POST['import_theme_options'], $theme_options );
-		} else {
-			if ( isset( $_POST['haet_mail'] ) ) {
-				$options = $this->save_options( $options, $_POST['haet_mail'] );
-			}
-			if ( isset( $_POST['haet_mail_theme'] ) ) {
-				$theme_options = $this->save_theme_options( $theme_options, $_POST['haet_mail_theme'] );
-			}
-			if ( isset( $_POST['haet_mail_plugins'] ) ) {
-				$plugin_options = Haet_Sender_Plugin::save_plugin_options( $plugin_options );
-			}
-		}
-		if ( isset( $_POST['haet_mail'] ) || isset( $_POST['haet_mail_theme'] ) || isset( $_POST['haet_mail_plugins'] ) ) {
+		if ( isset( $_POST['haet_mail_plugins'] ) ) {
+			$plugin_options = Haet_Sender_Plugin::save_plugin_options( $plugin_options );
+		
 			echo '<div class="updated"><p><strong>';
 			esc_html_e( 'Settings Updated.', 'wp-html-mail' );
 			echo '</strong></p></div>';
 		}
 
-		$is_able_to_use_new_editor = $this->templatedesigner->is_wp_version_compatible();
-
-		$use_old_editor = ! $is_able_to_use_new_editor || ( isset( $options['use_classic_template_editor'] ) && $options['use_classic_template_editor'] );
 
 		if ( array_key_exists( 'tab', $_GET ) ) {
 			$tab = sanitize_key( $_GET['tab'] );
 		}
 		if ( ! array_key_exists( 'tab', $_GET ) || ! $tab ) {
-			$tab = $use_old_editor ? 'general' : 'template';
+			$tab = 'template';
 		}
 
 		// template library
@@ -277,12 +276,9 @@ final class Haet_Mail {
 				$theme_options = $this->get_theme_options( 'default' );
 				$theme_options = $template_library->import_template( $_POST['haet_mail_import_template_url'], $theme_options, $this->multilanguage );
 				if ( $theme_options ) {
-					wp_redirect( remove_query_arg( 'tab' ) );
+					wp_redirect( esc_url( remove_query_arg( 'tab' ) ) );
 				}
 			}
-
-			include HAET_MAIL_PATH . 'views/admin/template-library.php';
-			return; // no further execution if we are on template library.
 		}
 
 		$active_plugins    = Haet_Sender_Plugin::get_active_plugins();
@@ -293,41 +289,18 @@ final class Haet_Mail {
 
 		$fonts = $this->get_fonts();
 
-		if ( isset( $_POST['haet_mail_create_template'] ) && 1 == $_POST['haet_mail_create_template'] ) {
-			$this->create_custom_template();
-		}
-
 		$template = $this->get_preview( $active_plugins, $tab, $options, $plugin_options, $theme_options );
 
-		if ( $use_old_editor ) {
-			$tabs = array(
-				'general' => __( 'General', 'wp-html-mail' ),
-				'header'  => __( 'Header', 'wp-html-mail' ),
-				'content' => __( 'Content', 'wp-html-mail' ),
-			);
-			foreach ( $active_plugins as $plugin ) {
-				if ( method_exists( $plugin['class'], 'settings_tab' ) ) {
-					$tabs[ $plugin['name'] ] = $plugin['display_name'];
-				}
-			}
-
-			$tabs['footer'] = __( 'Footer', 'wp-html-mail' );
-		} else {
-			$tabs = array(
-				'template' => __( 'Template', 'wp-html-mail' ),
-				'sender'   => __( 'Sender', 'wp-html-mail' ),
-			);
-			foreach ( $active_plugins as $plugin ) {
-				if ( method_exists( $plugin['class'], 'settings_tab' ) ) {
-					$tabs[ $plugin['name'] ] = $plugin['display_name'];
-				}
+		
+		$tabs = array(
+			'template' => __( 'Main settings', 'wp-html-mail' ),
+		);
+		foreach ( $active_plugins as $plugin ) {
+			if ( method_exists( $plugin['class'], 'settings_tab' ) ) {
+				$tabs[ $plugin['name'] ] = $plugin['display_name'];
 			}
 		}
-
-		$tabs['webfonts'] = __( 'Webfonts', 'wp-html-mail' );
-		$tabs['plugins']  = __( 'Plugins', 'wp-html-mail' );
-
-		$tabs['advanced'] = __( 'Advanced', 'wp-html-mail' );
+		$tabs['template-library'] = __( 'Template library', 'wp-html-mail' );
 
 		include HAET_MAIL_PATH . 'views/admin/settings.php';
 	}
@@ -377,31 +350,14 @@ final class Haet_Mail {
 		return $this->prepare_email_for_delivery( $template );
 	}
 
-	public function save_options( $saved_options, $new_options ) {
-		if ( ! $new_options ) {
-			$new_options = $_POST['haet_mail'];
-		}
-
-		if (
-			! isset( $_POST['email_options_nonce'] ) ||
-			! wp_verify_nonce( $_POST['email_options_nonce'], 'save_email_options' )
-		) {
-			return $saved_options;
-		}
-
-		$new_options = $this->validate_options( $new_options );
-
-		$options = array_merge( $saved_options, $new_options );
-
-		update_option( 'haet_mail_options', $options );
-		return $options;
-	}
 
 	private function validate_theme_options( $options ) {
 		foreach ( $options as $option_key => $option_value ) {
-			if ( 'footer' === $option_key ) {
+			if ( 'footer' === $option_key 
+				|| str_starts_with( $option_key, 'footer_' ) /* translation */) {
 				$options[ $option_key ] = strip_tags( $option_value, '<h1><h2><h3><h4><h5><blockquote><center><p><a><div><b><strong><i><em><button><table><thead><tbody><tr><th><td><span><br><img><style>' );
-			} elseif ( 'headertext' === $option_key ) {
+			} elseif ( 'headertext' === $option_key 
+				|| str_starts_with( $option_key, 'headertext_' ) /* translation */ ) {
 				$options[ $option_key ] = strip_tags( $option_value, '<b><strong><i><em><span>' );
 			} else {
 				$options[ $option_key ] = sanitize_text_field( $option_value );
@@ -410,12 +366,28 @@ final class Haet_Mail {
 		return $options;
 	}
 
-	private function validate_options( $options ) {
-		foreach ( $options as $option_key => $option_value ) {
-			if ( in_array( $option_key, array( 'fromaddress', 'testmode_recipient' ) ) ) {
-				$options[ $option_key ] = sanitize_email( $option_value );
-			} else {
-				$options[ $option_key ] = sanitize_text_field( $option_value );
+	/**
+	 * Before an option can be saved it has to be sanitized here.
+	 * Only option keys defined in get_default_options are valid.
+	 * 
+	 * @param array $options associative array of options.
+	 */
+	public function validate_options( $options ) {
+		$available_option_keys = array_keys( $this->get_default_options() );
+		if ( is_array( $options ) && count( $options ) ) {
+			foreach ( $options as $option_key => $option_value ) {
+				if ( ! in_array( $option_key, $available_option_keys ) ) {
+					unset( $options[ $option_key ] );
+				}
+
+				if ( in_array( $option_key, array( 'fromaddress', 'testmode_recipient' ) ) ) {
+					$options[ $option_key ] = sanitize_email( $option_value );
+				} elseif ( in_array( $option_key, array( 'email_post_ids' ) ) ) {
+					if( !is_array( $options[ $option_key ] ) )
+						$options[ $option_key ] = [];
+				} else {
+					$options[ $option_key ] = sanitize_text_field( $option_value );
+				}
 			}
 		}
 		return $options;
@@ -686,6 +658,8 @@ final class Haet_Mail {
 			$debug .= '===== ORIGINAL EMAIL=====' . "\n";
 			$debug .= print_r( $original_email, true );
 			file_put_contents( $debug_filename, $debug );
+			if( !isset($email['attachments']) || !is_array($email['attachments']) )
+				$email['attachments'] = [];
 			$email['attachments'][] = $debug_filename;
 		}
 
@@ -968,7 +942,7 @@ final class Haet_Mail {
 
 
 	public function inline_css( $html ) {
-		require_once HAET_MAIL_PATH . '/vendor/autoload.php';
+		require_once trailingslashit( HAET_MAIL_PATH ) . 'vendor/autoload.php';
 
 		$css_to_inline_styles = new voku\CssToInlineStyles\CssToInlineStyles( $html );
 
@@ -1001,9 +975,9 @@ final class Haet_Mail {
 
 	public function get_tab_url( $tab = '' ) {
 		if ( $tab ) {
-			return add_query_arg( 'tab', $tab, remove_query_arg( 'advanced-action' ) );
+			return esc_url( add_query_arg( 'tab', $tab, admin_url() . 'options-general.php?page=wp-html-mail' ) );
 		}
-		return remove_query_arg( 'tab', remove_query_arg( 'advanced-action' ) );
+		return esc_url( remove_query_arg( 'tab', admin_url() . 'options-general.php?page=wp-html-mail' ) );
 	}
 
 

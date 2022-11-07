@@ -1,14 +1,26 @@
 <?php if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 } ?>
-
-<h2 class="nav-tab-wrapper">
-	<?php
-	foreach ( $tabs as $el => $name ) {
-		echo '<a class="nav-tab' . ( $el == $tab ? ' nav-tab-active' : '' ) . '" href="' . esc_url( $this->get_tab_url( $el ) ) . '">' . esc_html( $name ) . '</a>';
-	}
-	?>
-</h2>
+<div class="wp-html-mail-header">
+	<div class="heading-wrap">
+		<img src="<?php echo HAET_MAIL_URL . 'images/icon.png'; ?>" width="32" height="32">
+		<div class="heading">
+			<h2>
+				WP HTML Mail - Email Template Designer
+			</h2>
+			<div class="subtitle">
+				<?php _e( 'The only true all-in-one email template solution', 'wp-html-mail' ); ?>
+			</div>
+		</div>
+	</div>
+	<div class="nav-buttons">
+		<?php
+		foreach ( $tabs as $el => $name ) {
+			echo '<a class="button' . ( $el == $tab ? ' active' : '' ) . ( $el == 'template' ? ' button-primary' : '' ) . '" href="' . esc_url( $this->get_tab_url( $el ) ) . '">' . esc_html( $name ) . '</a>';
+		}
+		?>
+	</div>
+</div>
 <textarea style="display:none;" id="haet_mailtemplate"><?php echo esc_textarea( stripslashes( str_replace( '\\&quot;', '', $template ) ) ); ?></textarea>
 
 <form method="post" id="haet_mail_form" action="<?php echo esc_url( $_SERVER['REQUEST_URI'] ); ?>">
@@ -16,33 +28,11 @@
 	wp_nonce_field( 'save_email_options', 'email_options_nonce' );
 	do_action( 'haet_mail_before_settings_tab_' . $tab );
 	switch ( $tab ) {
-		case 'general':
-			// for backwards 2.x compatibility
-			include 'settings-general.php';
-			break;
-		case 'header':
-			// for backwards 2.x compatibility
-			include 'settings-header.php';
-			break;
-		case 'content':
-			// for backwards 2.x compatibility
-			include 'settings-content.php';
-			break;
-		case 'footer':
-			// for backwards 2.x compatibility
-			include 'settings-footer.php';
-			break;
 		case 'template':
 			include 'settings-template.php';
 			break;
-		case 'sender':
-			include 'settings-sender.php';
-			break;
-		case 'plugins':
-			include 'settings-plugins.php';
-			break;
-		case 'advanced':
-			include 'settings-advanced.php';
+		case 'template-library':
+			include 'settings-template-library.php';
 			break;
 		case 'webfonts':
 			if ( defined( 'HAET_MAIL_WEBFONTS_PATH' ) ) {
@@ -61,7 +51,7 @@
 	} //switch Tab
 	do_action( 'haet_mail_after_settings_tab_' . $tab );
 	?>
-	<?php if ( $tab !== 'template' && $tab !== 'webfonts' ) : ?>
+	<?php if ( $tab === 'woocommerce' || $tab === 'easy-digital-downloads' ) : ?>
 		<div class="submit">
 			<input type="submit" name="update_haet_mailSettings" class="button-primary" value="<?php esc_html_e( 'Save and Preview', 'wp-html-mail' ); ?>" />
 		</div>
@@ -69,7 +59,7 @@
 </form>
 
 <?php
-if ( $tab !== 'webfonts' ) :
+if ( ! in_array( $tab, [ 'webfonts', 'template-library' ] ) ):
 	if (
 		! Haet_Mail()->multilanguage->is_multilanguage_site()
 		|| Haet_Mail()->multilanguage->get_current_language()
