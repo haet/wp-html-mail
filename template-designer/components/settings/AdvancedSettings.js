@@ -20,6 +20,7 @@ import { __ } from "@wordpress/i18n";
 
 
 import { TemplateDesignerContext } from "../../contexts/TemplateDesignerContext";
+import DebugEmailPostIDMapping from "./DebugEmailPostIDMapping";
 
 
 export default function AdvancedSettings() {
@@ -220,6 +221,9 @@ export default function AdvancedSettings() {
 							}
 							</CardBody>
 						</>
+					}
+					{settings && settings.email_post_ids && Object.keys( settings.email_post_ids ).length > 0 &&
+						<DebugEmailPostIDMapping/>
 					}
 				</Card>
 				{/* <div className="save-button-pane-bottom">

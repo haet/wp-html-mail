@@ -27,10 +27,12 @@ export default function MailFooter({}) {
 	const { theme } = templateDesignerContext;
 	const elementTitle = __("Email footer", "wp-html-mail");
 	const elementName = "footer";
-	const footer = getTranslateableThemeOption(theme, "footer").replace(
-		/\\(.)/gm,
-		"$1"
-	); // this is some kind of stripslashes
+	let footer = getTranslateableThemeOption(theme, "footer")
+	if (footer)
+		footer.replace(
+			/\\(.)/gm,
+			"$1"
+		); // this is some kind of stripslashes
 	const footer_field_key = getTranslateableThemeOptionsKey(
 		theme,
 		"footer"

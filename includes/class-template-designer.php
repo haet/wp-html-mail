@@ -1,7 +1,7 @@
 <?php if ( ! defined( 'ABSPATH' ) ) {
 	exit;}
 
-require HAET_MAIL_PATH . 'includes/class-content-editor.php';
+require trailingslashit( HAET_MAIL_PATH ) . 'includes/class-content-editor.php';
 
 class Haet_TemplateDesigner {
 
@@ -35,15 +35,15 @@ class Haet_TemplateDesigner {
 			if( $this->contenteditor )
 				$this->contenteditor->load();
 
-			$script_path       = HAET_MAIL_PATH . 'template-designer/build/index.js';
-			$script_asset_path = HAET_MAIL_PATH . 'template-designer/build/index.asset.php';
+			$script_path       = trailingslashit( HAET_MAIL_PATH ) . 'template-designer/build/index.js';
+			$script_asset_path = trailingslashit( HAET_MAIL_PATH ) . 'template-designer/build/index.asset.php';
 			$script_asset      = file_exists( $script_asset_path )
 				? require $script_asset_path
 				: array(
-					'dependencies' => array(),
+					'dependencies' => ['wp-element'],
 					'version'      => filemtime( $script_path ),
 				);
-			$script_url        = HAET_MAIL_URL . 'template-designer/build/index.js';
+			$script_url        = trailingslashit( HAET_MAIL_URL ) . 'template-designer/build/index.js';
 
 			$react_component_files = $this->get_react_compontent_files();
 			if( is_array( $react_component_files ) && count( $react_component_files ) ){

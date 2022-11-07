@@ -97,6 +97,7 @@ final class Haet_Mail_Builder {
 			'rewrite'              => false,
 			'capability_type'      => 'post',
 			'register_meta_box_cb' => array( $this, 'setup_meta_boxes' ),
+			'show_in_rest'		   => true,
 			'supports'             => array( '' ),
 		);
 

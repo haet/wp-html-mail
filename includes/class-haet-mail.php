@@ -353,9 +353,11 @@ final class Haet_Mail {
 
 	private function validate_theme_options( $options ) {
 		foreach ( $options as $option_key => $option_value ) {
-			if ( 'footer' === $option_key ) {
+			if ( 'footer' === $option_key 
+				|| str_starts_with( $option_key, 'footer_' ) /* translation */) {
 				$options[ $option_key ] = strip_tags( $option_value, '<h1><h2><h3><h4><h5><blockquote><center><p><a><div><b><strong><i><em><button><table><thead><tbody><tr><th><td><span><br><img><style>' );
-			} elseif ( 'headertext' === $option_key ) {
+			} elseif ( 'headertext' === $option_key 
+				|| str_starts_with( $option_key, 'headertext_' ) /* translation */ ) {
 				$options[ $option_key ] = strip_tags( $option_value, '<b><strong><i><em><span>' );
 			} else {
 				$options[ $option_key ] = sanitize_text_field( $option_value );
@@ -656,6 +658,8 @@ final class Haet_Mail {
 			$debug .= '===== ORIGINAL EMAIL=====' . "\n";
 			$debug .= print_r( $original_email, true );
 			file_put_contents( $debug_filename, $debug );
+			if( !isset($email['attachments']) || !is_array($email['attachments']) )
+				$email['attachments'] = [];
 			$email['attachments'][] = $debug_filename;
 		}
 
@@ -938,7 +942,7 @@ final class Haet_Mail {
 
 
 	public function inline_css( $html ) {
-		require_once HAET_MAIL_PATH . '/vendor/autoload.php';
+		require_once trailingslashit( HAET_MAIL_PATH ) . 'vendor/autoload.php';
 
 		$css_to_inline_styles = new voku\CssToInlineStyles\CssToInlineStyles( $html );
 
