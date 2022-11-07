@@ -109,7 +109,7 @@ https://youtu.be/RV8vUNCWOZw
 
 = Works with most email delivery plugins =
 * [WP Offload SES](https://aff.deliciousbrains.com/idevaffiliate.php?id=21298_4_3_3)
-* [Post SMTP Mailer/Email Log](https://wordpress.org/plugins/post-smtp/) 
+* [Post SMTP Mailer/Email Log](https://wordpress.org/plugins/post-smtp/)
 * WP Mail SMTP
 * wpMandrill
 * ...
