@@ -217,8 +217,12 @@ class Haet_Sender_Plugin {
 
 
 	public static function is_plugin_active( $plugin ) {
-		if ( array_key_exists( 'file', $plugin ) && is_plugin_active( $plugin['file'] ) ) {
-			return true;
+		if(array_key_exists( 'file', $plugin )){
+			if(!is_array($plugin['file'])){
+				if(is_plugin_active($plugin['file'])){
+					return true;
+				}
+			}
 		}
 
 		// plugins can consist of mutliple plugins e.g. wpforms & wpforms-lite
