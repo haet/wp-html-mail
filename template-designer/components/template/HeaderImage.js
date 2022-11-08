@@ -83,7 +83,7 @@ export default function HeaderImage({}) {
 									attachment.width > 600
 										? 600
 										: attachment.width;
-								templateDesignerContext.settheme({
+								templateDesignerContext.setTheme({
 									...theme,
 									[headerimg_field_key]: attachment.url,
 									headerimg_width: width,
@@ -333,7 +333,7 @@ export default function HeaderImage({}) {
 							topLeft: true,
 						}}
 						onResizeStop={(event, direction, elt, delta) => {
-							templateDesignerContext.setTheme({
+							templateDesignerContext.setTheme({ 
 								...theme,
 								headerimg_width:
 									parseInt(theme.headerimg_width) +

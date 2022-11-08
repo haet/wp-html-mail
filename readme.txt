@@ -2,9 +2,9 @@
 Contributors: codemiq,haet
 Tags: email, email template, woocommerce email, email design, elementor, caldera-forms, wp-e-commerce, easy-digital-downloads, contact-form-7, mandrill, postman, gravityforms
 Requires at least: 5.4
-Tested up to: 6.0
+Tested up to: 6.1
 Requires PHP: 7.2
-Stable tag: 3.3.3
+Stable tag: 3.3.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -148,6 +148,12 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 
 == Changelog ==
+
+= 3.3.4beta =
+* FIXED: header image / logo could not be saved
+
+= 3.3.3 = 
+* added restore tool for lost WooCommerce email templates
 
 = 3.3.2 =
 * tagged new version to fix missing files during latest update
