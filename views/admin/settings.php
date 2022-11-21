@@ -31,9 +31,6 @@
 		case 'template':
 			include 'settings-template.php';
 			break;
-		case 'template-library':
-			include 'settings-template-library.php';
-			break;
 		case 'webfonts':
 			if ( defined( 'HAET_MAIL_WEBFONTS_PATH' ) ) {
 				include HAET_MAIL_WEBFONTS_PATH . 'views/admin/settings-webfonts.php';
@@ -59,7 +56,7 @@
 </form>
 
 <?php
-if ( ! in_array( $tab, [ 'webfonts', 'template-library' ] ) ):
+if ( ! in_array( $tab, [ 'webfonts'] ) ):
 	if (
 		! Haet_Mail()->multilanguage->is_multilanguage_site()
 		|| Haet_Mail()->multilanguage->get_current_language()

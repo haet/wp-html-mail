@@ -2,14 +2,17 @@
 	exit;}
 
 require trailingslashit( HAET_MAIL_PATH ) . 'includes/class-content-editor.php';
+require trailingslashit( HAET_MAIL_PATH ) . 'includes/class-template-library.php';
 
 class Haet_TemplateDesigner {
 
 	private $api_base = 'whm/v3';
 	private $contenteditor;
+	private $templatelibrary;
 
 	public function __construct() {
 		//$this->contenteditor = new Haet_ContentEditor();
+		$this->templatelibrary = new Haet_Template_Library();
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_page_scripts_and_styles' ) );
 		add_action( 'rest_api_init', array( $this, 'rest_api_init' ) );
 
@@ -237,6 +240,20 @@ class Haet_TemplateDesigner {
 				'methods'             => 'GET',
 				'callback'            => function(){
 					return new \WP_REST_Response( $this->get_available_fonts() );
+				},
+				'permission_callback' => function () {
+					return current_user_can( 'manage_options' );
+				},
+			)
+		);
+
+		register_rest_route(
+			$this->api_base,
+			'/templatelibrary',
+			array(
+				'methods'             => 'GET',
+				'callback'            => function(){
+					return new \WP_REST_Response( $this->templatelibrary->get_templates() );
 				},
 				'permission_callback' => function () {
 					return current_user_can( 'manage_options' );

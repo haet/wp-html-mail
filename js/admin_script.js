@@ -232,13 +232,13 @@ jQuery(function ($) {
 						$(
 							'#haet_mail_import_form input[name="haet_mail_import_template_url"]'
 						).val($link.data("config"));
-						$("#haet_mail_import_form").submit();
+						$("#haet_mail_import_form").trigger('submit');
 						$(this).dialog("close");
 
 						$("#haet_mail_template_importing_dialog").dialog({
 							dialogClass: "no-close",
 							modal: true,
-							buttons: [],
+							buttons: [], 
 						});
 					},
 				},
@@ -246,34 +246,4 @@ jQuery(function ($) {
 		});
 	});
 
-	/*************************************
-	 * INFO ICONS
-	 * ***********************************/
-	$(".haet-mail-info-icon").on("click", function (e) {
-		e.preventDefault();
-		$(this)
-			.pointer({
-				content: "<p>" + $(this).data("tooltip") + "</p>",
-			})
-			.pointer("open");
-	});
-
-	/*************************************
-	 * IMPORT EXPORT
-	 * ***********************************/
-	$(".haet-mail-toggle-export-button").on("click", function () {
-		$(this).siblings(".haet-mail-toggle-export").addClass("toggle-active");
-		$(this).remove();
-		$(".haet-mail-toggle-import-button").remove();
-	});
-
-	$(".haet-mail-toggle-import-button").on("click", function () {
-		$(this).siblings(".haet-mail-toggle-import").addClass("toggle-active");
-		$(this).remove();
-		$(".haet-mail-toggle-export-button").remove();
-		$(".haet-mail-import-start").on("click", function () {
-			$("#haet_mail_enable_import_theme_options").val(1);
-			$("#haet_mail_form input[name='update_haet_mailSettings']").click();
-		});
-	});
 });

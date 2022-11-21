@@ -35,30 +35,4 @@ class Haet_Template_Library {
 		}
 		return $templates;
 	}
-
-
-
-
-	public function import_template( $template_url, $saved_options, $multilanguage ) {
-		$request = wp_remote_get( $template_url );
-		if ( is_wp_error( $request ) ) {
-			return $saved_options;
-		}
-
-		$request_body = wp_remote_retrieve_body( $request );
-		$new_options  = json_decode( $request_body, true );
-
-		if ( $new_options ) {
-			$options = array_merge( $saved_options, $new_options );
-
-			// $options = $multilanguage->remove_translations_for_field( $options, 'headerimg' );
-			// $options = $multilanguage->remove_translations_for_field( $options, 'footer' );
-
-			update_option( 'haet_mail_theme_options', $options );
-		} else {
-			$options = $saved_options;
-		}
-
-		return $options;
-	}
 }

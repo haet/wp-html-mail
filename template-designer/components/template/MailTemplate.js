@@ -18,6 +18,7 @@ import MailHeader from "./MailHeader";
 import MailContent from "./MailContent";
 import MailFooter from "./MailFooter";
 import EditableElement from "./EditableElement";
+import TemplateLibrary from './TemplateLibrary';
 
 export default function MailTemplate() {
 	const templateDesignerContext = useContext(TemplateDesignerContext);
@@ -79,15 +80,7 @@ export default function MailTemplate() {
 					}}
 				>
 					<div className="save-button-pane components-panel__header">
-						<Button
-							isSecondary
-							href={
-								window.mailTemplateDesigner.templateLibraryUrl
-							}
-							style={{ marginRight: 10 }}
-						>
-							{__("Browse our template library", "wp-html-mail")}
-						</Button>
+						<TemplateLibrary/>
 						<Button
 							isPrimary
 							isBusy={templateDesignerContext.isSaving}

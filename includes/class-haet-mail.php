@@ -3,7 +3,6 @@
 
 require HAET_MAIL_PATH . 'includes/class-multilanguage.php';
 require HAET_MAIL_PATH . 'includes/class-template-designer.php';
-require HAET_MAIL_PATH . 'includes/class-template-library.php';
 
 final class Haet_Mail {
 
@@ -268,19 +267,6 @@ final class Haet_Mail {
 			$tab = 'template';
 		}
 
-		// template library
-		if ( 'template-library' === $tab ) {
-			$template_library = new Haet_Template_Library();
-
-			if ( isset( $_POST['haet_mail_import_template_url'] ) && filter_var( $_POST['haet_mail_import_template_url'], FILTER_VALIDATE_URL ) !== false ) {
-				$theme_options = $this->get_theme_options( 'default' );
-				$theme_options = $template_library->import_template( $_POST['haet_mail_import_template_url'], $theme_options, $this->multilanguage );
-				if ( $theme_options ) {
-					wp_redirect( esc_url( remove_query_arg( 'tab' ) ) );
-				}
-			}
-		}
-
 		$active_plugins    = Haet_Sender_Plugin::get_active_plugins();
 		$available_plugins = Haet_Sender_Plugin::get_available_plugins();
 		$plugin_options    = Haet_Sender_Plugin::get_plugin_options();
@@ -300,7 +286,6 @@ final class Haet_Mail {
 				$tabs[ $plugin['name'] ] = $plugin['display_name'];
 			}
 		}
-		$tabs['template-library'] = __( 'Template library', 'wp-html-mail' );
 
 		include HAET_MAIL_PATH . 'views/admin/settings.php';
 	}
@@ -359,6 +344,8 @@ final class Haet_Mail {
 			} elseif ( 'headertext' === $option_key 
 				|| str_starts_with( $option_key, 'headertext_' ) /* translation */ ) {
 				$options[ $option_key ] = strip_tags( $option_value, '<b><strong><i><em><span>' );
+			} elseif ( 'headerimg_notice' === $option_key ) {
+				$options[ $option_key ] = strip_tags( $option_value, '<a>' );
 			} else {
 				$options[ $option_key ] = sanitize_text_field( $option_value );
 			}

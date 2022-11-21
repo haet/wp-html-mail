@@ -149,8 +149,10 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 == Changelog ==
 
-= 3.3.4beta =
+= 3.3.4 =
 * FIXED: header image / logo could not be saved
+* FIXED: Warning with PHP8 & multisite
+* tranformed template library to new React UI
 
 = 3.3.3 = 
 * added restore tool for lost WooCommerce email templates
