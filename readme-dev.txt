@@ -15,7 +15,7 @@ the only file of the template designer needed for production is js/template-desi
 but we also add js/template-designer/dev/main.js in case someone has SCRIPT_DEBUG enabled
 
 Build webfonts add-on for production
-cd wp-html-mail-webfonts; npm run build; grunt release_webfonts
+cd wp-html-mail-webfonts/js; npm run build; grunt release_webfonts
 
 
 WordPress Components

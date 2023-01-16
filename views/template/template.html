@@ -7,12 +7,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1"> <!-- So that mobile will display zoomed in -->
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- enable media queries for windows phone 8 -->
 	<meta name="format-detection" content="telephone=no"> <!-- disable auto telephone linking in iOS -->
-	<!--[if gte mso 9]><xml>
-	 <o:OfficeDocumentSettings>
-	  <o:AllowPNG/>
-	  <o:PixelsPerInch>96</o:PixelsPerInch>
-	 </o:OfficeDocumentSettings>
-	</xml><![endif]-->
+	<outlookconditionalcommentstart/>
+		<xml>
+			<o:OfficeDocumentSettings>
+				<o:AllowPNG/>
+				<o:PixelsPerInch>96</o:PixelsPerInch>
+			</o:OfficeDocumentSettings>
+		</xml>
+	<outlookconditionalcommentend/>
 	<style>
 		body {
 			background-color: ###background###;
@@ -181,6 +183,7 @@
 			vertical-align: top;
 		}
 
+
 		body {
 			margin: 0;
 			padding: 0;
@@ -251,6 +254,7 @@
 
 			table[class*="content-twocol"] {
 				float: none;
+				width: 100%;
 			}
 
 			table[class*="content-twocol"],
@@ -288,9 +292,9 @@
 								<tr>
 									<td>
 
-										<!--[if (gte mso 9)|(IE)]>
+										<outlookconditionalcommentstart/>
 										<table id="outlookholder" class="container" width="600" border="0" cellspacing="0" cellpadding="0" align="center"><tr><td>
-									<![endif]-->
+										<outlookconditionalcommentend/>
 										<!--header-table-->
 										<table width="100%" border="0" cellspacing="0" cellpadding="0">
 											<tr>
@@ -321,9 +325,9 @@
 											</tr>
 										</table>
 										<!--/footer-table-->
-										<!--[if (gte mso 9)|(IE)]>
+										<outlookconditionalcommentstart/>
 										</td></tr></table>
-									<![endif]-->
+										<outlookconditionalcommentend/>
 
 									</td>
 								</tr>

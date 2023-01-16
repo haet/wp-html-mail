@@ -100,34 +100,34 @@ final class Haet_MB_ContentType_TwoCol extends Haet_MB_ContentType {
 		$html = '';
 		if ( isset( $element_content->content ) ) :
 			$html .= '
-				<!--[if (gte mso 9)|(IE)]>
+				<outlookconditionalcommentstart/>
 					<table class="content-twocol" style="table-layout:fixed; width:100%">
 						<tr>
 							<td>
-				<![endif]-->
-					<table class="content-twocol" align="left" width="50%" cellspacing="0" cellpadding="0">
-						<tr>
-							<td style="width:50%">
-								' . $element_content->content->col1 . '
-							</td>
-						</tr>
-					</table>
-				<!--[if (gte mso 9)|(IE)]>
+				<outlookconditionalcommentend/>
+				<table class="content-twocol" align="left" width="50%" cellspacing="0" cellpadding="0">
+					<tr>
+						<td>
+							' . $element_content->content->col1 . '
+						</td>
+					</tr>
+				</table>
+				<outlookconditionalcommentstart/>
 							</td>
 							<td>
-				<![endif]-->
-					<table class="content-twocol" align="right" width="50%" cellspacing="0" cellpadding="0">
-						<tr>
-							<td style="width:50%">
-								' . $element_content->content->col2 . '
+				<outlookconditionalcommentend/>
+				<table class="content-twocol" align="right" width="50%" cellspacing="0" cellpadding="0">
+					<tr>
+						<td>
+							' . $element_content->content->col2 . '
+						</td>
+					</tr>
+				</table>
+				<outlookconditionalcommentstart/>
 							</td>
 						</tr>
 					</table>
-				<!--[if (gte mso 9)|(IE)]>
-							</td>
-						</tr>
-					</table>
-				<![endif]-->
+				<outlookconditionalcommentend/>
 				';
 		endif;
 

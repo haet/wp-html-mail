@@ -331,7 +331,7 @@ final class Haet_Mail {
 		}
 
 		$template = apply_filters( 'haet_mail_modify_styled_mail', $template );
-
+		
 		return $this->prepare_email_for_delivery( $template );
 	}
 
@@ -339,10 +339,10 @@ final class Haet_Mail {
 	private function validate_theme_options( $options ) {
 		foreach ( $options as $option_key => $option_value ) {
 			if ( 'footer' === $option_key 
-				|| str_starts_with( $option_key, 'footer_' ) /* translation */) {
+				|| strpos( $option_key, 'footer_' ) === 0 /* translation */) {
 				$options[ $option_key ] = strip_tags( $option_value, '<h1><h2><h3><h4><h5><blockquote><center><p><a><div><b><strong><i><em><button><table><thead><tbody><tr><th><td><span><br><img><style>' );
 			} elseif ( 'headertext' === $option_key 
-				|| str_starts_with( $option_key, 'headertext_' ) /* translation */ ) {
+				|| strpos( $option_key, 'headertext_' ) === 0 /* translation */ ) {
 				$options[ $option_key ] = strip_tags( $option_value, '<b><strong><i><em><span>' );
 			} elseif ( 'headerimg_notice' === $option_key ) {
 				$options[ $option_key ] = strip_tags( $option_value, '<a>' );
@@ -924,6 +924,12 @@ final class Haet_Mail {
 			$message = str_replace( array( '&lt;', '&gt;' ), array( '<', '>' ), $message );
 		}
 
+		$message = str_replace('<outlookconditionalcommentstart/>','<!--[if gte mso 9]>',$message);
+		$message = str_replace('<outlookconditionalcommentstart></outlookconditionalcommentstart>','<!--[if gte mso 9]>',$message);
+
+		$message = str_replace('<outlookconditionalcommentend/>','<![endif]-->',$message);
+		$message = str_replace('<outlookconditionalcommentend></outlookconditionalcommentend>','<![endif]-->',$message);
+
 		return $message;
 	}
 
@@ -1051,6 +1057,9 @@ final class Haet_Mail {
 	public function kses_mailcontent( $html ){
 		$allowed_tags = wp_kses_allowed_html('post');
 		$allowed_tags['style'] = [];
+		$allowed_tags['outlookconditionalcommentstart'] = [];
+		$allowed_tags['outlookconditionalcommentend'] = [];
+		error_log(print_r($allowed_tags,true));
 		return wp_kses($html, $allowed_tags);
 	}
 
