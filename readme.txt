@@ -4,7 +4,7 @@ Tags: email, email template, woocommerce email, email design, elementor, caldera
 Requires at least: 5.4
 Tested up to: 6.1.1
 Requires PHP: 7.2
-Stable tag: 3.3.6
+Stable tag: 3.3.8beta
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -148,6 +148,12 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 
 == Changelog ==
+
+= 3.3.8beta =
+* fixed a bug creating multiple emails with WPML
+
+= 3.3.7 =
+* removed debug output
 
 = 3.3.6 =
 * restored compatibility with Outlook

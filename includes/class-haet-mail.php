@@ -1059,7 +1059,6 @@ final class Haet_Mail {
 		$allowed_tags['style'] = [];
 		$allowed_tags['outlookconditionalcommentstart'] = [];
 		$allowed_tags['outlookconditionalcommentend'] = [];
-		error_log(print_r($allowed_tags,true));
 		return wp_kses($html, $allowed_tags);
 	}
 

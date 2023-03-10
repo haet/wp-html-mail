@@ -577,6 +577,7 @@ final class Haet_Mail_Builder {
 		if ( ! isset( $options['email_post_ids'][ $email_name ] ) || ! $options['email_post_ids'][ $email_name ] ) {
 			$options['email_post_ids'][ $email_name ] = $this->create_email( $email_name );
 		}
+		
 
 		$translated_email_post_id = false;
 		if ( isset( $options['email_post_ids'][ $email_name ] ) && Haet_Mail()->multilanguage->is_multilanguage_site() ) {
@@ -601,7 +602,7 @@ final class Haet_Mail_Builder {
 
 		// create missing translations.
 		if ( $email_post_id && Haet_Mail()->multilanguage->is_multilanguage_site() && ! $translated_email_post_id ) {
-			$translated_email_post_id = $this->create_email( $email_name );
+			
 
 			if ( Haet_Mail()->multilanguage->get_multilang_plugin() === 'WPML' ) {
 				// create language settings for WPML.
@@ -612,17 +613,20 @@ final class Haet_Mail_Builder {
 					'element_type' => 'wphtmlmail_mail',
 				);
 				$original_post_language_info = apply_filters( 'wpml_element_language_details', null, $get_language_args );
+				if( $original_post_language_info->language_code !== ICL_LANGUAGE_CODE ){
+					$translated_email_post_id = $this->create_email( $email_name );
+					$set_language_args = array(
+						'element_id'           => $translated_email_post_id,
+						'element_type'         => $wpml_element_type,
+						'trid'                 => $original_post_language_info->trid,
+						'language_code'        => ICL_LANGUAGE_CODE,
+						'source_language_code' => $original_post_language_info->language_code,
+					);
 
-				$set_language_args = array(
-					'element_id'           => $translated_email_post_id,
-					'element_type'         => $wpml_element_type,
-					'trid'                 => $original_post_language_info->trid,
-					'language_code'        => ICL_LANGUAGE_CODE,
-					'source_language_code' => $original_post_language_info->language_code,
-				);
-
-				do_action( 'wpml_set_element_language_details', $set_language_args );
+					do_action( 'wpml_set_element_language_details', $set_language_args );
+				}
 			} elseif ( Haet_Mail()->multilanguage->get_multilang_plugin() === 'Polylang' ) {
+				$translated_email_post_id = $this->create_email( $email_name );
 				// create language settings for Polylang.
 				PLL()->model->post->set_language( $translated_email_post_id, pll_current_language() );
 
