@@ -17,7 +17,7 @@ class Haet_Sender_Plugin_GravityForms extends Haet_Sender_Plugin {
 	 *   mofify the email content before applying the template
 	 **/
 	public function modify_content( $content ) {
-		if ( preg_match( '/<body*>(.*)<\/body>/Ums', $content, $matches ) ) {
+		if ( preg_match( '/<body.*>(.*)<\/body>/Ums', $content, $matches ) ) {
 			if ( is_array( $matches ) ) {
 				$content = $matches[1];
 			}

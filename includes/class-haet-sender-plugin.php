@@ -15,6 +15,7 @@ require HAET_MAIL_PATH . 'includes/class-haet-sender-plugin-divi-theme.php';
 require HAET_MAIL_PATH . 'includes/class-haet-sender-plugin-terawallet.php';
 require HAET_MAIL_PATH . 'includes/class-haet-sender-plugin-formidable.php';
 require HAET_MAIL_PATH . 'includes/class-haet-sender-plugin-wpforo.php';
+require HAET_MAIL_PATH . 'includes/class-haet-sender-plugin-fluent-crm.php';
 
 class Haet_Different_Plugin_Exception extends Exception {
 
@@ -119,6 +120,13 @@ class Haet_Sender_Plugin {
 				'file'         => 'wp-e-commerce/wp-shopping-cart.php',
 				'class'        => 'Haet_Sender_Plugin_WP_E_Commerce',
 				'display_name' => 'WP eCommerce',
+			),
+			'fluent'                       				=> array(
+				'name'         => 'fluent',
+				'file'         => 'fluent-crm/fluent-crm.php',
+				'class'        => 'Haet_Sender_Plugin_FluentCRM',
+				'display_name' => 'Fluent CRM',
+				'image_url'    => HAET_MAIL_URL . '/images/fluent-crm.png',
 			),
 		);
 
