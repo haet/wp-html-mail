@@ -149,8 +149,12 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 == Changelog ==
 
+= 3.3.9beta =
+* added support for Fluent Support
+
 = 3.3.8beta =
 * fixed a bug creating multiple emails with WPML
+* added support for Fluent CRM
 
 = 3.3.7 =
 * removed debug output
