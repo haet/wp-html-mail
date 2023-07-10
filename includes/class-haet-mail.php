@@ -278,14 +278,20 @@ final class Haet_Mail {
 		$template = $this->get_preview( $active_plugins, $tab, $options, $plugin_options, $theme_options );
 
 		
-		$tabs = array(
-			'template' => __( 'Main settings', 'wp-html-mail' ),
-		);
+		$tabs = [
+			'template' => '◀︎ ' . __( 'Main settings', 'wp-html-mail' )
+		];
+
 		foreach ( $active_plugins as $plugin ) {
 			if ( method_exists( $plugin['class'], 'settings_tab' ) ) {
-				$tabs[ $plugin['name'] ] = $plugin['display_name'];
+				// WooCommerce tab has moved to the react interface but it may still exist if someone has not updated the add on
+				if( $plugin['name'] !== 'woocommerce' ){
+					$tabs[ $plugin['name'] ] = $plugin['display_name'];
+				}
 			}
 		}
+		// remove current tab
+		unset( $tabs[$tab] );
 
 		include HAET_MAIL_PATH . 'views/admin/settings.php';
 	}
@@ -1137,6 +1143,17 @@ final class Haet_Mail {
 			$theme_options['headerimg_placement'] = 'replace_text';
 		}
 		return $theme_options;
+	}
+
+
+	/**
+	 * Should we use the lite version of the WooCommerce integration?
+	 */
+	public function use_woocommerce_lite(){
+		return ( 
+			is_plugin_active('woocommerce/woocommerce.php') 
+			&& !is_plugin_active('wp-html-mail-woocommerce/wp-html-mail-woocommerce.php') 
+		);
 	}
 }
 

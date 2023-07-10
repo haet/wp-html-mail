@@ -18,28 +18,28 @@ import { __ } from "@wordpress/i18n";
 import { TemplateDesignerContext } from "../../contexts/TemplateDesignerContext";
 
 
-export default function Plugins({plugins}) {
+export default function Plugins({ plugins }) {
 	const templateDesignerContext = useContext(TemplateDesignerContext);
-	const { setPluginSettings,pluginSettings,loadPluginSettings } = templateDesignerContext;
-	
+	const { setPluginSettings, pluginSettings, loadPluginSettings } = templateDesignerContext;
+
 	useEffect(() => {
 		loadPluginSettings();
 	}, []);
- 
+
 	const handleToggle = (plugin_name, setting_name, checked) => {
 		const newPluginSettings = { ...pluginSettings, [plugin_name]: { ...pluginSettings[plugin_name], [setting_name]: checked } };
 
 		setPluginSettings(newPluginSettings);
 		templateDesignerContext.savePluginSettings(() => {
-	
+
 			templateDesignerContext.setInfoMessage(__('Your settings have been saved.', 'wp-html-mail'))
-				setTimeout(() => { 
-					templateDesignerContext.setInfoMessage("");
-				}, 7000)
-			}, newPluginSettings,);
+			setTimeout(() => {
+				templateDesignerContext.setInfoMessage("");
+			}, 7000)
+		}, newPluginSettings,);
 	}
 
-	
+
 
 	if (templateDesignerContext.isLoading || !templateDesignerContext.theme)
 		return (
@@ -52,7 +52,7 @@ export default function Plugins({plugins}) {
 			<div className="mail-pluginSettings">
 				<Card className="mail-pluginSettings-content">
 					<CardHeader>
-						<h3>{ __( 'Plugins', 'wp-html-mail' ) }</h3>
+						<h3>{__('Plugins', 'wp-html-mail')}</h3>
 					</CardHeader>
 					<CardBody>
 						<p>
@@ -64,8 +64,8 @@ export default function Plugins({plugins}) {
 					</CardBody>
 					<CardDivider />
 					<CardBody>
-						<Panel header={__('Active plugins','wp-html-mail')}>
-							{plugins.filter( plugin => plugin.active ).map(plugin => 
+						<Panel header={__('Active plugins', 'wp-html-mail')}>
+							{plugins.filter(plugin => plugin.active).map(plugin =>
 								<PanelBody
 									key={plugin.name}
 									title={<>
@@ -79,10 +79,10 @@ export default function Plugins({plugins}) {
 									initialOpen={false}
 								>
 									<PanelRow>
-										{( plugin.has_addon && !plugin.is_addon_active && plugin.addon_url ) ?
+										{(plugin.has_addon && !plugin.is_addon_active && plugin.addon_url) ?
 											<Button
 												isSecondary
-												href={plugin.addon_url.replaceAll('&amp;','&')}
+												href={plugin.addon_url.replaceAll('&amp;', '&')}
 											>
 												{__('get WP HTML Mail for', 'wp-html-mail') + ' ' + plugin.display_name}
 											</Button>
@@ -90,58 +90,66 @@ export default function Plugins({plugins}) {
 												pluginSettings.hasOwnProperty(plugin.name) ?
 													<>
 														<ToggleControl
-																label={__('Use template', 'wp-html-mail')}
-																checked={
-																	(pluginSettings[plugin.name] && pluginSettings[plugin.name].hasOwnProperty('template'))
-																		? pluginSettings[plugin.name].template
-																		: true}
-																onChange={(checked) => {
-																	handleToggle(plugin.name, 'template', checked);
-																}}
+															label={__('Use template', 'wp-html-mail')}
+															checked={
+																(pluginSettings[plugin.name] && pluginSettings[plugin.name].hasOwnProperty('template'))
+																	? pluginSettings[plugin.name].template
+																	: true}
+															onChange={(checked) => {
+																handleToggle(plugin.name, 'template', checked);
+															}}
 														/>
 														<ToggleControl
-															label={__( 'Overwrite sender', 'wp-html-mail' )}
+															label={__('Overwrite sender', 'wp-html-mail')}
 															checked={
-																( pluginSettings[plugin.name] && pluginSettings[plugin.name].hasOwnProperty('sender') )
+																(pluginSettings[plugin.name] && pluginSettings[plugin.name].hasOwnProperty('sender'))
 																	? pluginSettings[plugin.name].sender
 																	: false}
-															onChange={ (checked) => {
-																handleToggle(plugin.name, 'sender', checked);	
-															} }
+															onChange={(checked) => {
+																handleToggle(plugin.name, 'sender', checked);
+															}}
 														/>
 														<ToggleControl
-															label={__( 'Hide header', 'wp-html-mail' )}
+															label={__('Hide header', 'wp-html-mail')}
 															checked={
-																( pluginSettings[plugin.name] && pluginSettings[plugin.name].hasOwnProperty('hide_header') )
+																(pluginSettings[plugin.name] && pluginSettings[plugin.name].hasOwnProperty('hide_header'))
 																	? pluginSettings[plugin.name].hide_header
 																	: false}
-																onChange={(checked) => {
-																	handleToggle(plugin.name, 'hide_header', checked);	
-															} }
+															onChange={(checked) => {
+																handleToggle(plugin.name, 'hide_header', checked);
+															}}
 														/>
 														<ToggleControl
-															label={__( 'Hide footer', 'wp-html-mail' )}
+															label={__('Hide footer', 'wp-html-mail')}
 															checked={
-																( pluginSettings[plugin.name] && pluginSettings[plugin.name].hasOwnProperty('hide_footer') )
+																(pluginSettings[plugin.name] && pluginSettings[plugin.name].hasOwnProperty('hide_footer'))
 																	? pluginSettings[plugin.name].hide_footer
 																	: false}
-															onChange={ (checked) => {
-																handleToggle(plugin.name, 'hide_footer', checked);	
-															} }
+															onChange={(checked) => {
+																handleToggle(plugin.name, 'hide_footer', checked);
+															}}
 														/>
+														{(plugin.has_addon && plugin.is_addon_active && plugin.hasOwnProperty('is_addon_lite') && plugin.is_addon_lite && plugin.addon_url) &&
+															<Button
+																isSecondary
+																href={plugin.addon_url.replaceAll('&amp;', '&')}
+															>
+																{__('get WP HTML Mail for', 'wp-html-mail') + ' ' + plugin.display_name}
+															</Button>
+														}
 													</>
 													:
 													<Spinner />
 											)
 										}
-										</PanelRow>
+									</PanelRow>
 
-									</PanelBody>
-								)
+								</PanelBody>
+							)
 							}
 						</Panel>
-						<br/><br/>
-						<Panel header={__('More supported plugins','wp-html-mail')}>
+						<br /><br />
+						<Panel header={__('More supported plugins', 'wp-html-mail')}>
 							{plugins.filter(plugin => !plugin.active).map(plugin =>
 								<PanelBody
 									key={plugin.name}
@@ -159,7 +167,7 @@ export default function Plugins({plugins}) {
 										{plugin.installation_url &&
 											<Button
 												isSecondary
-												href={plugin.installation_url.replaceAll('&amp;','&')}
+												href={plugin.installation_url.replaceAll('&amp;', '&')}
 											>
 												{__('install', 'wp-html-mail') + ' ' + plugin.display_name}
 											</Button>
@@ -167,7 +175,7 @@ export default function Plugins({plugins}) {
 										{plugin.addon_url &&
 											<Button
 												isSecondary
-												href={plugin.addon_url.replaceAll('&amp;','&')}
+												href={plugin.addon_url.replaceAll('&amp;', '&')}
 											>
 												{__('get WP HTML Mail for', 'wp-html-mail') + ' ' + plugin.display_name}
 											</Button>

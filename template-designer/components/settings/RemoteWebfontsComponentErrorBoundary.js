@@ -1,7 +1,7 @@
 import React from "react";
 import WebfontsSalesPage from "./WebfontsSalesPage";
 
-class RemoteComponentErrorBoundary extends React.Component {
+class RemoteWebfontsComponentErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
     this.state = { hasError: false, fallbackComponent: false };
@@ -9,11 +9,9 @@ class RemoteComponentErrorBoundary extends React.Component {
 
   static getDerivedStateFromError(error) {    // Update state so the next render will show the fallback UI.    
     let fallbackComponent = <></>
-    if (error.toString().indexOf("webfonts"))
+    if (error.toString().indexOf("wphtmlmailwebfonts"))
       fallbackComponent = <WebfontsSalesPage />
-    // elseif (error.toString().indexOf("woocommerce"))
-    //   fallbackComponent = <WoocommerceSalesPage/>
-    
+
     return { hasError: true, fallbackComponent: fallbackComponent };
   }
 
@@ -27,8 +25,8 @@ class RemoteComponentErrorBoundary extends React.Component {
     if (this.state.hasError && this.state.fallbackComponent) {      // You can render any custom fallback UI      
       return this.state.fallbackComponent;
     }
-    return this.props.children; 
+    return this.props.children;
   }
 }
 
-export default RemoteComponentErrorBoundary;
+export default RemoteWebfontsComponentErrorBoundary;

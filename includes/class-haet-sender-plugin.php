@@ -18,6 +18,10 @@ require HAET_MAIL_PATH . 'includes/class-haet-sender-plugin-wpforo.php';
 require HAET_MAIL_PATH . 'includes/class-haet-sender-plugin-fluent-crm.php';
 require HAET_MAIL_PATH . 'includes/class-haet-sender-plugin-fluent-support.php';
 
+if( Haet_Mail()->use_woocommerce_lite() ){
+	require HAET_MAIL_PATH . 'includes/class-haet-sender-plugin-woocommerce.php';
+}
+
 class Haet_Different_Plugin_Exception extends Exception {
 
 }
@@ -138,6 +142,14 @@ class Haet_Sender_Plugin {
 			),
 		);
 
+		if( Haet_Mail()->use_woocommerce_lite() ){
+			$plugins['woocommerce'] = array(
+				'name'         => 'woocommerce',
+				'file'         => 'woocommerce/woocommerce.php',
+				'class'        => 'Haet_Sender_Plugin_WooCommerce',
+				'display_name' => 'WooCommerce (minimal version)',
+			);
+		}
 		return apply_filters( 'haet_mail_available_plugins', $plugins );
 	}
 
@@ -272,6 +284,7 @@ class Haet_Sender_Plugin {
 	}
 
 
+
 	/**
 	 * Get available plugins.
 	 */
@@ -327,6 +340,8 @@ class Haet_Sender_Plugin {
 			if ( array_key_exists( $plugin_name, $addon_plugins ) ) {
 				$plugins[ $plugin_name ]['has_addon'] = true;
 				$plugins[ $plugin_name ]['is_addon_active'] = class_exists( $plugin['class'] );
+				if( $plugin_name === 'woocommerce' && Haet_Mail()->use_woocommerce_lite() )
+					$plugins[ $plugin_name ]['is_addon_lite'] = true;
 				if ( $plugins[ $plugin_name ]['is_addon_active'] )
 					$plugins[ $plugin_name ]['react_component'] = $plugin['class']::get_react_component();
 			} else {

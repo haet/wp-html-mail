@@ -1,10 +1,10 @@
 === Email Template Designer - WP HTML Mail ===
 Contributors: codemiq,haet
-Tags: email, email template, woocommerce email, email design, elementor, caldera-forms, wp-e-commerce, easy-digital-downloads, contact-form-7, mandrill, postman, gravityforms
+Tags: email, email template, woocommerce email, email design, elementor, caldera-forms, easy-digital-downloads, contact-form-7, mandrill, postman, gravityforms
 Requires at least: 5.4
-Tested up to: 6.1.1
+Tested up to: 6.2.2
 Requires PHP: 7.2
-Stable tag: 3.3.9 Beta
+Stable tag: 3.4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,13 +14,38 @@ All in one email template designer for WooCommerce, Ninja Forms, Elementor Forms
 Custom designed WordPress emails for your WooCommerce and EDD transactional emails, contact form notifications, your WordPress core emails, BuddyPress and many more. 
 Create your own professional email design within a few minutes without any coding. 
 
-= See how we design our WordPress emails within two and a half minutes =
+= NEW in 3.4: WooCommerce support in free version!! =
+
+== See how we design our WordPress emails within two and a half minutes ==
 
 https://youtu.be/h-bFpPqkAzk
 
-= All in one email designer for your contact forms, WooCommerce, Easy Digital Downloads and many more... = 
+
+== 🔝 Top rated email design plugin with 75 ⭐⭐⭐⭐⭐ reviews ==
+
+= Read what users say about our email template plugin =
+
+>⭐⭐⭐⭐⭐ Best Email Template Builder
+>🗣️ tillvb (@tillvb)
+
+>⭐⭐⭐⭐⭐ Simple, flexible and very needed on WP!
+>🗣️ Richard Fila (@richardfila)
+
+>⭐⭐⭐⭐⭐ Works great and is easy to use
+>Great plugin! Great support! Thank you very much!
+>🗣️ hirsala (@hirsala)
+
+>⭐⭐⭐⭐⭐ On my Plugins’ Top List
+>🗣️ Anticosti (@anticosti)
+
+>⭐⭐⭐⭐⭐ This is magic and should be default in WP!
+>🗣️ MarcelC (@imc67)
+
+
+== All in one email designer for your contact forms, WooCommerce, Easy Digital Downloads and many more... ==
 
 🆓 Elementor Forms
+🆓 WooCommerce – basic customization
 🆓 Ninja Forms
 🆓 Caldera Forms
 🆓 Contact Form 7
@@ -47,7 +72,7 @@ https://youtu.be/h-bFpPqkAzk
 🆓 Uncanny Owl Groups
 🆓 ShieldSecurity
 ➕ [WPForms and WPForms Lite](https://codemiq.com/en/downloads/wp-html-mail-wpforms/)
-➕ [WooCommerce](https://codemiq.com/en/downloads/wp-html-mail-woocommerce/)
+➕ [WooCommerce – advanced customization](https://codemiq.com/en/downloads/wp-html-mail-woocommerce/)
 ➕ [Easy Digital Downloads](https://codemiq.com/en/downloads/wp-html-mail-easy-digital-downloads/)
 ...
 
@@ -71,7 +96,7 @@ See all your changes immediately in the live preview.
 
 
 
-= ★★★★★ pro addon WooCommerce Drag & Drop Email Customizer =
+== ★★★★★ pro addon WooCommerce Drag & Drop Email Customizer ==
 
 **trusted by more than 2000 pro users**
 
@@ -129,10 +154,9 @@ The plugin is currently available in following languages
 * German
 * Spanish translation provided by [Jose](https://profiles.wordpress.org/jmbescos) from  [Ibidem Translations](http://www.ibidem-translations.com)
 * Italian translation provided by [@gablau](https://profiles.wordpress.org/gablau/) and Ema from  [Ibidem Traduzioni](http://www.ibidem-traduzioni.com)
-
-
-= > Want to get notified about new features and updates? =
-[Follow us on twitter](https://twitter.com/intent/user?screen_name=codemiq)
+* Dutch
+* Chinese
+* Persian
 
 
 == Installation ==
@@ -149,12 +173,11 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 == Changelog ==
 
-= 3.3.9beta =
+= 3.4.0 =
+* added basic WooCommerce support in free plugin!!!
 * added support for Fluent Support
-
-= 3.3.8beta =
-* fixed a bug creating multiple emails with WPML
 * added support for Fluent CRM
+* fixed a bug creating multiple emails with WPML
 
 = 3.3.7 =
 * removed debug output
@@ -256,193 +279,6 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 * template library with 25+ email templates
 
 
-= 2.9.4 =
-* added a link to manage all custom posts created by mailbuilder (tab "advanced")
-* added export and import functions (tab "advanced")
-* added uppercase formatting to font settings
-* added a few more web safe fonts
-* removed call to libxml_disable_entity_loader to support Kinsta hosting
-* tagged minimum PHP version 7.2
-
-
-= 2.9.3 =
-* Header and Footer translatable with WPML
-
-
-= 2.9.2 =
-* Fix: WooCommerce tab has overwritten some settings set on the plugins tab
-* Fixed issue with password reset mail when plain text is interpreted as HTML: https://wordpress.org/support/topic/password-recover-link/
-
-
-= 2.9.1.4 =
-* Fixed bug with headers passed as array instead of string
-* added new option to allow plaintext emails containing HTML code for backwards compatibility
-
-
-= 2.9.1 =
-* TeraWallet Support
-* Improved filtering of plaintext emails
-
-
-= 2.9.0.3 = 
-* custom templates can be moved to uploads folder now
-
-= 2.9.0.2 =
-* fixed a notice with not initialized settings
-
-= 2.9.0.1 =
-* improved polylang compatibility 
-* added options to enable/disable header and footer per sender plugin
-
-
-= 2.9 = 
-* added debug mode
-* optionally remove header and footer in mailbuilder
-* fixed a bug causing content to be overridden in mailbuilder
-
-
-= 2.8.4.2 =
-* removed a notice during login
-
-
-= 2.8.4.1 =
-* fixed a missing file during commit
-
-
-= 2.8.4  =
-* Happy Forms support
-* Added email test mode to redirect all messages to your own mailbox
-
-
-= 2.8.3.1 = 
-* Fixed a character encoding bug
-
-
-= 2.8.3 = 
-* Improvements for Gravity Forms and Gravity Flow
-
-
-= 2.8.2 =
-* Developers get back the custom template feature
-* new filter for custom header HTML code `haet_mail_header`
-* new filter for custom footer HTML code `haet_mail_footer`
-* filter for custom CSS `haet_mail_css_desktop` and `haet_mail_css_mobile
-
-
-= 2.8.1 =
-* fixed a character encoding bug
-
-
-= 2.8 =
-* another fix for gravity forms https://wordpress.org/support/topic/unwanted-space-in-gravity-form-notifications-and-solution/
-* changed get_tab_url() to use add_query_arg()
-* added reset buttons to delete settings
-* added preheader text to improve preview in some mailclients
-
-
-= 2.7.9.1 =
-* Bugfix for GravityForms line breaks
-
-
-= 2.7.9 =
-* Added support for Gravity Forms
-* added shortcode support
-
-
-= 2.7.8 =
-* Improved Mailbuilder interface
-* Mailbuilder supports padding and bg color for each element
-* Removed "advanced" tab
-* Added link to website to header 
-* Supports some special characters now in sender name and subject
-
-
-= 2.7.3 =
-* Added support for [Birthday Emails](https://wordpress.org/plugins/birthday-emails/), thanks to @carman23
-* improved CSS inlining (using a fork of CSS inliner now, but keeping the previous version for compatibility with WP HTML Mail for WooCommerce until 2.7.3)
-
-
-= 2.7.1 =
-* Added support for WP Support Plus Responsive Ticket System
-* WooCommerce Attachments Bugfix
-* Mailbuilder Improvement
-
-
-
-= 2.7 =
-* Improved MailBuilder for WooCommerce
-* Minor Bugfixes
-
-
-= 2.5 =
-* Updates for WooCommerce 3
-* Supports attachments for WooCommerce emails now
-* Fixed detection of NinjaForms emails
-
-
-= 2.4 =
-* Improved responsive display in Gmail App
-* Improved scaling for Outlook with high DPI setting
-* Fixed a bug adding inline styles to head tag
-* PHP Version check 
-* Fixed line breaks in emails sent by Contact Form 7
-
-= 2.3 =
-* Updated translation management
-
-= 2.2.6 =
-* Better alignment for multicolumn content (especially for WooCommerce)
-
-= 2.2.5 =
-* Fixed another bug with inline styles causing wrong preview of email footer
-
-= 2.2.4 = 
-* Updated CSS to Inline Styles library because of a bug with multiple line breaks
-
-= 2.2.3 =
-* Updated italian translation
-* Improved some WooCommerce features
-
-= 2.2.1 =
-* Fixed a bug causing double line breaks
-
-= 2.2 =
-* Works with wpMandrill now
-
-= 2.1.1 =
-* Plugin can be used by Non-Admins now [see here](https://codemiq.com/en/enable-email-customization-for-woocommerce-shop-managers/)
-
-= 2.1 =
-* Updated inline css library
-* Improved font toolbar
-
-
-= 2.0.2 =
-* Updated german translation
-
-= 2.0.1 =
-* Fixed a bug causing Email sender not beeing set
-
-= 2.0 = 
-* Added Drag&Drop Mailbuilder to customize email content
-
-= 1.2 =
-* Bugfixes
-* Support for Contact Form 7
-* Italian and German translations
-
-= 1.1 =
-* Improved formatting of embedded tables and lists
-
-= 1.0 = 
-* Bugfixes
-* added support for WooCommerce
-* added support for Easy Digital Downloads
-
-= 0.3 =
-* replaced nl2br with wpautop https://wordpress.org/support/topic/replace-nl2br-with-wpautop 
-* removed a few PHP notices
-* added support for Caldera forms
 
 == Upgrade Notice ==
 
@@ -485,6 +321,13 @@ Allthough we didn't optimize WP HTML Mail for these plugins our users use it wit
 * ShieldSecurity
 * ...
 
+= Why is my header image not visible? =
+
+The most common reasons are:
+* Your site is password protected so your email client can't load the image.
+* You are using a local staging site that is not reachable by your mail client.
+* The image format is not supported by your mail client. Try a different image (PNG, JPG or GIF).
+
 
 = Can I send my newsletter campaigns with this plugin? =
 
@@ -514,7 +357,7 @@ Of course you can display HTML code, not just text.
 There's a filter to change the footer HTML code. Just add this to your (child-)themes functions.php:
 
 `
-add_filter('haet_mail_footer', function( $header ){
+add_filter('haet_mail_footer', function( $footer ){
     return 'hello <strong>world</strong>';
 });
 `

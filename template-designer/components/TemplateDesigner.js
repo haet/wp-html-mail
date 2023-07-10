@@ -16,7 +16,8 @@ import Redirect from "./settings/Redirect";
 import Plugins from "./settings/Plugins";
 import ContentEditor from "./contenteditor/ContentEditor";
 import AdvancedSettings from "./settings/AdvancedSettings";
-import RemoteComponentErrorBoundary from "./settings/RemoteComponentErrorBoundary"
+import RemoteWebfontsComponentErrorBoundary from "./settings/RemoteWebfontsComponentErrorBoundary"
+import RemoteWoocommerceComponentErrorBoundary from "./settings/RemoteWoocommerceComponentErrorBoundary"
 
 import { PopoverPicker } from "./options/PopoverPicker";
 
@@ -27,12 +28,12 @@ const RemoteWebfontsSettings = lazy(() => import("wphtmlmailwebfonts/WebfontsSet
 export default function TemplateDesigner() {
 	const templateDesignerContext = useContext(TemplateDesignerContext);
 	const [plugins, setPlugins] = useState([]);
-	const [ isOpen, setIsOpen ] = useState( true );
+	const [isOpen, setIsOpen] = useState(true);
 
-    const handleCancel = () => {
-			setIsOpen( false );
-			templateDesignerContext.setConfirmDialog({})
-    };
+	const handleCancel = () => {
+		setIsOpen(false);
+		templateDesignerContext.setConfirmDialog({})
+	};
 
 	const loadPlugins = () => {
 		templateDesignerContext.setIsLoading(true);
@@ -94,6 +95,24 @@ export default function TemplateDesigner() {
 					component: null,
 					lazyComponent: plugin.react_component.component
 				});
+			} else if (plugin.name === 'woocommerce' && plugin.active && plugin.is_addon_active) {
+				const woocommerceTab = {
+					name: 'woocommerce',
+					title: 'WooCommerce',
+					className: 'tab-woocommerce',
+					component: null,
+				};
+				if (plugin.is_addon_lite) {
+					woocommerceTab.lazyComponent = 'WoocommerceSettings';
+				} else {
+					// Create a new URLSearchParams object from the URL
+					const searchParams = new URLSearchParams(window.location.search);
+					searchParams.set('tab', 'woocommerce');
+					const updatedURL = new URL(window.location.href);
+					updatedURL.search = searchParams.toString();
+					woocommerceTab.redirectUrl = updatedURL.href;
+				}
+				tabs.push(woocommerceTab);
 			}
 		})
 	}
@@ -105,7 +124,7 @@ export default function TemplateDesigner() {
 	// });
 	tabs.push({
 		name: 'webfonts',
-		title: __('Webfonts','wp-html-mail'),
+		title: __('Webfonts', 'wp-html-mail'),
 		className: 'tab-webfonts',
 		component: null,
 		lazyComponent: 'WebfontsSettings'
@@ -125,25 +144,25 @@ export default function TemplateDesigner() {
 	return (
 		<>
 			<div>
-				{ templateDesignerContext.errorMessage && <Snackbar className="snackbar error" status="error" isDismissible={false}>
-					<Icon icon="warning" style={{color: '#f78da7'}} />{templateDesignerContext.errorMessage}
+				{templateDesignerContext.errorMessage && <Snackbar className="snackbar error" status="error" isDismissible={false}>
+					<Icon icon="warning" style={{ color: '#f78da7' }} />{templateDesignerContext.errorMessage}
 				</Snackbar >}
-				{ templateDesignerContext.infoMessage && <Snackbar className="snackbar" status="success" isDismissible={false}>
-					<Icon icon="yes-alt" style={{color: 'green'}} />{templateDesignerContext.infoMessage}
+				{templateDesignerContext.infoMessage && <Snackbar className="snackbar" status="success" isDismissible={false}>
+					<Icon icon="yes-alt" style={{ color: 'green' }} />{templateDesignerContext.infoMessage}
 				</Snackbar >}
-					<ConfirmDialog
-						isOpen={ templateDesignerContext.confirmDialog && templateDesignerContext.confirmDialog.hasOwnProperty('message') }
-						onCancel={ handleCancel }
-						onConfirm={() => {
-							if (templateDesignerContext.confirmDialog.callback) {
-								const callback = templateDesignerContext.confirmDialog.callback;
-								setIsOpen( false );
-								callback();
-							}
-						}}
-					>
-            {templateDesignerContext.confirmDialog.message}
-        </ConfirmDialog>
+				<ConfirmDialog
+					isOpen={templateDesignerContext.confirmDialog && templateDesignerContext.confirmDialog.hasOwnProperty('message')}
+					onCancel={handleCancel}
+					onConfirm={() => {
+						if (templateDesignerContext.confirmDialog.callback) {
+							const callback = templateDesignerContext.confirmDialog.callback;
+							setIsOpen(false);
+							callback();
+						}
+					}}
+				>
+					{templateDesignerContext.confirmDialog.message}
+				</ConfirmDialog>
 			</div>
 			<TabPanel
 				className="wp-html-mail-tabs"
@@ -153,23 +172,28 @@ export default function TemplateDesigner() {
 					if (tab.component)
 						return tab.component;
 					if (tab.lazyComponent && tab.lazyComponent === 'WoocommerceSettings') {
-						return (<Suspense fallback={<Spinner/>}>
+						return (<Suspense fallback={<Spinner />}>
+							<RemoteWoocommerceComponentErrorBoundary>
 								<RemoteWoocommerceSettings
 									templateDesignerContext={templateDesignerContext}
 									PopoverPicker={PopoverPicker}
 								/>
-							</Suspense>);
+							</RemoteWoocommerceComponentErrorBoundary>
+						</Suspense>);
 					}
 					if (tab.lazyComponent && tab.lazyComponent === 'WebfontsSettings') {
 						return (
 							<Suspense fallback={<Spinner />}>
-								<RemoteComponentErrorBoundary>
-									<RemoteWebfontsSettings 
+								<RemoteWebfontsComponentErrorBoundary>
+									<RemoteWebfontsSettings
 										templateDesignerContext={templateDesignerContext}
 									/>
-								</RemoteComponentErrorBoundary>
+								</RemoteWebfontsComponentErrorBoundary>
 							</Suspense>
 						);
+					}
+					if (tab.redirectUrl) {
+						window.location.replace(tab.redirectUrl);
 					}
 				}}
 			</TabPanel>

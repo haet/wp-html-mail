@@ -316,16 +316,20 @@ label[for="haet_mail_headerimg_advanced"] {
 
 
 /****************************************
-*   WEBFONTS SALES PAGE
+*   WEBFONTS/WOOCOMMERCE SALES PAGE
 ****************************************/
 
-#wp-html-mail-webfonts-sales-page{
+#wp-html-mail-webfonts-sales-page,
+#wp-html-mail-woocommerce-sales-page{
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
 	align-items: center;
+	font-family: Montserrat, sans-serif;
+	font-weight: 300;
+	line-height: 1.35;
 
-	.webfonts-intro{
+	.salespage-intro{
 		width: 100%;
 		text-align: center;
 		padding: 40px 10px;
@@ -353,52 +357,58 @@ label[for="haet_mail_headerimg_advanced"] {
 		}
 	}
 
-	.webfonts-facts,
-	.webfonts-cta-bar {
-		font-family: Montserrat,sans-serif;
-		font-weight: 300;
-		line-height: 1.35;
+	.salespage-facts,
+	.salespage-cta-bar {
 		padding: 20px;
 	}
 
-	.webfonts-facts{
+	.salespage-facts{
 		color: #000;
 		max-width: 650px;
-
-		h2{
-			font-family: Montserrat,sans-serif;
-			font-weight:100;
-			background-color: #176588;
-			color:#fff;
-			padding: 7px 15px 3px 15px;
-			text-transform: uppercase;
-			display: inline-block;
-			font-size: 40px;
-			margin-bottom: 20px;
-		}
-
-		h3 {
-			font-family: Montserrat, sans-serif;
-			font-weight: 200;
-			color: #176588;
-			font-size: 25px;
-			text-transform: uppercase;
-			margin-bottom: 0;
-		}
 	}
 
-	.webfonts-cta-bar {
+	h2{
+		font-family: Montserrat,sans-serif;
+		font-weight:100;
+		background-color: #176588;
+		color:#fff;
+		padding: 7px 15px 3px 15px;
+		text-transform: uppercase;
+		display: inline-block;
+		font-size: 40px;
+		margin-bottom: 20px;
+	}
+
+	h3 {
+		font-family: Montserrat, sans-serif;
+		font-weight: 200;
+		color: #176588;
+		font-size: 25px;
+		text-transform: uppercase;
+		margin-bottom: 0;
+	}
+
+	h4 {
+		font-family: Montserrat, sans-serif;
+		font-weight: 200;
+		color: #176588;
+		font-size: 22px;
+		text-transform: uppercase;
+		margin-bottom: 0;
+		margin-top: 0.6em;
+	}
+
+	h4+p{
+		margin-top: 0.2em;
+	}
+
+	.salespage-cta-bar {
 		width:100%;
 		background-color: #176588;
 		color: #fff;
 
 		h3 {
-			font-family: Montserrat, sans-serif;
-			font-weight: 200;
 			color: #fff;
-			font-size: 25px;
-			text-transform: uppercase;
-			margin-bottom: 0;
 		}
 
 		.cq-cta{
@@ -425,8 +435,13 @@ label[for="haet_mail_headerimg_advanced"] {
 	}
 }
 @media screen and (min-width:768px){
-	#wp-html-mail-webfonts-sales-page {
-		.webfonts-intro {
+	#wp-html-mail-webfonts-sales-page,
+	#wp-html-mail-woocommerce-sales-page {
+		p {
+			font-size: 16px;
+		}
+
+		.salespage-intro {
 			width: 36%;
 			padding: 40px 0;
 			
@@ -444,7 +459,7 @@ label[for="haet_mail_headerimg_advanced"] {
 			}
 		}
 
-		.webfonts-facts {
+		.salespage-facts {
 			position: relative;
 			width: 55%;
 			padding: 0 0  40px 40px;
@@ -458,21 +473,15 @@ label[for="haet_mail_headerimg_advanced"] {
 				width: 3px;
 				background: #C6BF19;
 			}
-
-			p{
-				font-size: 16px;
-			}
 		}
 
-		.webfonts-cta-bar {
+		.salespage-cta-bar {
 			padding-left: 40px;
-
-			p {
-				font-size: 16px;
-			}
 		}
 	}
 }
+
+
 /****************************************
 *   ADVANCED
 ****************************************/
