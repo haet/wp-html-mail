@@ -173,7 +173,7 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 == Changelog ==
 
-= 3.4.1 Beta =
+= 3.4.2 Beta =
 * added support for The Newsletter Plugin
 
 = 3.4.0 =
