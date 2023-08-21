@@ -17,6 +17,7 @@ require HAET_MAIL_PATH . 'includes/class-haet-sender-plugin-formidable.php';
 require HAET_MAIL_PATH . 'includes/class-haet-sender-plugin-wpforo.php';
 require HAET_MAIL_PATH . 'includes/class-haet-sender-plugin-fluent-crm.php';
 require HAET_MAIL_PATH . 'includes/class-haet-sender-plugin-fluent-support.php';
+require HAET_MAIL_PATH . 'includes/class-haet-sender-plugin-the-newsletter-plugin.php';
 
 if( Haet_Mail()->use_woocommerce_lite() ){
 	require HAET_MAIL_PATH . 'includes/class-haet-sender-plugin-woocommerce.php';
@@ -139,6 +140,13 @@ class Haet_Sender_Plugin {
 				'class'        => 'Haet_Sender_Plugin_FluentSupport',
 				'display_name' => 'Fluent Support',
 				'image_url'    => HAET_MAIL_URL . '/images/fluent-support.png',
+			),
+			'newsletter'                       				=> array(
+				'name'         => 'newsletter',
+				'file'         => 'newsletter/plugin.php',
+				'class'        => 'Haet_Sender_Plugin_The_Newsletter_Plugin',
+				'display_name' => 'The Newsletter Plugin',
+				'image_url'    => HAET_MAIL_URL . '/images/the-newletter-plugin.png',
 			),
 		);
 
