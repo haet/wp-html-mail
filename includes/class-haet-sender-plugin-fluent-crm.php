@@ -6,7 +6,7 @@
 class Haet_Sender_Plugin_FluentCRM extends Haet_Sender_Plugin {
 
 	public function __construct( $mail ) {
-		if ( ! array_key_exists( 'campaign', $_POST ) ) {
+		if ( ! array_key_exists( 'campaign', $_POST ) && ! array_key_exists( 'campaign_id', $_POST )) {
 			throw new Haet_Different_Plugin_Exception();
 		}
 	}
