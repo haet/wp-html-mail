@@ -173,6 +173,9 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 == Changelog ==
 
+= 3.4.4 Beta =
+* FIXED: twocol display error in Outlook iOS
+
 = 3.4.3 Beta =
 * FIXED: display error when sending e-mails with FluentCRM
 

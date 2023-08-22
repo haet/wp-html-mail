@@ -101,11 +101,11 @@ final class Haet_MB_ContentType_TwoCol extends Haet_MB_ContentType {
 		if ( isset( $element_content->content ) ) :
 			$html .= '
 				<outlookconditionalcommentstart/>
-					<table class="content-twocol" style="table-layout:fixed; width:100%;">
+					<table class="content-twocol" style="table-layout:fixed; width:100%">
 						<tr>
 							<td>
 				<outlookconditionalcommentend/>
-				<table class="content-twocol" align="left" width="50%" cellspacing="0" cellpadding="0">
+				<table class="content-twocol" align="left" width="50%" cellspacing="0" cellpadding="0" style="float: left;">
 					<tr>
 						<td>
 							' . $element_content->content->col1 . '
@@ -116,7 +116,7 @@ final class Haet_MB_ContentType_TwoCol extends Haet_MB_ContentType {
 							</td>
 							<td>
 				<outlookconditionalcommentend/>
-				<table class="content-twocol" align="right" width="50%" cellspacing="0" cellpadding="0">
+				<table class="content-twocol" align="right" width="50%" cellspacing="0" cellpadding="0" style="float: right;">
 					<tr>
 						<td>
 							' . $element_content->content->col2 . '
