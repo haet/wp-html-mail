@@ -2,9 +2,9 @@
 Contributors: codemiq,haet
 Tags: email, email template, woocommerce email, email design, elementor, caldera-forms, easy-digital-downloads, contact-form-7, mandrill, postman, gravityforms
 Requires at least: 5.4
-Tested up to: 6.2.2
+Tested up to: 6.3.1
 Requires PHP: 7.2
-Stable tag: 3.4.0
+Stable tag: 3.4.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -172,6 +172,12 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 
 == Changelog ==
+
+= 3.4.2 =
+* removed preview ajax call
+
+= 3.4.1 = 
+* changed sending preview to rest API
 
 = 3.4.0 =
 * added basic WooCommerce support in free plugin!!!

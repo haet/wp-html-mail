@@ -261,6 +261,18 @@ class Haet_TemplateDesigner {
 			)
 		);
 
+		register_rest_route(
+			$this->api_base,
+			'/sendtestmail',
+			array(
+				'methods'             => 'POST',
+				'callback'            => array( Haet_Mail(), 'send_test' ),
+				'permission_callback' => function () {
+					return current_user_can( 'manage_options' );
+				},
+			)
+		);
+
 		do_action( 'haet_mail_rest_api_init', $this->api_base );
 	}
 

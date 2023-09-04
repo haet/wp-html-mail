@@ -48,29 +48,19 @@ final class Haet_Mail {
 	/**
 	 * Send a test message to the given email address
 	 */
-	public function send_test() {
-		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json(
-				array(
-					'success' => false,
-					'message' => __( 'Sorry, you are not allowed to send test emails.', 'wp-html-mail' ),
-				)
-			);
-			wp_die();
-		}
-		if ( isset( $_POST['email'] ) ) {
-			$email = sanitize_email( wp_unslash( $_POST['email'] ) );
+	public function send_test( $request ) {
+		if ( $request->get_params() ) {
+			$email = sanitize_email( wp_unslash( $request->get_params()['email'] ) );
 		} else {
 			$email = '';
 		}
 		if ( ! is_email( $email ) ) {
-			wp_send_json(
+			return new \WP_REST_Response( 
 				array(
 					'success' => false,
 					'message' => __( "This doesn't seem to be a valid email address.", 'wp-html-mail' ),
 				)
 			);
-			wp_die();
 		}
 		wp_mail(
 			$email,
@@ -78,13 +68,12 @@ final class Haet_Mail {
 			$this->get_demo_content(),
 			'Content-Type: text/html'
 		);
-		wp_send_json(
+		return new \WP_REST_Response( 
 			array(
 				'success' => true,
 				'message' => __( 'Your message has been sent.', 'wp-html-mail' ),
 			)
 		);
-		wp_die();
 	}
 
 	public function get_default_theme_options() {

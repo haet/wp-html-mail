@@ -3,7 +3,7 @@
 Plugin Name: WP HTML Mail - Email Template Designer
 Plugin URI: https://codemiq.com/en/plugins/wp-html-mail-email-templates/
 Description: Create your own professional email design for all your outgoing WordPress emails
-Version: 3.4.0
+Version: 3.4.2
 Text Domain: wp-html-mail
 Domain Path: /translations
 Author: Hannes Etzelstorfer // codemiq
@@ -40,8 +40,6 @@ if (class_exists("Haet_Mail")) {
 
         add_action('admin_menu', array(Haet_Mail(), 'admin_page'), 20);
         add_action('admin_enqueue_scripts', array(Haet_Mail(), 'admin_page_scripts_and_styles'));
-
-        add_action('wp_ajax_haet_mail_send_test', array(Haet_Mail(), 'send_test'));
 
         add_filter('plugin_action_links_' . plugin_basename(__FILE__), array(Haet_Mail(), 'plugin_action_links'));
     }

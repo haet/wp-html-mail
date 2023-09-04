@@ -15,8 +15,8 @@ haet_mail.previewMail = function (template_code) {
 	iframe = iframe.contentWindow
 		? iframe.contentWindow
 		: iframe.contentDocument.document
-		? iframe.contentDocument.document
-		: iframe.contentDocument;
+			? iframe.contentDocument.document
+			: iframe.contentDocument;
 	iframe.document.open();
 	iframe.document.write(template_code);
 	iframe.document.close();
@@ -130,16 +130,28 @@ jQuery(function ($) {
 
 	$("#haet_mail_test_submit").on('click', function () {
 		var email = $("#haet_mail_test_address").val();
-		$.post(
-			ajaxurl,
-			{ action: "haet_mail_send_test", email: email },
-			function (response) {
-				if (typeof response === 'object' && 'success' in response && 'message' in response) {
-					$("#haet_mail_test_sent p").text(response.message);
+
+		var request = new Request(
+			window.mailTemplateDesigner.restUrl + "sendtestmail",
+			{
+				method: "POST",
+				body: JSON.stringify({ email: email }),
+				headers: {
+					"Content-Type": "application/json",
+					"X-WP-Nonce": window.mailTemplateDesigner.nonce
+				},
+				credentials: "same-origin"
+			});
+		fetch(request)
+			.then((resp) => resp.json())
+			.then((data) => {
+				if (data.hasOwnProperty('success') && data.success == true) {
+					$("#haet_mail_test_sent p").text(data.message);
+				} else if (data.hasOwnProperty('success') && data.hasOwnProperty('message') && data.success == false) {
+					$("#haet_mail_test_sent p").text(data.message);
 				} else {
 					$("#haet_mail_test_sent p").text('Preview could not be sent');
 				}
-
 				$("#haet_mail_test_sent").dialog({
 					dialogClass: "no-close",
 					modal: true,
@@ -152,11 +164,11 @@ jQuery(function ($) {
 						},
 					],
 				});
-			}
-		);
+				console.log(data);
+			});
 	});
 
-	$("#haet_mail_create_template_button").on('click',function () {
+	$("#haet_mail_create_template_button").on('click', function () {
 		if (
 			!$(this).hasClass("button-disabled") &&
 			confirm($(this).data("haet-confirm"))
@@ -166,7 +178,7 @@ jQuery(function ($) {
 	});
 	haet_mail.previewMail($("#haet_mailtemplate").val());
 
-	$("a[data-haet-confirm]").on('click',function (e) {
+	$("a[data-haet-confirm]").on('click', function (e) {
 		return confirm($(this).data("haet-confirm"));
 	});
 
@@ -188,7 +200,7 @@ jQuery(function ($) {
 	/*************************************
 	 * MOBILE PREVIEW
 	 * ***********************************/
-	$(".haet-mail-preview-size-button").on('click',function () {
+	$(".haet-mail-preview-size-button").on('click', function () {
 		var $button = $(this);
 		$button
 			.addClass("nav-tab-active")
@@ -238,7 +250,7 @@ jQuery(function ($) {
 						$("#haet_mail_template_importing_dialog").dialog({
 							dialogClass: "no-close",
 							modal: true,
-							buttons: [], 
+							buttons: [],
 						});
 					},
 				},
