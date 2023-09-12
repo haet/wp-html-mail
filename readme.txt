@@ -4,7 +4,7 @@ Tags: email, email template, woocommerce email, email design, elementor, caldera
 Requires at least: 5.4
 Tested up to: 6.3.1
 Requires PHP: 7.2
-Stable tag: 3.4.2
+Stable tag: 3.4.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -71,6 +71,7 @@ https://youtu.be/h-bFpPqkAzk
 🆓 Modern Events Calendar
 🆓 Uncanny Owl Groups
 🆓 ShieldSecurity
+🆓 The Newsletter Plugin
 ➕ [WPForms and WPForms Lite](https://codemiq.com/en/downloads/wp-html-mail-wpforms/)
 ➕ [WooCommerce – advanced customization](https://codemiq.com/en/downloads/wp-html-mail-woocommerce/)
 ➕ [Easy Digital Downloads](https://codemiq.com/en/downloads/wp-html-mail-easy-digital-downloads/)
@@ -173,14 +174,16 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 == Changelog ==
 
-= 3.4.4 Beta =
+= 3.4.5 =
+* added support for The Newsletter Plugin
+* FIXED: display error when sending e-mails with FluentCRM
 * FIXED: twocol display error in Outlook iOS
 
-= 3.4.3 Beta =
-* FIXED: display error when sending e-mails with FluentCRM
+= 3.4.2 =
+* removed preview ajax call
 
-= 3.4.2 Beta =
-* added support for The Newsletter Plugin
+= 3.4.1 = 
+* changed sending preview to rest API
 
 = 3.4.0 =
 * added basic WooCommerce support in free plugin!!!
