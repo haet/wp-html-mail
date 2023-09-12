@@ -173,11 +173,14 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 == Changelog ==
 
-= 3.4.2 =
-* removed preview ajax call
+= 3.4.4 Beta =
+* FIXED: twocol display error in Outlook iOS
 
-= 3.4.1 = 
-* changed sending preview to rest API
+= 3.4.3 Beta =
+* FIXED: display error when sending e-mails with FluentCRM
+
+= 3.4.2 Beta =
+* added support for The Newsletter Plugin
 
 = 3.4.0 =
 * added basic WooCommerce support in free plugin!!!
