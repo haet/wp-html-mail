@@ -636,7 +636,9 @@ final class Haet_Mail {
 			$debug .= '=====GET:' . print_r( $_GET, true ) . "\n\n";
 			$debug .= 'SENDER-PLUGIN: ' . print_r( $sender_plugin, true ) . "\n\n";
 			$debug .= 'ACTIVE-PLUGINS: <pre>' . print_r( Haet_Sender_Plugin::get_active_plugins(), true ) . "\n\n";
-			$debug .= 'is_plaintext: ' . ( $is_plaintext ? 'YES' : 'NO' ) . "\n";
+			if( isset( $is_plaintext ) ){
+				$debug .= 'is_plaintext: ' . ( $is_plaintext ? 'YES' : 'NO' ) . "\n";
+			}
 			$debug .= '===== ORIGINAL EMAIL=====' . "\n";
 			$debug .= print_r( $original_email, true );
 			file_put_contents( $debug_filename, $debug );
