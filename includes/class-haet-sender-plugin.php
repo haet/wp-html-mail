@@ -308,7 +308,7 @@ class Haet_Sender_Plugin {
 			),
 			'easy-digital-downloads' => array(
 				'name'         => 'easy-digital-downloads',
-				'file'         => 'easy-digital-downloads/easy-digital-downloads.php',
+				'files'         => ['easy-digital-downloads/easy-digital-downloads.php', 'easy-digital-downloads-pro/easy-digital-downloads.php'],
 				'class'        => 'Haet_Sender_Plugin_EDD',
 				'display_name' => 'Easy Digital Downloads',
 				'addon_url'    => 'https://codemiq.com/en/downloads/wp-html-mail-easy-digital-downloads',
