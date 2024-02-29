@@ -174,6 +174,9 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 == Changelog ==
 
+= 3.4.621 Beta =
+* ADDED: Support for Fluent Support Mailbox mails
+
 = 3.4.62 Beta =
 * FIXED: EDD Pro not recognized as active
 
