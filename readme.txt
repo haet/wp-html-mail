@@ -181,9 +181,8 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 * FIXED: EDD Pro not recognized as active
 
 = 3.4.61 Beta =
+= 3.4.6
 * FIXED: display error when sending e-mails with FluentCRM automation
-
-= 3.4.x =
 * updated dependencies to fix a notice in PHP 8.1
 
 = 3.4.5 =

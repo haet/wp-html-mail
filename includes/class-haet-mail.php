@@ -492,6 +492,12 @@ final class Haet_Mail {
 			)
 		);
 
+		// check if the email content contains the mailbuilder comment
+		// if so we don't use the template twice if emails are resent for some reason
+		if( strpos( $email['message'], '<!--content-table-->' ) !== false ){
+			$use_template = false;
+		}
+
 		if ( $use_template ) {
 			// plain text or no content type
 			$headers_string = $email['headers'];
