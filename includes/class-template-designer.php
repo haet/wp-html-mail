@@ -27,7 +27,7 @@ class Haet_TemplateDesigner {
 
 
 	public function admin_page_scripts_and_styles( $page ) {
-		if ( strpos( $page, 'wp-html-mail' ) && ( ! array_key_exists( 'tab', $_GET ) || $_GET['tab'] == 'template' ) ) {
+		if ( strpos( $page, 'wp-html-mail' ) && ( ! array_key_exists( 'tab', $_GET ) || $_GET['tab'] == 'template'  || $_GET['tab'] == 'woocommerce' )) {
 
 			// style our options panel like the block editor.
 			wp_enqueue_style( 'wp-editor' );
