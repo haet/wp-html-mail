@@ -2,9 +2,9 @@
 Contributors: codemiq,haet
 Tags: email, email template, woocommerce email, email design, elementor, caldera-forms, easy-digital-downloads, contact-form-7, mandrill, postman, gravityforms
 Requires at least: 5.4
-Tested up to: 6.3.1
+Tested up to: 6.5
 Requires PHP: 7.2
-Stable tag: 3.4.5
+Stable tag: 3.4.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -174,14 +174,9 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 == Changelog ==
 
-= 3.4.621 Beta =
+= 3.4.7 =
 * ADDED: Support for Fluent Support Mailbox mails
-
-= 3.4.62 Beta =
 * FIXED: EDD Pro not recognized as active
-
-= 3.4.61 Beta =
-= 3.4.6
 * FIXED: display error when sending e-mails with FluentCRM automation
 * updated dependencies to fix a notice in PHP 8.1
 
