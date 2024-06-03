@@ -174,6 +174,9 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 == Changelog ==
 
+= 3.4.63 Beta =
+* FIXED: Sending test mails from WooCommerce tab
+
 = 3.4.621 Beta =
 * ADDED: Support for Fluent Support Mailbox mails
 
