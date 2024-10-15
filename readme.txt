@@ -180,6 +180,9 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 * FIXED: display error when sending e-mails with FluentCRM automation
 * updated dependencies to fix a notice in PHP 8.1
 
+= 3.4.6 = 
+* FIXED: Sending test mails from WooCommerce tab 
+
 = 3.4.5 =
 * added support for The Newsletter Plugin
 * FIXED: display error when sending e-mails with FluentCRM
