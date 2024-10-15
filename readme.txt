@@ -174,10 +174,6 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 == Changelog ==
 
-= 3.4.63 Beta =
-* FIXED: Sending test mails from WooCommerce tab
-
-= 3.4.621 Beta =
 = 3.4.7 =
 * ADDED: Support for Fluent Support Mailbox mails
 * FIXED: EDD Pro not recognized as active
@@ -310,25 +306,29 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 Our email designer has integrations for these plugins:
 
-* Ninja Forms
+* AutomateWoo
+* Birthday Emails
+* [BuddyPress](https://wordpress.org/plugins/wp-html-mail-buddypress/)
 * Caldera Forms
 * Contact Form 7
-* Gravity Forms
-* Gravity Flow
-* HappyForms
-* WP Support Plus Responsive Ticket System
-* Birthday Emails
-* Ultimate WP Mail
 * Divi Theme contact forms
-* [BuddyPress](https://wordpress.org/plugins/wp-html-mail-buddypress/)
-* [WPForms and WPForms Lite](https://codemiq.com/en/downloads/wp-html-mail-wpforms/)
-* [WooCommerce](https://codemiq.com/en/downloads/wp-html-mail-woocommerce/)
 * [Easy Digital Downloads](https://codemiq.com/en/downloads/wp-html-mail-easy-digital-downloads/)
-* [Give – Donation and Fundraising](https://wordpress.org/plugins/wp-html-mail-give/)
-* TeraWallet
-* WP E-Commerce
+* Fluent CRM
+* Fluent Support
 * Formidable Forms
+* [Give – Donation and Fundraising](https://wordpress.org/plugins/wp-html-mail-give/)
+* Gravity Flow
+* Gravity Forms
+* HappyForms
+* Ninja Forms
+* TeraWallet
+* The Newsletter Plugin
+* Ultimate WP Mail
+* [WooCommerce](https://codemiq.com/en/downloads/wp-html-mail-woocommerce/)
+* [WPForms and WPForms Lite](https://codemiq.com/en/downloads/wp-html-mail-wpforms/)
+* WP E-Commerce
 * WP Foro
+* WP Support Plus Responsive Ticket System
 
 Allthough we didn't optimize WP HTML Mail for these plugins our users use it with many more plugins
 
