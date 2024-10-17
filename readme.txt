@@ -2,9 +2,9 @@
 Contributors: codemiq,haet
 Tags: email, email template, woocommerce email, email design, elementor, caldera-forms, easy-digital-downloads, contact-form-7, mandrill, postman, gravityforms
 Requires at least: 5.4
-Tested up to: 6.5
+Tested up to: 6.6.2
 Requires PHP: 7.2
-Stable tag: 3.4.7
+Stable tag: 3.4.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -72,9 +72,9 @@ https://youtu.be/h-bFpPqkAzk
 🆓 Uncanny Owl Groups
 🆓 ShieldSecurity
 🆓 The Newsletter Plugin
-➕ [WPForms and WPForms Lite](https://codemiq.com/en/downloads/wp-html-mail-wpforms/)
-➕ [WooCommerce – advanced customization](https://codemiq.com/en/downloads/wp-html-mail-woocommerce/)
-➕ [Easy Digital Downloads](https://codemiq.com/en/downloads/wp-html-mail-easy-digital-downloads/)
+➕ [WPForms and WPForms Lite](https://wordpress-plugins.codemiq.com/en/downloads/wp-html-mail-wpforms/)
+➕ [WooCommerce – advanced customization](https://wordpress-plugins.codemiq.com/en/downloads/wp-html-mail-woocommerce/)
+➕ [Easy Digital Downloads](https://wordpress-plugins.codemiq.com/en/downloads/wp-html-mail-easy-digital-downloads/)
 ...
 
 
@@ -101,7 +101,7 @@ See all your changes immediately in the live preview.
 
 **trusted by more than 2000 pro users**
 
-Use our [WooCommerce email customizer addon](https://codemiq.com/en/downloads/wp-html-mail-woocommerce/) to customize all your store emails. For all standard emails you can also edit the email content as well as the products table. 
+Use our [WooCommerce email customizer addon](https://wordpress-plugins.codemiq.com/en/downloads/wp-html-mail-woocommerce/) to customize all your store emails. For all standard emails you can also edit the email content as well as the products table. 
 Most emails from third party WooCommerce plugins can be styled and for some of them we created special integrations:
 
 * Barcodes from **YITH WooCommerce Bar Codes and QR Codes** can be placed anywhere in your Emails
@@ -113,7 +113,7 @@ Most emails from third party WooCommerce plugins can be styled and for some of t
 You can try the plugin in [our WooCommerce Demo](https://wp-html-mail-woocommerce-demo.codemiq.com/).
 * **WooCommerce Germanized and Germanized Pro** are integrated
 
-[get WooCommerce Email Customizer >](https://codemiq.com/en/plugins/wp-html-mail-woocommerce/)
+[get WooCommerce Email Customizer >](https://wordpress-plugins.codemiq.com/en/plugins/wp-html-mail-woocommerce/)
 
 
 
@@ -126,12 +126,12 @@ Our second ecommerce extension is for Easy Digital Downloads. Using this simple 
 * format the products table
 * see a preview of your EDD emails in desktop and mobile view
 
-[get Easy Digital Downloads Email Customizer >](https://codemiq.com/de/plugins/wp-html-mail-easy-digital-downloads/)
+[get Easy Digital Downloads Email Customizer >](https://wordpress-plugins.codemiq.com/de/plugins/wp-html-mail-easy-digital-downloads/)
 
 
 https://youtu.be/RV8vUNCWOZw
 
-[more about WP HTML Mail](https://codemiq.com/en/plugins/wp-html-mail-email-templates/)
+[more about WP HTML Mail](https://wordpress-plugins.codemiq.com/en/plugins/wp-html-mail-email-templates/)
 
 = Works with most email delivery plugins =
 * [WP Offload SES](https://aff.deliciousbrains.com/idevaffiliate.php?id=21298_4_3_3)
@@ -174,14 +174,14 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 == Changelog ==
 
+= 3.4.8 = 
+* FIXED: Sending test mails from WooCommerce tab 
+
 = 3.4.7 =
 * ADDED: Support for Fluent Support Mailbox mails
 * FIXED: EDD Pro not recognized as active
 * FIXED: display error when sending e-mails with FluentCRM automation
 * updated dependencies to fix a notice in PHP 8.1
-
-= 3.4.6 = 
-* FIXED: Sending test mails from WooCommerce tab 
 
 = 3.4.5 =
 * added support for The Newsletter Plugin
