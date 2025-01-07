@@ -304,7 +304,7 @@ class Haet_Sender_Plugin {
 				'class'        => 'Haet_Sender_Plugin_WooCommerce',
 				'display_name' => 'WooCommerce',
 				'addon_url'    => 'https://codemiq.com/en/downloads/wp-html-mail-woocommerce',
-				'image_url'    => 'https://ps.w.org/woocommerce/assets/icon-128x128.png',
+				'image_url'    => 'https://ps.w.org/woocommerce/assets/icon-128x128.gif',
 			),
 			'easy-digital-downloads' => array(
 				'name'         => 'easy-digital-downloads',
