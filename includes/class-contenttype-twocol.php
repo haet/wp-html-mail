@@ -144,4 +144,9 @@ function Haet_MB_ContentType_TwoCol() {
 	return Haet_MB_ContentType_TwoCol::instance();
 }
 
-Haet_MB_ContentType_TwoCol();
+add_action(
+	'init',
+	function() {
+		Haet_MB_ContentType_TwoCol();
+	}
+);

@@ -121,4 +121,9 @@ function Haet_MB_ContentType_Text() {
 	return Haet_MB_ContentType_Text::instance();
 }
 
-Haet_MB_ContentType_Text();
+add_action(
+	'init',
+	function() {
+		Haet_MB_ContentType_Text();
+	}
+);
