@@ -27,6 +27,20 @@ class Haet_TemplateDesigner {
 
 
 	public function admin_page_scripts_and_styles( $page ) {
+		if (
+			isset($_GET['page']) && $_GET['page'] === 'wp-html-mail'
+			&& isset($_GET['tab']) && $_GET['tab'] === 'woocommerce'
+			&& function_exists('haet_mail_is_wp_html_mail_woocommerce_active')
+			&& haet_mail_is_wp_html_mail_woocommerce_active()
+		) {
+			// FIX: correct assets URL
+			if (class_exists('WC_Admin')) {
+				$wc_admin = new WC_Admin();
+				$wc_admin->preview_emails();
+				return; // Prevent any further output!
+			}
+		}
+
 		if ( strpos( $page, 'wp-html-mail' ) && ( ! array_key_exists( 'tab', $_GET ) || $_GET['tab'] == 'template'  || $_GET['tab'] == 'woocommerce' )) {
 
 			// style our options panel like the block editor.

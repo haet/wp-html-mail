@@ -66,26 +66,75 @@ if ( ! in_array( $tab, [ 'webfonts'] ) ):
 			<h3 class="haet-mail-preview-headline">
 				<?php esc_html_e( 'Preview', 'wp-html-mail' ); ?>
 			</h3>
-			<a class="nav-tab nav-tab-active haet-mail-preview-size-button" data-previewwidth="800">
-				<span class="dashicons dashicons-desktop"></span> &amp; <span class="dashicons dashicons-tablet"></span>
-			</a>
-			<a class="nav-tab haet-mail-preview-size-button" data-previewwidth="360">
-				<span class="dashicons dashicons-smartphone"></span>
-			</a>
-
-			<div class="haet-mail-send-preview">
-				<?php esc_html_e( 'Send a test mail', 'wp-html-mail' ); ?>
-				<input id="haet_mail_test_address" required type="email" placeholder="you@example.org">
-				<button id="haet_mail_test_submit"><span class="dashicons dashicons-arrow-right-alt2"></span></button>
-				<div id="haet_mail_test_sent" class="haet-mail-dialog" title="<?php esc_html_e( 'Send a test mail', 'wp-html-mail' ); ?>">
-					<p>
-
-					</p>
+			<?php
+			// Only show WooCommerce preview if correct tab & addon is active
+			if (
+				$tab === 'woocommerce'
+				&& function_exists('haet_mail_is_wp_html_mail_woocommerce_active')
+				&& haet_mail_is_wp_html_mail_woocommerce_active()
+			) {
+				// WooCommerce native preview code
+				if ( class_exists( 'WC_Email' ) && function_exists( 'WC' ) ) {
+					$mailer = WC()->mailer();
+					$emails = $mailer->get_emails();
+					$email_types = [];
+					foreach ($emails as $email) {
+						$email_types[$email->id] = [
+							'label' => $email->get_title(),
+							'class' => get_class($email),
+							'id' => $email->id,
+						];
+					}
+					$nonce = wp_create_nonce('preview-mail');
+					?>
+					
+					<select id="wc-email-type-select">
+						<?php foreach ($email_types as $id => $data) : ?>
+							<option value="<?php echo esc_attr($data['class']); ?>">
+								<?php echo esc_html($data['label']); ?>
+							</option>
+						<?php endforeach; ?>
+					</select>
+					<iframe
+						id="wc-email-preview-frame"
+						src="<?php echo esc_url( admin_url("?preview_woocommerce_mail=true&_wpnonce=$nonce&type=" . rawurlencode(reset($email_types)['class'])) ); ?>"
+						style="width:100%;height:600px;border:1px solid #ccc;background:#fff;margin-top:10px;">
+					</iframe>
+					<script>
+					document.getElementById('wc-email-type-select').addEventListener('change', function() {
+						var cls = this.value;
+						var nonce = '<?php echo esc_js($nonce); ?>';
+						var url = '<?php echo esc_url( admin_url('?preview_woocommerce_mail=true') ); ?>' +
+							'&_wpnonce=' + nonce +
+							'&type=' + encodeURIComponent(cls);
+						document.getElementById('wc-email-preview-frame').src = url;
+					});
+					</script>
+					<?php
+				}
+			} else {
+				// Default preview for all other usages
+				?>
+				<a class="nav-tab nav-tab-active haet-mail-preview-size-button" data-previewwidth="800">
+					<span class="dashicons dashicons-desktop"></span> &amp; <span class="dashicons dashicons-tablet"></span>
+				</a>
+				<a class="nav-tab haet-mail-preview-size-button" data-previewwidth="360">
+					<span class="dashicons dashicons-smartphone"></span>
+				</a>
+				<div class="haet-mail-send-preview">
+					<?php esc_html_e( 'Send a test mail', 'wp-html-mail' ); ?>
+					<input id="haet_mail_test_address" required type="email" placeholder="you@example.org">
+					<button id="haet_mail_test_submit"><span class="dashicons dashicons-arrow-right-alt2"></span></button>
+					<div id="haet_mail_test_sent" class="haet-mail-dialog" title="<?php esc_html_e( 'Send a test mail', 'wp-html-mail' ); ?>">
+						<p></p>
+					</div>
 				</div>
-			</div>
+				<iframe id="mailtemplatepreview" style="width:800px; height:480px; border:1px solid #ccc;"></iframe>
+				<br>
+				<?php
+			}
+			?>
 		</div>
-		<iframe id="mailtemplatepreview" style="width:800px; height:480px; border:1px solid #ccc;"></iframe>
-		<br>
 		<?php
 	elseif (
 		Haet_Mail()->multilanguage->is_multilanguage_site()

@@ -57,3 +57,8 @@ function haet_mail_php_update_notice()
     </div>
 <?php
 }
+
+function haet_mail_is_wp_html_mail_woocommerce_active() {
+    return is_plugin_active('wp-html-mail-woocommerce/wp-html-mail-woocommerce.php') ||
+           class_exists('WPHTMLMail_Woocommerce');
+}
