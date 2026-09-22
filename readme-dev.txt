@@ -1,5 +1,5 @@
 to get all dependencies:
-npn install 
+npm install 
 
 during development:
 go to template-designer/ folder
