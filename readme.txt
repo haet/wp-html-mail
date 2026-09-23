@@ -2,7 +2,7 @@
 Contributors: codemiq,haet
 Tags: email, email template, woocommerce email, email design, elementor, caldera-forms, easy-digital-downloads, contact-form-7, mandrill, postman, gravityforms
 Requires at least: 5.4
-Tested up to: 6.6.2
+Tested up to: 7.1.1
 Requires PHP: 7.2
 Stable tag: 3.4.9
 License: GPLv2 or later

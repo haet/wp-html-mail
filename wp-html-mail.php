@@ -11,7 +11,7 @@ Author URI: https://codemiq.com
 License: GPLv2 or later
 */
 
-/*  Copyright 2024 codemiq (email : support@codemiq.com) */
+/*  Copyright 2026 codemiq (email : support@codemiq.com) */
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
