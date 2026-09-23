@@ -900,7 +900,7 @@ final class Haet_Mail {
 			}
 			$template = str_replace( '###' . $option . '###', $value, $template );
 		}
-		return $template;
+		return do_shortcode($template);
 	}
 
 
