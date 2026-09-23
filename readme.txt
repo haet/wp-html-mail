@@ -4,7 +4,7 @@ Tags: email, email template, woocommerce email, email design, elementor, caldera
 Requires at least: 5.4
 Tested up to: 7.1.1
 Requires PHP: 7.2
-Stable tag: 3.4.9
+Stable tag: 3.5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -171,8 +171,14 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 4. append you contact details to the mail footer
 5. turn template on and off for supported plugins
 
-
 == Changelog ==
+
+= 3.5.0 = 
+* FIXED: WooCommerce email preview
+* FIXED: WooCommerce icon path and URL
+* FIXED: Typo in the plugin
+* UPDATED: WordPress version compatibility
+
 = 3.4.9 = 
 * FIXED: Prevent Function _load_textdomain_just_in_time was called incorrectly notice
 
