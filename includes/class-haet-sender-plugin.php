@@ -173,7 +173,7 @@ class Haet_Sender_Plugin {
 				$sender_plugin                   = new $plugin['class']( $mail );
 				$sender_plugin->current_plugin   = $plugin;
 				$sender_plugin->mail             = $mail;
-				$sender_plugin->activate_plugins = $active_plugins;
+				$sender_plugin->active_plugins   = $active_plugins;
 
 				return $sender_plugin;
 			} catch ( Haet_Different_Plugin_Exception $e ) {
