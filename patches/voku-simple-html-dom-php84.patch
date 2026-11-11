@@ -1,0 +1,34 @@
+diff -ru a/src/voku/helper/SimpleHtmlAttributes.php b/src/voku/helper/SimpleHtmlAttributes.php
+--- a/src/voku/helper/SimpleHtmlAttributes.php
++++ b/src/voku/helper/SimpleHtmlAttributes.php
+@@ -184,7 +184,7 @@
+     /**
+      * {@inheritdoc}
+      */
+-    public function toggle(string $token, bool $force = null): bool
++    public function toggle(string $token, ?bool $force = null): bool
+     {
+         // init
+         $this->tokenize();
+diff -ru a/src/voku/helper/SimpleHtmlAttributesInterface.php b/src/voku/helper/SimpleHtmlAttributesInterface.php
+--- a/src/voku/helper/SimpleHtmlAttributesInterface.php
++++ b/src/voku/helper/SimpleHtmlAttributesInterface.php
+@@ -78,5 +78,5 @@
+      * @return bool false if the token is not in the list after the call, or true if the token is in the list after the
+      *              call
+      */
+-    public function toggle(string $token, bool $force = null): bool;
++    public function toggle(string $token, ?bool $force = null): bool;
+ }
+diff -ru a/src/voku/helper/XmlDomParser.php b/src/voku/helper/XmlDomParser.php
+--- a/src/voku/helper/XmlDomParser.php
++++ b/src/voku/helper/XmlDomParser.php
+@@ -635,7 +635,7 @@
+      *
+      * @return void
+      */
+-    public function replaceTextWithCallback($callback, \DOMNode $domNode = null)
++    public function replaceTextWithCallback($callback, ?\DOMNode $domNode = null)
+     {
+         if ($domNode === null) {
+             $domNode = $this->document;

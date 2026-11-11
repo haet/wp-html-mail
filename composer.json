@@ -1,6 +1,26 @@
 {
 	"require": {
+		"cweagans/composer-patches": "^1.7",
 		"sabberworm/php-css-parser": "*",
 		"voku/css-to-inline-styles": "^2.0"
+	},
+	"config": {
+		"platform": {
+			"php": "7.2.5"
+		},
+		"allow-plugins": {
+			"cweagans/composer-patches": true
+		}
+	},
+	"extra": {
+		"composer-exit-on-patch-failure": true,
+		"patches": {
+			"voku/css-to-inline-styles": {
+				"PHP 8.4/8.5 deprecations (implicit nullable, SplObjectStorage::attach)": "patches/voku-css-to-inline-styles-php85.patch"
+			},
+			"voku/simple_html_dom": {
+				"PHP 8.4 deprecations (implicit nullable)": "patches/voku-simple-html-dom-php84.patch"
+			}
+		}
 	}
 }

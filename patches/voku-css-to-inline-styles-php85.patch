@@ -1,0 +1,29 @@
+--- a/src/CssToInlineStyles.php
++++ b/src/CssToInlineStyles.php
+@@ -150,7 +150,7 @@
+      * @param string|null $html the HTML to process
+      * @param string|null $css  the CSS to use
+      */
+-    public function __construct(string $html = null, string $css = null)
++    public function __construct(?string $html = null, ?string $css = null)
+     {
+         if ($html !== null) {
+             $this->setHTML($html);
+@@ -179,7 +179,7 @@
+      *
+      * @return string
+      */
+-    public function convert(bool $outputXHTML = false, int $libXMLExtraOptions = null, $path = null): string
++    public function convert(bool $outputXHTML = false, ?int $libXMLExtraOptions = null, $path = null): string
+     {
+         // validate
+         if (!$this->html) {
+@@ -588,7 +588,7 @@
+                         }
+ 
+                         // store original styles
+-                        $propertyStorage->attach($element, $originalStyle);
++                        $propertyStorage[$element] = $originalStyle;
+ 
+                         // clear the styles
+                         $element->setAttribute('style', '');
